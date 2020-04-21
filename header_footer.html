@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- normalize.css -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <title>header and footer</title>
+    <style>
+        *{
+            box-sizing: border-box;            
+        }
+        body{
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        /* --------------字形自己放!!!!!!!!!!!!--------------
+        https://www.cufonfonts.com/font/lucida-sans
+
+        1.放字形
+        2.放font-face語法
+        3.將font-family放在要下的地方
+        
+        ex.
+        .header{ font-family: 'Lucida Sans Italic'; } 
+        
+        */
+        @font-face {
+            font-family: 'Lucida Sans Italic';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Lucida Sans Italic'), url('./font/LSANSI.TTF') format('woff');
+        }
+        @font-face {
+            font-family: 'Lucida Sans Demibold Roman';
+            font-style: normal;
+            font-weight: normal;
+            src: local('Lucida Sans Demibold Roman'), url('./font/LSANSI.TTF') format('woff');
+        }
+        /* --------------字形自己放!!!!!!!!!!!!-------------- */
+        dl,ol,ul,li{
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .header a,
+        .header img,
+        .footer a,
+        .foot img{
+            cursor: pointer;
+        }
+        .transition{
+            transition:all .5s;
+            -webkit-transition: all .5s;
+        }
+        .wrapper{
+            max-width: 1440px;
+            margin: 0 auto;
+        }
+        .object_fit{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            overflow: hidden;
+        }
+
+    /* header */
+        .header{
+            box-shadow: 0 0 5px #ccc;
+            background: #fff;
+            font-size: 20px;
+        }
+        .header .nav{
+            /* header 高度 */
+            height: 120px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .header_nav_left{
+            display: flex;
+            align-items: center;
+        }
+        .header .logo{
+            padding: 0 40px;
+        }
+        .header_nav_left li{
+            margin: 0 2vw;
+        }
+        .header_nav_right{
+            display: flex;
+            align-items: center;
+        }
+        .header_nav_right img{
+            margin: 0 20px;
+        }
+        .header .menu{
+            display: none;
+        }
+        .header .bar{
+            width: 30px;
+            height: 4px;
+            background: rgb(58, 58, 58);
+            margin: 5px 0 0 30px;
+            border-radius: 2px;
+        }
+        .header_nav_right li:hover .sub_nav{
+            max-height: 300px;
+        }
+        .header nav ul li a:hover{
+            background: #FFE07C;
+        }
+        .header .sub_nav{
+            position: absolute;
+            background: rgb(255, 255, 255);
+            top: 77px;
+            width: 132px;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .header .sub_nav a{
+            padding:8px 20px;
+            display: block;
+        }
+        .header .rwd_sub_nav{
+            display: none;
+        }
+        @media all and (max-width: 360px) {
+            .wrapper{
+                /* 360px - 30px(左右邊框) */
+                width: 330px;
+            }
+            .header .nav{
+                height: 60px;
+            }
+            .header .logo{
+                padding: 0;
+            }
+            .header .logo img{
+                width: 40px;
+            }
+            .header_nav_left li{
+                display: none;
+            }
+            .header_nav_right img{
+                width: 15px;
+                margin: 0 10px;
+            }
+            .header .sub_nav{
+                display: none;
+            }
+            .header .active .rwd_sub_nav{
+                max-height: 300px;                
+            }
+            .header .rwd_sub_nav{
+                display: block;
+                position: absolute;
+                background: rgb(255, 255, 255);
+                font-size: 15px;
+                top: 60px;
+                right: 0;
+                width: 132px;
+                max-height: 0;
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .header .rwd_sub_nav a{
+                padding:8px 20px;
+                display: block;
+            }
+            /* 漢堡選單 */
+            .header .menu{
+                display: block;                
+            }
+            .header .bar{
+                width: 20px;
+                height: 3px;
+                margin: 4px 0 0 20px;
+            }            
+            .active .bar1{
+                -webkit-transform: rotate(-45deg) translate(-5px, 5px) ;
+                transform: rotate(-45deg) translate(-5px, 5px) ;
+            }
+            .active .bar2{
+                opacity: 0;
+            }
+            .active .bar3{
+                -webkit-transform: rotate(45deg) translate(-5px, -5px) ;
+                transform: rotate(45deg) translate(-5px, -5px) ;
+            }
+        }
+
+    /* footer */
+        .footer{
+            height: 415px;
+            padding-top: 60px;
+            background: #CA054D;
+            color: #fff;
+            font-size: 20px;
+        }
+        .footer .block_1{
+            display: flex;
+            justify-content: space-between;
+        }        
+        .footer .title{
+            /* 蓋過 footer 裡的 font-size */
+            font-size: 25px;
+            padding-bottom: 25px;
+        }
+        .footer .block_1_1 li,
+        .footer .block_1_2 li{
+            padding-bottom: 10px;
+        }
+        .footer hr{
+            width: 1440px;
+            border: 1px solid #fff;
+            color: #fff;
+            margin: 50px auto 25px ;
+        }
+        .footer .map{
+            height: 200px;
+            width: 500px;
+            background: #fff;
+        }
+        .footer .block_2{
+            display: flex;
+        }
+        .footer .block_2 img{
+            margin-right: 50px;
+        }
+        .footer .rwd_map{
+            display: none;
+        }
+        @media all and (max-width: 360px) {
+            .wrapper{
+                width: 300px;
+            }
+            .footer{
+                height: 550px;
+                padding-top: 20px;
+                background: #CA054D;
+                color: #fff;
+                font-size: 15px;
+            }
+            .footer div:first-child{
+                display: block;
+            }
+            .footer .title{
+                /* 蓋過 footer 裡的 font-size */
+                font-size: 20px;
+                padding: 15px 0;
+            }       
+            .footer .block_1_1 li,
+            .footer .block_1_2 li{
+                padding-bottom: 10px;
+            }
+            .footer .block_1_2 img{
+                margin-right: 5px;
+            }
+            .footer .block_2{
+                display: block;
+            }
+            .footer .block_2 div:first-child img{
+                margin-right: 20px;
+                height: 20px;
+            }
+            .footer .block_1_3{
+                display: none;
+            }
+            .footer hr{
+                width: 330px;
+                margin: 25px 15px 20px ;
+            }
+            .footer .rwd_map{
+                width: 100%;
+                display: block;
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="wrapper">
+        <nav class="nav">
+            <div class="header_nav_left">
+                <div class="logo">
+                    <img src="./icon/logo.png" alt="">
+                </div>
+                <li><a>關於我們</a></li>
+                <li><a>商品</a></li>
+                <li><a>商品客製</a></li>
+                <li><a>健康小教室</a></li>
+            </div>
+            <div class="header_nav_right">
+                <li><img src="./icon/search.png"></img></li>
+                <li class="position-relative">
+                    <img class="log_in" src="./icon/log_in.png"></img>
+                    <ul class="sub_nav transition">
+                        <li><a class="transition">會員中心</a></li>
+                        <li><a class="transition">訂單查詢</a></li>
+                        <li><a class="transition">登出</a></li>
+                    </ul>
+                </li>
+                <li><img src="./icon/cart.png"></img></li>
+                <li class="menu">
+                    <!-- bar1.2.3 上動畫用 -->
+                    <div class="bar bar1 transition"></div>
+                    <div class="bar bar2 transition"></div>
+                    <div class="bar bar3 transition"></div>
+                    <ul class="rwd_sub_nav transition">
+                        <li><a>關於我們</a></li>
+                        <li><a>商品客製</a></li>
+                        <li><a>健康小教室</a></li>
+                        <li><a>登出</a></li>
+                    </ul>
+                </li>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="footer">
+    <div class="wrapper">
+        <div class="block_1">
+            <div class="block_1_1">
+                <div class="title"><a>取得協助</a></div>
+                <li><a>常見問題</a></li>
+                <li><a>購物相關問題</a></li>
+            </div>
+            <div class="block_1_2">
+                <div class="title"><a>聯絡我們</a></div>
+                <li>
+                    <img src="./icon/position.png" alt="">
+                    <a>105 臺北市大安區復興南路一段390號2樓</a>
+                </li>
+                <li>
+                    <img src="./icon/phone.png" alt="">
+                    <a>02-6631-6666 / 0966-666-666</a>
+                </li>
+                <li>
+                    <img src="./icon/email.png" alt="">
+                    <a>redcore@gmail.com</a>
+                </li>
+            </div>
+            <div class="block_1_3">
+                <div class="map">
+                    <img class="object_fit" src="./icon/map.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>        
+    <hr>
+    <div class="wrapper">
+        <div class="block_2 justify-content-between">
+            <div class="d-flex">
+                <li><img src="./icon/social_media.png" alt=""></li>
+                <li><img src="./icon/fb.png" alt=""></li>
+                <li><img src="./icon/fb.png" alt=""></li>
+                <li><img src="./icon/fb.png" alt=""></li>
+            </div>
+            <div class="rwd_map">
+                <img class="object_fit" src="./icon/map.png" alt="">
+            </div>
+            <div>&copy 2020 REFCORE, Inc. All Rights Reserved</div>
+        </div>
+    </div>
+</div>
+
+<!-- jQuery -->
+<script
+  src="https://code.jquery.com/jquery-3.5.0.min.js"
+  integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+  crossorigin="anonymous"></script>
+<script>
+    $(".header .menu").on("click", function(){
+        $(this).toggleClass("active")
+    })
+</script>
+
+</body>
+</html>
