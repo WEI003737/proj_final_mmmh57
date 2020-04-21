@@ -3,7 +3,7 @@
             box-sizing: border-box;
         }
         body{
-            font-family: 'Noto Sans TC', sans-serif';
+            font-family: 'Noto Sans TC', sans-serif;
         }
         /* --------------字形自己放!!!!!!!!!!!!--------------
         https://www.cufonfonts.com/font/lucida-sans
@@ -19,13 +19,13 @@
             font-family: 'Lucida Sans Italic';
             font-style: normal;
             font-weight: normal;
-            src: local('Lucida Sans Italic'), url('./font/LSANSI.TTF') format('woff');
+            src: local('Lucida Sans Italic'), url('./font/LSANSD.TTF') format('woff');
         }
         @font-face {
             font-family: 'Lucida Sans Demibold Roman';
             font-style: normal;
             font-weight: normal;
-            src: local('Lucida Sans Demibold Roman'), url('./font/LSANSI.TTF') format('woff');
+            src: local('Lucida Sans Demibold Roman'), url('./font/LSANSDI.TTF') format('woff');
         }
         /* --------------字形自己放!!!!!!!!!!!!-------------- */
         dl,ol,ul,li{
