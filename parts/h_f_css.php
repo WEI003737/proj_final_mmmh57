@@ -8,10 +8,9 @@
         /* --------------字形自己放!!!!!!!!!!!!--------------
         https://www.cufonfonts.com/font/lucida-sans
 
-        1.放字形
-        2.放font-face語法
+        1.放字形檔案
+        2.font-face語法已經寫好
         3.將font-family放在要下的地方
-        
         ex.
         .header{ font-family: 'Lucida Sans Italic'; } 
         
