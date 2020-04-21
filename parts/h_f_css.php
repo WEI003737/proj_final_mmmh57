@@ -3,7 +3,7 @@
             box-sizing: border-box;
         }
         body{
-            font-family: 'Noto Sans TC', sans-serif;
+            font-family: 'Noto Sans TC', sans-serif';
         }
         /* --------------字形自己放!!!!!!!!!!!!--------------
         https://www.cufonfonts.com/font/lucida-sans
