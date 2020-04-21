@@ -12,4 +12,5 @@
  google font : 'Noto Sans TC', sans-serif'
  
  ####h_f_script 裡面有:  
- jQuery 3.5.0
+ jQuery 3.5.0  
+ 跟 header & footer 的 動態
