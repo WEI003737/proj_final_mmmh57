@@ -253,6 +253,9 @@
                 margin-right: 20px;
                 height: 20px;
             }
+            .footer .block_2 img{
+                margin-right: 0;
+            }
             .footer .block_1_3{
                 display: none;
             }
