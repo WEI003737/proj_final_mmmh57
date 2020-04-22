@@ -17,10 +17,10 @@
             </div>
             <div class="header_nav_right">
                 <li>
-                    <div class="a_input-group">
-                        <input type="text" class="a_form-control a_transition" placeholder="找商品">
-                        <div class="input-group-append">
-                            <span class="input-group-text"><img src="./icon/search.png"></span>
+                    <div class="a_input_search">
+                        <input type="text" class="a_form_search a_transition" placeholder="找商品">
+                        <div>
+                            <span class="a_input_search_img"><img src="./icon/search.png"></span>
                         </div>
                     </div>
                 </li>
