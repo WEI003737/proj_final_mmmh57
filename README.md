@@ -13,4 +13,5 @@
  
  ####h_f_script 裡面有:  
  jQuery 3.5.0  
+ GSAP  
  跟 header & footer 的 動態

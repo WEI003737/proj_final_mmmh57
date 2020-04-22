@@ -5,7 +5,7 @@
         body{
             font-family: 'Noto Sans TC', sans-serif;
         }
-        /* --------------字形自己放!!!!!!!!!!!!--------------
+/* --------------font-face 英文字形自己放在要用的地方--------------
         https://www.cufonfonts.com/font/lucida-sans
 
         1.放字形檔案
@@ -27,7 +27,29 @@
             font-weight: normal;
             src: local('Lucida Sans Demibold Roman'), url('./font/LSANSDI.TTF') format('woff');
         }
-        /* --------------字形自己放!!!!!!!!!!!!-------------- */
+/* --------------字體大小-------------- */
+        h1{
+            font-size: 90px;
+        }
+        h2{
+            font-size: 72px;
+        }
+        h3{
+            font-size: 54px;
+        }
+        h4{
+            font-size: 36px;
+        }
+        h5{
+            font-size: 20px;
+        }
+        h6{
+            font-size: 18px;
+        }
+        p{
+            font-size: 15px;
+        }
+/* -------------- 去掉列表的圖案 -------------- */
         dl,ol,ul,li{
             list-style: none;
             padding: 0;
@@ -39,15 +61,15 @@
         .foot img{
             cursor: pointer;
         }
-        .transition{
+        .a_transition{
             transition:all .5s;
             -webkit-transition: all .5s;
         }
-        .wrapper{
+        .a_wrapper{
             max-width: 1440px;
             margin: 0 auto;
         }
-        .object_fit{
+        .a_object_fit{
             width: 100%;
             height: 100%;
             object-fit: cover;
@@ -60,7 +82,7 @@
             background: #fff;
             font-size: 20px;
         }
-        .header .nav{
+        .header .a_nav{
             /* header 高度 */
             height: 120px;
             display: flex;
@@ -70,8 +92,11 @@
             display: flex;
             align-items: center;
         }
-        .header .logo{
+        .header .a_logo {
             padding: 0 40px;
+        }
+        .header .a_logo_top {
+            padding-left: 10px;
         }
         .header_nav_left li{
             margin: 0 2vw;
@@ -83,23 +108,23 @@
         .header_nav_right img{
             margin: 0 20px;
         }
-        .header .menu{
+        .header .a_menu{
             display: none;
         }
-        .header .bar{
+        .header .a_bar{
             width: 30px;
             height: 4px;
             background: rgb(58, 58, 58);
             margin: 5px 0 0 30px;
             border-radius: 2px;
         }
-        .header_nav_right li:hover .sub_nav{
+        .header_nav_right li:hover .a_sub_nav{
             max-height: 300px;
         }
         .header nav ul li a:hover{
             background: #FFE07C;
         }
-        .header .sub_nav{
+        .header .a_sub_nav{
             position: absolute;
             background: rgb(255, 255, 255);
             top: 77px;
@@ -107,25 +132,25 @@
             max-height: 0;
             overflow: hidden;
         }
-        .header .sub_nav a{
+        .header .a_sub_nav a{
             padding:8px 20px;
             display: block;
         }
-        .header .rwd_sub_nav{
+        .header .a_rwd_sub_nav{
             display: none;
         }
         @media all and (max-width: 360px) {
-            .wrapper{
+            .a_wrapper{
                 /* 360px - 30px(左右邊框) */
                 width: 330px;
             }
-            .header .nav{
+            .header .a_nav{
                 height: 60px;
             }
-            .header .logo{
+            .header .a_logo{
                 padding: 0;
             }
-            .header .logo img{
+            .header .a_logo img{
                 width: 40px;
             }
             .header_nav_left li{
@@ -135,13 +160,13 @@
                 width: 15px;
                 margin: 0 10px;
             }
-            .header .sub_nav{
+            .header .a_sub_nav{
                 display: none;
             }
-            .header .active .rwd_sub_nav{
+            .header .active .a_rwd_sub_nav{
                 max-height: 300px;                
             }
-            .header .rwd_sub_nav{
+            .header .a_rwd_sub_nav{
                 display: block;
                 position: absolute;
                 background: rgb(255, 255, 255);
@@ -153,27 +178,27 @@
                 overflow: hidden;
                 /* z-index: -1; */
             }
-            .header .rwd_sub_nav a{
+            .header .a_rwd_sub_nav a{
                 padding:8px 20px;
                 display: block;
             }
             /* 漢堡選單 */
-            .header .menu{
+            .header .a_menu{
                 display: block;                
             }
-            .header .bar{
+            .header .a_bar{
                 width: 20px;
                 height: 3px;
                 margin: 4px 0 0 20px;
             }            
-            .active .bar1{
+            .active .a_bar1{
                 -webkit-transform: rotate(-45deg) translate(-5px, 5px) ;
                 transform: rotate(-45deg) translate(-5px, 5px) ;
             }
-            .active .bar2{
+            .active .a_bar2{
                 opacity: 0;
             }
-            .active .bar3{
+            .active .a_bar3{
                 -webkit-transform: rotate(45deg) translate(-5px, -5px) ;
                 transform: rotate(45deg) translate(-5px, -5px) ;
             }
@@ -187,17 +212,17 @@
             color: #fff;
             font-size: 20px;
         }
-        .footer .block_1{
+        .footer .a_block_1{
             display: flex;
             justify-content: space-between;
         }        
-        .footer .title{
+        .footer .a_title{
             /* 蓋過 footer 裡的 font-size */
             font-size: 25px;
             padding-bottom: 25px;
         }
-        .footer .block_1_1 li,
-        .footer .block_1_2 li{
+        .footer .a_block_1_1 li,
+        .footer .a_block_1_2 li{
             padding-bottom: 10px;
         }
         .footer hr{
@@ -206,22 +231,22 @@
             color: #fff;
             margin: 50px auto 25px ;
         }
-        .footer .map{
+        .footer .a_map{
             height: 200px;
             width: 500px;
             background: #fff;
         }
-        .footer .block_2{
+        .footer .a_block_2{
             display: flex;
         }
-        .footer .block_2 img{
+        .footer .a_block_2 img{
             margin-right: 50px;
         }
-        .footer .rwd_map{
+        .footer .a_rwd_map{
             display: none;
         }
         @media all and (max-width: 360px) {
-            .wrapper{
+            .a_wrapper{
                 width: 300px;
             }
             .footer{
@@ -234,36 +259,36 @@
             .footer div:first-child{
                 display: block;
             }
-            .footer .title{
+            .footer .a_title{
                 /* 蓋過 footer 裡的 font-size */
                 font-size: 20px;
                 padding: 15px 0;
             }       
-            .footer .block_1_1 li,
-            .footer .block_1_2 li{
+            .footer .a_block_1_1 li,
+            .footer .a_block_1_2 li{
                 padding-bottom: 10px;
             }
-            .footer .block_1_2 img{
+            .footer .a_block_1_2 img{
                 margin-right: 5px;
             }
-            .footer .block_2{
+            .footer .a_block_2{
                 display: block;
             }
-            .footer .block_2 div:first-child img{
+            .footer .a_block_2 div:first-child img{
                 margin-right: 20px;
                 height: 20px;
             }
-            .footer .block_2 img{
+            .footer .a_block_2 img{
                 margin-right: 0;
             }
-            .footer .block_1_3{
+            .footer .a_block_1_3{
                 display: none;
             }
             .footer hr{
                 width: 330px;
                 margin: 25px 15px 20px ;
             }
-            .footer .rwd_map{
+            .footer .a_rwd_map{
                 width: 100%;
                 display: block;
                 margin: 10px 0;
