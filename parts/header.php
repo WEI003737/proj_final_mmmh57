@@ -16,7 +16,14 @@
                 <li><a>健康小教室</a></li>
             </div>
             <div class="header_nav_right">
-                <li><img src="./icon/search.png"></img></li>
+                <li>
+                    <div class="a_input-group">
+                        <input type="text" class="a_form-control a_transition" placeholder="找商品">
+                        <div class="input-group-append">
+                            <span class="input-group-text"><img src="./icon/search.png"></span>
+                        </div>
+                    </div>
+                </li>
                 <li class="position-relative">
                     <img class="a_log_in" src="./icon/log_in.png"></img>
                     <ul class="a_sub_nav a_transition">

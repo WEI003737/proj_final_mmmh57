@@ -19,13 +19,13 @@
             font-family: 'Lucida Sans Italic';
             font-style: normal;
             font-weight: normal;
-            src: local('Lucida Sans Italic'), url('./font/LSANSD.TTF') format('woff');
+            src: local('Lucida Sans Italic'), url('/font/LSANSD.TTF') format('woff');
         }
         @font-face {
             font-family: 'Lucida Sans Demibold Roman';
             font-style: normal;
             font-weight: normal;
-            src: local('Lucida Sans Demibold Roman'), url('./font/LSANSDI.TTF') format('woff');
+            src: local('Lucida Sans Demibold Roman'), url('/font/LSANSDI.TTF') format('woff');
         }
 /* --------------字體大小-------------- */
         h1{
@@ -76,7 +76,7 @@
             overflow: hidden;
         }
 
-    /* header */
+    /* ----------- header ----------- */
         .header{
             box-shadow: 0 0 5px #ccc;
             background: #fff;
@@ -98,8 +98,11 @@
         .header .a_logo_top {
             padding-left: 10px;
         }
-        .header_nav_left li{
+        .header_nav_left>li{
             margin: 0 2vw;
+        }
+        .header_nav_left>li a:hover{
+            color: #CA054D;
         }
         .header_nav_right{
             display: flex;
@@ -107,6 +110,30 @@
         }
         .header_nav_right img{
             margin: 0 20px;
+        }
+        .header_nav_right>li img:hover{
+            transform: translateY(-3px);
+        }
+/* ----------- header 搜尋欄 ----------- */
+        .a_input-group{
+            margin:0;
+            padding-top: 8px;
+            display: flex;
+        }
+        .a_input-group:hover .a_form-control{
+            max-width: 150px;
+            border: 1px solid #CA054D;
+        }
+        .a_form-control{
+            max-width: 0;
+            padding: 3px 10px;
+            border: 0;
+            border-radius: 20px;
+        }
+        .input-group-text{
+            background-color: rgba(255, 255, 255, 0);
+            border: 0;
+            padding: 0;
         }
         .header .a_menu{
             display: none;
@@ -139,6 +166,7 @@
         .header .a_rwd_sub_nav{
             display: none;
         }
+
         @media all and (max-width: 360px) {
             .a_wrapper{
                 /* 360px - 30px(左右邊框) */
@@ -204,7 +232,7 @@
             }
         }
 
-    /* footer */
+    /* ----------- footer ----------- */
         .footer{
             height: 415px;
             padding-top: 60px;
