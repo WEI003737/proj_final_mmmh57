@@ -14,7 +14,4 @@ VALUES
 ('3', 'bottoms', 'biker shorts',''),
 ('3', 'bottoms', 'capris',''),
 ('3', 'bottoms', 'pants',''),
-('4', 'accessories', 'kettle',''),
-('4', 'accessories', 'oil',''),
-('4', 'accessories', 'sock',''),
 ('4', 'accessories', 'yoga','')

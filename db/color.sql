@@ -18,3 +18,13 @@ VALUES
 ('10', 'bk', 'black', '(paddedbra_009_bk_1, paddedbra_009_bk_2, paddedbra_009_bk_3, paddedbra_009_bk_4, paddedbra_009_bk_5)')
 
 -- 以上為 Padded bra 1-10筆-------------------------------------------------
+-- 以下為 Soft cup bra 1-5筆-------------------------------------------------
+('11', 'bk', 'black', '(softcupbra_000_bk_1, softcupbra_000_bk_2, softcupbra_000_bk_3, softcupbra_000_bk_4, softcupbra_000_bk_5)'),
+('12', 'bk', 'black', '(softcupbra_001_bk_1, softcupbra_001_bk_2, softcupbra_001_bk_3, softcupbra_001_bk_4, softcupbra_001_bk_5)'),
+('12', 'w', 'white', '(softcupbra_001_w_1, softcupbra_001_w_2, softcupbra_001_w_3, softcupbra_001_w_4, softcupbra_001_w_5)'),
+('13', 'r', 'red', '(softcupbra_002_r_1, softcupbra_002_r_2, softcupbra_002_r_3, softcupbra_002_r_4, softcupbra_002_r_5)'),
+('14', 'bk', 'black', '(softcupbra_003_bk_1, softcupbra_003_bk_2, softcupbra_003_bk_3, softcupbra_003_bk_4, softcupbra_003_bk_5)'),
+('14', 'bl', 'blue', '(softcupbra_003_bl_1, softcupbra_003_bl_2, softcupbra_003_bl_3, softcupbra_003_bl_4, softcupbra_003_bl_5)'),
+('14', 'r', 'red', '(softcupbra_003_r_1, softcupbra_003_r_2, softcupbra_003_r_3, softcupbra_003_r_4, softcupbra_003_r_5)'),
+('15', 'bk', 'black', '(softcupbra_004_bk_1, softcupbra_004_bk_2, softcupbra_004_bk_3, softcupbra_004_bk_4, softcupbra_004_bk_5)')
+
