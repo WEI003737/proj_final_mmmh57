@@ -13,7 +13,7 @@ $pageBtn = [];
 $where = " WHERE 1 ";
 if(!empty($cate)){
     $where .= " AND cate_sid = $cate ";
-    $pageBtn['page'] = $page;
+    $pageBtn['cate'] = $cate;
 }
 
 //取得總筆數
@@ -394,7 +394,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
         <div class="row no-gutters">
             <div class="col-sm-2">
                 <ul class="show-desktop wea_product_select_bar">
-                    <ul ><a href=""><h5>所有商品</h5></a></a></ul>
+                    <ul ><a href="?"><h5>所有商品</h5></a></a></ul>
 <!--                    <ul ><a href=""><h6>運動內衣</h6></a></ul>-->
                     <?php foreach($categoriesRow as $nav):  ?>
                         <ul><a href="?cate=<?= $nav['sid'] ?>"><h6><?= $nav['parent'] ?></h6></a></ul>
