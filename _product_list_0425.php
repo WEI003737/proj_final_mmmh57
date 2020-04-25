@@ -14,7 +14,7 @@ $where = " WHERE 1 ";
 if(!empty($cate)){
     $where .= " AND cate_sid = $cate ";
     $pageBtn['page'] = $page;
-;}
+}
 
 //取得總筆數
 $totalRows = $pdo->query("SELECT COUNT(1) FROM products $where")
@@ -26,15 +26,8 @@ $totalPages = ceil($totalRows / $perPage);
 ($page < 1) ? ($page = 1) : false;
 ($page > $totalPages) ? ($page = $totalPages) : false;
 
-// 如果有資料
-//if($totalRows>0){
-//    $sql = sprintf("SELECT * FROM products LIMIT %s, %s", ($page-1)*$perPage, $perPage);
-//    $stmt = $pdo->query($sql);
-//    $rows = $stmt->fetchAll();
-//}
-
-
 //-----------------------------總商品資料 + 商品圖---------------------------------
+//如果有資料
 if($totalRows>0){
     //總商品sql
     $totalProductSql = sprintf("SELECT * FROM products $where LIMIT %s, %s", ($page-1)*$perPage, $perPage);
@@ -44,13 +37,27 @@ if($totalRows>0){
     //商品資料最後，塞入從 color 資料表拿出的，該商品的其中一種顏色的圖片(陣列)
     $i=0;
     foreach($totalProduct as $value){
-        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`=".$value["sid"]." LIMIT 1"); //LIMIT 限制筆數
+        //加入照片陣列
+        //LIMIT 限制筆數
+        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`= ".$value["sid"]." LIMIT 1");
         $totalProductPics = $productPics -> fetch();
         $totalProduct[$i]["pictures"]=$totalProductPics;
+
+        //加入每個款式的顏色數量
+        $colorLengthSql = $pdo -> query("SELECT *,count(pro_sid) FROM `color` WHERE `pro_sid`= ".$value["sid"]." GROUP BY `pro_sid`");
+        $colorLength = $colorLengthSql -> fetch();
+        $totalProduct[$i]["colorLength"] = $colorLength['count(pro_sid)'];
+
+        //加入顏色陣列
+        $colorArrSql = $pdo -> query("SELECT `color` FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
+        $colorArr = $colorArrSql -> fetchAll();
+        $totalProduct[$i]["colorArr"] = $colorArr;
+
 
         $i++;
     }
 };
+
 //echo json_encode($totalProduct, JSON_UNESCAPED_UNICODE);
 
 
@@ -324,6 +331,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
         width: 20px;
         height: 20px;
         border-radius: 50%;
+        border: 1px solid #ccc;
         margin-left: 8px;
         background: #272838;
     }
@@ -410,16 +418,18 @@ $categoriesRow = $categoriesStmt -> fetchAll();
 
                 <ul class="wea_product_list d-flex justify-content-between flex-wrap">
                     <?php foreach($totalProduct as $t):
-                        $pictureArr = json_decode($t["pictures"]["pro_pic"]); //把字串變陣列
-//                            var_dump(json_decode($t["pictures"]["pro_pic"], true));
+                        $pictureArr = json_decode($t['pictures']['pro_pic']); //把字串變陣列
+                        // var_dump(json_decode($t["pictures"]["pro_pic"], true));
                         ?>
                     <li class="wea_product_list_item">
                         <img src="./images/<?=$pictureArr[0]?>.png" alt="">
                         <p><?= $t['name']; ?></p>
                         <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price"><?= $t['price']; ?></p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
+                            <p class="wea_product_list_item_price">$<?= $t['price']; ?></p>
+                            <?php for($i=1; $i<=$t['colorLength']; $i++): ?>
+                            <div class="wea_product_list_item_color" style="background: <?= $t['colorArr'][$i-1]['color'] ?>"></div>
+                            <?php endfor; ?>
+<!--                            <div class="wea_product_list_item_color gray"></div>-->
                         </div>
                     </li>
                     <?php endforeach; ?>
