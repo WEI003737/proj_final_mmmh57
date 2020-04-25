@@ -44,7 +44,7 @@ CREATE TABLE `proj_final`.`products_intro` ( `sid` INT NOT NULL AUTO_INCREMENT ,
 
 //color-----------------------------
 CREATE TABLE `proj_final`.`color` ( `sid` INT NOT NULL AUTO_INCREMENT , `pro_sid` INT NOT NULL , `color` VARCHAR(255) NOT NULL ,
-`color` VARCHAR(255) NOT NULL, `pro_pic` VARCHAR(255) NOT NULL , PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+`pro_pic` VARCHAR(255) NOT NULL , PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 
 //size-----------------------------
 CREATE TABLE `proj_final`.`size` ( `sid` INT NOT NULL AUTO_INCREMENT , `pro_sid` INT NOT NULL , `color_sid` INT NOT NULL ,
