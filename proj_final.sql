@@ -44,18 +44,18 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`sid`, `parent_sid`, `parent`, `en_parent`, `name`, `en_name`, `size_chart`) VALUES
 (1, 1, '運動內衣', 'sports bras', '襯墊式', 'padded bra', ''),
-(2, 1, '運動內衣', 'sports bras', '無襯墊式', 'soft cup bra', ''),
+(2, 1, '', 'sports bras', '無襯墊式', 'soft cup bra', ''),
 (3, 2, '上衣', 'tops', '短袖上衣', 'tees', ''),
-(4, 2, '上衣', 'tops', '無袖背心', 'tanks', ''),
-(5, 2, '上衣', 'tops', '長袖上衣', 'longsleeves', ''),
-(6, 2, '上衣', 'tops', '運動棉衫', 'sweatshirts', ''),
-(7, 2, '上衣', 'tops', '外套罩衫', 'outerwear', ''),
+(4, 2, '', 'tops', '無袖背心', 'tanks', ''),
+(5, 2, '', 'tops', '長袖上衣', 'longsleeves', ''),
+(6, 2, '', 'tops', '運動棉衫', 'sweatshirts', ''),
+(7, 2, '', 'tops', '外套罩衫', 'outerwear', ''),
 (8, 3, '下身', 'bottoms', '緊身褲', 'leggings', ''),
-(9, 3, '下身', 'bottoms', '運動褲', 'sweatpants', ''),
-(10, 3, '下身', 'bottoms', '短褲', 'shorts', ''),
-(11, 3, '下身', 'bottoms', '五分褲', 'biker shorts', ''),
-(12, 3, '下身', 'bottoms', '七八分褲', 'capris', ''),
-(13, 3, '下身', 'bottoms', '長褲', 'pants', ''),
+(9, 3, '', 'bottoms', '運動褲', 'sweatpants', ''),
+(10, 3, '', 'bottoms', '短褲', 'shorts', ''),
+(11, 3, '', 'bottoms', '五分褲', 'biker shorts', ''),
+(12, 3, '', 'bottoms', '七八分褲', 'capris', ''),
+(13, 3, '', 'bottoms', '長褲', 'pants', ''),
 (17, 4, '運動配件', 'accessories', '瑜珈', 'yoga', '');
 
 -- --------------------------------------------------------
@@ -68,7 +68,6 @@ CREATE TABLE `color` (
   `sid` int(11) NOT NULL,
   `pro_sid` int(11) NOT NULL,
   `color` varchar(255) NOT NULL,
-  `en_color` varchar(255) NOT NULL,
   `pro_pic` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -76,30 +75,30 @@ CREATE TABLE `color` (
 -- 傾印資料表的資料 `color`
 --
 
-INSERT INTO `color` (`sid`, `pro_sid`, `color`, `en_color`, `pro_pic`) VALUES
-(1, 1, 'bk', 'black', '(\'paddedbra_000_bk_1\', \'paddedbra_000_bk_2\', \'paddedbra_000_bk_3\', \'paddedbra_000_bk_4\', \'paddedbra_000_bk_5\')'),
-(2, 1, 'pk', 'pink', '(\'paddedbra_000_pk_1\', \'paddedbra_000_pk_2\', \'paddedbra_000_pk_3\', \'paddedbra_000_pk_4\', \'paddedbra_000_pk_5\')'),
-(3, 2, 'gr', 'gray', '(\'paddedbra_001_gr_1\', \'paddedbra_001_gr_2\', \'paddedbra_001_gr_3\', \'paddedbra_001_gr_4\', \'paddedbra_001_gr_5\')'),
-(4, 2, 'pk', 'pink', '(\'paddedbra_001_pk_1\', \'paddedbra_001_pk_2\', \'paddedbra_001_pk_3\', \'paddedbra_001_pk_4\', \'paddedbra_001_pk_5\')'),
-(5, 3, 'bk', 'black', '(\'paddedbra_002_bk_1\',\'paddedbra_002_bk_2\', \'paddedbra_002_bk_3\', \'paddedbra_002_bk_4\', \'paddedbra_002_bk_5\')'),
-(6, 3, 'w', 'white', '(\'paddedbra_002_w_1\',\'paddedbra_002_w_2\', \'paddedbra_002_w_3\', \'paddedbra_002_w_4\', \'paddedbra_002_w_5\')'),
-(7, 3, 'br', 'brown', '(\'paddedbra_002_br_1\',\'paddedbra_002_br_2\', \'paddedbra_002_br_3\', \'paddedbra_002_br_4\', \'paddedbra_002_br_5\')'),
-(8, 4, 'bk', 'black', '(\'paddedbra_003_bk_1\', \'paddedbra_003_bk_2\', \'paddedbra_003_bk_3\', \'paddedbra_003_bk_4\', \'paddedbra_003_bk_5\')'),
-(9, 5, 'pk', 'pink', '(\'paddedbra_004_pk_1\', \'paddedbra_004_pk_2\', \'paddedbra_004_pk_3\', \'paddedbra_004_pk_4\', \'paddedbra_004_pk_5\')'),
-(10, 5, 'y', 'yellow', '(\'paddedbra_004_y_1\', \'paddedbra_004_y_2\', \'paddedbra_004_y_3\', \'paddedbra_004_y_4\', \'paddedbra_004_y_5\')'),
-(11, 6, 'w', 'white', '(\'paddedbra_005_w_1\', \'paddedbra_005_w_2\', \'paddedbra_005_w_3\', \'paddedbra_005_w_4\', \'paddedbra_005_w_5\')'),
-(12, 7, 'bl', 'blue', '(\'paddedbra_006_bl_1\', \'paddedbra_006_bl_2\', \'paddedbra_006_bl_3\', \'paddedbra_006_bl_4\', \'paddedbra_006_bl_5\')'),
-(13, 8, 'w', 'white', '(\'paddedbra_007_w_1\', \'paddedbra_007_w_2\', \'paddedbra_007_w_3\', \'paddedbra_007_w_4\', \'paddedbra_007_w_5\')'),
-(14, 9, 'bk', 'black', '(\'paddedbra_008_bk_1\', \'paddedbra_008_bk_2\', \'paddedbra_008_bk_3\', \'paddedbra_008_bk_4\', \'paddedbra_008_bk_5\')'),
-(15, 10, 'bk', 'black', '(\'paddedbra_009_bk_1\', \'paddedbra_009_bk_2\', \'paddedbra_009_bk_3\', \'paddedbra_009_bk_4\', \'paddedbra_009_bk_5\')'),
-(16, 11, 'bk', 'black', '(softcupbra_000_bk_1, softcupbra_000_bk_2, softcupbra_000_bk_3, softcupbra_000_bk_4, softcupbra_000_bk_5)'),
-(17, 12, 'bk', 'black', '(softcupbra_001_bk_1, softcupbra_001_bk_2, softcupbra_001_bk_3, softcupbra_001_bk_4, softcupbra_001_bk_5)'),
-(18, 12, 'w', 'white', '(softcupbra_001_w_1, softcupbra_001_w_2, softcupbra_001_w_3, softcupbra_001_w_4, softcupbra_001_w_5)'),
-(19, 13, 'r', 'red', '(softcupbra_002_r_1, softcupbra_002_r_2, softcupbra_002_r_3, softcupbra_002_r_4, softcupbra_002_r_5)'),
-(20, 14, 'bk', 'black', '(softcupbra_003_bk_1, softcupbra_003_bk_2, softcupbra_003_bk_3, softcupbra_003_bk_4, softcupbra_003_bk_5)'),
-(21, 14, 'bl', 'blue', '(softcupbra_003_bl_1, softcupbra_003_bl_2, softcupbra_003_bl_3, softcupbra_003_bl_4, softcupbra_003_bl_5)'),
-(22, 14, 'r', 'red', '(softcupbra_003_r_1, softcupbra_003_r_2, softcupbra_003_r_3, softcupbra_003_r_4, softcupbra_003_r_5)'),
-(23, 15, 'bk', 'black', '(softcupbra_004_bk_1, softcupbra_004_bk_2, softcupbra_004_bk_3, softcupbra_004_bk_4, softcupbra_004_bk_5)');
+INSERT INTO `color` (`sid`, `pro_sid`, `color`, `pro_pic`) VALUES
+(1, 1, 'black', '[\"paddedbra_000_bk_1\",\"paddedbra_000_bk_2\", \"paddedbra_000_bk_3\", \"paddedbra_000_bk_4\", \"paddedbra_000_bk_5\"]'),
+(2, 1, 'pink', '[\"paddedbra_000_pk_1\",\"paddedbra_000_pk_2\", \"paddedbra_000_pk_3\",\"paddedbra_000_pk_4\", \"paddedbra_000_pk_5\"]'),
+(3, 2, 'gray', '[\"paddedbra_001_gr_1\",\"paddedbra_001_gr_2\", \"paddedbra_001_gr_3\",\"paddedbra_001_gr_4\", \"paddedbra_001_gr_5\"]'),
+(4, 2, 'pink', '[\"paddedbra_001_pk_1\", \"paddedbra_001_pk_2\", \"paddedbra_001_pk_3\", \"paddedbra_001_pk_4\", \"paddedbra_001_pk_5\"]'),
+(5, 3, 'black', '[\"paddedbra_002_bk_1\",\"paddedbra_002_bk_2\", \"paddedbra_002_bk_3\", \"paddedbra_002_bk_4\", \"paddedbra_002_bk_5\"]'),
+(6, 3, 'white', '[\"paddedbra_002_w_1\",\"paddedbra_002_w_2\", \"paddedbra_002_w_3\", \"paddedbra_002_w_4\", \"paddedbra_002_w_5\"]'),
+(7, 3, 'brown', '[\"paddedbra_002_br_1\",\"paddedbra_002_br_2\", \"paddedbra_002_br_3\",\"paddedbra_002_br_4\", \"paddedbra_002_br_5\"]'),
+(8, 4, 'black', '[\"paddedbra_003_bk_1\", \"paddedbra_003_bk_2\", \"paddedbra_003_bk_3\",\"paddedbra_003_bk_4\", \"paddedbra_003_bk_5\"]'),
+(9, 5, 'pink', '[\"paddedbra_004_pk_1\",\"paddedbra_004_pk_2\", \"paddedbra_004_pk_3\",\"paddedbra_004_pk_4\", \"paddedbra_004_pk_5\"]'),
+(10, 5, 'yellow', '[\"paddedbra_004_y_1\",\"paddedbra_004_y_2\", \"paddedbra_004_y_3\",\"paddedbra_004_y_4\", \"paddedbra_004_y_5\"]'),
+(11, 6, 'white', '[\"paddedbra_005_w_1\",\"paddedbra_005_w_2\",\"paddedbra_005_w_3\", \"paddedbra_005_w_4\", \"paddedbra_005_w_5\"]'),
+(12, 7, 'blue', '[\"paddedbra_006_bl_1\",\"paddedbra_006_bl_2\", \"paddedbra_006_bl_3\",\"paddedbra_006_bl_4\", \"paddedbra_006_bl_5\"]'),
+(13, 8, 'white', '[\"paddedbra_007_w_1\",\"paddedbra_007_w_2\", \"paddedbra_007_w_3\",\"paddedbra_007_w_4\", \"paddedbra_007_w_5\"]'),
+(14, 9, 'black', '[\"paddedbra_008_bk_1\",\"paddedbra_008_bk_2\", \"paddedbra_008_bk_3\",\"paddedbra_008_bk_4\", \"paddedbra_008_bk_5\"]'),
+(15, 10, 'black', '[\"paddedbra_009_bk_1\",\"paddedbra_009_bk_2\", \"paddedbra_009_bk_3\",\"paddedbra_009_bk_4\", \"paddedbra_009_bk_5\"]'),
+(16, 11, 'black', '[\"softcupbra_000_bk_1\",\"softcupbra_000_bk_2\", \"softcupbra_000_bk_3\", \"softcupbra_000_bk_4\", \"softcupbra_000_bk_5\"]'),
+(17, 12, 'black', '[\"softcupbra_001_bk_1\",\"softcupbra_001_bk_2\", \"softcupbra_001_bk_3\",\"softcupbra_001_bk_4\", \"softcupbra_001_bk_5\"]'),
+(18, 12, 'white', '[\"softcupbra_001_w_1\",\"softcupbra_001_w_2\", \"softcupbra_001_w_3\",\"softcupbra_001_w_4\", \"softcupbra_001_w_5\"]'),
+(19, 13, 'red', '[\"softcupbra_002_r_1\",\"softcupbra_002_r_2\", \"softcupbra_002_r_3\",\"softcupbra_002_r_4\", \"softcupbra_002_r_5\"]'),
+(20, 14, 'black', '[\"softcupbra_003_bk_1\",\"softcupbra_003_bk_2\", \"softcupbra_003_bk_3\",\"softcupbra_003_bk_4\", \"softcupbra_003_bk_5\"]'),
+(21, 14, 'blue', '[\"softcupbra_003_bl_1\",\"softcupbra_003_bl_2\", \"softcupbra_003_bl_3\",\"softcupbra_003_bl_4\", \"softcupbra_003_bl_5\"]'),
+(22, 14, 'red', '[\"softcupbra_003_r_1\",\"softcupbra_003_r_2\", \"softcupbra_003_r_3\",\"softcupbra_003_r_4\", \"softcupbra_003_r_5\"]'),
+(23, 15, 'black', '[\"softcupbra_004_bk_1\",\"softcupbra_004_bk_2\", \"softcupbra_004_bk_3\",\"softcupbra_004_bk_4\", \"softcupbra_004_bk_5\"]');
 
 -- --------------------------------------------------------
 
