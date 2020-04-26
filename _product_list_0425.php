@@ -2,22 +2,36 @@
 require __DIR__ . '/__connect_db.php';
 $page_name = 'product_list';
 
-//-----------------------------頁數---------------------------------
+//-------------------篩選:頁數、商品類別、---------------------------------
 
 $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
+$orderByDate = isset($_GET['orderByDate']) ? $_GET['orderByDate'] : '';
+$color = isset($_GET['color']) ? $_GET['color'] : ''; //還沒用到...
+//get的內容 要用http_build_query輸出
 $pageBtn = [];
+//可篩選的顏色種類
+$selectColor = ['red','black','blue','pink'];
+$selectColorCount = count($selectColor);
 
 //-----------------------------點商品類別 列出該類別商品---------------------------------
 $where = " WHERE 1 ";
-if(!empty($cate)){
-    $where .= " AND cate_sid = $cate ";
-    $pageBtn['cate'] = $cate;
-}
+$orderBy = '  ';
+if(!empty($cate) or !empty($orderByDate)) {
+
+    if (!empty($cate)) {
+        $where .= " AND cate_sid = $cate ";
+        $pageBtn['cate'] = $cate;
+    };
+    if (!empty($orderByDate)) {
+        $orderBy .= " ORDER BY created_date $orderByDate ";
+        $pageBtn['orderByDate'] = $orderByDate;
+    };
+};
 
 //取得總筆數
-$totalRows = $pdo->query("SELECT COUNT(1) FROM products $where")
+$totalRows = $pdo->query("SELECT COUNT(1) FROM products $where ")
     ->fetch(PDO::FETCH_NUM)[0];
 
 //算總頁數
@@ -30,7 +44,7 @@ $totalPages = ceil($totalRows / $perPage);
 //如果有資料
 if($totalRows>0){
     //總商品sql
-    $totalProductSql = sprintf("SELECT * FROM products $where LIMIT %s, %s", ($page-1)*$perPage, $perPage);
+    $totalProductSql = sprintf("SELECT * FROM products $where $orderBy LIMIT %s, %s  ", ($page-1)*$perPage, $perPage);
     //總商品資料
     $totalProductStmt = $pdo -> query($totalProductSql);
     $totalProduct = $totalProductStmt -> fetchAll();
@@ -49,16 +63,24 @@ if($totalRows>0){
         $totalProduct[$i]["colorLength"] = $colorLength['count(pro_sid)'];
 
         //加入顏色陣列
-        $colorArrSql = $pdo -> query("SELECT `color` FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
+        $colorArrSql = $pdo -> query("SELECT `color`,`sid` AS `color_sid` FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
         $colorArr = $colorArrSql -> fetchAll();
         $totalProduct[$i]["colorArr"] = $colorArr;
 
+//尺寸跟庫存叫不出來: echo $colorArr有 但 echo $totalProduct 看不到????----------------------------????????????
+
+//        for($j=0; $j<= ($totalProduct[$i]["colorLength"]-1); $j++){
+//            $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
+//            $sizeArr = $sizeSql -> fetchAll();
+//            $colorArr[$j]["size"] = $sizeArr;
+//        };
 
         $i++;
     }
+
 };
 
-//echo json_encode($totalProduct, JSON_UNESCAPED_UNICODE);
+echo json_encode($colorArr, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------
@@ -407,11 +429,24 @@ $categoriesRow = $categoriesStmt -> fetchAll();
             <div class="col-lg-10">
                 <div class="d-flex justify-content-between">
                     <h5 class="wea_product_list_tital">所有商品</h5>
-                    <div id="wea_product_list_filter" class="wea_product_list_changebar">
-                        <span>分類篩選</span><i class="fas fa-chevron-down"></i>
+                    <div id="wea_product_list_filter" class="wea_product_list_changebar d-flex">
+                        <span>尺寸</span><i class="fas fa-chevron-down"></i>
+                        <a href="">XS</a>
+                        <a href="">S</a>
+                        <a href="">M</a>
+                        <a href="">L</a>
+                        <span>顏色</span><i class="fas fa-chevron-down"></i>
+                        <?php for($c=0; $c<=($selectColorCount-1); $c++):?>
+                        <a href=""><?= $selectColor[$c] ?></a>
+                        <?php endfor; ?>
+                        <span>價格</span><i class="fas fa-chevron-down"></i>
+                        <input type="text" placeholder="請輸入最低價格">
+                        <input type="text" placeholder="請輸入最高價格">
                     </div>
-                    <div id="wea_product_list_sort" class="wea_product_list_changebar">
-                        <span>排序方式</span><i class="fas fa-chevron-down"></i>
+                    <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
+                        <a href="?orderByDate=<?= 'DESC'; ?>">新到舊</a><i class="fas fa-chevron-down"></i>
+                        <a href="?orderByDate=<?= 'ASC'; ?>">舊到新</a><i class="fas fa-chevron-down"></i>
+                        <a href="">熱銷</a><i class="fas fa-chevron-down"></i>
                      </div>
                 </div>
     <!-- ======================================= 商品 ====================================== -->
@@ -429,7 +464,14 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                             <?php for($i=1; $i<=$t['colorLength']; $i++): ?>
                             <div class="wea_product_list_item_color" style="background: <?= $t['colorArr'][$i-1]['color'] ?>"></div>
                             <?php endfor; ?>
-<!--                            <div class="wea_product_list_item_color gray"></div>-->
+                        </div>
+                        <div>
+                            <select class="form-control qty" style="display: inline-block; width: auto">
+                                <?php for($k=1; $k<=10; $k++): ?>
+                                    <option value="<?= $k ?>"><?= $k ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <button type="button" class="btn btn-primary add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
                         </div>
                     </li>
                     <?php endforeach; ?>
