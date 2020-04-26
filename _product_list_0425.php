@@ -53,9 +53,9 @@ if($totalRows>0){
     foreach($totalProduct as $value){
         //加入照片陣列
         //LIMIT 限制筆數
-        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`= ".$value["sid"]." LIMIT 1");
-        $totalProductPics = $productPics -> fetch();
-        $totalProduct[$i]["pictures"]=$totalProductPics;
+//        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`= ".$value["sid"]);
+//        $totalProductPics = $productPics -> fetchAll();
+//        $totalProduct[$i]["pictures"]=$totalProductPics;
 
         //加入每個款式的顏色數量
         $colorLengthSql = $pdo -> query("SELECT *,count(pro_sid) FROM `color` WHERE `pro_sid`= ".$value["sid"]." GROUP BY `pro_sid`");
@@ -63,24 +63,25 @@ if($totalRows>0){
         $totalProduct[$i]["colorLength"] = $colorLength['count(pro_sid)'];
 
         //加入顏色陣列
-        $colorArrSql = $pdo -> query("SELECT `color`,`sid` AS `color_sid` FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
+        //加入顏色照片陣列
+        $colorArrSql = $pdo -> query("SELECT `color`,`sid` AS `color_sid`,`pro_pic`  FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
         $colorArr = $colorArrSql -> fetchAll();
         $totalProduct[$i]["colorArr"] = $colorArr;
 
 //尺寸跟庫存叫不出來: echo $colorArr有 但 echo $totalProduct 看不到????----------------------------????????????
 
-//        for($j=0; $j<= ($totalProduct[$i]["colorLength"]-1); $j++){
-//            $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
-//            $sizeArr = $sizeSql -> fetchAll();
-//            $colorArr[$j]["size"] = $sizeArr;
-//        };
+        for($j=0; $j<= ($totalProduct[$i]["colorLength"]-1); $j++){
+            $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
+            $sizeArr = $sizeSql -> fetchAll();
+            $colorArr[$j]["size"] = $sizeArr;
+        };
 
         $i++;
     }
 
 };
 
-echo json_encode($colorArr, JSON_UNESCAPED_UNICODE);
+echo json_encode($totalProduct, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------
@@ -363,6 +364,15 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     .wea_product_list_item_color.gray{
         background: #bebebe;
     }
+    .a_size_btn{
+        margin-right: 10px;
+        padding: 2px 5px;
+        border: 1px solid #C9044D;
+    }
+    .a_size_btn.active{
+        background: #C9044D;
+        color: #fff;
+    }
     @media screen and (max-width: 992px){
         .wea_product_list{
         margin-left: 20px;
@@ -453,7 +463,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
 
                 <ul class="wea_product_list d-flex justify-content-between flex-wrap">
                     <?php foreach($totalProduct as $t):
-                        $pictureArr = json_decode($t['pictures']['pro_pic']); //把字串變陣列
+                        $pictureArr = json_decode($t['colorArr'][0]['pro_pic']); //把字串變陣列
                         // var_dump(json_decode($t["pictures"]["pro_pic"], true));
                         ?>
                     <li class="wea_product_list_item">
@@ -465,13 +475,19 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                             <div class="wea_product_list_item_color" style="background: <?= $t['colorArr'][$i-1]['color'] ?>"></div>
                             <?php endfor; ?>
                         </div>
+                        <div class="a_get_data_size_sid" data-sizeSid="1">
+                            <button type="button" class="btn a_size_btn active" data-sizeSid="1" data-stock="2">XS</button>
+                            <button type="button" class="btn a_size_btn" data-sizeSid="2" data-stock="2">S</button>
+                            <button type="button" class="btn a_size_btn" data-sizeSid="3" data-stock="2">M</button>
+                            <button type="button" class="btn a_size_btn" data-sizeSid="4" data-stock="2">L</button>
+                        </div>
                         <div>
-                            <select class="form-control qty" style="display: inline-block; width: auto">
+                            <select class="form-control a_cart_qty" style="display: inline-block; width: auto">
                                 <?php for($k=1; $k<=10; $k++): ?>
                                     <option value="<?= $k ?>"><?= $k ?></option>
                                 <?php endfor; ?>
                             </select>
-                            <button type="button" class="btn btn-primary add-to-cart-btn"><i class="fas fa-cart-plus"></i></button>
+                            <button type="button" class="btn btn-primary a_add_to_cart_btn"><i class="fas fa-cart-plus"></i></button>
                         </div>
                     </li>
                     <?php endforeach; ?>
@@ -495,13 +511,41 @@ $categoriesRow = $categoriesStmt -> fetchAll();
             </div> 
         </div>
     </div>
-   
+
+    <?php include __DIR__ . '/parts/h_f_script.php' ?>
+
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>
+    <script>
+
+        const a_addToCartBtn = $('.a_add_to_cart_btn'),
+            a_sizeBtn = $('.a_size_btn');
+
+        //拿到 size 的 sid ------------------------------------------------------------------
+        //將 size 的 sid 以 data-sizeSid 設定給上一層 div---------------------------------------
+        $('.a_size_btn').click(function(){
+            $(this).addClass("active").siblings().removeClass("active");
+            sizeSid = $(this).attr("data-sizeSid");
+            // console.log(`"sizeSid: " ${sizeSid}`)
+            $(this).parent().attr("data-sizeSid",sizeSid);
+        });
+
+        //加入購物車時 拿到 size_sid 跟 數量------------------------------------------------------
+        a_addToCartBtn.click(function(){
+            const cart_sid = $(this).parent().siblings('.a_get_data_size_sid').attr('data-sizeSid');
+            const cart_qty = $(this).siblings('.a_cart_qty').val();
+            // console.log({cart_sid, cart_qty});
+
+            //傳送資料給後端
+            $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
+                countCartObj(data);
+            }, 'json');
+        });
+
+    </script>
     <script>
 
         var index=0;
