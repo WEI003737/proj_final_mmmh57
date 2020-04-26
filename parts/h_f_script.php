@@ -6,6 +6,19 @@
 <!-- gsap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 <script>
+    $.get('add_to_cart_api.php', function(data){
+        countCartObj(data);
+    }, 'json');
+
+    function countCartObj(data){
+        let total = 0;
+        for(let i in data){
+            total += data[i];
+        }
+        // $('.cart-count').text(total);
+    }
+</script>
+<script>
 // logo 動態 ----------------------
     const tl = gsap.timeline({
         defaults: { duration: 0.4, ease: "power2.inOut" }
