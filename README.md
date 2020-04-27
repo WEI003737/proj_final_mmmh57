@@ -17,6 +17,7 @@
  1.normalize.css  
  2.bootstrap  
  3.google font : 'Noto Sans TC', sans-serif'
+ 4.font awesome (4/27新增)
  
  ####h_f_script 裡面有:  
  1.jQuery 3.5.0  

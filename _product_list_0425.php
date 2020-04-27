@@ -17,8 +17,8 @@ $selectColorCount = count($selectColor);
 
 //-----------------------------點商品類別 列出該類別商品---------------------------------
 $where = " WHERE 1 ";
-$orderBy = '  ';
-if(!empty($cate) or !empty($orderByDate)) {
+$orderBy = '';
+if(!empty($cate) or !empty($orderByDate) or !empty($orderByStock)) {
 
     if (!empty($cate)) {
         $where .= " AND cate_sid = $cate ";
@@ -27,6 +27,9 @@ if(!empty($cate) or !empty($orderByDate)) {
     if (!empty($orderByDate)) {
         $orderBy .= " ORDER BY created_date $orderByDate ";
         $pageBtn['orderByDate'] = $orderByDate;
+    }else if(!empty($orderByStock)){
+        $orderBy .= " ORDER BY created_date $orderByStock ";
+        $pageBtn['orderByStock'] = $orderByStock;
     };
 };
 
@@ -70,11 +73,19 @@ if($totalRows>0){
 
 //尺寸跟庫存叫不出來: echo $colorArr有 但 echo $totalProduct 看不到????----------------------------????????????
 
-        for($j=0; $j<= ($totalProduct[$i]["colorLength"]-1); $j++){
-            $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
+        // for($j=0; $j<= ($totalProduct[$i]["colorLength"]-1); $j++){
+        //     $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
+        //     $sizeArr = $sizeSql -> fetchAll();
+        //     $colorArr[$j]["size"] = $sizeArr;
+        // };
+
+        $j=0;
+        foreach($totalProduct[$i]["colorArr"] as $color){
+            $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $color["color_sid"]." ORDER BY `sid` ");
             $sizeArr = $sizeSql -> fetchAll();
-            $colorArr[$j]["size"] = $sizeArr;
-        };
+            $totalProduct[$i]["colorArr"][$j]["size"] = $sizeArr;
+            $j++;
+        }
 
         $i++;
     }

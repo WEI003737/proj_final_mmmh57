@@ -1,15 +1,13 @@
 <?php
-require __DIR__. '/member_connect_db.php';
+require __DIR__. '/__connect_db.php';
 
-session_start();
-//$_SESSION['loginUser']='CCC@Gmail.com';
-//$stmt = $pdo->query("SELECT * FROM `members` where `email`="$_SESSION['loginUser']"")
 $rows = [];
 $sql = "SELECT * FROM members where email='" . $_SESSION['loginUser'] . "'";
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll();
 
 // echo json_encode($_SESSION['loginUser'])
+
 ?>
 
 <!DOCTYPE html>
@@ -108,16 +106,7 @@ input:focus,textarea:focus,button:focus{
     margin-right:50px;
 }
 
-.j_locksize{
-    width:50px;
-    height:50px;   
-}
 
-/* 對話框出不來 */
-.bubble{
- background-image:url(./images/bubble.png);
-
-}
 
 </style>
 <body>
@@ -127,7 +116,6 @@ input:focus,textarea:focus,button:focus{
 
     <div class="container">
 
-    <!-- <div class="bubble"></div> -->
 
         <div class="member_top_title j_padt_100"> 
             <div class="d-flex align-items-center justify-content-cneter ">
@@ -156,16 +144,18 @@ input:focus,textarea:focus,button:focus{
 
                        <div class="d-flex align-items-center">
                             <div class="d-felx text-align-center j_email_bg"><?=$r['email'] ?></div>
-                            <div>
-                                <img class="j_locksize" src="images/iconlock.svg" alt="">
+                            <div class="j_locksize">
+                                <i class="fas fa-key"></i>
                                 <a href="mailto:camillemilky@gmail.com">更改密碼</a>
                             </div>
+                            
+                            
                        </div>
 
-                        <div>姓名&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="name_new" name="name_new" placeholder="" value="<?= $r['name'] ?>" /></div>
+                        <div>姓名&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="name_new" name="name_new" placeholder="" value="<?= $r['name'] ?>" required minlength="2" /></div>
                         <small id="name_help" class="form-text"></small>
 
-                        <div>電話&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="mobile_new" name="mobile_new" placeholder="" value="<?= $r['mobile'] ?>" /></div>
+                        <div>電話&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="tel" id="mobile_new" name="mobile_new" placeholder="" value="<?= $r['mobile'] ?>" required pattern="/^09\d{2}-?\d{3}-?\d{3}$/" /></div>
                         <small id="mobile_help" class="form-text"></small>
                     
                         <br>
@@ -182,7 +172,7 @@ input:focus,textarea:focus,button:focus{
                         <!-- <input type="" id="" name="" placeholder="常用便利商店" value=""  />  -->
 
 
-                        <div id="info-bar3" class="alert alert-info bubble" role="alert" style="display: none"></div>
+                        <div id="info-bar3" class="alert alert-info" role="alert" style="display: none"></div>
                    
 
                         <div><button class="login_btn" type="submit" >儲存變更</button></div>
@@ -208,81 +198,24 @@ input:focus,textarea:focus,button:focus{
 
 <script>
 
-       const email = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-       const mobile = /^09\d{2}-?\d{3}-?\d{3}$/;
-
-       const $name_new = $("#name_new"),
-             $name_help = $("#name_help"),
-
-             $mobile = $("#mobile_new"),
-             $mobile_help = $("#mobile_help"),
-
-             $receiver = $("#receiver_name"),
-             $receiver_name_help = $("#receiver_name_help"),
-
-             $receiver_mobile = $("#receiver_mobile"),
-             $receiver_mobile_help = $("#receiver_mobile_help"),
-
-             $receiver_address = $('#receiver_address');
-            
+             
         function checkForm3(){
-            let isPass = true; 
-        
-            $("#info-bar3").hide();
-            $name_new.css('border-color', '#ccc');
-             $name_help.text('');
-
-            $mobile.css('border-color', '#ccc');
-            $mobile_help.text('');
-
-            $receiver.css('border-color', '#ccc');
-            $receiver_name_help.text('');
-
-            $receiver_mobile.css('border-color', '#ccc');
-            $receiver_mobile_help .text('');
-
-            $receiver_address.css('border-color', '#ccc');
-
-
-            if($name_new.val().length < 2){
-                $name_new.css('border-color', 'blue');
-                $name_help.text('請填寫正確的姓名');
-                isPass = false;
-            }
-
-            if(! mobile.test($mobile.val())){
-                $mobile.css('border-color', 'blue');
-                $mobile_help.text('請填寫符合格式的手機號碼 範例: 0933-666-333');
-                isPass = false;
-            }
-
-            if($receiver.val().length == 1){
-                $receiver.css('border-color', 'blue');
-                $receiver_name_help.text('請填寫正確的姓名');
-                isPass = false;
-            }
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if($receiver_mobile.val().length > 0){
-                if(! mobile.test($receiver_mobile.val())){
-                    $receiver_mobile.css('border-color', 'blue');
-                    $receiver_mobile_help.text('請填寫符合格式的手機號碼 範例: 0933-666-333');
-                    isPass = false;
-                }
+            
+            if($("form")[0].checkValidity()) {
+                // console.log($(document.form3).serialize())
                 
-            }else{
-                    isPass = true;
-            }
-
-            if(isPass){
                 $.post('member_information_update_api.php', $(document.form3).serialize(), function (data){
                     if(data.success){
                         $('#info-bar3').show().text('資料更新成功');
-                        console.log(data)
+                        // console.log(data)
                     } else {
                         $('#info-bar3').show().text('資料格式有誤');
                     }
+                    
                 }, 'json');
             }
+
+        
             return false;
         }
 

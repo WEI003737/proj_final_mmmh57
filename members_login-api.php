@@ -1,11 +1,5 @@
 <?php
-require __DIR__. '/member_connect_db.php';
-
-
-//SESSION 換到這裡來 
-if(!isset($_SESSION)){
-    session_start();
-}
+require __DIR__. '/__connect_db.php';
 
 $output = [
     'success' => false,
@@ -25,9 +19,9 @@ $stmt->execute([$email, $password]);
 
 if($stmt->rowCount()){
     $row = $stmt->fetch();
-    $_SESSION['loginUser'] = $email;   //?
+    $_SESSION['loginUser'] = $email; 
     $output['success'] = true;
-    $output['data'] = $row;  //不一定要顯示出 危險
+    $output['data'] = $row;
 }
 header('Content-Type: application/json');
 echo json_encode($output);

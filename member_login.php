@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/member_connect_db.php';  
+require __DIR__. '/__connect_db.php';  
 ?>
 
 <!DOCTYPE html>
