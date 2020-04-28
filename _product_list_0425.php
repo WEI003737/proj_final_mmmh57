@@ -12,6 +12,7 @@ $orderByDate = isset($_GET['orderByDate']) ? $_GET['orderByDate'] : '';
 
 //get的內容 要用http_build_query輸出
 $my_qs = $_GET;
+
 //可篩選的顏色種類 (test)
 $selectColor = ['red','black','blue','pink'];
 $selectColorCount = count($selectColor);
@@ -470,10 +471,13 @@ $categoriesRow = $categoriesStmt -> fetchAll();
             <div class="col-sm-2">
                 <ul class="show-desktop wea_product_select_bar">
                     <ul ><a href="?"><h5>所有商品</h5></a></a></ul>
-<!--                    <ul ><a href=""><h6>運動內衣</h6></a></ul>-->
                     <?php foreach($categoriesRow as $nav):  ?>
-                        <ul><a href="?cate=<?= $nav['sid'] ?>"><h6><?= $nav['parent'] ?></h6></a></ul>
-                        <li><a href="?cate=<?= $nav['sid'] ?>"><p><?= $nav['name'] ?></p></a></li>
+                        <ul><a href="?<?php
+                            $my_qs['cate'] = $nav['sid'];
+                            echo http_build_query($my_qs);?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                        <li><a href="?<?php
+                            $my_qs['cate'] = $nav['sid'];
+                            echo http_build_query($my_qs); ?>"><p><?= $nav['name'] ?></p></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
