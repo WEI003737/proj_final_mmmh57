@@ -11,29 +11,29 @@ $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
 
 //get的內容 要用http_build_query輸出
 $my_qs = $_GET;
-
+//print_r($my_qs);
 //可篩選的顏色種類 (test)
 $selectColor = ['red','black','blue','pink'];
 $selectColorCount = count($selectColor);
 
 //-----------------------------點商品類別 列出該類別商品---------------------------------
+//怎麼篩2個以上的東西??????????????????????????????????????????
 $where = " WHERE 1 ";
-$orderBy = '';
-if(!empty($cate)) {
-    if (!empty($cate)) {
-        $where .= " AND cate_sid = $cate ";
-        $pageBtn['cate'] = $cate;
-    };
-};
-if(!empty($orderByDate)) {
+$orderBy = "";
+$selectDate = '';
+$selectPrice = '';
 
-    if (!empty($orderByDate)) {
-        $orderBy .= " ORDER BY created_date $orderByDate ";
-        $pageBtn['orderByDate'] = $orderByDate;
-    }else if(!empty($orderByStock)){
-        $orderBy .= " ORDER BY created_date $orderByStock ";
-        $pageBtn['orderByStock'] = $orderByStock;
-    };
+if(!empty($cate)) {
+    $where .= " AND cate_sid = $cate ";
+//    $my_qs['cate'] = $cate;
+};
+if(!empty($selectDate)) {
+    $orderBy .= " ORDER BY created_date $selectDate ";
+    unset($my_qs['$selectPrice']);
+};
+if(!empty($selectPrice)) {
+    $orderBy .= " ORDER BY price $selectPrice ";
+    unset($my_qs['$selectDate']);
 };
 
 //取得總筆數
@@ -558,6 +558,9 @@ $categoriesRow = $categoriesStmt -> fetchAll();
             <!-- <li class="active"></li> -->
         </ul>
     </div>
+  <!-- =================================== 新增收藏提醒 (test) =================================== -->
+  <div id="a_add_to_alarm" class="alert alert-info" role="alert" style="display:none">
+  </div>
     <!-- =================================== 選單 =================================== -->
     <div class="wea_wrapper">
         <div class="row no-gutters">
@@ -565,24 +568,47 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                 <ul class="show-desktop wea_product_select_bar">
                     <ul ><a href="?"><h5>所有商品</h5></a></a></ul>
                     <?php foreach($categoriesRow as $nav):  ?>
-                        <ul><a href="?cate=<?= $nav['sid'] ?>"><h6><?= $nav['parent'] ?></h6></a></ul>
-                        <li><a href="?cate=<?= $nav['sid'] ?>"><p><?= $nav['name'] ?></p></a></li>
+                        <ul><a href="?<?php
+                            $my_qs['cate'] = $nav['sid'];
+                            echo http_build_query($my_qs);?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                        <li><a href="?<?php
+                            $my_qs['cate'] = $nav['sid'];
+                            echo http_build_query($my_qs);?>"><p><?= $nav['name'] ?></p></a></li>
                     <?php endforeach; ?>
 
                 </ul>
             </div>
+
     <!-- ===================================== 商品列表 ===================================== -->
     <!-- ======================================= 篩選 ====================================== -->
             <div class="col-lg-10">
                 <div class="position-relative">
                     <div class="d-flex wea_product_list_header">
                         <h5 class="show-desktop wea_product_list_tital ">所有商品</h5>
-                        <div id="wea_product_list_filter" class="wea_product_list_changebar">
-                            <span>分類篩選</span><i class="fas fa-chevron-down"></i>
+                        <div id="wea_product_list_filter" class="wea_product_list_changebar d-flex">
+                            <span>顏色</span><i class="fas fa-chevron-down"></i>
+                            <?php for($c=0; $c<=($selectColorCount-1); $c++):?>
+                                <a href=""><?= $selectColor[$c] ?></a>
+                            <?php endfor; ?>
+                            <span>價格</span><i class="fas fa-chevron-down"></i>
+                            <input type="text" placeholder="請輸入最低價格">
+                            <input type="text" placeholder="請輸入最高價格">
                         </div>
-                        <div id="wea_product_list_sort" class="wea_product_list_changebar">
-                            <span>排序方式</span><i class="fas fa-chevron-down"></i>
-                         </div>
+                        <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
+                            <a href="?<?php
+                            $my_qs['selectDate'] = 'DESC';
+                            echo http_build_query($my_qs);?>">新到舊</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs['selectDate'] = 'ASC';
+                            echo http_build_query($my_qs);?>">舊到新</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs['selectPrice'] = 'DESC';
+                            echo http_build_query($my_qs);?>">價錢高到低</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs['selectPrice'] = 'ASC';
+                            echo http_build_query($my_qs);?>">價錢低到高</a><i class="fas fa-chevron-down"></i>
+
+                        </div>
                     </div>
                     <!-- 手機 -->
                     <div class="show-mobile wea_product_list_header_mobile position-absolute">
@@ -592,8 +618,12 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                             <ul class="position-absolute wea_product_select_bar show-mobile">
                                 <ul><a class="d-flex"><h5>所有商品</h5></a></a></ul>
                                 <?php foreach($categoriesRow as $nav):  ?>
-                                    <ul><a href="?cate=<?= $nav['sid'] ?>"><h6><?= $nav['parent'] ?></h6></a></ul>
-                                    <li><a href="?cate=<?= $nav['sid'] ?>"><p><?= $nav['name'] ?></p></a></li>
+                                    <ul><a href="?<?php
+                                        $my_qs['cate'] = $nav['sid'];
+                                        echo http_build_query($my_qs);?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                                    <li><a href="?<?php
+                                        $my_qs['cate'] = $nav['sid'];
+                                        echo http_build_query($my_qs);?>"><p><?= $nav['name'] ?></p></a></li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
@@ -614,8 +644,9 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                     ?>
                     <li class="wea_product_list_item position-relative">
                         <img src="./images/<?=$pictureArr[0]?>.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
+                        <i class="a_add_to_like_unactive far fa-heart position-absolute" data-proSid="<?=$t['sid']?>"></i>
+                        <i class="a_add_to_like_active fas fa-heart position-absolute display_none"></i>
+
                         <!-- <div class="wea_product_list_item_img"></div> -->
                         <p><?= $t['name']; ?></p>
                         <div class="d-flex justify-content-between">
@@ -659,7 +690,28 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <?php include __DIR__ . '/parts/h_f_script.php' ?>
+  <script>
+//加入最愛-----------------------------
+//還要寫刪除最愛???????????????????????????????????????????????????????????
+//檢查是否已登入，登入才顯示愛心
+      $(".a_add_to_like_unactive").click(function(){
+          //加入最愛圖示
+          $(this).siblings(".a_add_to_like_active").removeClass("display_none");
+          //傳送 colorSid 給後端
+          const a_likeProSid = $(this).attr("data-proSid");
 
+          $.get('_add_to_like_api.php', {a_likeProSid}, function(data){
+              if(data.success){
+                  console.log(data);
+                  $("#a_add_to_alarm").show().text('成功加入收藏');
+                  setTimeout(function(){
+                      $("#a_add_to_alarm").hide();
+                  }, 1000);
+              }
+
+          }, 'json');
+      })
+  </script>
   <script>
         var index=0;
         var slideWidth=$(".wea_ootd_img").width();
