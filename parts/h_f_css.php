@@ -81,6 +81,12 @@
             box-shadow: 0 0 5px #ccc;
             background: #fff;
             font-size: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            z-index: 999;
         }
         .header .a_nav{
             /* header 高度 */
@@ -254,7 +260,7 @@
             padding-bottom: 10px;
         }
         .footer hr{
-            width: 1440px;
+            width: 100%;
             border: 1px solid #fff;
             color: #fff;
             margin: 50px auto 25px ;
@@ -313,7 +319,7 @@
                 display: none;
             }
             .footer hr{
-                width: 330px;
+                width: 80%;
                 margin: 25px 15px 20px ;
             }
             .footer .a_rwd_map{
