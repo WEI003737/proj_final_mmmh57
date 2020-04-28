@@ -483,11 +483,6 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                 <div class="d-flex justify-content-between">
                     <h5 class="wea_product_list_tital">所有商品</h5>
                     <div id="wea_product_list_filter" class="wea_product_list_changebar d-flex">
-                        <span>尺寸</span><i class="fas fa-chevron-down"></i>
-                        <a href="">XS</a>
-                        <a href="">S</a>
-                        <a href="">M</a>
-                        <a href="">L</a>
                         <span>顏色</span><i class="fas fa-chevron-down"></i>
                         <?php for($c=0; $c<=($selectColorCount-1); $c++):?>
                         <a href=""><?= $selectColor[$c] ?></a>
@@ -499,8 +494,10 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                     <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
                         <a href="?orderByDate=<?= 'DESC'; ?>">新到舊</a><i class="fas fa-chevron-down"></i>
                         <a href="?orderByDate=<?= 'ASC'; ?>">舊到新</a><i class="fas fa-chevron-down"></i>
-                        <a href="">熱銷</a><i class="fas fa-chevron-down"></i>
-                     </div>
+                        <a href="">價錢高到低</a><i class="fas fa-chevron-down"></i>
+                        <a href="">價錢低到高</a><i class="fas fa-chevron-down"></i>
+
+                    </div>
                 </div>
     <!-- ======================================= 商品 ====================================== -->
 

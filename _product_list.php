@@ -1,3 +1,136 @@
+<?php
+require __DIR__ . '/__connect_db.php';
+$page_name = 'product_list';
+
+//-------------------篩選:頁數、商品類別、---------------------------------
+
+$perPage = 8;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
+
+
+//get的內容 要用http_build_query輸出
+$my_qs = $_GET;
+
+//可篩選的顏色種類 (test)
+$selectColor = ['red','black','blue','pink'];
+$selectColorCount = count($selectColor);
+
+//-----------------------------點商品類別 列出該類別商品---------------------------------
+$where = " WHERE 1 ";
+$orderBy = '';
+if(!empty($cate)) {
+    if (!empty($cate)) {
+        $where .= " AND cate_sid = $cate ";
+        $pageBtn['cate'] = $cate;
+    };
+};
+if(!empty($orderByDate)) {
+
+    if (!empty($orderByDate)) {
+        $orderBy .= " ORDER BY created_date $orderByDate ";
+        $pageBtn['orderByDate'] = $orderByDate;
+    }else if(!empty($orderByStock)){
+        $orderBy .= " ORDER BY created_date $orderByStock ";
+        $pageBtn['orderByStock'] = $orderByStock;
+    };
+};
+
+//取得總筆數
+$totalRows = $pdo->query("SELECT COUNT(1) FROM products $where ")
+    ->fetch(PDO::FETCH_NUM)[0];
+
+//算總頁數
+$totalPages = ceil($totalRows / $perPage);
+
+($page < 1) ? ($page = 1) : false;
+($page > $totalPages) ? ($page = $totalPages) : false;
+
+//-----------------------------總商品資料 + 商品圖---------------------------------
+//如果有資料
+if($totalRows>0){
+    //總商品sql
+    $totalProductSql = sprintf("SELECT * FROM products $where $orderBy LIMIT %s, %s  ", ($page-1)*$perPage, $perPage);
+    //總商品資料
+    $totalProductStmt = $pdo -> query($totalProductSql);
+    $totalProducts = $totalProductStmt -> fetchAll();
+
+//    另一種資料撈法------------------------------------------------------------------------------------
+//    $dictProducts = [];
+//    $proSids = [];
+//
+//    foreach($totalProducts as $pro){
+//        $dictProducts[ $pro['sid'] ] = $pro;
+//        $proSids[] = $pro['sid'];
+//    }
+//
+//    $colorSql = sprintf("SELECT * FROM `color` WHERE `pro_sid` IN (%s)", implode(',', $proSids));
+//    $totalColorStmt = $pdo -> query($colorSql);
+//    $totalColors = $totalColorStmt -> fetchAll();
+//
+//    $i=0;
+//    foreach($totalColors as $c){
+//        $dictProducts[$i]['color'] = $c;
+//        $i++;
+//    }
+//    print_r($dictProducts);
+//    print_r($totalColors);
+//    另一種資料撈法------------------------------------------------------------------------------------
+
+
+
+    //商品資料最後，塞入從 color 資料表拿出的，該商品的其中一種顏色的圖片(陣列)
+    $i=0;
+    foreach($totalProducts as $value){
+        //加入照片陣列
+        //LIMIT 限制筆數
+//        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`= ".$value["sid"]);
+//        $totalProductPics = $productPics -> fetchAll();
+//        $totalProducts[$i]["pictures"]=$totalProductPics;
+
+        //加入每個款式的顏色數量
+        $colorLengthSql = $pdo -> query("SELECT *,count(pro_sid) FROM `color` WHERE `pro_sid`= ".$value["sid"]." GROUP BY `pro_sid`");
+        $colorLength = $colorLengthSql -> fetch();
+        $totalProducts[$i]["colorLength"] = $colorLength['count(pro_sid)'];
+
+        //加入顏色陣列
+        //加入顏色照片陣列
+        $colorArrSql = $pdo -> query("SELECT `color`,`sid` AS `color_sid`,`pro_pic`  FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
+        $colorArr = $colorArrSql -> fetchAll();
+        $totalProducts[$i]["colorArr"] = $colorArr;
+
+//尺寸跟庫存叫不出來: echo $colorArr有 但 echo $totalProducts 看不到????----------------------------????????????
+
+        // for($j=0; $j<= ($totalProducts[$i]["colorLength"]-1); $j++){
+        //     $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
+        //     $sizeArr = $sizeSql -> fetchAll();
+        //     $colorArr[$j]["size"] = $sizeArr;
+        // };
+
+        $j=0;
+        foreach($totalProducts[$i]["colorArr"] as $color){
+            $sizeSql = $pdo->query("SELECT `sid` AS `size_sid`, `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $color["color_sid"]." ORDER BY `sid` ");
+            $sizeArr = $sizeSql -> fetchAll();
+            $totalProducts[$i]["colorArr"][$j]["size"] = $sizeArr;
+            $j++;
+        }
+
+        $i++;
+    }
+
+};
+
+//echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
+
+
+//-----------------------------商品選單---------------------------------
+
+$categoriesStmt = $pdo -> query("SELECT * FROM `categories`");
+$categoriesRow = $categoriesStmt -> fetchAll();
+//echo json_encode($categoriesRow);
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -6,9 +139,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
+
+      <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    <?php include __DIR__ . '/parts/h_f_link.php' ?>
+    <?php include __DIR__ . '/parts/h_f_css.php' ?>
+
   </head>
   <style>
     /* * {
@@ -72,6 +209,7 @@
     /* ================================== #ootd ============================== */
     .wea_ootd{
         width: 100%;
+        margin-top: 120px;
     }
     .wea_ootd_img{
         width: 100%;
@@ -178,6 +316,9 @@
     }
     }
     @media screen and (max-width: 625px){
+        .wea_ootd{
+            margin-top: 60px;
+        }
         .wea_ootd_dec h1{
         font-size: 36px;
     }
@@ -397,7 +538,9 @@
     }
   </style>
   <body>
-    <!-- =================================== #ootd =================================== -->
+  <?php include __DIR__ . '/parts/header.php' ?>
+
+  <!-- =================================== #ootd =================================== -->
     <div class="wea_ootd">
         <div class="wea_ootd_img position-relative">
             <ul class="list-unstyled wea_ootd_slider_img d-flex position-absolute">
@@ -420,31 +563,12 @@
         <div class="row no-gutters">
             <div class="col-sm-2">
                 <ul class="show-desktop wea_product_select_bar">
-                    <ul ><a href=""><h5>所有商品</h5></a></a></ul>
-                    <ul ><a href=""><h6>運動內衣</h6></a>
-                        <li><a href=""><p>有襯墊內衣</p></a></li>
-                        <li><a href=""><p>無襯墊內衣</p></a></li>
-                    </ul>
-                    <ul><a href=""><h6>上身類</h6></a>
-                        <li><a href=""><p>短袖上衣</p></a></li>
-                        <li><a href=""><p>長袖上衣</p></a></li>
-                        <li><a href=""><p>無袖背心</p></a></li>
-                        <li><a href=""><p>運動棉衫</p></a></li>
-                        <li><a href=""><p>外套罩衫</p></a></li>
-                    </ul>
-                    <ul><a href=""><h6>下著類</h6></a>
-                        <li><a href=""><p>短褲</p></a></li>
-                        <li><a href=""><p>長褲</p></a></li>
-                        <li><a href=""><p>五分褲</p></a></li>
-                        <li><a href=""><p>七/八分褲</p></a></li>
-                        <li><a href=""><p>緊身褲</p></a></li>
-                    </ul>
-                    <ul ><a href=""><h6>配件</h6></a>
-                        <li><a href=""><p>水壺</p></a></li>
-                        <li><a href=""><p>保養與清潔</p></a></li>
-                        <li><a href=""><p>運動襪</p></a></li>
-                        <li><a href=""><p>瑜珈</p></a></li>
-                    </ul>
+                    <ul ><a href="?"><h5>所有商品</h5></a></a></ul>
+                    <?php foreach($categoriesRow as $nav):  ?>
+                        <ul><a href="?cate=<?= $nav['sid'] ?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                        <li><a href="?cate=<?= $nav['sid'] ?>"><p><?= $nav['name'] ?></p></a></li>
+                    <?php endforeach; ?>
+
                 </ul>
             </div>
     <!-- ===================================== 商品列表 ===================================== -->
@@ -467,26 +591,10 @@
                             <div class="wea_product_list_tital_seclect position-absolute"></div>
                             <ul class="position-absolute wea_product_select_bar show-mobile">
                                 <ul><a class="d-flex"><h5>所有商品</h5></a></a></ul>
-                                <!-- <ul ><a href=""><h5>所有商品</h5></a></a></ul> -->
-                                <ul ><a class="d-flex"><h6>運動內衣</h6></a>
-                                    <li><a class="d-flex"><p>有襯墊內衣</p></a></li>
-                                    <li><a class="d-flex"><p>無襯墊內衣</p></a></li>
-                                </ul>
-                                <ul><a class="d-flex"><h6>上身類</h6></a>
-                                    <li><a class="d-flex"><p>短袖上衣</p></a></li>
-                                    <li><a class="d-flex"><p>長袖上衣</p></a></li>
-                                    <li><a class="d-flex"><p>無袖背心</p></a></li>
-                                    <li><a class="d-flex"><p>運動棉衫</p></a></li>
-                                    <li><a class="d-flex"><p>外套罩衫</p></a></li>
-                                </ul>
-                                <ul><a class="d-flex"><h6>下著類</h6></a>
-                                    <li><a class="d-flex"><p>短褲</p></a></li>
-                                    <li><a class="d-flex"><p>長褲</p></a></li>
-                                    <li><a class="d-flex"><p>五分褲</p></a></li>
-                                    <li><a class="d-flex"><p>七/八分褲</p></a></li>
-                                    <li><a class="d-flex"><p>緊身褲</p></a></li>
-                                </ul>
-                                <ul ><a class="d-flex"><h6>配件</h6></a></ul>
+                                <?php foreach($categoriesRow as $nav):  ?>
+                                    <ul><a href="?cate=<?= $nav['sid'] ?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                                    <li><a href="?cate=<?= $nav['sid'] ?>"><p><?= $nav['name'] ?></p></a></li>
+                                <?php endforeach; ?>
                             </ul>
                         </div>
                         <!-- 收起狀態 -->
@@ -500,174 +608,59 @@
                 </div>
     <!-- ======================================= 商品 ====================================== -->
                 <ul class="wea_product_list d-flex justify-content-between flex-wrap">
+                    <?php foreach($totalProducts as $t):
+                    $pictureArr = json_decode($t['colorArr'][0]['pro_pic']); //把字串變陣列
+                    // var_dump(json_decode($t["pictures"]["pro_pic"], true));
+                    ?>
                     <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
+                        <img src="./images/<?=$pictureArr[0]?>.png" alt="">
                         <i class="far fa-heart position-absolute"></i>
                         <i class="fas fa-heart position-absolute display_none"></i>
                         <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
+                        <p><?= $t['name']; ?></p>
                         <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
+                            <p class="wea_product_list_item_price">$<?= $t['price']; ?></p>
+                            <?php for($i=1; $i<=$t['colorLength']; $i++): ?>
+                                <div class="wea_product_list_item_color" style="background: <?= $t['colorArr'][$i-1]['color'] ?>"></div>
+                            <?php endfor; ?>
                         </div>
                     </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
-                    <li class="wea_product_list_item position-relative">
-                        <img src="img/0.png" alt="">
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
-                        <!-- <div class="wea_product_list_item_img"></div> -->
-                        <p>後綁帶短袖上衣</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="wea_product_list_item_price">NT1340</p>
-                            <div class="wea_product_list_item_color pink"></div>
-                            <div class="wea_product_list_item_color gray"></div>
-                        </div>
-                    </li>
+                    <?php endforeach; ?>
                 </ul>
     <!-- ======================================= 頁碼 ====================================== -->
                 <div class="wea_product_list_page d-flex">
-                    <a href=""><i class="fas fa-chevron-left"></i></a>
-                    <a href="">1</a>
-                    <a href="">2</a>
-                    <a href="">3</a>
-                    <a href="">4</a>
-                    <a href="">5</a>
-                    <a href=""><i class="fas fa-chevron-right"></i></a>
+                    <a href="?<?=
+                    $my_qs['page']=$page-1;
+                    echo http_build_query($my_qs)?>">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    <?php for($i = 1; $i <= $totalPages; $i++):
+                        $my_qs['page']=$i;?>
+                        <a href="?<?= http_build_query($my_qs); ?>"><?= $i ?></a>
+                    <?php endfor; ?>
+                    <a href="?<?=
+                    $my_qs['page']=$page+1;
+                    echo http_build_query($my_qs)?>">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
                 </div>
             </div> 
         </div>
     </div>
-   
-    <!-- Optional JavaScript -->
+    <?php include __DIR__ . '/parts/footer.php' ?>
+
+
+  <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>
+<!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>-->
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-    <script>
+    <?php include __DIR__ . '/parts/h_f_script.php' ?>
+
+  <script>
         var index=0;
         var slideWidth=$(".wea_ootd_img").width();
         var slideImages=[ "ootd1.png", "ootd2.jpg","ootd3.jpg","ootd4.png","ootd5.png"];
