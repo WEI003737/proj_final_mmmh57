@@ -8,10 +8,11 @@ $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
 $orderByDate = isset($_GET['orderByDate']) ? $_GET['orderByDate'] : '';
-$color = isset($_GET['color']) ? $_GET['color'] : ''; //還沒用到...
+
+
 //get的內容 要用http_build_query輸出
-$pageBtn = [];
-//可篩選的顏色種類
+$my_qs = $_GET;
+//可篩選的顏色種類 (test)
 $selectColor = ['red','black','blue','pink'];
 $selectColorCount = count($selectColor);
 
@@ -50,40 +51,65 @@ if($totalRows>0){
     $totalProductSql = sprintf("SELECT * FROM products $where $orderBy LIMIT %s, %s  ", ($page-1)*$perPage, $perPage);
     //總商品資料
     $totalProductStmt = $pdo -> query($totalProductSql);
-    $totalProduct = $totalProductStmt -> fetchAll();
+    $totalProducts = $totalProductStmt -> fetchAll();
+
+//    另一種資料撈法------------------------------------------------------------------------------------
+//    $dictProducts = [];
+//    $proSids = [];
+//
+//    foreach($totalProducts as $pro){
+//        $dictProducts[ $pro['sid'] ] = $pro;
+//        $proSids[] = $pro['sid'];
+//    }
+//
+//    $colorSql = sprintf("SELECT * FROM `color` WHERE `pro_sid` IN (%s)", implode(',', $proSids));
+//    $totalColorStmt = $pdo -> query($colorSql);
+//    $totalColors = $totalColorStmt -> fetchAll();
+//
+//    $i=0;
+//    foreach($totalColors as $c){
+//        $dictProducts[$i]['color'] = $c;
+//        $i++;
+//    }
+//    print_r($dictProducts);
+//    print_r($totalColors);
+//    另一種資料撈法------------------------------------------------------------------------------------
+
+
+
     //商品資料最後，塞入從 color 資料表拿出的，該商品的其中一種顏色的圖片(陣列)
     $i=0;
-    foreach($totalProduct as $value){
+    foreach($totalProducts as $value){
         //加入照片陣列
         //LIMIT 限制筆數
 //        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`= ".$value["sid"]);
 //        $totalProductPics = $productPics -> fetchAll();
-//        $totalProduct[$i]["pictures"]=$totalProductPics;
+//        $totalProducts[$i]["pictures"]=$totalProductPics;
 
         //加入每個款式的顏色數量
         $colorLengthSql = $pdo -> query("SELECT *,count(pro_sid) FROM `color` WHERE `pro_sid`= ".$value["sid"]." GROUP BY `pro_sid`");
         $colorLength = $colorLengthSql -> fetch();
-        $totalProduct[$i]["colorLength"] = $colorLength['count(pro_sid)'];
+        $totalProducts[$i]["colorLength"] = $colorLength['count(pro_sid)'];
 
         //加入顏色陣列
         //加入顏色照片陣列
         $colorArrSql = $pdo -> query("SELECT `color`,`sid` AS `color_sid`,`pro_pic`  FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
         $colorArr = $colorArrSql -> fetchAll();
-        $totalProduct[$i]["colorArr"] = $colorArr;
+        $totalProducts[$i]["colorArr"] = $colorArr;
 
-//尺寸跟庫存叫不出來: echo $colorArr有 但 echo $totalProduct 看不到????----------------------------????????????
+//尺寸跟庫存叫不出來: echo $colorArr有 但 echo $totalProducts 看不到????----------------------------????????????
 
-        // for($j=0; $j<= ($totalProduct[$i]["colorLength"]-1); $j++){
+        // for($j=0; $j<= ($totalProducts[$i]["colorLength"]-1); $j++){
         //     $sizeSql = $pdo->query("SELECT `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $colorArr[$j]["color_sid"]." ORDER BY `sid` ");
         //     $sizeArr = $sizeSql -> fetchAll();
         //     $colorArr[$j]["size"] = $sizeArr;
         // };
 
         $j=0;
-        foreach($totalProduct[$i]["colorArr"] as $color){
+        foreach($totalProducts[$i]["colorArr"] as $color){
             $sizeSql = $pdo->query("SELECT `sid` AS `size_sid`, `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $color["color_sid"]." ORDER BY `sid` ");
             $sizeArr = $sizeSql -> fetchAll();
-            $totalProduct[$i]["colorArr"][$j]["size"] = $sizeArr;
+            $totalProducts[$i]["colorArr"][$j]["size"] = $sizeArr;
             $j++;
         }
 
@@ -92,7 +118,7 @@ if($totalRows>0){
 
 };
 
-echo json_encode($totalProduct, JSON_UNESCAPED_UNICODE);
+echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------
@@ -479,7 +505,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     <!-- ======================================= 商品 ====================================== -->
 
                 <ul class="wea_product_list d-flex justify-content-between flex-wrap">
-                    <?php foreach($totalProduct as $t):
+                    <?php foreach($totalProducts as $t):
                         $pictureArr = json_decode($t['colorArr'][0]['pro_pic']); //把字串變陣列
                         // var_dump(json_decode($t["pictures"]["pro_pic"], true));
                         ?>
@@ -511,19 +537,20 @@ $categoriesRow = $categoriesStmt -> fetchAll();
 
                 </ul>
     <!-- ======================================= 頁碼 ====================================== -->
+
                 <div class="wea_product_list_page d-flex">
                     <a href="?<?=
-                    $pageBtn['page']=$page-1;
-                    echo http_build_query($pageBtn)?>">
+                    $my_qs['page']=$page-1;
+                    echo http_build_query($my_qs)?>">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                        <?php for($i = 1; $i <= $totalPages; $i++):
-                           $pageBtn['page']=$i;?>
-                            <a href="?<?= http_build_query($pageBtn); ?>"><?= $i ?></a>
+                           $my_qs['page']=$i;?>
+                            <a href="?<?= http_build_query($my_qs); ?>"><?= $i ?></a>
                        <?php endfor; ?>
                     <a href="?<?=
-                    $pageBtn['page']=$page+1;
-                    echo http_build_query($pageBtn)?>"><i class="fas fa-chevron-right"></i></a>
+                    $my_qs['page']=$page+1;
+                    echo http_build_query($my_qs)?>"><i class="fas fa-chevron-right"></i></a>
                 </div>
             </div> 
         </div>
