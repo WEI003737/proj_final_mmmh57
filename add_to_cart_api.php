@@ -12,27 +12,26 @@ $cart_sid = isset($_GET['cart_sid']) ? intval($_GET['cart_sid']) : 0;
 $cart_qty = isset($_GET['cart_qty']) ? intval($_GET['cart_qty']) : 0;
 
 
-$sql = "INSERT INTO `address_book`(
-`name`, `email`, `mobile`, `birthday`, `address`, `created_at`
-) VALUES (?, ?, ?, ?, ?, NOW())";
+//先判斷有無此商品
+if(! empty($cart_sid)){
+    $sizeSidSql = $pdo -> query("SELECT * FROM `size` WHERE `sid`= ".$cart_sid);
+    $haveSizeSid = $sizeSidSql -> fetch(); //設fetchAll不會動
 
-$stmt = $pdo->prepare($sql);
+    if($sizeSidSql -> rowCount() == 1){
+//判斷有無足夠庫存
+        if(!empty($cart_qty) and $cart_qty <= $haveSizeSid['in_stock']) {
+            $_SESSION['cart'][$cart_sid] = $cart_qty;
+             $_SESSION['cart']['success'] = true;
 
-$stmt->execute([
-    $_POST['name'],
-    $_POST['email'],
-    $_POST['mobile'],
-    $_POST['birthday'],
-    $_POST['address'],
-]);
+        }else{
+             $_SESSION['cart']['success'] = false;
 
-if($stmt->rowCount()==1){
-    $output['success'] = true;
-    $output['error'] = '';
-} else {
-    $output['error'] = '資料無法新增';
-}
+        }
+    }
 
+}else {
+    unset($_SESSION['cart'][$cart_sid]);
+};
 
 header('Content-Type: application/json');
 echo json_encode($_SESSION['cart']);
