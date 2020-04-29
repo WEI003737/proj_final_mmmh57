@@ -120,7 +120,7 @@ if($totalRows>0){
 
 };
 
-//echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
+echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------

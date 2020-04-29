@@ -4,39 +4,51 @@ require __DIR__. '/__connect_db.php';
 $pKeys = array_keys($_SESSION['cart']);
 
 $a_cartItem = []; // 預設值
-$proSid = [];
+$colorSid = [];
 
 if(!empty($pKeys)) {
-    $a_totalCartItemSql = sprintf("SELECT * FROM `color`
+    $a_totalCartItemSql = sprintf("SELECT * FROM `size`
     WHERE `sid`
     IN(%s)", implode(',', $pKeys));
     $a_totalCartItemRows = $pdo ->query($a_totalCartItemSql) -> fetchAll();
 
-    foreach($a_totalCartItemRows as $cart){
-        $a_cartItem[ $cart['sid']] = $cart;
-        $proSid[] = $cart['pro_sid'];
-    }
-
-    $a_totalCartItemDataSql = sprintf("SELECT * FROM `products` WHERE `sid` IN (%s)", implode(',', $proSid));
-    $a_totalCartItemDataStmt = $pdo -> query($a_totalCartItemDataSql);
-    $a_totalCartItemDataRows = $a_totalCartItemDataStmt -> fetchAll();
-
     $i=0;
-    foreach($a_totalCartItemDataRows as $cartData){
-        $a_cartItem[$i]['productData'] = $cartData;
+    foreach($a_totalCartItemRows as $cart){
+//        $a_cartItem[ $cart['sid']] = $cart;
+
+//        $colorSid[] = $cart['color_sid'];
+        $a_colorSql = "SELECT * FROM `color` WHERE `sid`=".$cart['color_sid'] ;
+        $a_colorStmt = $pdo -> query($a_colorSql);
+        $a_colorRows = $a_colorStmt -> fetch();
+        $a_totalCartItemRows[$i]["color"]=$a_colorRows;
+
+
+        $a_proSql = "SELECT * FROM `products` WHERE `sid`=".$cart['pro_sid'] ;
+        $a_proStmt = $pdo -> query($a_proSql);
+        $a_proRows = $a_proStmt -> fetch();
+
+        $a_totalCartItemRows[$i]["product"]=$a_proRows;
         $i++;
     }
 
-//    $sql = sprintf("SELECT * FROM products WHERE sid IN(%s)", implode(',', $pKeys));
-//    $rows = $pdo->query($sql)->fetchAll();
+    $i=0;
+    foreach($colorSid as $c) {
+       $a_colorSql = "SELECT * FROM `color` WHERE `sid`=".$c ;
+       $a_colorStmt = $pdo -> query($a_colorSql);
+       $a_colorRows = $a_colorStmt -> fetchAll();
 
-//    foreach($rows as $r){
-//        $r['quantity'] = $_SESSION['cart'][$r['sid']];
-//        $data_ar[$r['sid']] = $r;
-//    }
+
+
+       $i++;
+    };
+
 }
-print_r($a_cartItem);
-print_r($colorSid);
+print_r($a_totalCartItemRows);
+//print_r($a_colorRows);
+//print_r($colorSid);
+
+
+
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
