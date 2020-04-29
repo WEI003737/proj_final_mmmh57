@@ -172,7 +172,9 @@
         .header .a_rwd_sub_nav{
             display: none;
         }
-
+        .a_cart_count{
+            color: #fff;
+        }
         @media all and (max-width: 360px) {
             .a_wrapper{
                 /* 360px - 30px(左右邊框) */

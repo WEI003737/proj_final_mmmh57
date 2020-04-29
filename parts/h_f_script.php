@@ -15,7 +15,7 @@
         for(let i in data){
             total += data[i];
         }
-        // $('.cart-count').text(total);
+        $('.a_cart_count').text(total);
     }
 </script>
 <script>
