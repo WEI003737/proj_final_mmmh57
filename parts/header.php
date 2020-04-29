@@ -32,7 +32,10 @@
                         <li><a class="a_transition">登出</a></li>
                     </ul>
                 </li>
-                <li><img src="./icon/cart.png"></img></li>
+                <li>
+                    <img src="./icon/cart.png">
+                    <span class="badge badge-pill badge-warning a_cart_count">0</span>
+                </li>
                 <li class="a_menu">
                     <!-- bar1.2.3 上動畫用 -->
                     <div class="a_bar a_bar1 a_transition"></div>
