@@ -6,9 +6,7 @@
 <!-- gsap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 <script>
-    $.get('add_to_cart_api.php', function(data){
-        countCartObj(data);
-    }, 'json');
+//購物車內的商品數
 
     function countCartObj(data){
         let total = 0;

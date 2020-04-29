@@ -11,7 +11,7 @@
                     </div>
                 </div>
                 <li><a>關於我們</a></li>
-                <li><a>商品</a></li>
+                <li><a href="_product_list.php">商品</a></li>
                 <li><a>商品客製</a></li>
                 <li><a>健康小教室</a></li>
             </div>
@@ -29,12 +29,12 @@
                     <ul class="a_sub_nav a_transition">
                         <li><a class="a_transition">會員中心</a></li>
                         <li><a class="a_transition">訂單查詢</a></li>
-                        <li><a class="a_transition">登出</a></li>
+                        <li><a href="member_logout_api.php" class="a_transition">登出</a></li>
                     </ul>
                 </li>
                 <li>
                     <img src="./icon/cart.png">
-                    <span class="badge badge-pill badge-warning a_cart_count">0</span>
+                    <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
                 <li class="a_menu">
                     <!-- bar1.2.3 上動畫用 -->
