@@ -37,17 +37,11 @@ if(!empty($pKeys)) {
        $a_colorStmt = $pdo -> query($a_colorSql);
        $a_colorRows = $a_colorStmt -> fetchAll();
 
-
-
        $i++;
     };
 
 }
 print_r($a_totalCartItemRows);
-//print_r($a_colorRows);
-//print_r($colorSid);
-
-
 
 
 ?>
