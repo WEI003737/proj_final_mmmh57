@@ -12,7 +12,7 @@
                         </div>
                     </a>
                 </div>
-                <li><a>關於我們</a></li>
+                <li><a href="cin_about.php">關於我們</a></li>
                 <li><a href="_product_list.php">商品</a></li>
                 <li><a>商品客製</a></li>
                 <li><a>健康小教室</a></li>
