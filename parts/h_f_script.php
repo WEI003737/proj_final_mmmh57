@@ -6,7 +6,10 @@
 <!-- gsap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 <script>
-//購物車內的商品數
+//讓所有頁面一進來就能讀到購物車內的商品數
+    $.get('add_to_cart_api.php', function(data){
+        countCartObj(data);
+    }, 'json');
 
     function countCartObj(data){
         let total = 0;
@@ -15,6 +18,8 @@
         }
         $('.a_cart_count').text(total);
     }
+
+
 </script>
 <script>
 // logo 動態 ----------------------

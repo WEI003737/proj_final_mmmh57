@@ -3,12 +3,14 @@
         <nav class="a_nav">
             <div class="header_nav_left">
                 <div class="a_logo">
-                    <div class="a_logo_top">
-                        <img src="./icon/logo_top.png" alt="">
-                    </div>
-                    <div class="a_logo_bottom">
-                        <img src="./icon/logo_bottom.png" alt="">
-                    </div>
+                    <a href="_index.php">
+                        <div class="a_logo_top">
+                            <img src="./icon/logo_top.png" alt="">
+                        </div>
+                        <div class="a_logo_bottom">
+                            <img src="./icon/logo_bottom.png" alt="">
+                        </div>
+                    </a>
                 </div>
                 <li><a>關於我們</a></li>
                 <li><a href="_product_list.php">商品</a></li>
@@ -33,7 +35,7 @@
                     </ul>
                 </li>
                 <li>
-                    <img src="./icon/cart.png">
+                    <a href="cart_step1.php"><img src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
                 <li class="a_menu">

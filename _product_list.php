@@ -734,9 +734,11 @@ a_addToCartBtn.click(function(){
     const cart_qty = $(this).siblings('.a_cart_qty').val();
     // console.log({cart_sid, cart_qty});
 
-    //傳送資料給後端
+    //傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
+    //讓所有頁面一進來就能讀到購物車內的商品數
+    //登入才會出現數量泡泡????????????????????????????????????????????????????????
     $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
-        countCartObj(data); //功能寫在script
+        countCartObj(data);
         // if(data.success){
         //     $("#a_add_to_alarm").show().text('成功加入購物車');
         //     setTimeout(function(){
@@ -748,8 +750,10 @@ a_addToCartBtn.click(function(){
         //         $("#a_add_to_alarm").hide();
         //     }, 1000);
         // }
-
+        // };
+        $('.a_cart_count').text(total);
     }, 'json');
+
 });
 
 

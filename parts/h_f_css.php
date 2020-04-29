@@ -75,7 +75,9 @@
             object-fit: cover;
             overflow: hidden;
         }
-
+        .a_push_place{
+            height: 120px;
+        }
     /* ----------- header ----------- */
         .header{
             box-shadow: 0 0 5px #ccc;

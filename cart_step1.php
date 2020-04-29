@@ -3,28 +3,52 @@ require __DIR__. '/__connect_db.php';
 
 $pKeys = array_keys($_SESSION['cart']);
 
-$rows = []; // 預設值
-$data_ar = []; // dict
+$a_cartItem = []; // 預設值
+$proSid = [];
 
 if(!empty($pKeys)) {
-    $sql = sprintf("SELECT * FROM `products` WHERE sid IN(35,42,47)");
-    $rows = $pdo->query($sql)->fetchAll();
+    $a_totalCartItemSql = sprintf("SELECT * FROM `color`
+    WHERE `sid`
+    IN(%s)", implode(',', $pKeys));
+    $a_totalCartItemRows = $pdo ->query($a_totalCartItemSql) -> fetchAll();
 
-    foreach($rows as $r){
-        $r['quantity'] = $_SESSION['cart'][$r['sid']];
-        $data_ar[$r['sid']] = $r;
+    foreach($a_totalCartItemRows as $cart){
+        $a_cartItem[ $cart['sid']] = $cart;
+        $proSid[] = $cart['pro_sid'];
     }
-}
 
-// $colorSql = "SELECT `pro_pic` FROM `color` WHERE `sid`=". $rows['sid'];
-// $colorArr = $pdo -> fetchAll();
-print_r($rows);
+    $a_totalCartItemDataSql = sprintf("SELECT * FROM `products` WHERE `sid` IN (%s)", implode(',', $proSid));
+    $a_totalCartItemDataStmt = $pdo -> query($a_totalCartItemDataSql);
+    $a_totalCartItemDataRows = $a_totalCartItemDataStmt -> fetchAll();
+
+    $i=0;
+    foreach($a_totalCartItemDataRows as $cartData){
+        $a_cartItem[$i]['productData'] = $cartData;
+        $i++;
+    }
+
+//    $sql = sprintf("SELECT * FROM products WHERE sid IN(%s)", implode(',', $pKeys));
+//    $rows = $pdo->query($sql)->fetchAll();
+
+//    foreach($rows as $r){
+//        $r['quantity'] = $_SESSION['cart'][$r['sid']];
+//        $data_ar[$r['sid']] = $r;
+//    }
+}
+print_r($a_cartItem);
+print_r($colorSid);
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
+<!-- 公版: link -->
+<?php include __DIR__ . '/parts/h_f_link.php'; ?>
+<!-- 公版: css -->
+<?php include __DIR__ . '/parts/h_f_css.php'; ?>
 <?php include __DIR__ . '/parts/main-css.php'; ?>
 
-
+<!-- 公版: header -->
+<?php include __DIR__ . '/parts/header.php' ?>
+    <div class="a_push_place"></div>
     <div class="t_page_cart">
         <div class="t_wrap">
             <div class="t_step_panel">
@@ -68,20 +92,16 @@ print_r($rows);
                     </div>
                     <!-- ---------------------商品細節start--------------------- -->
                     <div>
-                    <?php
-                        foreach($_SESSION['cart'] as $sid=>$qty): 
-                            $item = $data_ar[$sid]; 
-                            ?>
-                        <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $sid ?>">
+                        <div class="t_grid-container_cart1_productinfo p-item" data-sid="">
                             <div></div>
                             <div class="cart_img">
-                                <img src="./images/<?= $item['book_id'] ?>.png" alt="">
+                                <img src="./images/paddedbra_000_bk_1.png" alt="">
                             </div>
                             <div class="t_text_left">
                                 <h6>
-                                    <a href=""><?= $item['name'] ?></a> 
+                                    <a href=""></a>
                                     <br><br>
-                                    <label class="price" data-price="<?= $item['price'] ?>"></label>
+                                    <label class="price" data-price=""></label>
                                 </h6>
                             </div>
                             <div>
@@ -91,8 +111,8 @@ print_r($rows);
                                 <h6>S</h6>
                             </div>
                             <div>
-                                <select class="form-control quantity" data-qty="<?= $item['quantity'] ?>" onchange="changeQty(event)">
-                                    <?php for($i=1; $i<=20; $i++): ?>
+                                <select class="form-control quantity" data-qty="" onchange="">
+                                    <?php for($i=1; $i<=10; $i++): ?>
                                         <option value="<?= $i ?>"><?= $i ?></option>
                                     <?php endfor; ?>
                                 </select>
@@ -101,9 +121,8 @@ print_r($rows);
                                 <h6>NT 1920</h6>
                             </div>
                             <div> 
-                            <a href="#" onclick="removeProductItem(event)"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#" onclick=""><i class="fas fa-trash-alt"></i></a>
                             </div>
-                        <?php endforeach; ?>
                         </div>
                     </div>
                     <!-- ---------------------商品細節end--------------------- -->
@@ -184,13 +203,18 @@ print_r($rows);
 
         </div>
     </div>
-    
+<?php include __DIR__ . '/parts/footer.php'; ?>
+
     
     <!-- jQuery -->
-    <script
-      src="https://code.jquery.com/jquery-3.5.0.min.js"
-      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
-      crossorigin="anonymous"></script>
+<!--    <script-->
+<!--      src="https://code.jquery.com/jquery-3.5.0.min.js"-->
+<!--      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="-->
+<!--      crossorigin="anonymous"></script>-->
+
+<!-- 公版: script -->
+<?php include __DIR__ . '/parts/h_f_script.php'; ?>
+
     <script>
       const dallorCommas = function(n){
         return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
