@@ -498,11 +498,20 @@ $categoriesRow = $categoriesStmt -> fetchAll();
         margin-left: 8px;
         background: #272838;
     }
-    .wea_product_list_item_color.pink{
-        background: #ffb6b6;
+    /*.wea_product_list_item_color.pink{*/
+    /*    background: #ffb6b6;*/
+    /*}*/
+    /*.wea_product_list_item_color.gray{*/
+    /*    background: #bebebe;*/
+    /*}*/
+    .a_size_btn{
+        margin-right: 10px;
+        padding: 2px 5px;
+        border: 1px solid #C9044D;
     }
-    .wea_product_list_item_color.gray{
-        background: #bebebe;
+    .a_size_btn.active{
+        background: #C9044D;
+        color: #fff;
     }
     @media screen and (max-width: 992px){
         .wea_product_list{
@@ -655,6 +664,20 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                                 <div class="wea_product_list_item_color" style="background: <?= $t['colorArr'][$i-1]['color'] ?>"></div>
                             <?php endfor; ?>
                         </div>
+                        <div class="a_get_data_size_sid" data-sizeSid="<?= $t['colorArr'][0]['size'][0]['size_sid'] ?>">
+                            <button type="button" class="btn a_size_btn active" data-sizeSid="<?= $t['colorArr'][0]['size'][0]['size_sid'] ?>" data-stock="<?= $t['colorArr'][0]['size'][0]['in_stock'] ?>">XS</button>
+                            <button type="button" class="btn a_size_btn" data-sizeSid="<?= $t['colorArr'][0]['size'][1]['size_sid'] ?>" data-stock="<?= $t['colorArr'][0]['size'][1]['in_stock'] ?>">S</button>
+                            <button type="button" class="btn a_size_btn" data-sizeSid="<?= $t['colorArr'][0]['size'][2]['size_sid'] ?>" data-stock="<?= $t['colorArr'][0]['size'][2]['in_stock'] ?>">M</button>
+                            <button type="button" class="btn a_size_btn" data-sizeSid="<?= $t['colorArr'][0]['size'][3]['size_sid'] ?>" data-stock="<?= $t['colorArr'][0]['size'][3]['in_stock'] ?>">L</button>
+                        </div>
+                        <div>
+                            <select class="form-control a_cart_qty" style="display: inline-block; width: auto">
+                                <?php for($k=1; $k<=10; $k++): ?>
+                                    <option value="<?= $k ?>"><?= $k ?></option>
+                                <?php endfor; ?>
+                            </select>
+                            <button type="button" class="btn a_add_to_cart_btn"><i class="fas fa-cart-plus"></i></button>
+                        </div>
                     </li>
                     <?php endforeach; ?>
                 </ul>
@@ -691,6 +714,45 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <?php include __DIR__ . '/parts/h_f_script.php' ?>
   <script>
+//加入購物車-----------------------------
+const a_addToCartBtn = $('.a_add_to_cart_btn'),
+    a_sizeBtn = $('.a_size_btn');
+
+//拿到 size 的 sid ------------------------------------------------------------------
+//將 size 的 sid 以 data-sizeSid 設定給上一層 div---------------------------------------
+$('.a_size_btn').click(function(){
+    $(this).addClass("active").siblings().removeClass("active");
+    sizeSid = $(this).attr("data-sizeSid");
+    // console.log(`"sizeSid: " ${sizeSid}`)
+    $(this).parent().attr("data-sizeSid",sizeSid);
+});
+
+//加入購物車時 拿到 size_sid 跟 數量------------------------------------------------------
+//介面:購物車icon要顯示數量??????????????????????????????????????????????????????????????
+a_addToCartBtn.click(function(){
+    const cart_sid = $(this).parent().siblings('.a_get_data_size_sid').attr('data-sizeSid');
+    const cart_qty = $(this).siblings('.a_cart_qty').val();
+    // console.log({cart_sid, cart_qty});
+
+    //傳送資料給後端
+    $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
+        countCartObj(data); //功能寫在script
+        // if(data.success){
+        //     $("#a_add_to_alarm").show().text('成功加入購物車');
+        //     setTimeout(function(){
+        //         $("#a_add_to_alarm").hide();
+        //     }, 1000);
+        // }else {
+        //     $("#a_add_to__alarm").show().text('商品庫存不足');
+        //     setTimeout(function(){
+        //         $("#a_add_to_alarm").hide();
+        //     }, 1000);
+        // }
+
+    }, 'json');
+});
+
+
 //加入最愛-----------------------------
 //檢查是否已登入，登入才顯示愛心???????????????????????????????????????????????????????
 
@@ -717,6 +779,8 @@ $categoriesRow = $categoriesStmt -> fetchAll();
         }, 'json');
       });
 
+//移除最愛-----------------------------
+//沒反應 api語法有問題? ????????????????????????????????????????????????????????????
     $(".a_add_to_like_active").click(function(){
         //移除最愛圖示
         $(this).addClass("display_none");

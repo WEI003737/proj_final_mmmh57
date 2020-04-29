@@ -461,7 +461,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
             <!-- <li class="active"></li> -->
         </ul>
     </div>
-    <!-- ============================ 購物車新增/失敗提醒 =================================== -->
+    <!-- ============================ 購物車新增/失敗提醒 (test) =================================== -->
 
     <div id="a_add_to_cart_alarm" class="alert alert-info" role="alert" style="display:none">
     </div>

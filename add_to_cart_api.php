@@ -3,7 +3,7 @@ require __DIR__. '/__connect_db.php';
 
 if(!isset($_SESSION['cart'])){
     $_SESSION['cart'] = [];
-    $_SESSION['cart']['success'] = false;
+//    $_SESSION['cart']['success'] = false;
 
 };
 
@@ -21,11 +21,7 @@ if(! empty($cart_sid)){
 //判斷有無足夠庫存
         if(!empty($cart_qty) and $cart_qty <= $haveSizeSid['in_stock']) {
             $_SESSION['cart'][$cart_sid] = $cart_qty;
-             $_SESSION['cart']['success'] = true;
-
-        }else{
-             $_SESSION['cart']['success'] = false;
-
+//             $_SESSION['cart']['success'] = true;
         }
     }
 
@@ -34,4 +30,4 @@ if(! empty($cart_sid)){
 };
 
 header('Content-Type: application/json');
-echo json_encode($_SESSION['cart']);
+echo json_encode($_SESSION['cart']); //送關聯式陣列回來
