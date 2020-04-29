@@ -784,14 +784,13 @@ a_addToCartBtn.click(function(){
       });
 
 //移除最愛-----------------------------
-//沒反應 api語法有問題? ????????????????????????????????????????????????????????????
     $(".a_add_to_like_active").click(function(){
         //移除最愛圖示
         $(this).addClass("display_none");
         //傳送 colorSid 給後端
         const a_likeProSid = $(this).attr("data-proSid");
 
-        $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
+        $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
             if (data.success) {
                 // console.log(data);
                 $("#a_add_to_alarm").show().text('已移除收藏');

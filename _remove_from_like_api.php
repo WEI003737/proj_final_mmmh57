@@ -9,9 +9,9 @@ $output = [
 $a_likeProSid = isset($_GET['a_likeProSid']) ? intval($_GET['a_likeProSid']) : '';
 
 
-    $removeFromLikeSql = "DELETE FROM `like_box` WHERE `pro_sid`= ".$a_likeProSid;
+    $removeFromLikeSql = "DELETE FROM `like_box` WHERE `pro_sid`=?";
     $removeFromLikeStmt = $pdo->prepare($removeFromLikeSql);
-    $removeFromLikeStmt->execute();
+    $removeFromLikeStmt->execute([$a_likeProSid]);
 
     if($removeFromLikeStmt->rowCount()==1){
         $output['success'] = true;
