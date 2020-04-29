@@ -645,7 +645,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                     <li class="wea_product_list_item position-relative">
                         <img src="./images/<?=$pictureArr[0]?>.png" alt="">
                         <i class="a_add_to_like_unactive far fa-heart position-absolute" data-proSid="<?=$t['sid']?>"></i>
-                        <i class="a_add_to_like_active fas fa-heart position-absolute display_none"></i>
+                        <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-proSid="<?=$t['sid']?>"></i>
 
                         <!-- <div class="wea_product_list_item_img"></div> -->
                         <p><?= $t['name']; ?></p>
@@ -692,25 +692,49 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     <?php include __DIR__ . '/parts/h_f_script.php' ?>
   <script>
 //加入最愛-----------------------------
-//還要寫刪除最愛???????????????????????????????????????????????????????????
-//檢查是否已登入，登入才顯示愛心
-      $(".a_add_to_like_unactive").click(function(){
+//檢查是否已登入，登入才顯示愛心???????????????????????????????????????????????????????
+
+    $(".a_add_to_like_unactive").click(function(){
           //加入最愛圖示
           $(this).siblings(".a_add_to_like_active").removeClass("display_none");
           //傳送 colorSid 給後端
-          const a_likeProSid = $(this).attr("data-proSid");
+        const a_likeProSid = $(this).attr("data-proSid");
 
-          $.get('_add_to_like_api.php', {a_likeProSid}, function(data){
-              if(data.success){
-                  console.log(data);
-                  $("#a_add_to_alarm").show().text('成功加入收藏');
-                  setTimeout(function(){
-                      $("#a_add_to_alarm").hide();
-                  }, 1000);
-              }
+        $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
+            if (data.success) {
+                // console.log(data);
+                $("#a_add_to_alarm").show().text('成功加入收藏');
+                setTimeout(function () {
+                    $("#a_add_to_alarm").hide();
+                }, 1000);
+            }else {
+                $("#a_add_to_alarm").show().text('已收藏此商品');
+                setTimeout(function () {
+                    $("#a_add_to_alarm").hide();
+                }, 1000);
+            }
 
-          }, 'json');
-      })
+        }, 'json');
+      });
+
+    $(".a_add_to_like_active").click(function(){
+        //移除最愛圖示
+        $(this).addClass("display_none");
+        //傳送 colorSid 給後端
+        const a_likeProSid = $(this).attr("data-proSid");
+
+        $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
+            if (data.success) {
+                // console.log(data);
+                $("#a_add_to_alarm").show().text('已移除收藏');
+                setTimeout(function () {
+                    $("#a_add_to_alarm").hide();
+                }, 1000);
+            }
+
+        }, 'json');
+    })
+
   </script>
   <script>
         var index=0;

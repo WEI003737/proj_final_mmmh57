@@ -9,19 +9,23 @@ $output = [
 $a_likeProSid = isset($_GET['a_likeProSid']) ? intval($_GET['a_likeProSid']) : '';
 
 
-//先檢查是否已加入收藏??????????????????????????????????????????????????????????????????????
-$addToLikeSql = "INSERT INTO `like_box`(`mem_sid`, `pro_sid`) 
-VALUES (?, ?)";
-$addToLikestmt = $pdo->prepare($addToLikeSql);
-$addToLikestmt->execute([
-    "1",
-    $a_likeProSid,
-]);
+$checkLikeSql = "SELECT `pro_sid` FROM `like_box` WHERE `pro_sid`= ".$a_likeProSid ;
+$checkLikeStmt = $pdo-> query($checkLikeSql);
+$checkLikeStmt -> fetchAll();
 
-if($addToLikestmt->rowCount()==1){
-    $output['success'] = true;
+if(!$checkLikeStmt -> rowCount() == 1) {
+    $addToLikeSql = "INSERT INTO `like_box`(`mem_sid`, `pro_sid`) 
+    VALUES (?, ?)";
+    $addToLikestmt = $pdo->prepare($addToLikeSql);
+    $addToLikestmt->execute([
+        "1",
+        $a_likeProSid,
+    ]);
+
+    if ($addToLikestmt->rowCount() == 1) {
+        $output['success'] = true;
+    };
 };
-
 header('Content-Type: application/json');
 echo json_encode($output);
 //echo json_encode($_GET);
