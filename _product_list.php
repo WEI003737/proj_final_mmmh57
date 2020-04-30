@@ -7,10 +7,14 @@ $page_name = 'product_list';
 $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
+$selectDate = isset($_GET['selectDate']) ? $_GET['selectDate'] : "";
+
 
 
 //get的內容 要用http_build_query輸出
 $my_qs = $_GET;
+$my_qs_tmp = $_GET;
+
 //print_r($my_qs);
 //可篩選的顏色種類 (test)
 $selectColor = ['red','black','blue','pink'];
@@ -20,8 +24,6 @@ $selectColorCount = count($selectColor);
 //怎麼篩2個以上的東西??????????????????????????????????????????
 $where = " WHERE 1 ";
 $orderBy = "";
-$selectDate = '';
-$selectPrice = '';
 
 if(!empty($cate)) {
     $where .= " AND cate_sid = $cate ";
@@ -30,11 +32,12 @@ if(!empty($cate)) {
 if(!empty($selectDate)) {
     $orderBy .= " ORDER BY created_date $selectDate ";
     unset($my_qs['$selectPrice']);
+
 };
-if(!empty($selectPrice)) {
-    $orderBy .= " ORDER BY price $selectPrice ";
-    unset($my_qs['$selectDate']);
-};
+//if(!empty($selectPrice)) {
+//    $orderBy .= " ORDER BY price $selectPrice ";
+//    unset($my_qs['$selectDate']);
+//};
 
 //取得總筆數
 $totalRows = $pdo->query("SELECT COUNT(1) FROM products $where ")
@@ -120,7 +123,7 @@ if($totalRows>0){
 
 };
 
-echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
+//echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------
@@ -128,6 +131,7 @@ echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
 $categoriesStmt = $pdo -> query("SELECT * FROM `categories`");
 $categoriesRow = $categoriesStmt -> fetchAll();
 //echo json_encode($categoriesRow);
+
 
 ?>
 
@@ -605,17 +609,18 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                         </div>
                         <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
                             <a href="?<?php
-                            $my_qs['selectDate'] = 'DESC';
-                            echo http_build_query($my_qs);?>">新到舊</a><i class="fas fa-chevron-down"></i>
+                            $my_qs_tmp['selectDate'] = 'DESC';
+
+                            echo http_build_query($my_qs_tmp);?>#wea_product_list_sort">新到舊</a><i class="fas fa-chevron-down"></i>
                             <a href="?<?php
-                            $my_qs['selectDate'] = 'ASC';
-                            echo http_build_query($my_qs);?>">舊到新</a><i class="fas fa-chevron-down"></i>
-                            <a href="?<?php
-                            $my_qs['selectPrice'] = 'DESC';
-                            echo http_build_query($my_qs);?>">價錢高到低</a><i class="fas fa-chevron-down"></i>
-                            <a href="?<?php
-                            $my_qs['selectPrice'] = 'ASC';
-                            echo http_build_query($my_qs);?>">價錢低到高</a><i class="fas fa-chevron-down"></i>
+                            $my_qs_tmp['selectDate'] = 'ASC';
+                            echo http_build_query($my_qs_tmp);?>">舊到新</a><i class="fas fa-chevron-down"></i>
+<!--                            <a href="?--><?php
+//                            $my_qs['selectPrice'] = 'DESC';
+//                            echo http_build_query($my_qs);?><!--">價錢高到低</a><i class="fas fa-chevron-down"></i>-->
+<!--                            <a href="?--><?php
+//                            $my_qs['selectPrice'] = 'ASC';
+//                            echo http_build_query($my_qs);?><!--">價錢低到高</a><i class="fas fa-chevron-down"></i>-->
 
                         </div>
                     </div>
@@ -684,17 +689,17 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     <!-- ======================================= 頁碼 ====================================== -->
                 <div class="wea_product_list_page d-flex">
                     <a href="?<?=
-                    $my_qs['page']=$page-1;
-                    echo http_build_query($my_qs)?>">
+                    $my_qs_tmp['page']=$page-1;
+                    echo http_build_query($my_qs_tmp)?>">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                     <?php for($i = 1; $i <= $totalPages; $i++):
-                        $my_qs['page']=$i;?>
-                        <a href="?<?= http_build_query($my_qs); ?>"><?= $i ?></a>
+                        $my_qs_tmp['page']=$i;?>
+                        <a href="?<?= http_build_query($my_qs_tmp); ?>"><?= $i ?></a>
                     <?php endfor; ?>
                     <a href="?<?=
-                    $my_qs['page']=$page+1;
-                    echo http_build_query($my_qs)?>">
+                    $my_qs_tmp['page']=$page+1;
+                    echo http_build_query($my_qs_tmp)?>">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>

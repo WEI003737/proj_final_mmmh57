@@ -3,9 +3,6 @@ require __DIR__. '/__connect_db.php';
 
 $pKeys = array_keys($_SESSION['cart']);
 
-$a_cartItem = []; // 預設值
-$colorSid = [];
-
 if(!empty($pKeys)) {
     $a_totalCartItemSql = sprintf("SELECT * FROM `size`
     WHERE `sid`
@@ -14,9 +11,6 @@ if(!empty($pKeys)) {
 
     $i=0;
     foreach($a_totalCartItemRows as $cart){
-//        $a_cartItem[ $cart['sid']] = $cart;
-
-//        $colorSid[] = $cart['color_sid'];
         $a_colorSql = "SELECT * FROM `color` WHERE `sid`=".$cart['color_sid'] ;
         $a_colorStmt = $pdo -> query($a_colorSql);
         $a_colorRows = $a_colorStmt -> fetch();
@@ -31,17 +25,9 @@ if(!empty($pKeys)) {
         $i++;
     }
 
-    $i=0;
-    foreach($colorSid as $c) {
-       $a_colorSql = "SELECT * FROM `color` WHERE `sid`=".$c ;
-       $a_colorStmt = $pdo -> query($a_colorSql);
-       $a_colorRows = $a_colorStmt -> fetchAll();
-
-       $i++;
-    };
 
 }
-print_r($a_totalCartItemRows);
+echo json_encode($a_totalCartItemRows,JSON_UNESCAPED_UNICODE);
 
 
 ?>
