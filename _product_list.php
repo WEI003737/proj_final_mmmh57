@@ -175,11 +175,6 @@ $categoriesRow = $categoriesStmt -> fetchAll();
         padding: 0;
         margin: 0;
     }
-    ul,li{
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
     a, a:link{
         color:#272838;
         display: block;
@@ -189,31 +184,10 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     a:hover,a:active{
         color: #C9044D;
     }
-    h1{
-        font-size: 90px;
-    }
-    h2{
-        font-size: 72px;
-    }
-    h3{
-        font-size: 54px;
-    }
-    h4{
-        font-size: 36px;
-    }
-    h5{
-        font-size: 20px;
-    }
-    h6{
-        font-size: 18px;
-    }
-    p{
-        font-size: 15px;
-    }
+
     /* ================================== #ootd ============================== */
     .wea_ootd{
         width: 100%;
-        margin-top: 120px;
     }
     .wea_ootd_img{
         width: 100%;
@@ -554,7 +528,8 @@ $categoriesRow = $categoriesStmt -> fetchAll();
   <?php include __DIR__ . '/parts/header.php' ?>
 
   <!-- =================================== #ootd =================================== -->
-    <div class="wea_ootd">
+  <div class="a_push_place"></div>
+  <div class="wea_ootd">
         <div class="wea_ootd_img position-relative">
             <ul class="list-unstyled wea_ootd_slider_img d-flex position-absolute">
                 <!-- <li><img src="img/ootd1.png" alt=""></li> -->
@@ -657,7 +632,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                     // var_dump(json_decode($t["pictures"]["pro_pic"], true));
                     ?>
                     <li class="wea_product_list_item position-relative">
-                        <img src="./images/<?=$pictureArr[0]?>.png" alt="">
+                        <img src="./product_images/<?=$pictureArr[0]?>.png" alt="">
                         <?php if(isset($_SESSION['loginUser'])): ?>
                         <i class="a_add_to_like_unactive far fa-heart position-absolute" data-proSid="<?=$t['sid']?>"></i>
                         <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-proSid="<?=$t['sid']?>"></i>
@@ -709,16 +684,17 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     </div>
     <?php include __DIR__ . '/parts/footer.php' ?>
 
-
+  <?php include __DIR__ . '/parts/h_f_script.php' ?>
   <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <!--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>-->
 <!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>-->
-    <!-- 滑動圖片 -->
+
+  <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-    <?php include __DIR__ . '/parts/h_f_script.php' ?>
+
   <script>
 //加入購物車-----------------------------
 const a_addToCartBtn = $('.a_add_to_cart_btn'),

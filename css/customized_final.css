@@ -1,0 +1,835 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+.container {
+    max-width: 1400px;
+    padding: 20px;
+}
+
+h2.nac {
+    font-size: 4.5rem;
+    padding: 0px;
+    font-weight: 300;
+}
+
+h3.nac {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+h4.nac {
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+h6.nac {
+    font-size: .8rem;
+    font-weight: 300;
+    color: #adadad;
+    padding: 0px;
+}
+
+p.nac {
+    font-size: 15px;
+    line-height: 2rem;
+}
+
+.nac_menu_reserve {
+    height: 150px;
+}
+
+button:focus {
+    outline: 1px solid rgb(230, 1, 85);
+    transition: .5s;
+}
+
+/* 瞄點定位偏移 */
+
+.nac_target-fix {
+    position: relative;
+    top: -44px;
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.nac_width100 {
+    width: 100%;
+}
+
+/* 導航列預留 */
+
+.nac_menu_reserve {
+    height: 120px;
+    margin-bottom: 15px;
+}
+
+@media all and (max-width: 768px) {
+    .nac_menu_reserve {
+        height: 120px;
+    }
+    .nac_onlymobile {
+        display: block;
+    }
+    .nac_onlypc {
+        display: none;
+    }
+}
+
+@media all and (max-width: 360px) {
+    .nac_menu_reserve {
+        height: 60px;
+    }
+}
+
+@media all and (min-width: 768px) {
+    .nac_onlymobile {
+        display: none;
+    }
+    .nac_onlypc {
+        display: block;
+    }
+}
+
+/*================================分隔線========================================*/
+
+.nac_partingline {
+    margin: 100px auto;
+    height: 3px;
+    max-width: 100px;
+    background: rgb(202, 5, 77);
+}
+
+/* ========================主視覺(PC))========================================================================================= */
+
+.nac_banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto', 'Noto Sans TC', sans-serif;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    /* background: rgb(238, 238, 238); */
+    overflow: hidden;
+    margin-bottom: 150px;
+}
+
+.nac_banner .nac_Color_block {
+    position: absolute;
+    top: -150vh;
+    right: 62vw;
+    background: rgb(202, 5, 77, .8);
+    height: 300vh;
+    width: 1920px;
+    transform: rotate(25deg);
+    transition: .5s;
+}
+
+.nac_banner figure {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.nac_banner figure img {
+    object-fit: cover;
+    object-position: 70% top;
+    width: 100%;
+    height: 100%;
+}
+
+.nac_banner article {
+    display: flex;
+    color: #fff;
+    justify-self: center;
+    flex-direction: column;
+    width: 1320px;
+    margin: 60px;
+    z-index: 1;
+}
+
+.nac_banner article h3 {
+    font-size: 1.3rem;
+    font-weight: 300;
+}
+
+.nac_banner article h2 {
+    color: #fff;
+    font-size: 5rem;
+    font-weight: bold;
+    margin: 18px 0px;
+}
+
+.nac_banner article p {
+    font-size: 1.125rem;
+    font-weight: 200;
+    line-height: 2rem;
+}
+
+.nac_go_customized_box {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nac_customized_title_box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 90px;
+    text-align: center;
+}
+
+.nac_customized_title_box h2.nac {
+    font-size: 36px;
+    color: #272838;
+}
+
+a.nac_go_customized {
+    border-radius: 5px;
+    border: 1px solid #fff;
+    color: #fff;
+    background: rgb(202, 5, 77);
+    width: 150px;
+    margin-top: 40px;
+    text-align: center;
+    transition: .5s;
+    padding: 15px 0px;
+    box-shadow: 0px 1px 3px rgb(134, 10, 56);
+}
+
+a.nac_go_customized:hover {
+    color: rgb(202, 5, 77);
+    background: #fff;
+    box-shadow: 0px 5px 3px rgb(134, 10, 56);
+    transform: translate(0px, -5px);
+}
+
+.nac_howtouse {
+    opacity: .6;
+    transform: translateX(-8px);
+    font-size: .9rem;
+    transition: .5s;
+}
+
+.nac_howtouse:hover {
+    opacity: 1;
+}
+
+a.nac_btn {
+    text-decoration: none;
+}
+
+a.nac_btn:hover {
+    cursor: pointer;
+}
+
+/* ========================主視覺(mobile)================================================================================================================================================== */
+
+@media all and (max-width: 768px) {
+    .nac_banner {
+        min-height: calc(100vh - 60px);
+    }
+    .nac_banner article {
+        top: 5vh;
+    }
+    .nac_banner article h2 {
+        font-size: 3rem;
+    }
+}
+
+/* ========================MENU列表(PC)====================================================================================================================== */
+
+.nac_customized_menu ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.nac_customized_menu ul li a {
+    line-height: 55px;
+    color: #272838;
+    text-decoration-line: none;
+    padding: 10px 30px;
+    background: rgb(255, 255, 255);
+    border-radius: 9999px;
+    transition: .5s;
+}
+
+.nac_customized_menu ul li::after {
+    content: "/";
+    padding: 0px 10px;
+}
+
+.nac_customized_menu ul li:last-child:after {
+    content: "";
+}
+
+.nac_customized_menu ul li a:hover {
+    background: rgb(202, 5, 77);
+    color: #fff;
+}
+
+.nac_customized_menu ul li a.active {
+    background: rgb(202, 5, 77);
+    color: #fff;
+}
+
+/* ========================MENU列表(mobile)================================================================================================= */
+
+@media all and (max-width: 768px) {
+    .nac_customized_menu ul li::after {
+        content: "";
+        padding: 0px 0px;
+    }
+}
+
+/* ========================模板列表(PC)====================================================================================================================== */
+
+.nac_customized_item h3.nac img {
+    max-width: 30px;
+    transform: translateY(-2px);
+    margin-right: 5px;
+}
+
+.nac_customized_item div.nac_customized_item_area:last-child {
+    border-bottom: .5px solid rgb(200, 200, 200);
+}
+
+.nac_customized_item_area {
+    display: flex;
+    border-top: .5px solid rgb(200, 200, 200);
+    padding: 110px 0px 80px 0px;
+    justify-content: center;
+}
+
+/* 模板列表敘述 */
+
+.nac_customized_item_description {
+    display: flex;
+    flex-direction: column;
+    flex: 0.8 1 0;
+    margin: 0px 100px 0px 0px;
+}
+
+.nac_customized_item_description p {
+    padding: 20px 0px;
+}
+
+/* 商品部分 */
+
+.nac_customized_item_box_outside {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* background-color: rgb(134, 10, 56, .5); */
+    flex: 2 1 0;
+}
+
+.nac_customized_item_box_outside.customized_listus li {
+    max-width: 33.333333%;
+}
+
+.nac_customized_item_box_outside.customized_detail li {
+    max-width: 25%;
+}
+
+.nac_customized_item_box_outside a {
+    /* max-height: 500px; */
+    color: #272838;
+    text-decoration: none;
+}
+
+.nac_customized_item_box {
+    padding: 0px 20px;
+    position: relative;
+    transition: .5s;
+}
+
+.nac_customized_item_box_tg {
+    position: absolute;
+    top: 20px;
+    left: -2px;
+    color: #fff;
+    background: rgb(202, 5, 77);
+    z-index: 2;
+    padding: 3px 6px;
+    font-size: .5rem;
+}
+
+.nac_customized_item_box_outside figure {
+    position: relative;
+    overflow: hidden;
+}
+
+.nac_customized_item_box_outside figure img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: .8s;
+    transform: scale(1);
+    margin: 0px;
+}
+
+.nac_customized_item_box_cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: rgb(39, 40, 56, .7);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    transition: .5s;
+    opacity: 0;
+    color: #fff;
+}
+
+h6.customized_item_money {
+    color: rgb(202, 5, 77);
+}
+
+.nac_customized_item_box_outside a:hover .nac_customized_item_box {
+    transform: scale(1.1);
+    z-index: 3;
+}
+
+.nac_customized_item_box_outside a:hover img {
+    transform: scale(1.2);
+    object-fit: cover;
+}
+
+.nac_customized_item_box_cover h6.nac {
+    text-align: center;
+}
+
+.nac_customized_item_box_outside a:hover .nac_customized_item_box_cover {
+    opacity: 1;
+}
+
+/* ========================模板列表(mobile)=========================== */
+
+@media all and (max-width: 768px) {
+    .nac_customized_title_box {
+        margin: 0px 0px 50px 0px;
+    }
+    .nac_customized_item {
+        margin-bottom: 0px;
+    }
+    .nac_customized_item_area {
+        flex-direction: column;
+    }
+    .nac_customized_item_description {
+        margin-right: 0px;
+    }
+    .nac_customized_item_description h3 {
+        width: 100%;
+    }
+    .nac_customized_item_box_outside.customized_listus li {
+        max-width: 50%;
+    }
+    .nac_customized_item_box {
+        padding: 3px;
+        margin-bottom: 20px;
+    }
+    .nac_customized_item_bo_tg {
+        display: none;
+    }
+    .nac_customized_item_box_outside a {
+        display: inline;
+    }
+}
+
+/* ========================流程_PC==================================================================================================================================== */
+
+.nac_customized_help {
+    margin: 150px 0px 0px 0px;
+    background-color: #fff;
+}
+
+.nac_step {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0px;
+    padding: 50px 0px;
+}
+
+.nac_customized_help_outbox div.nac_step:nth-child(even) {
+    background: #f1f1f1;
+}
+
+.nac_step_number h2.nac {
+    font-size: 180px;
+    font-weight: 700;
+    padding: 0px;
+    margin: 0px;
+    transform: translateY(-3px);
+}
+
+.nac_step_info {
+    flex: 1 1 0;
+    max-width: 400px;
+    padding: 0px 40px;
+}
+
+.nac_step figure {
+    flex: 1 1 0;
+    padding: 0px 60px;
+}
+
+.nac_step figure img {
+    width: 100%;
+}
+
+/* ========================流程_mobile==================================================================================================================================== */
+
+@media all and (max-width: 768px) {
+    .nac_step {
+        flex-direction: column;
+    }
+}
+
+/*=====選單===================================================*/
+
+.nac_customized_detail_menu {
+    display: flex;
+    color: #adadad;
+    align-items: center;
+}
+
+.nac_customized_detail_menu img {
+    max-width: 22px;
+    transform: translateY(-1px);
+}
+
+.nac_customized_detail_menu a {
+    text-decoration: none;
+    color: rgb(202, 5, 77);
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.nac_customized_detail_menu li:first-child:after {
+    content: "";
+    margin: 0px 5px 0px 20px;
+}
+
+.nac_customized_detail_menu li::after {
+    content: "/";
+    margin: 0px 20px;
+}
+
+.nac_customized_detail_menu li:last-child {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    flex: 1 1 0;
+}
+
+.nac_customized_detail_menu li:last-child:after {
+    content: "";
+    margin: 0px 20px;
+}
+
+@media all and (max-width: 768px) {
+    .nac_customized_detail_menu {
+        width: 100%;
+    }
+    .nac_customized_detail_menu li::after {
+        content: "/";
+        margin: 0px 5px;
+    }
+}
+
+/*=====最大外框===================================================*/
+
+.customized_detail_desi {
+    display: flex;
+    margin-top: 0px;
+    padding-top: 0px;
+    /* margin-bottom: 100px; */
+}
+
+@media all and (max-width: 768px) {
+    .customized_detail_desi {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/*=====圖===================================================*/
+
+.customized_detail_picture_outbox {
+    flex: 1 1 0;
+}
+
+.customized_detail_picture {
+    position: relative;
+    width: 100%;
+    align-items: center;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.customized_detail_picture svg {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    transition: fill .5s;
+}
+
+.customized_detail_picture img {
+    width: 100%;
+}
+
+#nac_item_pic_blend {
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+}
+
+@media all and (max-width: 768px) {
+    .customized_detail_picture {
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 30px;
+        height: 100%;
+    }
+}
+
+/*===========圖上的色盤================*/
+
+.color-panel {
+    background: #fff;
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 11;
+    width: 150px;
+    display: none;
+}
+
+.color-panel li {
+    height: 20px;
+}
+
+svg path:hover {
+    fill-opacity: .8;
+}
+
+.color-panel li {
+    height: 20px;
+}
+
+/*=====內容框===================================================*/
+
+.customized_detail_main {
+    flex: 1 1 0;
+    padding: 0px 30px;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+    width: 100%;
+}
+
+/*=====標題===================================================*/
+
+.customized_detail_itemtitle {
+    border-left: 10px solid rgb(202, 5, 77);
+    padding-left: 10px;
+}
+
+h2.nac.detail_itemtitle {
+    font-size: 2.2rem;
+    flex: 15 1 0;
+    font-weight: 400;
+    margin: 0px;
+}
+
+/*=====錢===================================================*/
+
+.customized_detail_main h3.mony {
+    color: rgb(202, 5, 77);
+    font-weight: 500;
+}
+
+/*=====客製化顏色===================================================*/
+
+.nac_chose_color {
+    margin-top: 15px;
+    align-items: center;
+    justify-content: center;
+}
+
+.nac_chose_color_area {
+    background: #fafafa;
+    border-radius: 15px;
+    padding: 10px;
+    display: flex;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.nac_chose_color_area .nac_chose_color_btn {
+    display: block;
+    padding: 15px;
+    border-radius: 50%;
+    margin: 10px;
+    border: 3px solid rgb(202, 5, 77, 0);
+    transition: .5s;
+}
+
+.nac_chose_color_btn_flot {
+    display: block;
+    padding: 15px;
+    margin: 10px;
+    border: 3px solid rgb(202, 5, 77, 0);
+    transition: .5s;
+}
+
+.nac_chose_color_btn.active {
+    border: 3px solid rgb(202, 5, 77);
+    box-shadow: 0px 2px 3px rgba(85, 85, 85, 0.5);
+}
+
+/*=====選尺寸===================================================*/
+
+.nac_chose_size {
+    margin-top: 15px;
+}
+
+a.nac_sizechart:hover h6.nac_sizechart {
+    cursor: pointer;
+    font-size: .9rem;
+}
+
+h6.nac_sizechart {
+    color: rgb(202, 5, 77);
+    margin: 5px 0px;
+    transition: .5s;
+}
+
+.nac_chose_size_box {
+    display: flex;
+}
+
+.nac_chose_size_box li {
+    padding: 5px 0px;
+}
+
+input.nac_size_btn {
+    padding: 5px 25px;
+    margin-right: 10px;
+    background: #fff;
+    text-align: center;
+    border: 1px solid rgb(202, 5, 77);
+    transition: .5s;
+    text-decoration: none;
+    color: rgb(202, 5, 77);
+}
+
+input.nac_size_btn:focus {
+    outline: 1px solid rgb(230, 1, 85);
+    transition: .5s;
+}
+
+input.nac_size_btn.active, input.nac_size_btn:hover {
+    background: rgb(202, 5, 77);
+    border: 1px solid rgb(202, 5, 77);
+    color: #FFF;
+}
+
+/*=====選數量===================================================*/
+
+.nac_chose_pieces {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nac_chose_pieces_btn {
+    background-color: rgb(202, 5, 77);
+    border-radius: 0px;
+    border: 0px solid;
+    color: #fff;
+    width: 40px;
+    padding: 5px 0px;
+}
+
+.nac_chose_pieces_count {
+    width: 100px;
+    background-color: white;
+    border: 0px solid;
+}
+
+/*=====購買按鈕===================================================*/
+
+.nac_buynow {
+    margin-top: 20px;
+    display: flex;
+}
+
+.nac_chose_pieces_num {
+    border: 1px solid rgb(202, 5, 77);
+;
+}
+
+.nac_buynow button {
+    background-color: rgb(202, 5, 77);
+    color: #FFF;
+    flex: 1 1 0;
+    min-height: 55px;
+    border: 0px;
+}
+
+.nac_buynow button:last-of-type {
+    content: "";
+    margin-left: 10px;
+}
+
+@media all and (max-width: 768px) {
+    .customized_detail_main {
+        padding: 0px;
+    }
+}
+
+/*=====推薦商品===================================================*/
+
+.customized_detail_more {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* box-shadow:0px -5px 5px rgb(202, 5, 77); */
+    margin-bottom: 150px;
+}
+
+.customized_detail_more_title_box {
+    text-align: center;
+    margin-bottom: 10px;
+    /* border-right: 6px solid rgb(202, 5, 77); */
+    padding: 10px 20px;
+}
+
+/* .customized_detail_more_box_outside {
+    justify-content: space-between;
+    flex-wrap: wrap;
+    display: flex;
+}
+.nac_customized_item_box_outside.nac_detileuse li {
+    max-width: 25%;
+    margin: 35px 0px;
+} */
