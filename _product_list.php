@@ -658,9 +658,10 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                     ?>
                     <li class="wea_product_list_item position-relative">
                         <img src="./images/<?=$pictureArr[0]?>.png" alt="">
+                        <?php if(isset($_SESSION['loginUser'])): ?>
                         <i class="a_add_to_like_unactive far fa-heart position-absolute" data-proSid="<?=$t['sid']?>"></i>
                         <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-proSid="<?=$t['sid']?>"></i>
-
+                        <?php endif; ?>
                         <!-- <div class="wea_product_list_item_img"></div> -->
                         <p><?= $t['name']; ?></p>
                         <div class="d-flex justify-content-between">
