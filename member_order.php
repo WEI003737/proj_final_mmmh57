@@ -1,5 +1,5 @@
 <?php
-require __DIR__. '/member_connect_db.php';
+require __DIR__. '/__connect_db.php';
 
 //歷史訂單
 $rows = [];
@@ -173,9 +173,9 @@ text-align: left;
          <div class="d-flex justify-content-center j_padb_200"> 
                 <div class="member_left_list col-lg-2">
                     <ul>
-                        <li class="leftlist_circle"><a>會員資料修改</a></li>
-                        <li class="leftlist_circle"><a>我的收藏</a></li>
-                        <li class="leftlist_circle"><a style="color:#CA054D;">訂單查詢</a></li>
+                        <li class="leftlist_circle"><a href="member_information.php">會員資料修改</a></li>
+                        <li class="leftlist_circle"><a href="member_wishlist.php">我的收藏</a></li>
+                        <li class="leftlist_circle"><a href="member_order.php" style="color:#CA054D;">訂單查詢</a></li>
                         <li class="leftlist_circle"><a>我的優惠卷</a></li>
                     </ul>
                 </div>
@@ -261,7 +261,7 @@ text-align: left;
                     </div>
                         <?php } ?>
 
-
+                </div>
                 <!-- 訂單細節 手機板-->
                 <div class="j_desk_noshow ">    
                    
@@ -305,8 +305,8 @@ text-align: left;
                    <p class="d-flex justify-content-end" style="font-weight:bold;">合計 NT:<?=  $r2['amount'] ?></p>
                    </div>
 
+        </div>
     </div>
-</div>    
  <?php include __DIR__ . '/parts/footer.php'; ?>    
 </body>
 </html> 

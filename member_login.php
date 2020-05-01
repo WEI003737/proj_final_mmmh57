@@ -14,13 +14,11 @@ require __DIR__. '/__connect_db.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>member_login</title>
 </head>
+<?php include __DIR__ . '/parts/h_f_link.php'; ?>
+<?php include __DIR__ . '/parts/h_f_css.php'; ?>
 
-  <?php include __DIR__ . '/parts/h_f_css.php'; ?>
-  <?php include __DIR__ . '/parts/h_f_link.php'; ?>
  
 <style>
-
-    * {box-sizing: border-box;}
 
     .container{
         max-width: 1440px;
@@ -112,9 +110,8 @@ require __DIR__. '/__connect_db.php';
 
 
 <body>
-  <!-- <?php include __DIR__ . '/parts/header.php'; ?> -->
-    
-    
+   <?php include __DIR__ . '/parts/header.php'; ?>
+<div class="a_push_place"></div>
 <div class="container">
 
     <div class="login-register-tab">

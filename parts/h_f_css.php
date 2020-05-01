@@ -144,7 +144,7 @@
         .header .a_sub_nav{
             position: absolute;
             background: rgb(255, 255, 255);
-            top: 77px;
+            top: 47px;
             width: 132px;
             max-height: 0;
             overflow: hidden;

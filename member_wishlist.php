@@ -131,10 +131,10 @@ border: 2px solid #FFE07C;
         <div class="flex justify-content-cneter j_padb_200">
                 <div class="member_left_list col-md-2">
                     <ul>
-                        <li>會員資料修改</li>
-                        <li>我的收藏</li>
-                        <li>訂單查詢</li>
-                        <li>我的優惠卷</li>
+                        <li class="leftlist_circle"><a href="member_information.php" >會員資料修改</a></li>
+                        <li class="leftlist_circle"><a href="member_wishlist.php" style="color:#CA054D;">我的收藏</a></li>
+                        <li class="leftlist_circle"><a href="member_order.php">訂單查詢</a></li>
+                        <li class="leftlist_circle"><a>我的優惠卷</a></li>
                     </ul>
                 </div>
 

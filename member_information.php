@@ -22,8 +22,6 @@ $rows = $stmt->fetchAll();
    
 <style>
 
-* {box-sizing: border-box;}
-
 .container{
     max-width: 1440px;
     margin: 0 auto;
@@ -143,9 +141,9 @@ input:focus,textarea:focus,button:focus{
         <div class="flex justify-content-cneter j_padb_200">
                 <div class="member_left_list col-lg-3">
                     <ul>
-                        <li class="leftlist_circle"><a style="color:#CA054D;">會員資料修改</a></li>
-                        <li class="leftlist_circle"><a>我的收藏</a></li>
-                        <li class="leftlist_circle"><a>訂單查詢</a></li>
+                        <li class="leftlist_circle"><a href="member_information.php" style="color:#CA054D;">會員資料修改</a></li>
+                        <li class="leftlist_circle"><a href="member_wishlist.php">我的收藏</a></li>
+                        <li class="leftlist_circle"><a href="member_order.php">訂單查詢</a></li>
                         <li class="leftlist_circle"><a>我的優惠卷</a></li>
                     </ul>
                 </div>
@@ -168,7 +166,8 @@ input:focus,textarea:focus,button:focus{
                         <div>姓名&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="name_new" name="name_new" placeholder="" value="<?= $r['name'] ?>"  required minlength="2"   /></div>
                         <small id="name_help" class="form-text"></small>
 
-                        <div>電話&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="mobile_new" name="mobile_new" placeholder="" value="<?= $r['mobile'] ?>" required pattern="/^09\d{2}-?\d{3}-?\d{3}$/"  /></div>
+                        <div>電話&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="mobile_new" name="mobile_new" placeholder="" value="<?= $r['mobile'] ?>" required minlength="10"  /></div>
+<!--                    required pattern="/^09\d{2}-?\d{3}-?\d{3}$/"-->
                         <small id="mobile_help" class="form-text"></small>
                     
                         <br>
