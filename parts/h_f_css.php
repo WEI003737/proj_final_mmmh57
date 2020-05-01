@@ -100,6 +100,7 @@
         .header_nav_left{
             display: flex;
             align-items: center;
+            padding-left: 20px;
         }
         .header .a_logo {
             height: 80%;
@@ -128,6 +129,7 @@
         .header_nav_right{
             display: flex;
             align-items: center;
+            padding-right: 20px;
         }
         .header_nav_right>li img:hover{
             transform: translateY(-3px);
@@ -184,14 +186,76 @@
         .header .a_rwd_sub_nav{
             display: none;
         }
+        @media all and (max-width: 768px) {
+            .a_wrapper{
+                max-width: 708px;
+            }
+            .header .a_logo {
+                padding: 0;
+            }
+            .header_nav_left li{
+                display: none;
+            }
+            .header .a_sub_nav{
+                display: none;
+            }
+            .header .active .a_rwd_sub_nav{
+                max-height: 300px;
+            }
+            .header .a_rwd_sub_nav{
+                display: block;
+                position: absolute;
+                background: rgb(255, 255, 255);
+                font-size: 15px;
+                top: 40px;
+                right: -30px;
+                width: 132px;
+                max-height: 0;
+                overflow: hidden;
+                /* z-index: -1; */
+            }
+            .header .a_rwd_sub_nav a{
+                padding:8px 20px;
+                display: block;
+            }
+            /* 漢堡選單 */
+            .header .a_menu{
+                display: block;
+            }
+            .header .a_bar{
+                width: 20px;
+                height: 3px;
+                margin: 5px 0 0 20px;
+                border-radius: 2px;
+                background: rgb(58, 58, 58);
+            }
+            .active .a_bar1{
+                -webkit-transform: rotate(-45deg) translate(-6px, 6px) ;
+                transform: rotate(-45deg) translate(-6px, 6px) ;
+            }
+            .active .a_bar2{
+                opacity: 0;
+            }
+            .active .a_bar3{
+                -webkit-transform: rotate(45deg) translate(-5px, -5px) ;
+                transform: rotate(45deg) translate(-5px, -5px) ;
+            }
 
+        }
         @media all and (max-width: 360px) {
+            .a_push_place{
+                /*推出header的空間*/
+                height: 60px;
+            }
             .a_wrapper{
                 /* 360px - 30px(左右邊框) */
-                width: 330px;
+                max-width: 330px;
             }
             .header .a_nav{
                 height: 60px;
+            }
+            .header_nav_left{
+                padding: 0;
             }
             .header .a_logo{
                 padding: 0;
@@ -208,60 +272,32 @@
             .header_nav_left li{
                 display: none;
             }
+            .header_nav_right{
+                padding-right: 0;
+            }
             .header_nav_right img{
                 width: 15px;
                 margin: 0 10px;
             }
-            .header .a_sub_nav{
-                display: none;
-            }
-            .header .active .a_rwd_sub_nav{
-                max-height: 300px;                
-            }
-            .header .a_rwd_sub_nav{
-                display: block;
-                position: absolute;
-                background: rgb(255, 255, 255);
-                font-size: 15px;
-                top: 60px;
-                right: 0;
-                width: 132px;
-                max-height: 0;
-                overflow: hidden;
-                /* z-index: -1; */
-            }
-            .header .a_rwd_sub_nav a{
-                padding:8px 20px;
-                display: block;
-            }
-            /* 漢堡選單 */
-            .header .a_menu{
-                display: block;                
-            }
             .header .a_bar{
-                width: 20px;
-                height: 3px;
-                margin: 4px 0 0 20px;
-                border-radius: 2px;
-                background: rgb(58, 58, 58);
+                width: 18px;
+                height: 2px;
+                margin: 4px 0 0 10px;
             }
             .active .a_bar1{
-                -webkit-transform: rotate(-45deg) translate(-5px, 5px) ;
-                transform: rotate(-45deg) translate(-5px, 5px) ;
-            }
-            .active .a_bar2{
-                opacity: 0;
+                -webkit-transform: rotate(-45deg) translate(-4px, 5px) ;
+                transform: rotate(-45deg) translate(-4px, 5px) ;
             }
             .active .a_bar3{
-                -webkit-transform: rotate(45deg) translate(-5px, -5px) ;
-                transform: rotate(45deg) translate(-5px, -5px) ;
+                -webkit-transform: rotate(45deg) translate(-4px, -4px) ;
+                transform: rotate(45deg) translate(-4px, -4px) ;
             }
         }
 
     /* ----------- footer ----------- */
         .footer{
             height: 415px;
-            padding-top: 60px;
+            padding: 60px 30px 0;
             background: #CA054D;
             color: #fff;
             font-size: 20px;
@@ -287,7 +323,7 @@
         }
         .footer .a_map{
             height: 200px;
-            width: 500px;
+            max-width: 500px;
             background: #fff;
         }
         .footer .a_block_2{
@@ -299,12 +335,12 @@
         .footer .a_rwd_map{
             display: none;
         }
-        @media all and (max-width: 360px) {
+        @media all and (max-width: 768px) {
             .a_wrapper{
-                width: 300px;
+                max-width: 708px;
             }
             .footer{
-                height: 550px;
+                height: 700px;
                 padding-top: 20px;
                 background: #CA054D;
                 color: #fff;
@@ -317,7 +353,11 @@
                 /* 蓋過 footer 裡的 font-size */
                 font-size: 20px;
                 padding: 15px 0;
-            }       
+            }
+            .footer .a_block_1{
+                display: flex;
+            }
+
             .footer .a_block_1_1 li,
             .footer .a_block_1_2 li{
                 padding-bottom: 10px;
@@ -337,6 +377,22 @@
             }
             .footer .a_block_1_3{
                 display: none;
+            }
+            .footer hr{
+                width: 100%;
+                margin: 25px 15px 20px ;
+            }
+            .footer .a_rwd_map{
+                width: 100%;
+                display: block;
+                margin: 10px 0;
+            }
+        @media all and (max-width: 360px) {
+            .a_wrapper{
+                width: 300px;
+            }
+            .footer{
+                height: 550px;
             }
             .footer hr{
                 width: 80%;

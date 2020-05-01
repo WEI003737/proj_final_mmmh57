@@ -13,12 +13,20 @@ $rows_itemcount = count($rows);
 $can_cus_color = json_decode($row['can_cus_color']);
 $can_cus_color_count = count($can_cus_color);
 
+
+$customized_bars = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=1");
+$customized_tops = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=2");
+$customized_bottoms = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=3");
+
+$customized_bars_each = $customized_bars->fetchAll(); //倒內衣資料
+$customized_tops_each = $customized_tops->fetchAll(); //倒上衣資料
+$customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 //var_dump($can_cus_color);
 //var_dump($a_color);
 //print_r($can_cus_color_count);
 
 
-if ($sid < 1 || $sid >= $rows_itemcount) {
+if ($sid < 1 || $sid > $rows_itemcount) {
     header("location:./customized.php");
     exit();
 }
@@ -43,10 +51,11 @@ if ($sid < 1 || $sid >= $rows_itemcount) {
 
     <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all.min.css">
     <link rel="stylesheet" href="./css/customized_final.css">
+
     <style>
-        /* * {
-            outline: #FA8000 solid 1px;
-        } */
+        /** {*/
+        /*    outline: #FA8000 solid 1px;*/
+        /*}*/
     </style>
 </head>
 
@@ -64,7 +73,7 @@ if ($sid < 1 || $sid >= $rows_itemcount) {
             </ul>
         </nav>
     </div>
-    <section class="container customized_detail_desi ">
+    <section class="container customized_detail_desi">
         <!-- 成品展示區 -->
         <div class="customized_detail_picture_outbox">
             <div class="customized_detail_picture" id="clothes">
@@ -86,7 +95,7 @@ if ($sid < 1 || $sid >= $rows_itemcount) {
 
             <div class="customized_detail_itemtitle">
                 <!-- 商品名 -->
-                <h2 class="nac"><?= $row['name'] ?></h2>
+                <h2 class="nac detail_itemtitle"><?= $row['name'] ?></h2>
                 <!-- 價碼 -->
                 <h3 class="nac mony">$NT<?= $row['price'] ?></h3>
             </div>
@@ -144,9 +153,41 @@ if ($sid < 1 || $sid >= $rows_itemcount) {
             </div>
 
     </section>
+    <div class="nac_partingline"></div>
+
+    <section class="customized_detail_more">
+       
+        <div class="container">
+        <div class="customized_detail_more_title_box">
+            <h2 class="nac detail_itemtitle">設計更多屬於你的STYLE!</h2>
+            <h4 class="nac">DESIGN MORE BY YOURSELF</h4>
+        </div>
+            <ul class="nac_customized_item_box_outside customized_detail">
+                <?php foreach ($customized_bars_each as $row) : ?>
+                    <li>
+                        <a href="./customized_detail.php?sid=<?= $row['sid'] ?>" data-sid="<?= $row['sid'] ?>">
+                            <div class="nac_customized_item_box">
+                                <div class="nac_customized_item_box_tg">DESIGN</div>
+                                <figure>
+                                    <div class="nac_customized_item_box_cover">
+                                        <h3 class="nac">開始設計</h3>
+                                        <h6 class="nac">DESIGN BY YOURSELF.</h6>
+                                    </div>
+                                    <img src="./images/<?= $row['pro_pic'] ?>.png" alt="">
+                                </figure>
+                                <h6 class="customized_item_title"><?= $row['name'] ?></h6>
+                                <h6 class="customized_item_money">NT<?= $row['price'] ?></h6>
+                            </div>
+
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section>
 
 
-    <?php //include __DIR__ . './parts/footer.php'
+    <?php include __DIR__ . './parts/footer.php'
     ?>
     <script defer src="./fontawesome-free-5.13.0-web/js/all.js"></script>
     <?php include __DIR__ . './parts/h_f_script.php' ?>

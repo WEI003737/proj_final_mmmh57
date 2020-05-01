@@ -33,7 +33,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
 
     <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all.min.css">
-    <link rel="stylesheet" href="./css/customized.css">
+    <link rel="stylesheet" href="./css/customized_final.css">
     <style>
         /* * {
             outline: #FA8000 solid 1px;
@@ -43,6 +43,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
 <body>
     <?php include __DIR__ . './parts/header.php' ?>
+    <div class="a_push_place"></div>
     <section class="nac_banner" id="nac_banner">
         <article>
             <h3 class="nac">REDCORE客製化</h3>
@@ -86,21 +87,29 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
             <div class="nac_target_fix" id="customized_bars"></div>
 
-            <div class="nac_customized_item_area">
 
+
+
+
+
+            <div class="nac_customized_item_area">
 
                 <div class="nac_customized_item_description">
                     <h3 class="nac"><img src="./images/customized_icon.svg" alt="">運動內衣 客製化</h3>
                     <h6 class="nac">CUSTOMIZED SPORTS BRAS</h6>
                     <p class="nac">撞色拼接作為設計，採用機能性面料，不僅舒適親膚，絕佳彈性及透氣感讓妳能夠大膽嘗試任何運動，展現妳最青春的健康活力！</p>
                 </div>
-                <ul class="nac_customized_item_box_outside">
-                    <?php foreach ($customized_bars_each as $row) : ?>
 
+                <ul class="nac_customized_item_box_outside customized_listus">
+
+                    <?php foreach ($customized_bars_each as $row) : ?>
                         <li>
                             <a href="./customized_detail.php?sid=<?= $row['sid'] ?>" data-sid="<?= $row['sid'] ?>">
+
                                 <div class="nac_customized_item_box">
-                                    <div class="nac_customized_item_bo_tg">DESIGN</div>
+
+                                    <div class="nac_customized_item_box_tg">DESIGN</div>
+                                   
                                     <figure>
                                         <div class="nac_customized_item_box_cover">
                                             <h3 class="nac">開始設計</h3>
@@ -108,16 +117,29 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
                                         </div>
                                         <img src="./images/<?= $row['pro_pic'] ?>.png" alt="">
                                     </figure>
+
                                     <h6 class="customized_item_title"><?= $row['name'] ?></h6>
                                     <h6 class="customized_item_money">NT<?= $row['price'] ?></h6>
+                                    
                                 </div>
 
                             </a>
                         </li>
                     <?php endforeach; ?>
+
                 </ul>
+
             </div>
             <div class="nac_target_fix" id="customized_top"></div>
+
+
+
+
+
+
+
+
+
 
             <div class="nac_customized_item_area">
                 <div class="nac_customized_item_description">
@@ -125,13 +147,13 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
                     <h6 class="nac">CUSTOMIZED SPORTS TOPS</h6>
                     <p class="nac">腰身設計到整體版型剪裁，多處精緻細節打造妳的個人特色！輕鬆打造休閒時尚風！</p>
                 </div>
-                <ul class="nac_customized_item_box_outside">
+                <ul class="nac_customized_item_box_outside customized_listus">
                     <?php foreach ($customized_tops_each as $row) : ?>
 
                         <li>
                             <a href="./customized_detail.php?sid=<?= $row['sid'] ?>" data-sid="<?= $row['sid'] ?>">
                                 <div class="nac_customized_item_box">
-                                    <div class="nac_customized_item_bo_tg">DESIGN</div>
+                                    <div class="nac_customized_item_box_tg">DESIGN</div>
                                     <figure>
                                         <div class="nac_customized_item_box_cover">
                                             <h3 class="nac">開始設計</h3>
@@ -157,13 +179,13 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
                 </div>
 
 
-                <ul class="nac_customized_item_box_outside">
+                <ul class="nac_customized_item_box_outside customized_listus">
                     <?php foreach ($customized_bottoms_each as $row) : ?>
 
                         <li>
                             <a href="./customized_detail.php?sid=<?= $row['sid'] ?>" data-sid="<?= $row['sid'] ?>">
                                 <div class="nac_customized_item_box">
-                                    <div class="nac_customized_item_bo_tg">DESIGN</div>
+                                    <div class="nac_customized_item_box_tg">DESIGN</div>
                                     <figure>
                                         <div class="nac_customized_item_box_cover">
                                             <h3 class="nac">開始設計</h3>
@@ -248,20 +270,6 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
     </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     <?php include __DIR__ . './parts/footer.php'
     ?>
     <script defer src="./fontawesome-free-5.13.0-web/js/all.js"></script>
@@ -278,36 +286,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
 
 
-
-        // if (nac_windw_width * 1 > 768) {
-        //     nac_scroll_revise = 200;
-        // } else {
-        //     nac_scroll_revise = -20
-        // }
-
-
-
-
-
-        // $(window).resize(function() {
-
-        //     nac_windw_width = $(window).width();
-
-        //     if (nac_windw_width * 1 > 640) {
-        //         nac_scroll_revise = 150;
-        //     } else {
-        //         nac_scroll_revise = -60
-        //     }
-        // })
-
-
-
-
-
-
         $("a").click(function() {
-            // console.log(`nac_windw_width:${nac_windw_width}`)
-            // console.log(`nac_scroll_revise:${nac_scroll_revise}`)
 
             let id = $(this).attr("data-goto");
             $("html,body").animate({

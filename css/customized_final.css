@@ -784,7 +784,7 @@ input.nac_size_btn.active, input.nac_size_btn:hover {
 
 .nac_chose_pieces_num {
     border: 1px solid rgb(202, 5, 77);
-;
+    ;
 }
 
 .nac_buynow button {
@@ -829,6 +829,7 @@ input.nac_size_btn.active, input.nac_size_btn:hover {
     flex-wrap: wrap;
     display: flex;
 }
+
 .nac_customized_item_box_outside.nac_detileuse li {
     max-width: 25%;
     margin: 35px 0px;

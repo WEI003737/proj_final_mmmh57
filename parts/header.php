@@ -51,9 +51,12 @@
                     <div class="a_bar a_bar3 a_transition"></div>
                     <ul class="a_rwd_sub_nav a_transition">
                         <li><a href="cin_about.php">關於我們</a></li>
+                        <li><a href="_product_list.php">商品</a></li>
                         <li><a href="customized.php">商品客製</a></li>
                         <li><a>健康小教室</a></li>
+                        <?php if(isset($_SESSION['loginUser'])): ?>
                         <li><a href="member_logout_api.php">登出</a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
             </div>
