@@ -27,17 +27,23 @@
                     </div>
                 </li>
                 <li class="position-relative">
-                    <img class="a_log_in" src="./icon/log_in.png"></img>
+                    <?php if(isset($_SESSION['loginUser'])): ?>
+                    <img class="a_log_in" src="">
                     <ul class="a_sub_nav a_transition">
                         <li><a class="a_transition">會員中心</a></li>
                         <li><a class="a_transition">訂單查詢</a></li>
                         <li><a href="member_logout_api.php" class="a_transition">登出</a></li>
                     </ul>
+                    <?php else: ?>
+                    <img class="a_log_in" src="./icon/log_in.png">
+                    <?php endif; ?>
                 </li>
+                <?php if(isset($_SESSION['loginUser'])): ?>
                 <li>
                     <a href="cart_step1.php"><img src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
+                <?php endif; ?>
                 <li class="a_menu">
                     <!-- bar1.2.3 上動畫用 -->
                     <div class="a_bar a_bar1 a_transition"></div>

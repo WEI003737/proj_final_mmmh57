@@ -76,7 +76,7 @@
             overflow: hidden;
         }
         .a_push_place{
-            height: 120px;
+            height: 80px;
         }
     /* ----------- header ----------- */
         .header{
@@ -92,7 +92,8 @@
         }
         .header .a_nav{
             /* header 高度 */
-            height: 120px;
+            /*也要改a_push_place*/
+            height: 80px;
             display: flex;
             justify-content: space-between;
         }
@@ -101,10 +102,22 @@
             align-items: center;
         }
         .header .a_logo {
+            height: 80%;
             padding: 0 40px;
         }
         .header .a_logo_top {
-            padding-left: 10px;
+            padding: 5px 0 0 10px;
+        }
+        .header .a_logo_top img {
+            height: 40px;
+        }
+        .header .a_logo .a_logo_bottom{
+            position: relative;
+        }
+        .header .a_logo_bottom img{
+            height: 20px;
+            position: absolute;
+            top: 0;
         }
         .header_nav_left>li{
             margin: 0 2vw;
@@ -116,17 +129,36 @@
             display: flex;
             align-items: center;
         }
-        .header_nav_right img{
-            margin: 0 20px;
-        }
         .header_nav_right>li img:hover{
             transform: translateY(-3px);
+        }
+        .header_nav_right li:hover .a_sub_nav{
+            max-height: 300px;
+        }
+        .header_nav_right img{
+             margin: 0 20px;
+         }
+        .header nav ul li a:hover{
+            background: #FFE07C;
+        }
+        .header .a_sub_nav{
+            position: absolute;
+            background: rgb(255, 255, 255);
+            top: 77px;
+            width: 132px;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .header .a_sub_nav a{
+            padding:8px 20px;
+            display: block;
         }
 /* ----------- header 搜尋欄 ----------- */
         .a_input_search{
             margin:0;
             padding-top: 6px;
             display: flex;
+            font-size: 15px;
         }
         .a_input_search:hover .a_form_search{
             max-width: 150px;
@@ -143,40 +175,16 @@
             border: 0;
             padding: 0;
         }
+        .a_cart_count{
+            color: #fff;
+        }
         .header .a_menu{
             display: none;
-        }
-        .header .a_bar{
-            width: 30px;
-            height: 4px;
-            background: rgb(58, 58, 58);
-            margin: 5px 0 0 30px;
-            border-radius: 2px;
-        }
-        .header_nav_right li:hover .a_sub_nav{
-            max-height: 300px;
-        }
-        .header nav ul li a:hover{
-            background: #FFE07C;
-        }
-        .header .a_sub_nav{
-            position: absolute;
-            background: rgb(255, 255, 255);
-            top: 77px;
-            width: 132px;
-            max-height: 0;
-            overflow: hidden;
-        }
-        .header .a_sub_nav a{
-            padding:8px 20px;
-            display: block;
         }
         .header .a_rwd_sub_nav{
             display: none;
         }
-        .a_cart_count{
-            color: #fff;
-        }
+
         @media all and (max-width: 360px) {
             .a_wrapper{
                 /* 360px - 30px(左右邊框) */
@@ -188,8 +196,14 @@
             .header .a_logo{
                 padding: 0;
             }
-            .header .a_logo img{
-                width: 40px;
+            .header .a_logo{
+                height: 80%;
+            }
+            .header .a_logo .a_logo_top img{
+                height: 25px;
+            }
+            .header .a_logo .a_logo_bottom img{
+                height: 15px;
             }
             .header_nav_left li{
                 display: none;
@@ -228,7 +242,9 @@
                 width: 20px;
                 height: 3px;
                 margin: 4px 0 0 20px;
-            }            
+                border-radius: 2px;
+                background: rgb(58, 58, 58);
+            }
             .active .a_bar1{
                 -webkit-transform: rotate(-45deg) translate(-5px, 5px) ;
                 transform: rotate(-45deg) translate(-5px, 5px) ;
