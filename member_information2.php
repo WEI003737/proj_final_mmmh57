@@ -1,13 +1,13 @@
-m0ru.42k7<?php
+<?php
 require __DIR__. '/__connect_db.php';
 
+session_start();
+//$_SESSION['loginUser']='CCC@Gmail.com';
+//$stmt = $pdo->query("SELECT * FROM `members` where `email`="$_SESSION['loginUser']"")
 $rows = [];
 $sql = "SELECT * FROM members where email='" . $_SESSION['loginUser'] . "'";
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll();
-
-// echo json_encode($_SESSION['loginUser'])
-
 ?>
 
 <!DOCTYPE html>
@@ -106,9 +106,14 @@ input:focus,textarea:focus,button:focus{
     margin-right:50px;
 }
 
-.j_locksize{
-    width:50px;
-    height:50px;   
+.j_keysize{
+    width:25px;
+    height:25px;   
+}
+
+/* 忘記密碼出不來 */
+.jkeysize:hover .j_changepw a{
+ display:block;
 }
 
 /* 對話框出不來 */
@@ -155,8 +160,9 @@ input:focus,textarea:focus,button:focus{
                        <div class="d-flex align-items-center">
                             <div class="d-felx text-align-center j_email_bg"><?=$r['email'] ?></div>
                             <div>
-                                <img class="j_locksize" src="images/iconlock.svg" alt="">
-                                <a href="mailto:camillemilky@gmail.com">更改密碼</a>
+                                <!-- <img class="j_locksize" src="images/iconlock.svg" alt=""> -->
+                                <img class="j_keysize" src="images/key-solid.svg" alt="">
+                                <a class="j_changepw" style="display:none" href="mailto:camillemilky@gmail.com">更改密碼</a>
                             </div>
                        </div>
 
@@ -168,11 +174,11 @@ input:focus,textarea:focus,button:focus{
                     
                         <br>
                         <br>
-                    <p>常用設定</p>
+                    <p>常用設定</p>  
                         <div>收件人&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="receiver_name" name="receiver" placeholder=" " value="<?= $r['receiver'] ?>" /></div>
                         <small id="receiver_name_help" class="form-text"></small>
  
-                        <div>收件人手機&nbsp<input type="text" id="receiver_mobile" name="receiver_mobile" placeholder="" value="<?= $r['receiver_mobile'] ?>" /></div>
+                        <div>收件人手機&nbsp<input type="text" id="receiver_mobile" name="receiver_mobile" placeholder="" value="<?= $r['receiver-mobile'] ?>" /></div>
                         <small id="receiver_mobile_help" class="form-text"></small>
                 
                         <div>收件人地址&nbsp<input type="text" id="receiver_address" name="receiver_address" placeholder="" value="<?= $r['address'] ?>" /></div>
@@ -180,7 +186,7 @@ input:focus,textarea:focus,button:focus{
                         <!-- <input type="" id="" name="" placeholder="常用便利商店" value=""  />  -->
 
 
-                        <div id="info-bar3" class="alert alert-info bubble" role="alert" style="display: none"></div>
+                        <div id="info-bar3" class="alert alert-info bubble" role="alert" style="display:none"></div>
                    
 
                         <div><button class="login_btn" type="submit" >儲存變更</button></div>
@@ -219,14 +225,11 @@ input:focus,textarea:focus,button:focus{
              $receiver_name_help = $("#receiver_name_help"),
 
              $receiver_mobile = $("#receiver_mobile"),
-             $receiver_mobile_help = $("#receiver_mobile_help"),
-
-             $receiver_address = $('#receiver_address');
+             $receiver_mobile_help = $("#receiver_mobile_help");
             
-             
         function checkForm3(){
             let isPass = true; 
-            
+        
             $("#info-bar3").hide();
             $name_new.css('border-color', '#ccc');
              $name_help.text('');
@@ -239,54 +242,51 @@ input:focus,textarea:focus,button:focus{
 
             $receiver_mobile.css('border-color', '#ccc');
             $receiver_mobile_help .text('');
-
-            $receiver_address.css('border-color', '#ccc');
-
+ 
 
             if($name_new.val().length < 2){
-                $name_new.css('border-color', 'blue');
+                $name_new.css('border-color', 'red');
                 $name_help.text('請填寫正確的姓名');
                 isPass = false;
             }
 
             if(! mobile.test($mobile.val())){
-                $mobile.css('border-color', 'blue');
+                $mobile.css('border-color', 'red');
                 $mobile_help.text('請填寫符合格式的手機號碼 範例: 0933-666-333');
                 isPass = false;
             }
 
-            if($receiver.val().length == 1){
-                $receiver.css('border-color', 'blue');
-                $receiver_name_help.text('請填寫正確的姓名');
-                isPass = false;
-            }
-// !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-            if($receiver_mobile.val().length > 0){
-                if(! mobile.test($receiver_mobile.val())){
-                    $receiver_mobile.css('border-color', 'blue');
-                    $receiver_mobile_help.text('請填寫符合格式的手機號碼 範例: 0933-666-333');
-                    isPass = false;
-                }
-                
-            }else{
-                    isPass = true;
-            }
 
-            if(isPass){
-                console.log($(document.form3).serialize())
+            
+            // if($receiver.val().length ){
+            //     $receiver.css('border-color', 'red');
+            //     $receiver_name_help.text('請填寫正確的姓名');
+            //     isPass = false;
+            // }else if($receiver.val()=""){
+            //     isPass = true;
+            // }
 
-            }else{
+            // if($receiver_mobile.val().length > 0){
+            //     // console.log($receiver_mobile.val())
+            //     if(! mobile.test($receiver_mobile.val())){
+            //         $receiver_mobile.css('border-color', 'red');
+            //         $receiver_mobile_help.text('請填寫符合格式的手機號碼 範例: 0933-666-333');
+            //         isPass = false;
+            //     console.log($receiver_mobile.val())
 
-                console.log("no")
-            }
-            return false;
+            //     }else{
+            //         isPass = true;
+            //     }
+            // }else{
+            //         isPass = true;
+            // }
+
 
             if(isPass){
                 $.post('member_information_update_api.php', $(document.form3).serialize(), function (data){
                     if(data.success){
                         $('#info-bar3').show().text('資料更新成功');
-                        console.log(data)
-                    } else {
+                    } else{
                         $('#info-bar3').show().text('資料格式有誤');
                     }
                 }, 'json');

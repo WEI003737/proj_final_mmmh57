@@ -1,5 +1,10 @@
 <?php
-require __DIR__. '/__connect_db.php';  
+require __DIR__. '/__connect_db.php';
+
+// $sql_coupon = "SELECT * FROM `members`";
+// $stmt_coupon = $pdo -> query($sql_coupon);
+// $stmt_coupon -> fetchAll();
+// echo json_encode($stmt_coupon);
 ?>
 
 <!DOCTYPE html>
@@ -80,10 +85,7 @@ require __DIR__. '/__connect_db.php';
    
     .inputcss{padding:10px 300px 10px 5px; border:2px #CA054D solid;
     cursor:pointer; text-align:left;margin:30px auto; }
-/* 
-    .j_checkbox{
-    height:30px;
-    } */
+
 
     input:focus,textarea:focus,button:focus{
     outline: none;
@@ -110,111 +112,112 @@ require __DIR__. '/__connect_db.php';
 
 
 <body>
-  <?php include __DIR__ . '/parts/header.php'; ?>
+  <!-- <?php include __DIR__ . '/parts/header.php'; ?> -->
     
     
-    <div class="container">
+<div class="container">
 
-        <div class="login-register-tab">
-            <div class="login-register_1">會員登入</div>
-            <div class="login-register_2">註冊成會員</div>
-        </div>
-
-   
-        <P class="j_dashline"></P>
-
-
-            <div id="login-area" class="flex justify-content-cneter ">
-                
-                    <form name="form1" method="post" onsubmit="return checkForm()">
-                                <div>
-                                    <input class="inputcss"  type="text" id="" name="email" placeholder="Email " value="" />
-                                </div>
-
-                                <div>
-                                    <input class="inputcss" type="password" id="login_pw" name="password" placeholder="密碼" value="" />
-                                    <a href="">忘記密碼？</a>
-                                </div>
-                               
-                                <div id="info-bar" class="alert alert-info" role="alert" style="display:none">  
-                                </div>
-                                   
-
-                                <div class="login-remember">
-                                    <button class="login_btn" type="submit" formaction="">確認登入</button>
-                                </div>
-                               
-                    </form>
-                        
-             </div>  
-    
-            <div id="register-area" class="flex justify-content-cneter" style="display:none">
-
-                    <form name="form2" method="post" onsubmit="return checkForm2()">
-                     
-                
-                                <div>
-                                      <input class="inputcss" type="text" id="register_name" name="register_name" placeholder="姓名 " value=""  required/>
-                                      <small id="name_help" class="form-text"></small>
-                                </div>
-
-                                <div>
-                                     <input class="inputcss" type="text" id="register_email" name="register_email" placeholder="Email" value="" required />
-                                     <small id="email_help" class="form-text"></small>
-                                </div>
-                                
-                                <div>
-                                    <input class="inputcss" type="text" id="register_mobile" name="register_mobile" placeholder="手機" value="" required />
-                                    <small id="mobile_help" class="form-text"></small>
-                                </div>
-
-                                <div>
-                                    <input class="inputcss" type="password" id="register_pw" name="register_pw" placeholder="密碼" value="" required />
-                                    <small id="password_help" class="form-text"></small>
-                                </div>
-                                
-
-                                <div id="info-bar2" class="alert alert-info" role="alert" style="style= display:none">
-                                </div>
-
-                                <!-- <img src="./icon/logo.png" alt="">  -->
-
-                                <div class="check_btn">
-
-                                       
-                    
-
-                                        <!-- 無法勾起 因直接對input下樣式 增加class可解決 -->
-                                        <div class="j_checkbox">
-                                            <input type="checkbox" id="check_must" value="">
-                                            <label for="">我同意RED CORE的<a href="">使用條款</a></label>  
-                                            <br><br><p id="checkbox_help" class="form-text"></p> 
-                                        </div>
-                                            
-                                                
-                                        <div class="j_checkbox">
-                                            <input type="checkbox" id="" value="">
-                                            <label for="">註冊後接收來自RED CORE的相關產品.服務.優惠資訊</label>
-                                        </div>
-            
-                                        <div class="j_padt_50">
-                                        <button class="login_btn_2" type="submit" formmethod="post" formaction="">建立帳號</button>
-                                        </div>
-
-
-                                </div>
-
-                               
-                        </form>
-                        
-                     
-                            
-             </div>   
-             
-       <!-- <img class="j_run_img" src="https://images.unsplash.com/photo-1502904550040-7534597429ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2149&q=80" alt=""> -->
-
-      
+    <div class="login-register-tab">
+        <div class="login-register_1">會員登入</div>
+        <div class="login-register_2">註冊成會員</div>
     </div>
+
+
+    <P class="j_dashline"></P>
+
+
+        <div id="login-area" class="flex justify-content-cneter ">
+            
+                <form name="form1" method="post" onsubmit="return checkForm()">
+                            <div>
+                                <input class="inputcss"  type="text" id="" name="email" placeholder="Email " value="" />
+                            </div>
+
+                            <div>
+                                <input class="inputcss" type="password" id="login_pw" name="password" placeholder="密碼" value="" />
+                                <a href="">忘記密碼？</a>
+                            </div>
+                            
+                            <div id="info-bar" class="alert alert-info" role="alert" style="display:none">  
+                            </div>
+                                
+
+                            <div class="login-remember">
+                                <button class="login_btn" type="submit" formaction="">確認登入</button>
+                            </div>
+                            
+                </form>
+                    
+            </div>  
+
+        <div id="register-area" class="flex justify-content-cneter" style="display:none">
+
+                <form name="form2" method="post" onsubmit="return checkForm2()">
+                    
+            
+                        <div>
+                            <input class="inputcss" type="text" id="register_name" name="register_name" placeholder="姓名 " value=""  required  minlength="2"/>
+                        </div>
+
+                        <div>
+                              <input class="inputcss" type="email" id="register_email" name="register_email" placeholder="Email" value="" required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                                                                                                          
+                        </div>
+                        
+                        <div>
+                            <input class="inputcss" type="text" id="register_mobile" name="register_mobile" placeholder="手機" value=""  required length="10" />
+                            <!-- <失敗的格式    pattern="[0-9]{2}-[0-9]{3}-[0-9]{3}"    pattern="/^09\d{2}-?\d{3}-?\d{3}$/"  pattern="09\d{8}"        -->
+                        </div> 
+                            
+                        <div>                                                                                                            
+                            <input class="inputcss" type="password" id="register_pw" name="register_pw" placeholder="密碼" value="" style="margin-bottom:0px;" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}"
+                            />
+                        </div> 
+
+                        <div>
+                            <small>必須包含5個或更多字符，至少包含一個數字，以及一個大寫和小寫字母 </small>
+                        </div>
+                           
+                            
+
+                        <div id="info-bar2" class="alert alert-info" role="alert" style="">
+    </div>
+                        <div id="info-bar3" class="alert alert-info" role="alert" style="">
+                        </div>
+                        <!-- <img src="./icon/logo.png" alt="">  -->
+
+                        <div class="check_btn">
+
+                                <!-- 無法勾起 因直接對input下樣式 增加class可解決 -->
+                                <div class="j_checkbox">
+                                    <input type="checkbox" id="check_must" value="">
+                                    <label for="">我同意RED CORE的<a href="">使用條款</a></label>  
+                                    <br><br><p id="checkbox_help" class="form-text"></p> 
+                                </div>
+                                    
+                                <div class="j_checkbox">
+                                    <input type="checkbox" id="" value="">
+                                    <label for="">註冊後接收來自RED CORE的相關產品.服務.優惠資訊</label>
+                                </div>
+    
+                                <div class="j_padt_50">
+                                <button class="login_btn_2" type="submit" formmethod="post" formaction="">建立帳號</button>
+                                </div>
+
+                        </div>
+
+                            
+                    </form>
+                    
+                    
+                        
+            </div>   
+            
+    <!-- <img class="j_run_img" src="https://images.unsplash.com/photo-1502904550040-7534597429ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2149&q=80" alt=""> -->
+
+    
+</div>
+
 
  
  <?php include __DIR__ . '/parts/footer.php'; ?>
@@ -264,86 +267,72 @@ require __DIR__. '/__connect_db.php';
 <script>
     //  註冊
 
-        const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-        const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
+        // const email_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+        // const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
 
         const $email = $("#register_email"),
-            $name = $("#register_name"),
-            $mobile = $("#register_mobile"),
-            $password = $("#register_pw"),
-            $email_help = $("#email_help"),
-            $name_help = $("#name_help"),
-            $mobile_help = $("#mobile_help"),
-            $password_help = $("#password_help"),
-            $checkbox_help = $("#checkbox_help");
+              $name = $("#register_name"),
+              $mobile = $("#register_mobile"),
+              $password = $("#register_pw"),
+              $checkbox_help = $("#checkbox_help");
+
 
         function checkForm2(){
             let isPass = true; //有沒有通過檢查
-            //回復提示設定
             $("#info-bar2").hide();
             $email.css('border-color', '#ccc');
-            $email_help.text('');
-
             $name.css('border-color', '#ccc');
-            $name_help.text('');
-
             $mobile.css('border-color', '#ccc');
-            $mobile_help.text('');
-
             $password.css('border-color', '#ccc');
-            $password_help.text('');
-
-
-            if($name.val().length < 2){
-                $name.css('border-color', 'red');
-                $name_help.text('請填寫正確的姓名');
-                isPass = false;
-            }
-
-            if($email.val().length == 0){
-                $email.css('border-color', 'red');
-                $email_help.text('請填寫email');
-
-                if(! email_re.test($email.val())){
-                    $email.css('border-color', 'red');
-                    $email_help.text('請填寫正確的 Email 格式');
-                    isPass = false;
-                }
-            }
-
-            if(! mobile_re.test($mobile.val())){
-                $mobile.css('border-color', 'red');
-                $mobile_help.text('請填寫正確的手機號碼');
-                isPass = false;
-            }
-
-            if($password.val().length < 6){
-                $password.css('border-color', 'red');
-                $password_help.text('密碼必須大於6個英數字');
-                isPass = false;
-            }
 
             if(!check_must.checked){
                 $checkbox_help.text('請閱讀使用條款並確認勾選');
                 isPass = false;
             }
 
-
             if(isPass){
                 $.post('register_api.php', $(document.form2).serialize(), function (data){
                     if(data.success){
-                        $('#info-bar2').show().text('註冊成功 You are a part of Red Core Now!');
-                        setTimeout(function(){ //要導到商品列表或首頁
-                            location.href = 'member_wishlist.php '; 
-                        }, 1000);
+                        $('#info-bar2').show().text('註冊成功 You are a part of Red Core Now! ');
+                        // setTimeout(function(){ //要導到商品列表或首頁
+                        //     $('#info-bar2').hide(); 
+                        // }, 1000);
                     } else {
                         $('#info-bar2').show().text(data.error);
                     }
                 }, 'json');
-            }
 
+                $.get('member_coupon_api.php', function (data){
+                    if(data.getcoupon){
+                        // setTimeout(function(){ 
+
+                        // }, 1100);
+                        $('#info-bar3').show().text('得到優惠卷 You are a part of Red Core Now!');
+                        
+                    } 
+                    // else {
+                    //     $('#info-bar3').show().text(data.error);
+                    // }
+                }, 'json');
+            }
             return false;
         }
+
+
+        //優惠卷 
+        //  $.post('memeber_coupon_api.php',{$sid} , function ()){
+
+        //     if(success){
+        //         $('#info-bar2').show().text('獲得優惠卷一張');
+        //     } else {
+        //         $('#info-bar2').show().text('error');
+        //     }
+            
+        //     }, 'json');
+        //     }
+
+        //     return false;
+        // }
 
     </script>
 

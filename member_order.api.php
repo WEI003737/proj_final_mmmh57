@@ -1,6 +1,5 @@
 <?php
-require __DIR__. '/__connect_db.php';
-
+require __DIR__. '/member_connect_db.php';
 
 $output = [
     'success' => false,
@@ -10,6 +9,13 @@ $output = [
 
 $sql_update = "UPDATE `members` SET
         `mobile`=?, `name`=?, `receiver`=?,`receiver_mobile`=?, `address`=? where `email`=?"; 
+
+SELECT * FROM 
+members
+LEFT JOIN
+orders
+ON
+members.sid = orders.mem_sidSELECT * FROM `members` WHERE 1
       
         
             $stmt = $pdo->prepare($sql_update);
@@ -35,4 +41,3 @@ $sql_update = "UPDATE `members` SET
          // echo json_encode($_POST);
          
 ?>
-
