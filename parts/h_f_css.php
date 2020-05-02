@@ -5,6 +5,7 @@
         body{
             font-family: 'Noto Sans TC', sans-serif;
         }
+
 /* --------------font-face 英文字形自己放在要用的地方--------------
         https://www.cufonfonts.com/font/lucida-sans
 
@@ -177,8 +178,13 @@
             border: 0;
             padding: 0;
         }
-        .a_cart_count{
+        .header .header_nav_right .a_cart_count{
             color: #fff;
+            font-size: 12px;
+            position: absolute;
+            left: auto;
+            right: 5px;
+            top: 14px;
         }
         .header .a_menu{
             display: none;

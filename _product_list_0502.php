@@ -7,14 +7,14 @@ $page_name = 'product_list';
 $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
-$select = isset($_GET['$select']) ? $_GET['$select'] : '';
+$selectDate = isset($_GET['selectDate']) ? $_GET['selectDate'] : "";
 
 
 
 //get的內容 要用http_build_query輸出
-
-$my_qs = $_GET;
 $my_qs_tmp = $_GET;
+$my_qs = $_GET;
+$my_qs_color = $_GET;
 
 
 //print_r($my_qs);
@@ -31,25 +31,13 @@ if(!empty($cate)) {
     $where .= " AND cate_sid = $cate ";
 //    $my_qs['cate'] = $cate;
 };
-//if(!empty($select)) {
-//    switch ($select) {
-//        case "NewToOld":
-//            $orderBy .= " ORDER BY created_date DESC ";
-//            break;
-//        case "OldToNew":
-//            $orderBy .= " ORDER BY created_date ASC ";
-//            break;
-//        case "HighToLow":
-//            $orderBy .= " ORDER BY price DESC ";
-//            break;
-//        case "LowToHigh":
-//            $orderBy .= " ORDER BY price ASC ";
-//    }
-//
-//};
-//echo json_encode($cate);
-//echo json_encode($select);
+if(!empty($selectDate)) {
+    $orderBy .= " ORDER BY created_date $selectDate ";
+};
+if(!empty($color)) {
+    $color .= " AND color =  $color ";
 
+};
 
 //取得總筆數
 $totalRows = $pdo->query("SELECT COUNT(1) FROM products $where ")
@@ -71,27 +59,27 @@ if($totalRows>0){
     $totalProducts = $totalProductStmt -> fetchAll();
 
 //    另一種資料撈法------------------------------------------------------------------------------------
-//    $dictProducts = [];
-//    $proSids = [];
-//
-//    foreach($totalProducts as $pro){
-//        $dictProducts[ $pro['sid'] ] = $pro;
-//        $proSids[] = $pro['sid'];
-//    }
-//
-//    $colorSql = sprintf("SELECT * FROM `color` WHERE `pro_sid` IN (%s)", implode(',', $proSids));
-//    $totalColorStmt = $pdo -> query($colorSql);
-//    $totalColors = $totalColorStmt -> fetchAll();
-//
-//    $i=0;
-//    foreach($totalColors as $c){
-//        $dictProducts[$i]['color'] = $c;
-//        $i++;
-//    }
-////    print_r($dictProducts);
-//    print_r($proSids);
-//
-//    exit;
+    $dictProducts = [];
+    $proSids = [];
+
+    foreach($totalProducts as $pro){
+        $dictProducts[ $pro['sid'] ] = $pro;
+        $proSids[] = $pro['sid'];
+    }
+
+    $colorSql = sprintf("SELECT * FROM `color` WHERE `pro_sid` IN (%s)", implode(',', $proSids));
+    $totalColorStmt = $pdo -> query($colorSql);
+    $totalColors = $totalColorStmt -> fetchAll();
+
+    $i=0;
+    foreach($totalColors as $c){
+        $dictProducts[$i]['color'] = $c;
+        $i++;
+    }
+//    print_r($totalColors);
+    print_r($totalColors);
+
+    exit;
 
 //    另一種資料撈法------------------------------------------------------------------------------------
 
@@ -138,7 +126,7 @@ if($totalRows>0){
 $picOnlySql = $pdo -> query("SELECT `sid` AS `colorSid`, `pro_pic` FROM `color` ");
 $picOnlyRows = $picOnlySql -> fetchAll();
 
-//echo json_encode($picOnlyRows, JSON_UNESCAPED_UNICODE);
+echo json_encode($picOnlyRows, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------
@@ -591,27 +579,30 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                         <div id="wea_product_list_filter" class="wea_product_list_changebar d-flex">
                             <span>顏色</span><i class="fas fa-chevron-down"></i>
                             <?php for($c=0; $c<=($selectColorCount-1); $c++):?>
-                                <a href=""><?= $selectColor[$c] ?></a>
+                                <a href="<?php
+                                $my_qs_tmp['color'] = $selectColor[$c];
+                                echo http_build_query($my_qs_color)
+                                ?>"><?= $selectColor[$c] ?></a>
                             <?php endfor; ?>
                             <span>價格</span><i class="fas fa-chevron-down"></i>
                             <input type="text" placeholder="請輸入最低價格">
                             <input type="text" placeholder="請輸入最高價格">
                         </div>
-<!--                        <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">-->
+                        <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
+                            <a href="?<?php
+                            $my_qs_tmp['selectDate'] = 'DESC';
+                            echo http_build_query($my_qs_tmp);?>#wea_product_list_sort">新到舊</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs_tmp['selectDate'] = 'ASC';
+                            echo http_build_query($my_qs_tmp);?>">舊到新</a><i class="fas fa-chevron-down"></i>
 <!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "NewToOld";
-//                            echo http_build_query($my_qs_tmp);?><!--">新到舊</a><i class="fas fa-chevron-down"></i>-->
+//                            $my_qs['selectPrice'] = 'DESC';
+//                            echo http_build_query($my_qs);?><!--">價錢高到低</a><i class="fas fa-chevron-down"></i>-->
 <!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "OldToNew";
-//                            echo http_build_query($my_qs_tmp);?><!--">舊到新</a><i class="fas fa-chevron-down"></i>-->
-<!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "HighToLow";
-//                            echo http_build_query($my_qs_tmp);?><!--">價錢高到低</a><i class="fas fa-chevron-down"></i>-->
-<!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "LowToHigh";
-//                            echo http_build_query($my_qs_tmp);?><!--">價錢低到高</a><i class="fas fa-chevron-down"></i>-->
-<!---->
-<!--                        </div>-->
+//                            $my_qs['selectPrice'] = 'ASC';
+//                            echo http_build_query($my_qs);?><!--">價錢低到高</a><i class="fas fa-chevron-down"></i>-->
+
+                        </div>
                     </div>
                     <!-- 手機 -->
                     <div class="show-mobile wea_product_list_header_mobile position-absolute">
