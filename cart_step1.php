@@ -34,7 +34,7 @@ if(!empty($pKeys)) {
 
 }
 
-//print_r($cartProRows);
+print_r($cartProRows);
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
@@ -97,10 +97,10 @@ if(!empty($pKeys)) {
                             $colorArr = json_decode($r['color'][0]['pro_pic']);
                             // print_r($colorArr);
                             ?>
-                            <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $sid ?>">
+                            <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $r['sid'] ?>">
                                 <div></div>
                                 <div class="cart_img">
-                                    <img src="./images/<?= $colorArr[0]?>.png" alt="">
+                                    <img src="./product_images/<?= $colorArr[0]?>.png" alt="">
                                 </div>
                                 <div class="t_text_left">
                                     <h6>
@@ -116,9 +116,9 @@ if(!empty($pKeys)) {
                                     <h6><?= $r['size']; ?></h6>
                                 </div>
                                 <div class="t_wea_product_main_count d-flex align-items-center">
-                                    <li><a><div id="minus<?= $j?>" class="minus">-</div></a></li>
-                                    <li><div id="countnum<?= $j?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" onchange="changeQty(event)"><?= $r['quantity'] ?></div></li>
-                                    <li><a><div id="plus<?= $j?> " class="plus">+</div></a></li>
+                                    <li><a><div id="minus<?= $j?>" class="minus" onclick="changeQty(event)">-</div></a></li>
+                                    <li><div id="countnum<?= $j?>" data-qty="<?= $r['quantity'] ?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" ></div></li>
+                                    <li><a><div id="plus<?= $j?> " class="plus" onclick="changeQty(event)"  data-stock="<?= $r['in_stock'] ?>">+</div></a></li>
                                 </div>
                                 <div>
                                     <h6 class="sub-total"></h6>
@@ -148,7 +148,7 @@ if(!empty($pKeys)) {
                         ?>
                         <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $sid ?>">
                             <div class="cart_img">
-                                <img src="./images/<?= $colorArr[0]?>.png" alt="">
+                                <img src="./product_images/<?= $colorArr[0]?>.png" alt="">
                             </div>
                             <div class="t_text_left">
                                 <a href=""><?=$r['product'][0]['name'] ?></a>
@@ -217,7 +217,7 @@ if(!empty($pKeys)) {
         var selectCountNum ;
         var thisnum ;
 
-        function countNumState(num,stocknum){
+        function countNumState(event){
 
             if(selectCountNum == 1){
                 $(num).find("li").eq(0).find("div").addClass("unckick");
@@ -234,7 +234,7 @@ if(!empty($pKeys)) {
 
         // countNumState();
         $(".plus").click(function(){
-            thisnum = $(this).closest(".t_wea_product_main_count");
+            thisnum = $(this).closest(".t_wea_product_main_count").find("#countnum").text();
             selectMax = $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").attr("data-maxnum");
             console.log(thisnum );
             if($(this).hasClass("unckick") == false){
@@ -267,20 +267,22 @@ if(!empty($pKeys)) {
 
         function removeProductItem(event){
             event.preventDefault(); // 避免 <a> 的連結
-            const div = $(event.target).closest('div.p-item')
-            const sid = div.attr('data-sid');
+            const p_item = $(event.target).closest('div.p-item')
+            const cart_sid = p_item.attr('data-sid');
 
-            $.get('add_to_cart_api.php', {sid}, function(data){
-                div.remove();
+            $.get('add_to_cart_api.php', {cart_sid}, function(data){
+                p_item.remove();
                 countCartObj(data);
                 calPrices();
             }, 'json');
         }
 
         function changeQty(event){
-            let qty = $(event.target).val();
-            let div = $(event.target).closest('div');
-            let sid = div.attr('data-sid');
+            let cart_qty = $(event.target).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text();
+            let p_item = $(event.target).closest('div.p-item');
+            let cart_sid = p_item.attr('data-sid');
+            console.log(cart_qty);
+            console.log(cart_sid);
 
             $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
                 countCartObj(data);
@@ -299,7 +301,7 @@ if(!empty($pKeys)) {
             // }
 
             p_items.each(function(i, el){
-                console.log( $(el).attr('data-sid') );
+                // console.log( $(el).attr('data-sid') );
                 // let price = parseInt( $(el).find('.price').attr('data-price') );
                 // let price = $(el).find('.price').attr('data-price') * 1;
 
@@ -309,14 +311,14 @@ if(!empty($pKeys)) {
                 const $qty =  $(el).find('.quantity'); // <select> combo box
                 // 如果有的話才設定
                 if($qty.attr('data-qty')){
-                    $qty.val( $qty.attr('data-qty') );
+                    $qty.text( $qty.attr('data-qty') );
                 }
                 $qty.removeAttr('data-qty'); // 設定完就移除
 
                 const $sub_total = $(el).find('.sub-total');
 
-                $sub_total.text('$ ' + dallorCommas($price.attr('data-price') * $qty.val()));
-                total += $price.attr('data-price') * $qty.val();
+                $sub_total.text('$ ' + dallorCommas($price.attr('data-price') * $qty.text()));
+                total += $price.attr('data-price') * $qty.text();
             });
 
             $('#totalAmount').text( '$ ' + dallorCommas(total));
