@@ -5,6 +5,7 @@
         body{
             font-family: 'Noto Sans TC', sans-serif;
         }
+
 /* --------------font-face 英文字形自己放在要用的地方--------------
         https://www.cufonfonts.com/font/lucida-sans
 
@@ -76,7 +77,7 @@
             overflow: hidden;
         }
         .a_push_place{
-            height: 120px;
+            height: 80px;
         }
     /* ----------- header ----------- */
         .header{
@@ -92,19 +93,33 @@
         }
         .header .a_nav{
             /* header 高度 */
-            height: 120px;
+            /*也要改a_push_place*/
+            height: 80px;
             display: flex;
             justify-content: space-between;
         }
         .header_nav_left{
             display: flex;
             align-items: center;
+            padding-left: 20px;
         }
         .header .a_logo {
+            height: 80%;
             padding: 0 40px;
         }
         .header .a_logo_top {
-            padding-left: 10px;
+            padding: 5px 0 0 10px;
+        }
+        .header .a_logo_top img {
+            height: 40px;
+        }
+        .header .a_logo .a_logo_bottom{
+            position: relative;
+        }
+        .header .a_logo_bottom img{
+            height: 20px;
+            position: absolute;
+            top: 0;
         }
         .header_nav_left>li{
             margin: 0 2vw;
@@ -115,18 +130,38 @@
         .header_nav_right{
             display: flex;
             align-items: center;
-        }
-        .header_nav_right img{
-            margin: 0 20px;
+            padding-right: 20px;
         }
         .header_nav_right>li img:hover{
             transform: translateY(-3px);
+        }
+        .header_nav_right li:hover .a_sub_nav{
+            max-height: 300px;
+        }
+        .header_nav_right img{
+             margin: 0 20px;
+         }
+        .header nav ul li a:hover{
+            background: #FFE07C;
+        }
+        .header .a_sub_nav{
+            position: absolute;
+            background: rgb(255, 255, 255);
+            top: 47px;
+            width: 132px;
+            max-height: 0;
+            overflow: hidden;
+        }
+        .header .a_sub_nav a{
+            padding:8px 20px;
+            display: block;
         }
 /* ----------- header 搜尋欄 ----------- */
         .a_input_search{
             margin:0;
             padding-top: 6px;
             display: flex;
+            font-size: 15px;
         }
         .a_input_search:hover .a_form_search{
             max-width: 150px;
@@ -143,74 +178,43 @@
             border: 0;
             padding: 0;
         }
+        .header .header_nav_right .a_cart_count{
+            color: #fff;
+            font-size: 12px;
+            position: absolute;
+            left: auto;
+            right: 5px;
+            top: 14px;
+        }
         .header .a_menu{
             display: none;
-        }
-        .header .a_bar{
-            width: 30px;
-            height: 4px;
-            background: rgb(58, 58, 58);
-            margin: 5px 0 0 30px;
-            border-radius: 2px;
-        }
-        .header_nav_right li:hover .a_sub_nav{
-            max-height: 300px;
-        }
-        .header nav ul li a:hover{
-            background: #FFE07C;
-        }
-        .header .a_sub_nav{
-            position: absolute;
-            background: rgb(255, 255, 255);
-            top: 77px;
-            width: 132px;
-            max-height: 0;
-            overflow: hidden;
-        }
-        .header .a_sub_nav a{
-            padding:8px 20px;
-            display: block;
         }
         .header .a_rwd_sub_nav{
             display: none;
         }
-        .a_cart_count{
-            color: #fff;
-        }
-        @media all and (max-width: 360px) {
+        @media all and (max-width: 768px) {
             .a_wrapper{
-                /* 360px - 30px(左右邊框) */
-                width: 330px;
+                max-width: 708px;
             }
-            .header .a_nav{
-                height: 60px;
-            }
-            .header .a_logo{
+            .header .a_logo {
                 padding: 0;
-            }
-            .header .a_logo img{
-                width: 40px;
             }
             .header_nav_left li{
                 display: none;
-            }
-            .header_nav_right img{
-                width: 15px;
-                margin: 0 10px;
             }
             .header .a_sub_nav{
                 display: none;
             }
             .header .active .a_rwd_sub_nav{
-                max-height: 300px;                
+                max-height: 300px;
             }
             .header .a_rwd_sub_nav{
                 display: block;
                 position: absolute;
                 background: rgb(255, 255, 255);
                 font-size: 15px;
-                top: 60px;
-                right: 0;
+                top: 40px;
+                right: -30px;
                 width: 132px;
                 max-height: 0;
                 overflow: hidden;
@@ -222,16 +226,18 @@
             }
             /* 漢堡選單 */
             .header .a_menu{
-                display: block;                
+                display: block;
             }
             .header .a_bar{
                 width: 20px;
                 height: 3px;
-                margin: 4px 0 0 20px;
-            }            
+                margin: 5px 0 0 20px;
+                border-radius: 2px;
+                background: rgb(58, 58, 58);
+            }
             .active .a_bar1{
-                -webkit-transform: rotate(-45deg) translate(-5px, 5px) ;
-                transform: rotate(-45deg) translate(-5px, 5px) ;
+                -webkit-transform: rotate(-45deg) translate(-6px, 6px) ;
+                transform: rotate(-45deg) translate(-6px, 6px) ;
             }
             .active .a_bar2{
                 opacity: 0;
@@ -240,12 +246,64 @@
                 -webkit-transform: rotate(45deg) translate(-5px, -5px) ;
                 transform: rotate(45deg) translate(-5px, -5px) ;
             }
+
+        }
+        @media all and (max-width: 360px) {
+            .a_push_place{
+                /*推出header的空間*/
+                height: 60px;
+            }
+            .a_wrapper{
+                /* 360px - 30px(左右邊框) */
+                max-width: 330px;
+            }
+            .header .a_nav{
+                height: 60px;
+            }
+            .header_nav_left{
+                padding: 0;
+            }
+            .header .a_logo{
+                padding: 0;
+            }
+            .header .a_logo{
+                height: 80%;
+            }
+            .header .a_logo .a_logo_top img{
+                height: 25px;
+            }
+            .header .a_logo .a_logo_bottom img{
+                height: 15px;
+            }
+            .header_nav_left li{
+                display: none;
+            }
+            .header_nav_right{
+                padding-right: 0;
+            }
+            .header_nav_right img{
+                width: 15px;
+                margin: 0 10px;
+            }
+            .header .a_bar{
+                width: 18px;
+                height: 2px;
+                margin: 4px 0 0 10px;
+            }
+            .active .a_bar1{
+                -webkit-transform: rotate(-45deg) translate(-4px, 5px) ;
+                transform: rotate(-45deg) translate(-4px, 5px) ;
+            }
+            .active .a_bar3{
+                -webkit-transform: rotate(45deg) translate(-4px, -4px) ;
+                transform: rotate(45deg) translate(-4px, -4px) ;
+            }
         }
 
     /* ----------- footer ----------- */
         .footer{
             height: 415px;
-            padding-top: 60px;
+            padding: 60px 30px 0;
             background: #CA054D;
             color: #fff;
             font-size: 20px;
@@ -271,7 +329,7 @@
         }
         .footer .a_map{
             height: 200px;
-            width: 500px;
+            max-width: 500px;
             background: #fff;
         }
         .footer .a_block_2{
@@ -283,12 +341,12 @@
         .footer .a_rwd_map{
             display: none;
         }
-        @media all and (max-width: 360px) {
+        @media all and (max-width: 768px) {
             .a_wrapper{
-                width: 300px;
+                max-width: 708px;
             }
             .footer{
-                height: 550px;
+                height: 700px;
                 padding-top: 20px;
                 background: #CA054D;
                 color: #fff;
@@ -301,7 +359,11 @@
                 /* 蓋過 footer 裡的 font-size */
                 font-size: 20px;
                 padding: 15px 0;
-            }       
+            }
+            .footer .a_block_1{
+                display: flex;
+            }
+
             .footer .a_block_1_1 li,
             .footer .a_block_1_2 li{
                 padding-bottom: 10px;
@@ -321,6 +383,22 @@
             }
             .footer .a_block_1_3{
                 display: none;
+            }
+            .footer hr{
+                width: 100%;
+                margin: 25px 15px 20px ;
+            }
+            .footer .a_rwd_map{
+                width: 100%;
+                display: block;
+                margin: 10px 0;
+            }
+        @media all and (max-width: 360px) {
+            .a_wrapper{
+                width: 300px;
+            }
+            .footer{
+                height: 550px;
             }
             .footer hr{
                 width: 80%;

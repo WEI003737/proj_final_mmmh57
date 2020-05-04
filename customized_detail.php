@@ -1,0 +1,354 @@
+<!-- nac_header_test{}測試用記得刪除 -->
+<!-- container的命名我沒有加名稱，為了使用BT的預設屬性我只改了寬max-width:1440 -->
+<?php
+require __DIR__ . '/__connect_db.php';
+$page_name = 'Customized客製化 - Redcore';
+
+
+$sid = isset($_GET['sid']) ? intval($_GET['sid']) : 0;
+$rows = $pdo->query("SELECT * FROM `customize`")->fetchAll();
+$row = $pdo->query("SELECT * FROM `customize` WHERE `sid`=" . $sid)->fetch();
+$cate_sid = isset($row['cate_sid']) ? intval($row['cate_sid']) : 0;
+$rows_itemcount = count($rows);
+$can_cus_color = json_decode($row['can_cus_color']);
+$can_cus_color_count = count($can_cus_color);
+
+
+$customized_bars = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=1");
+$customized_tops = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=2");
+$customized_bottoms = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=3");
+
+$customized_bars_each = $customized_bars->fetchAll(); //倒內衣資料
+$customized_tops_each = $customized_tops->fetchAll(); //倒上衣資料
+$customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
+//var_dump($can_cus_color);
+//var_dump($a_color);
+//print_r($can_cus_color_count);
+
+
+if ($sid < 1 || $sid > $rows_itemcount) {
+    header("location:./customized.php");
+    exit();
+}
+
+
+
+
+
+?>
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <?php include __DIR__ . './parts/h_f_link.php' ?>
+    <?php include __DIR__ . './parts/h_f_link.php' ?>
+    <?php include __DIR__ . './parts/h_f_css.php' ?>
+    <title>Customized_Redcore</title>
+
+
+    <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all.min.css">
+    <link rel="stylesheet" href="./css/customized_final.css">
+
+    <style>
+        /** {*/
+        /*    outline: #FA8000 solid 1px;*/
+        /*}*/
+    </style>
+</head>
+
+<body>
+    <?php include __DIR__ . './parts/header.php' ?>
+    <div class="a_push_place"></div>
+    <!-- 導航列 -->
+    <div class="container">
+        <nav>
+            <ul class="nac_customized_detail_menu">
+                <li><img src="./images/customized_icon.svg" alt=""></li>
+                <li><a href="./customized.php">客製化</a></li>
+                <li><a class="nac_cate" href=""></a></li>
+                <li><?= $row['name'] ?></li>
+            </ul>
+        </nav>
+    </div>
+    <section class="container customized_detail_desi">
+        <!-- 成品展示區 -->
+        <div class="customized_detail_picture_outbox">
+            <div class="customized_detail_picture" id="clothes">
+                <!-- 預設顯示圖片 -->
+                <img src="./images/<?= $row['pro_pic'] ?>_auto.png" alt="" id="nac_item_pic_auto">
+                <!-- 控制區/色塊區 -->
+                <?= $row['cus_area_svg'] ?>
+                <!-- 混和層 -->
+                <img src="./images/<?= $row['pro_pic'] ?>_blend.png" alt="" id="nac_item_pic_blend">
+                <!-- 即時色盤 -->
+                <div class="color-panel position-absolute" id="colorPanel">
+                    <ul class="list-unstyled m-0">
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <!-- 訂製內容點選區 -->
+        <form class="customized_detail_main" method="post" action="">
+
+            <div class="customized_detail_itemtitle">
+                <!-- 商品名 -->
+                <h2 class="nac detail_itemtitle"><?= $row['name'] ?></h2>
+                <!-- 價碼 -->
+                <h3 class="nac mony">$NT<?= $row['price'] ?></h3>
+            </div>
+
+
+            <!-- 右邊調色盤 -->
+            <div class="nac_chose_color">
+                <?php for ($i = 0; $i < $can_cus_color_count; $i++) : ?>
+                    <h4 class="nac"><?= $can_cus_color[$i] ?></h4>
+                    <h6 class="nac">Color 0<?= $i + 1 ?></h6>
+                    <ul class="nac_chose_color_area" data-clothes_area="Clothes_area<?= $i + 1 ?>" id="clothesPick<?= $i + 1 ?>">
+                    </ul>
+                <?php endfor; ?>
+            </div>
+            <!-- 尺寸 -->
+            <div class="nac_chose_size">
+                <h4 class="nac">尺寸</h4>
+                <h6 class="nac">Size</h6>
+                <ul class="nac_chose_size_box">
+                    <li>
+                        <input type="button" class="nac_size_btn" date-sizeChose="S" value="S"></input>
+                    </li>
+                    <li>
+                        <input type="button" class="nac_size_btn active" date-sizeChose="M" value="M"></input>
+                    </li>
+                    <li>
+                        <input type="button" class="nac_size_btn" date-sizeChose="L" value="L"></input>
+                    </li>
+                    <li>
+                        <input type="button" class="nac_size_btn" date-sizeChose="XL" value="XL"></input>
+                    </li>
+                </ul>
+                <!-- 尺寸參考表 -->
+                <a class="nac_sizechart">
+                    <h6 class="nac nac_sizechart"><i class="fas fa-question-circle"></i> 尺寸表參考</h6>
+                </a>
+            </div>
+            <!-- 數量 -->
+            <div class="nac_chose_pieces">
+
+                <h4 class="nac">數量</h4>
+                <h6 class="nac">Pieces</h6>
+                <div class="nac_chose_pieces_num">
+                    <button type="button" class="nac_chose_pieces_btn nac_plus" onclick="dec()">-</button>
+                    <button type="button" class="nac_chose_pieces_count" disabled="disabled" id="pieces_count">1</button>
+                    <button type="button" class="nac_chose_pieces_btn nac_minus" onclick="insc()">+</button>
+                </div>
+            </div>
+
+
+
+            <div class="nac_buynow">
+                <button id="add_to_cart" type="submit">立即購買</button>
+                <button>加入購物車</button>
+            </div>
+
+    </section>
+    <div class="nac_partingline"></div>
+
+    <section class="customized_detail_more">
+       
+        <div class="container">
+        <div class="customized_detail_more_title_box">
+            <h2 class="nac detail_itemtitle">設計更多屬於你的STYLE!</h2>
+            <h4 class="nac">DESIGN MORE BY YOURSELF</h4>
+        </div>
+            <ul class="nac_customized_item_box_outside customized_detail">
+                <?php foreach ($customized_bars_each as $row) : ?>
+                    <li>
+                        <a href="./customized_detail.php?sid=<?= $row['sid'] ?>" data-sid="<?= $row['sid'] ?>">
+                            <div class="nac_customized_item_box">
+                                <div class="nac_customized_item_box_tg">DESIGN</div>
+                                <figure>
+                                    <div class="nac_customized_item_box_cover">
+                                        <h3 class="nac">開始設計</h3>
+                                        <h6 class="nac">DESIGN BY YOURSELF.</h6>
+                                    </div>
+                                    <img src="./images/<?= $row['pro_pic'] ?>.png" alt="">
+                                </figure>
+                                <h6 class="customized_item_title"><?= $row['name'] ?></h6>
+                                <h6 class="customized_item_money">NT<?= $row['price'] ?></h6>
+                            </div>
+
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+    </section>
+
+
+    <?php include __DIR__ . './parts/footer.php'
+    ?>
+    <script defer src="./fontawesome-free-5.13.0-web/js/all.js"></script>
+    <?php include __DIR__ . './parts/h_f_script.php' ?>
+
+
+    <script>
+        var sizeChose = "M";
+        var nac_chose_pieces = "1";
+        let cate_sid = <?= $cate_sid ?>;
+
+        /*顯示區域*/
+
+        //MENU判斷
+        switch (cate_sid) {
+            case 1:
+                $("a.nac_cate").attr("href", "./customized.php#nac_customized_main").text("內衣")
+                break;
+            case 2:
+                $("a.nac_cate").attr("href", "./customized.php#customized_top").text("上衣")
+                break;
+            case 3:
+                $("a.nac_cate").attr("href", "./customized.php#customized_bottoms").text("下著")
+                break;
+        }
+
+        /*選擇顏色*/
+        // var colorChoseOne = "color2_nac_white";
+        // var colorChoseTwo = "color2_nac_white";
+        // var colorChoseThree = "color3_nac_white";
+        let can_cus_color = <?= $can_cus_color_count ?>;
+        let colors = ["#FFFFFF", "#505050", "#ca054d", "#ff9900", "#ffbe33", "#1eccbd", "#1d6be0", "#7226b1"];
+        let pickId = "Clothes_area1";
+        let clothes_area = "";
+        let colorPick = "";
+        let colorPick_nac = "";
+
+        //預設顏色
+        $('svg path').css("fill", colors[0])
+
+        // 生成色盤
+        colors.forEach(
+            function(color) {
+                colorPick_nac += `
+            <li class="nac_chose_color_btn" date-colorChoseOne="color1_nac_${color}" style="background: ${color}"></li>`
+            });
+
+        // 色盤放進網頁
+        $(".nac_chose_color_area, #colorPanel ul").append(colorPick_nac);
+
+        //預設ACTIVE
+        $("ul.nac_chose_color_area:eq(0) li").eq(0).addClass("active")
+        $("ul.nac_chose_color_area:eq(1) li").eq(0).addClass("active")
+        $("ul.nac_chose_color_area:eq(2) li").eq(0).addClass("active")
+
+        console.log($("#Clothes_area1").css("fill"))
+        console.log($("#Clothes_area2").css("fill"))
+        console.log($("#Clothes_area3").css("fill"))
+
+
+
+
+
+        // 色盤放進網頁&點擊行為
+        $("ul.nac_chose_color_area li.nac_chose_color_btn").click(function(e) {
+            e.stopPropagation(); //禁止往下(外)傳送行為
+            let color = $(this).css("background-color"); //取得選中色碼
+            let colorIndex = $(this).index(); //是第幾個色塊(index順序)
+            let pick_which_area = $(this).parent().attr("data-clothes_area") //點到的色盤是控制哪個區域的
+            let nowcolor = ""
+            pickId = pick_which_area //點到的色盤是控制哪個區域,回傳給全域變數
+            clothes_area = `#${pick_which_area}` //回傳給全域變數     
+            $(clothes_area).css("fill", color) //填色
+
+
+
+            $(this).addClass("active").siblings().removeClass("active") //點到哪個提示
+            $("#colorPanel").hide();
+            console.log(clothes_area)
+            console.log($("#Clothes_area1").css("fill"))
+            console.log($("#Clothes_area2").css("fill"))
+            console.log($("#Clothes_area3").css("fill"))
+        })
+
+        // 即時色盤消失
+        $("body").click(function() {
+            $("#colorPanel").hide();
+        });
+
+        // 即時色盤
+        $('svg path').click(function(e) { //Default mouse Position 
+            e.stopPropagation();
+            let elm = $(".customized_detail_picture");
+            let xPos = e.pageX - elm.offset().left;
+            let yPos = e.pageY - elm.offset().top;
+            pickId = $(this).attr("id")
+
+            //console.log(pickId)
+            pickClothes = $("#" + pickId)
+
+            $("#colorPanel").show();
+            $("#colorPanel").css({
+                left: xPos,
+                top: yPos
+            })
+        });
+
+
+
+        // 即時色盤填塞
+        $("#colorPanel li").click(function(e) {
+            e.stopPropagation();
+            let color = $(this).css("background-color");
+            let colorIndex = $(this).index();
+            pickClothes.css("fill", color)
+            $("#colorPanel").hide();
+
+            if (pickId == $("ul.nac_chose_color_area").eq(0).attr("data-clothes_area")) {
+                $("ul.nac_chose_color_area:eq(0) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
+            } else if (pickId == $("ul.nac_chose_color_area").eq(1).attr("data-clothes_area")) {
+                $("ul.nac_chose_color_area:eq(1) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
+
+            } else if (pickId == $("ul.nac_chose_color_area").eq(2).attr("data-clothes_area")) {
+                $("ul.nac_chose_color_area:eq(2) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
+            }
+
+            console.log(clothes_area)
+            console.log($("#Clothes_area1").css("fill"))
+            console.log($("#Clothes_area2").css("fill"))
+            console.log($("#Clothes_area3").css("fill"))
+        })
+
+
+
+
+        /*尺寸選擇*/
+        $(".nac_size_btn").click(function() {
+            $(this).addClass("active")
+            $(this).parents().siblings().find(".nac_size_btn").removeClass("active")
+            sizeChose = $(this).attr("date-sizeChose")
+            console.log(sizeChose)
+        })
+
+
+
+        /* 數量加減 */
+        function insc() {
+            var count = document.getElementById("pieces_count").innerHTML;
+            document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
+            nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
+            console.log(nac_chose_pieces)
+        }
+
+        function dec() {
+            var count = document.getElementById("pieces_count").innerHTML;
+            if (parseInt(count) > 1) {
+                document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
+            };
+            nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
+            console.log(nac_chose_pieces)
+        }
+    </script>
+</body>
+
+</html>

@@ -35,7 +35,7 @@ h1{
 }
 @font-face{
     font-family: 'Lucida Sans';
-    src:url(../font/Lucida\ Sans);
+    src:url(./font/Lucida\ Sans);
     font-style: italic;
 }
 h2{

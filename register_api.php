@@ -1,7 +1,6 @@
 <?php
 require  __DIR__ . '/member_connect_db.php';
 
-
 //回應的資料型態為JSON
 header('Content-Type: application/json');
 
@@ -12,6 +11,7 @@ $output = [
   'postData' => $_POST
 ];
 
+$email = isset($_POST['register_email']) ? $_POST['register_email'] : '';
 
  if(isset($_POST['register_email']) and isset($_POST['register_name']) and isset($_POST['register_mobile']) and isset($_POST['register_pw'])){
     // TODO: 欄位資料檢查
@@ -28,35 +28,47 @@ $output = [
         exit;
     };
 
-    //檢查手機格式
-     $mobile_re = " /^09\d{2}-?\d{3}-?\d{3}$/";
-    if(empty(preg_grep($mobile_re, [$_POST['register_mobile']]))){
-        $output['error'] = '手機號碼格式不符';      //會顯示在哪??
-        echo json_encode($output, JSON_UNESCAPED_UNICODE);
-        exit;
-    };
-
-    //全部選項都要有?
-    $sql = "INSERT INTO `members`(`email`, `password`, `mobile`, `name`, `created-date`, `receiver`, `receiver-mobile`, `address`) 
+    $sql_register = "INSERT INTO `members`(`email`, `password`, `mobile`, `name`, `created_date`, `receiver`, `receiver_mobile`, `address`) 
     VALUES (?,?,?,?, NOW(),'','','')";
 
-    $stmt = $pdo->prepare($sql);
+    $stmt_register = $pdo->prepare( $sql_register);
 
-    $stmt->execute([
+    $stmt_register->execute([
         $_POST['register_email'],
         $_POST['register_pw'],
         $_POST['register_mobile'],
         $_POST['register_name'],
-
-
     ]);
+    
 
-    if($stmt->rowCount() == 1){
+    if($stmt_register->rowCount() == 1){
+        $_SESSION['loginUser'] =  $email;
         $output['success'] = true;
-        $output['error'] = '';
     }else {
-        $output['error'] = '資料無法新增';
+        $output['error'] = '資料無法新增'; 
     };
 }
+
+// $sql_coupon = "SELECT * FROM `members` WHERE `email`=". $_SESSION['loginUser'];
+// $stmt_coupon = $pdo -> query($sql_coupon);
+// $stmt_coupon -> fetchAll();
+
+// if($stmt_coupon->rowCount()==1){
+//     $_SESSION['sid'] =$stmt_coupon;   
+//     $output['success'] = true;
+    
+//     // $output['data'] = $row_coupon;  
+// }
+
+   
+    
+// //     $sql_coupon_new = "INSERT INTO `coupon`(`mem_sid`, `name`, `description`, `discount`, `is_use`, `expire_date`) 
+// //     VALUES (?,'會員註冊禮卷','購物即可折抵100元','100','0', NOW())";
+// //     //設is_use 0未使用 1表示已使用
+
+// //     $stmt = $pdo->prepare( $sql_coupon_new);
+// //     $stmt->execute([
+// //         $_SESSION['sid'],
+// //         ]);
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);

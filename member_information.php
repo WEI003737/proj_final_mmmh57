@@ -1,13 +1,12 @@
 <?php
 require __DIR__. '/__connect_db.php';
 
+//$_SESSION['loginUser']='CCC@Gmail.com';
+//$stmt = $pdo->query("SELECT * FROM `members` where `email`="$_SESSION['loginUser']"")
 $rows = [];
 $sql = "SELECT * FROM members where email='" . $_SESSION['loginUser'] . "'";
 $stmt = $pdo->query($sql);
 $rows = $stmt->fetchAll();
-
-// echo json_encode($_SESSION['loginUser'])
-
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +21,6 @@ $rows = $stmt->fetchAll();
 <?php include __DIR__ . '/parts/h_f_link.php'; ?>
    
 <style>
-
-* {box-sizing: border-box;}
 
 .container{
     max-width: 1440px;
@@ -106,7 +103,21 @@ input:focus,textarea:focus,button:focus{
     margin-right:50px;
 }
 
+.j_keysize{
+    width:25px;
+    height:25px;   
+}
 
+/* 忘記密碼出不來 */
+.jkeysize:hover .j_changepw a{
+ display:block;
+}
+
+/* 對話框出不來 */
+.bubble{
+ background-image:url(./images/bubble.png);
+
+}
 
 </style>
 <body>
@@ -116,6 +127,7 @@ input:focus,textarea:focus,button:focus{
 
     <div class="container">
 
+    <!-- <div class="bubble"></div> -->
 
         <div class="member_top_title j_padt_100"> 
             <div class="d-flex align-items-center justify-content-cneter ">
@@ -129,38 +141,38 @@ input:focus,textarea:focus,button:focus{
         <div class="flex justify-content-cneter j_padb_200">
                 <div class="member_left_list col-lg-3">
                     <ul>
-                        <li class="leftlist_circle"><a style="color:#CA054D;">會員資料修改</a></li>
-                        <li class="leftlist_circle"><a>我的收藏</a></li>
-                        <li class="leftlist_circle"><a>訂單查詢</a></li>
+                        <li class="leftlist_circle"><a href="member_information.php" style="color:#CA054D;">會員資料修改</a></li>
+                        <li class="leftlist_circle"><a href="member_wishlist.php">我的收藏</a></li>
+                        <li class="leftlist_circle"><a href="member_order.php">訂單查詢</a></li>
                         <li class="leftlist_circle"><a>我的優惠卷</a></li>
                     </ul>
                 </div>
 
 
                 <form class="col-lg-9" name="form3" method="post"  onsubmit="return checkForm3()" >
+        
                     <?php foreach($rows as $r): ?>
                     
                        <P>基本資料</p>
 
                        <div class="d-flex align-items-center">
                             <div class="d-felx text-align-center j_email_bg"><?=$r['email'] ?></div>
-                            <div class="j_locksize">
-                                <i class="fas fa-key"></i>
-                                <a href="mailto:camillemilky@gmail.com">更改密碼</a>
+                            <div>
+                                <img class="j_keysize" src="images/key-solid.svg" alt="">
+                                <a class="j_changepw" style="" href="mailto:camillemilky@gmail.com">更改密碼</a>
                             </div>
-                            
-                            
-                       </div>
+                       </div> 
 
-                        <div>姓名&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="name_new" name="name_new" placeholder="" value="<?= $r['name'] ?>" required minlength="2" /></div>
+                        <div>姓名&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="name_new" name="name_new" placeholder="" value="<?= $r['name'] ?>"  required minlength="2"   /></div>
                         <small id="name_help" class="form-text"></small>
 
-                        <div>電話&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="tel" id="mobile_new" name="mobile_new" placeholder="" value="<?= $r['mobile'] ?>" required pattern="/^09\d{2}-?\d{3}-?\d{3}$/" /></div>
+                        <div>電話&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="mobile_new" name="mobile_new" placeholder="" value="<?= $r['mobile'] ?>" required minlength="10"  /></div>
+<!--                    required pattern="/^09\d{2}-?\d{3}-?\d{3}$/"-->
                         <small id="mobile_help" class="form-text"></small>
                     
                         <br>
-                        <br>
-                    <p>常用設定</p>
+                        <br>    
+                    <p>常用設定</p>  
                         <div>收件人&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<input type="text" id="receiver_name" name="receiver" placeholder=" " value="<?= $r['receiver'] ?>" /></div>
                         <small id="receiver_name_help" class="form-text"></small>
  
@@ -172,7 +184,7 @@ input:focus,textarea:focus,button:focus{
                         <!-- <input type="" id="" name="" placeholder="常用便利商店" value=""  />  -->
 
 
-                        <div id="info-bar3" class="alert alert-info" role="alert" style="display: none"></div>
+                        <div id="info-bar3" class="alert alert-info bubble" role="alert" style="display:none"></div>
                    
 
                         <div><button class="login_btn" type="submit" >儲存變更</button></div>
@@ -197,8 +209,6 @@ input:focus,textarea:focus,button:focus{
 <?php include __DIR__ . '/parts/h_f_script.php'; ?>
 
 <script>
-
-             
         function checkForm3(){
             
             if($("form")[0].checkValidity()) {
@@ -218,6 +228,5 @@ input:focus,textarea:focus,button:focus{
         
             return false;
         }
-
 
 </script>

@@ -1,66 +1,10 @@
 <style>
-    *{
-    box-sizing: border-box;
-    font-family: 'Noto Sans TC', sans-serif;
-}
-
 a{
     color: black;
 }
 
-dl,ol,ul,li{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-h1{
-    font-size: 90px;
-}
-h2{
-    font-size: 72px;
-}
-h3{
-    font-size: 54px;
-}
-h4{
-    font-size: 36px;
-}
-h5{
-    font-size: 20px;
-}
-h6{
-    font-size: 18px;
-}
-p{
-    font-size: 15px;
-}
-
-.header a,
-.header img,
-.footer a,
-.foot img{
-    cursor: pointer;
-}
-.transition{
-    transition:all .5s;
-    -webkit-transition: all .5s;
-}
-.wrapper{
-    max-width: 1440px;
-    margin: 0 auto;
-}
-.object_fit{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: hidden;
-}
-
-
 /* --------------------------------------cart1----------------------------------------- */
 .t_page_cart{
-    min-height: 100vh;
     width: 100%;
 }
 .t_wrap{
@@ -94,7 +38,7 @@ p{
 }
 .t_main_cart{
     margin: 0 auto;
-    padding: 30px;
+    padding: 0 30px;
 }
 .t_grid-container_cart1,
 .t_grid-container_cart2,
@@ -126,13 +70,37 @@ p{
 .t_grid-container_cart1_productinfo div,
 .t_grid-container_cart2_productinfo div,
 .t_grid-container_cart3_productinfo div{
-    padding: 10px 0;
     margin: 0;
     text-align: center;
     align-self: center;
 }
 .t_text_left h6{
     text-align: left;
+}
+
+.t_wea_product_main_count div{
+        width: 30px;
+        height: 30px;
+        border: 1px solid #CA054D;
+        background: #CA054D;
+        color: white;
+        text-align: center;
+        line-height: 30px;
+        -webkit-user-select:none;
+}
+.t_wea_product_main_count div.unckick{
+    border: 1px solid #d8d8d8;
+    background: #d8d8d8;
+    color: white;
+}
+.t_wea_product_main_count .quantity{
+    width: 75px;
+    background: white;
+    color: #CA054D;
+}
+
+.t_color_size_between{
+    margin: 0 10px 0 0 ;
 }
 
 .t_grid-container_cart1_productinfo div h6,
@@ -149,7 +117,7 @@ p{
     height: 155px;
 }
 
-.web_none{
+.t_web_none{
     display: none;
 }
 
@@ -214,7 +182,7 @@ input.btn:hover{
         display: grid;
         grid-template-columns: 35% 40% 25% ;
         background-color: transparent;
-        padding: 10px;
+        padding: 10px 30px;
         border-bottom: 1px solid #8F8F8F;
         position:relative;
     }
@@ -225,7 +193,7 @@ input.btn:hover{
     }
     .t_grid-container_cart1_productinfo_mobile .fa-times{
         position:absolute;
-        right:0;
+        right:30px;
         top:10px;
     }
     .t_grid-container_cart1_productinfo_mobile .cart_img img,
@@ -237,6 +205,7 @@ input.btn:hover{
     .t_text_left{
         padding: 10px;
     }
+    
     .t_cart1_subtotal{
         display: block;
         width: 60%;
@@ -280,6 +249,26 @@ input.btn:hover{
         margin: 0 20px;
     }
 
+    .t_wea_product_main_count div{
+        width: 20px;
+        height: 20px;
+        border: 1px solid #CA054D;
+        background: #CA054D;
+        color: white;
+        text-align: center;
+        line-height: 20px;
+        -webkit-user-select:none;
+    }
+    .t_wea_product_main_count div.unckick{
+        border: 1px solid #d8d8d8;
+        background: #d8d8d8;
+        color: white;
+    }
+    .t_wea_product_main_count #countnum{
+        width: 60px;
+        background: white;
+        color: #CA054D;
+    }
 }
 /* --------------------------------------cart2----------------------------------------- */
 .t_top-amount{
@@ -298,10 +287,10 @@ input.btn:hover{
     width: 50%;
 }
 
-.unfold{
+.t_unfold{
     display: none;
 }
-.unfold .active{
+.t_unfold .active{
     display: block;
 }
 
@@ -320,7 +309,7 @@ hr.t_separation_line_gr_long {
     margin: 50px 0;
 }
 
-.text_right{
+.t_text_right{
     text-align: right;
 }
 
@@ -347,7 +336,7 @@ input.btn-p:hover{
     color: #CA054D;
 }
 @media screen and (max-width: 850px) {
-    .flex-mobile-wrap{
+    .t_flex-mobile-wrap{
         flex-wrap: wrap;
     }
     .t_cart2_info{
@@ -359,7 +348,7 @@ input.btn-p:hover{
         margin: 0;
         border-bottom: none;
     }
-    .mobile_none{
+    .t_mobile_none{
         display: none;
     }
     .t_cart2_subtotal{
@@ -392,7 +381,7 @@ input.btn-p:hover{
     color: #CA054D;
     margin: 0 30px;
 }
-.justify_align_center{
+.t_justify_align_center{
     align-items: center;
     justify-content: center;
 }
@@ -410,11 +399,11 @@ input.btn-p:hover{
     padding: 5px;
 }
 
-.text_center{
+.t_text_center{
     text-align: center;
 }
 
-.justify_align_end{
+.t_justify_align_end{
     justify-self: end;
     align-self: end
 }

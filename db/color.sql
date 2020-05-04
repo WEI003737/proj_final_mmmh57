@@ -1,0 +1,332 @@
+-- phpMyAdmin SQL Dump
+-- version 4.9.5
+-- https://www.phpmyadmin.net/
+--
+-- 主機： 127.0.0.1
+-- 產生時間： 
+-- 伺服器版本： 10.4.11-MariaDB
+-- PHP 版本： 7.3.15
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- 資料庫： `proj_final`
+--
+
+-- --------------------------------------------------------
+
+--
+-- 資料表結構 `color`
+--
+
+CREATE TABLE `color` (
+  `sid` int(11) NOT NULL,
+  `pro_sid` int(11) NOT NULL,
+  `color` varchar(255) NOT NULL,
+  `pro_pic` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `color`
+--
+
+INSERT INTO `color` (`sid`, `pro_sid`, `color`, `pro_pic`) VALUES
+(1, 1, 'black', '[\"paddedbra_000_bk_1_resize\",\"paddedbra_000_bk_2_resize\", \"paddedbra_000_bk_3_resize\", \"paddedbra_000_bk_4_resize\", \"paddedbra_000_bk_5_resize\"]'),
+(2, 1, 'pink', '[\"paddedbra_000_pk_1_resize\",\"paddedbra_000_pk_2_resize\", \"paddedbra_000_pk_3_resize\", \"paddedbra_000_pk_4_resize\", \"paddedbra_000_pk_5_resize\"]'),
+(3, 2, 'gray', '[\"paddedbra_001_gr_1_resize\",\"paddedbra_001_gr_2_resize\", \"paddedbra_001_gr_3_resize\", \"paddedbra_001_gr_4_resize\", \"paddedbra_001_gr_5_resize\"]'),
+(4, 2, 'pink', '[\"paddedbra_001_pk_1_resize\",\"paddedbra_001_pk_2_resize\", \"paddedbra_001_pk_3_resize\", \"paddedbra_001_pk_4_resize\", \"paddedbra_001_pk_5_resize\"]'),
+(5, 3, 'black', '[\"paddedbra_002_bk_1_resize\",\"paddedbra_002_bk_2_resize\", \"paddedbra_002_bk_3_resize\", \"paddedbra_002_bk_4_resize\", \"paddedbra_002_bk_5_resize\"]'),
+(6, 3, 'white', '[\"paddedbra_002_w_1_resize\",\"paddedbra_002_w_2_resize\", \"paddedbra_002_w_3_resize\", \"paddedbra_002_w_4_resize\", \"paddedbra_002_w_5_resize\"]'),
+(7, 3, 'brown', '[\"paddedbra_002_br_1_resize\",\"paddedbra_002_br_2_resize\", \"paddedbra_002_br_3_resize\", \"paddedbra_002_br_4_resize\", \"paddedbra_002_br_5_resize\"]'),
+(8, 4, 'black', '[\"paddedbra_003_bk_1_resize\",\"paddedbra_003_bk_2_resize\", \"paddedbra_003_bk_3_resize\", \"paddedbra_003_bk_4_resize\", \"paddedbra_003_bk_5_resize\"]'),
+(9, 5, 'pink', '[\"paddedbra_004_pk_1_resize\",\"paddedbra_004_pk_2_resize\", \"paddedbra_004_pk_3_resize\", \"paddedbra_004_pk_4_resize\", \"paddedbra_004_pk_5_resize\"]'),
+(10, 5, 'yellow', '[\"paddedbra_004_y_1_resize\",\"paddedbra_004_y_2_resize\", \"paddedbra_004_y_3_resize\", \"paddedbra_004_y_4_resize\", \"paddedbra_004_y_5_resize\"]'),
+(11, 6, 'white', '[\"paddedbra_005_w_1_resize\",\"paddedbra_005_w_2_resize\", \"paddedbra_005_w_3_resize\", \"paddedbra_005_w_4_resize\", \"paddedbra_005_w_5_resize\"]'),
+(12, 7, 'blue', '[\"paddedbra_006_bl_1_resize\",\"paddedbra_006_bl_2_resize\", \"paddedbra_006_bl_3_resize\", \"paddedbra_006_bl_4_resize\", \"paddedbra_006_bl_5_resize\"]'),
+(13, 8, 'white', '[\"paddedbra_007_w_1_resize\",\"paddedbra_007_w_2_resize\", \"paddedbra_007_w_3_resize\", \"paddedbra_007_w_4_resize\", \"paddedbra_007_w_5_resize\"]'),
+(14, 9, 'black', '[\"paddedbra_008_bk_1_resize\",\"paddedbra_008_bk_2_resize\", \"paddedbra_008_bk_3_resize\", \"paddedbra_008_bk_4_resize\", \"paddedbra_008_bk_5_resize\"]'),
+(15, 10, 'black', '[\"paddedbra_009_bk_1_resize\",\"paddedbra_009_bk_2_resize\", \"paddedbra_009_bk_3_resize\", \"paddedbra_009_bk_4_resize\", \"paddedbra_009_bk_5_resize\"]'),
+(16, 11, 'white', '[\"paddedbra_010_w_1_resize\",\"paddedbra_010_w_2_resize\", \"paddedbra_010_w_3_resize\", \"paddedbra_010_w_4_resize\", \"paddedbra_010_w_5_resize\"]'),
+(17, 12, 'black', '[\"paddedbra_011_bk_1_resize\",\"paddedbra_011_bk_2_resize\", \"paddedbra_011_bk_3_resize\", \"paddedbra_011_bk_4_resize\", \"paddedbra_011_bk_5_resize\"]'),
+(18, 13, 'black', '[\"paddedbra_012_bk_1_resize\",\"paddedbra_012_bk_2_resize\", \"paddedbra_012_bk_3_resize\", \"paddedbra_012_bk_4_resize\", \"paddedbra_012_bk_5_resize\"]'),
+(19, 14, 'pink', '[\"paddedbra_013_pk_1_resize\",\"paddedbra_013_pk_2_resize\", \"paddedbra_013_pk_3_resize\", \"paddedbra_013_pk_4_resize\", \"paddedbra_013_pk_5_resize\"]'),
+(20, 15, 'black', '[\"paddedbra_014_bk_1_resize\",\"paddedbra_014_bk_2_resize\", \"paddedbra_014_bk_3_resize\", \"paddedbra_014_bk_4_resize\", \"paddedbra_014_bk_5_resize\"]'),
+(21, 16, 'black', '[\"paddedbra_015_bk_1_resize\",\"paddedbra_015_bk_2_resize\", \"paddedbra_015_bk_3_resize\", \"paddedbra_015_bk_4_resize\", \"paddedbra_015_bk_5_resize\"]'),
+(22, 17, 'black', '[\"paddedbra_016_bk_1_resize\",\"paddedbra_016_bk_2_resize\", \"paddedbra_016_bk_3_resize\", \"paddedbra_016_bk_4_resize\", \"paddedbra_016_bk_5_resize\"]'),
+(23, 17, 'green', '[\"paddedbra_016_gn_1_resize\",\"paddedbra_016_gn_2_resize\", \"paddedbra_016_gn_3_resize\", \"paddedbra_016_gn_4_resize\", \"paddedbra_016_gn_5_resize\"]'),
+(24, 17, 'white', '[\"paddedbra_016_w_1_resize\",\"paddedbra_016_w_2_resize\", \"paddedbra_016_w_3_resize\", \"paddedbra_016_w_4_resize\", \"paddedbra_016_w_5_resize\"]'),
+(25, 18, 'black', '[\"paddedbra_017_bk_1_resize\",\"paddedbra_017_bk_2_resize\", \"paddedbra_017_bk_3_resize\", \"paddedbra_017_bk_4_resize\", \"paddedbra_017_bk_5_resize\"]'),
+(26, 18, 'red', '[\"paddedbra_017_r_1_resize\",\"paddedbra_017_r_2_resize\", \"paddedbra_017_r_3_resize\", \"paddedbra_017_r_4_resize\", \"paddedbra_017_r_5_resize\"]'),
+(27, 19, 'black', '[\"paddedbra_018_bk_1_resize\",\"paddedbra_018_bk_2_resize\", \"paddedbra_018_bk_3_resize\", \"paddedbra_018_bk_4_resize\", \"paddedbra_018_bk_5_resize\"]'),
+(28, 20, 'grey', '[\"paddedbra_019_gr_1_resize\",\"paddedbra_019_gr_2_resize\", \"paddedbra_019_gr_3_resize\", \"paddedbra_019_gr_4_resize\", \"paddedbra_019_gr_5_resize\"]'),
+(29, 21, 'black', '[\"paddedbra_020_bk_1_resize\",\"paddedbra_020_bk_2_resize\", \"paddedbra_020_bk_3_resize\", \"paddedbra_020_bk_4_resize\", \"paddedbra_020_bk_5_resize\"]'),
+(30, 22, 'black', '[\"paddedbra_021_bk_1_resize\",\"paddedbra_021_bk_2_resize\", \"paddedbra_021_bk_3_resize\", \"paddedbra_021_bk_4_resize\", \"paddedbra_021_bk_5_resize\"]'),
+(31, 23, 'black', '[\"paddedbra_022_bk_1_resize\",\"paddedbra_022_bk_2_resize\", \"paddedbra_022_bk_3_resize\", \"paddedbra_022_bk_4_resize\", \"paddedbra_022_bk_5_resize\"]'),
+(32, 23, 'white', '[\"paddedbra_022_w_1_resize\",\"paddedbra_022_w_2_resize\", \"paddedbra_022_w_3_resize\", \"paddedbra_022_w_4_resize\", \"paddedbra_022_w_5_resize\"]'),
+(33, 24, 'black', '[\"paddedbra_023_bk_1_resize\",\"paddedbra_023_bk_2_resize\", \"paddedbra_023_bk_3_resize\", \"paddedbra_023_bk_4_resize\", \"paddedbra_023_bk_5_resize\"]'),
+(34, 24, 'red', '[\"paddedbra_023_r_1_resize\",\"paddedbra_023_r_2_resize\", \"paddedbra_023_r_3_resize\", \"paddedbra_023_r_4_resize\", \"paddedbra_023_r_5_resize\"]'),
+(35, 25, 'blue', '[\"paddedbra_024_bl_1_resize\",\"paddedbra_024_bl_2_resize\", \"paddedbra_024_bl_3_resize\", \"paddedbra_024_bl_4_resize\", \"paddedbra_024_bl_5_resize\"]'),
+(36, 25, 'pink', '[\"paddedbra_024_pk_1_resize\",\"paddedbra_024_pk_2_resize\", \"paddedbra_024_pk_3_resize\", \"paddedbra_024_pk_4_resize\", \"paddedbra_024_pk_5_resize\"]'),
+(37, 26, 'black', '[\"paddedbra_025_bk_1_resize\",\"paddedbra_025_bk_2_resize\", \"paddedbra_025_bk_3_resize\", \"paddedbra_025_bk_4_resize\", \"paddedbra_025_bk_5_resize\"]'),
+(38, 27, 'black', '[\"paddedbra_026_bk_1_resize\",\"paddedbra_026_bk_2_resize\", \"paddedbra_026_bk_3_resize\", \"paddedbra_026_bk_4_resize\", \"paddedbra_026_bk_5_resize\"]'),
+(39, 27, 'white', '[\"paddedbra_026_w_1_resize\",\"paddedbra_026_w_2_resize\", \"paddedbra_026_w_3_resize\", \"paddedbra_026_w_4_resize\", \"paddedbra_026_w_5_resize\"]'),
+(40, 28, 'pink', '[\"paddedbra_027_pk_1_resize\",\"paddedbra_027_pk_2_resize\", \"paddedbra_027_pk_3_resize\", \"paddedbra_027_pk_4_resize\", \"paddedbra_027_pk_5_resize\"]'),
+(41, 28, 'red', '[\"paddedbra_027_r_1_resize\",\"paddedbra_027_r_2_resize\", \"paddedbra_027_r_3_resize\", \"paddedbra_027_r_4_resize\", \"paddedbra_027_r_5_resize\"]'),
+(42, 29, 'pink', '[\"paddedbra_028_pk_1_resize\",\"paddedbra_028_pk_2_resize\", \"paddedbra_028_pk_3_resize\", \"paddedbra_028_pk_4_resize\", \"paddedbra_028_pk_5_resize\"]'),
+(43, 29, 'white', '[\"paddedbra_028_w_1_resize\",\"paddedbra_028_w_2_resize\", \"paddedbra_028_w_3_resize\", \"paddedbra_028_w_4_resize\", \"paddedbra_028_w_5_resize\"]'),
+(44, 30, 'purple', '[\"paddedbra_029_p_1_resize\",\"paddedbra_029_p_2_resize\", \"paddedbra_029_p_3_resize\", \"paddedbra_029_p_4_resize\", \"paddedbra_029_p_5_resize\"]'),
+(45, 31, 'black', '[\"paddedbra_030_bk_1_resize\",\"paddedbra_030_bk_2_resize\", \"paddedbra_030_bk_3_resize\", \"paddedbra_030_bk_4_resize\", \"paddedbra_030_bk_5_resize\"]'),
+(46, 31, 'purple', '[\"paddedbra_030_p_1_resize\",\"paddedbra_030_p_2_resize\", \"paddedbra_030_p_3_resize\", \"paddedbra_030_p_4_resize\", \"paddedbra_030_p_5_resize\"]'),
+(47, 32, 'black', '[\"paddedbra_031_bk_1_resize\",\"paddedbra_031_bk_2_resize\", \"paddedbra_031_bk_3_resize\", \"paddedbra_031_bk_4_resize\", \"paddedbra_031_bk_5_resize\"]'),
+(48, 32, 'blue', '[\"paddedbra_031_bl_1_resize\",\"paddedbra_031_bl_2_resize\", \"paddedbra_031_bl_3_resize\", \"paddedbra_031_bl_4_resize\", \"paddedbra_031_bl_5_resize\"]'),
+(49, 32, 'purple', '[\"paddedbra_031_p_1_resize\",\"paddedbra_031_p_2_resize\", \"paddedbra_031_p_3_resize\", \"paddedbra_031_p_4_resize\", \"paddedbra_031_p_5_resize\"]'),
+(50, 33, 'blue', '[\"paddedbra_032_bl_1_resize\",\"paddedbra_032_bl_2_resize\", \"paddedbra_032_bl_3_resize\", \"paddedbra_032_bl_4_resize\", \"paddedbra_032_l_5_resize\"]'),
+(51, 33, 'purple', '[\"paddedbra_032_p_1_resize\",\"paddedbra_032_p_2_resize\", \"paddedbra_032_p_3_resize\", \"paddedbra_032_p_4_resize\", \"paddedbra_032_p_5_resize\"]'),
+(52, 34, 'black', '[\"paddedbra_033_bk_1_resize\",\"paddedbra_033_bk_2_resize\", \"paddedbra_033_bk_3_resize\", \"paddedbra_033_bk_4_resize\", \"paddedbra_033_bk_5_resize\"]'),
+(53, 34, 'white', '[\"paddedbra_033_w_1_resize\",\"paddedbra_033_w_2_resize\", \"paddedbra_033_w_3_resize\", \"paddedbra_033_w_4_resize\", \"paddedbra_033_w_5_resize\"]'),
+(54, 34, 'blue', '[\"paddedbra_033_bl_1_resize\",\"paddedbra_033_bl_2_resize\", \"paddedbra_033_bl_3_resize\", \"paddedbra_033_bl_4_resize\", \"paddedbra_033_bl_5_resize\"]'),
+(55, 35, 'blue', '[\"paddedbra_034_bl_1_resize\",\"paddedbra_034_bl_2_resize\", \"paddedbra_034_bl_3_resize\", \"paddedbra_034_bl_4_resize\", \"paddedbra_034_bl_5_resize\"]'),
+(56, 35, 'purple', '[\"paddedbra_034_p_1_resize\",\"paddedbra_034_p_2_resize\", \"paddedbra_034_p_3_resize\", \"paddedbra_034_p_4_resize\", \"paddedbra_034_p_5_resize\"]'),
+(57, 36, 'black', '[\"paddedbra_035_bk_1_resize\",\"paddedbra_035_bk_2_resize\", \"paddedbra_035_bk_3_resize\", \"paddedbra_035_bk_4_resize\", \"paddedbra_035_bk_5_resize\"]'),
+(58, 37, 'black', '[\"paddedbra_036_bk_1_resize\",\"paddedbra_036_bk_2_resize\", \"paddedbra_036_bk_3_resize\", \"paddedbra_036_bk_4_resize\", \"paddedbra_036_bk_5_resize\"]'),
+(59, 37, 'purple', '[\"paddedbra_036_p_1_resize\",\"paddedbra_036_p_2_resize\", \"paddedbra_036_p_3_resize\", \"paddedbra_036_p_4_resize\", \"paddedbra_036_p_5_resize\"]'),
+(60, 38, 'black', '[\"paddedbra_037_bk_1_resize\",\"paddedbra_037_bk_2_resize\", \"paddedbra_037_bk_3_resize\", \"paddedbra_037_bk_4_resize\", \"paddedbra_037_bk_5_resize\"]'),
+(61, 38, 'green', '[\"paddedbra_037_gn_1_resize\",\"paddedbra_037_gn_2_resize\", \"paddedbra_037_gn_3_resize\", \"paddedbra_037_gn_4_resize\", \"paddedbra_037_gn_5_resize\"]'),
+(62, 38, 'purple', '[\"paddedbra_037_p_1_resize\",\"paddedbra_037_p_2_resize\", \"paddedbra_037_p_3_resize\", \"paddedbra_037_p_4_resize\", \"paddedbra_037_p_5_resize\"]'),
+(63, 39, 'black', '[\"paddedbra_038_bk_1_resize\",\"paddedbra_038_bk_2_resize\", \"paddedbra_038_bk_3_resize\", \"paddedbra_038_bk_4_resize\", \"paddedbra_038_bk_5_resize\"]'),
+(64, 39, 'white', '[\"paddedbra_038_w_1_resize\",\"paddedbra_038_w_2_resize\", \"paddedbra_038_w_3_resize\", \"paddedbra_038_w_4_resize\", \"paddedbra_038_w_5_resize\"]'),
+(65, 39, 'blue', '[\"paddedbra_038_bl_1_resize\",\"paddedbra_038_bl_2_resize\", \"paddedbra_038_bl_3_resize\", \"paddedbra_038_bl_4_resize\", \"paddedbra_038_bl_5_resize\"]'),
+(66, 40, 'blue', '[\"paddedbra_039_bl_1_resize\",\"paddedbra_039_bl_2_resize\", \"paddedbra_039_bl_3_resize\", \"paddedbra_039_bl_4_resize\", \"paddedbra_039_bl_5_resize\"]'),
+(67, 41, 'blue', '[\"paddedbra_040_bl_1_resize\",\"paddedbra_040_bl_2_resize\", \"paddedbra_040_bl_3_resize\", \"paddedbra_040_bl_4_resize\", \"paddedbra_040_bl_5_resize\"]'),
+(68, 42, 'black', '[\"paddedbra_041_bk_1_resize\",\"paddedbra_041_bk_2_resize\", \"paddedbra_041_bk_3_resize\", \"paddedbra_041_bk_4_resize\", \"paddedbra_041_bk_5_resize\"]'),
+(69, 43, 'black', '[\"paddedbra_042_bk_1_resize\",\"paddedbra_042_bk_2_resize\", \"paddedbra_042_bk_3_resize\", \"paddedbra_042_bk_4_resize\", \"paddedbra_042_bk_5_resize\"]'),
+(70, 44, 'black', '[\"paddedbra_043_bk_1_resize\",\"paddedbra_043_bk_2_resize\", \"paddedbra_043_bk_3_resize\", \"paddedbra_043_bk_4_resize\", \"paddedbra_043_bk_5_resize\"]'),
+(71, 44, 'white', '[\"paddedbra_043_w_1_resize\",\"paddedbra_043_w_2_resize\", \"paddedbra_043_w_3_resize\", \"paddedbra_043_w_4_resize\", \"paddedbra_043_w_5_resize\"]'),
+(72, 44, 'grey', '[\"paddedbra_043_gr_1_resize\",\"paddedbra_043_gr_2_resize\", \"paddedbra_043_gr_3_resize\", \"paddedbra_043_gr_4_resize\", \"paddedbra_043_gr_5_resize\"]'),
+(73, 45, 'red', '[\"paddedbra_044_r_1_resize\",\"paddedbra_044_r_2_resize\", \"paddedbra_044_r_3_resize\", \"paddedbra_044_r_4_resize\", \"paddedbra_044_r_5_resize\"]'),
+(74, 46, 'black', '[\"paddedbra_045_bk_1_resize\",\"paddedbra_045_bk_2_resize\", \"paddedbra_045_bk_3_resize\", \"paddedbra_045_bk_4_resize\", \"paddedbra_045_bk_5_resize\"]'),
+(75, 47, 'blue', '[\"paddedbra_046_bl_1_resize\",\"paddedbra_046_bl_2_resize\", \"paddedbra_046_bl_3_resize\", \"paddedbra_046_bl_4_resize\", \"paddedbra_046_bl_5_resize\"]'),
+(76, 47, 'pink', '[\"paddedbra_046_pk_1_resize\",\"paddedbra_046_pk_2_resize\", \"paddedbra_046_pk_3_resize\", \"paddedbra_046_pk_4_resize\", \"paddedbra_046_pk_5_resize\"]'),
+(77, 48, 'black', '[\"softcupbra_000_bk_1_resize\",\"softcupbra_000_bk_2_resize\", \"softcupbra_000_bk_3_resize\", \"softcupbra_000_bk_4_resize\", \"softcupbra_000_bk_5_resize\"]'),
+(78, 49, 'black', '[\"softcupbra_001_bk_1_resize\",\"softcupbra_001_bk_2_resize\", \"softcupbra_001_bk_3_resize\", \"softcupbra_001_bk_4_resize\", \"softcupbra_001_bk_5_resize\"]'),
+(79, 49, 'white', '[\"softcupbra_001_w_1_resize\",\"softcupbra_001_w_2_resize\", \"softcupbra_001_w_3_resize\", \"softcupbra_001_w_4_resize\", \"softcupbra_001_w_5_resize\"]'),
+(80, 50, 'red', '[\"softcupbra_002_r_1_resize\",\"softcupbra_002_r_2_resize\", \"softcupbra_002_r_3_resize\", \"softcupbra_002_r_4_resize\", \"softcupbra_002_r_5_resize\"]'),
+(81, 51, 'black', '[\"softcupbra_003_bk_1_resize\",\"softcupbra_003_bk_2_resize\", \"softcupbra_003_bk_3_resize\", \"softcupbra_003_bk_4_resize\", \"softcupbra_003_bk_5_resize\"]'),
+(82, 51, 'blue', '[\"softcupbra_003_bl_1_resize\",\"softcupbra_003_bl_2_resize\", \"softcupbra_003_bl_3_resize\", \"softcupbra_003_bl_4_resize\", \"softcupbra_003_bl_5_resize\"]'),
+(83, 51, 'red', '[\"softcupbra_003_r_1_resize\",\"softcupbra_003_r_2_resize\", \"softcupbra_003_r_3_resize\", \"softcupbra_003_r_4_resize\", \"softcupbra_003_r_5_resize\"]'),
+(84, 52, 'black', '[\"softcupbra_004_bk_1_resize\",\"softcupbra_004_bk_2_resize\", \"softcupbra_004_bk_3_resize\", \"softcupbra_004_bk_4_resize\", \"softcupbra_004_bk_5_resize\"]'),
+(85, 53, 'black', '[\"softcupbra_005_bk_1_resize\",\"softcupbra_005_bk_2_resize\", \"softcupbra_005_bk_3_resize\", \"softcupbra_005_bk_4_resize\", \"softcupbra_005_bk_5_resize\"]'),
+(86, 54, 'black', '[\"softcupbra_006_bk_1_resize\",\"softcupbra_006_bk_2_resize\", \"softcupbra_006_bk_3_resize\", \"softcupbra_006_bk_4_resize\", \"softcupbra_006_bk_5_resize\"]'),
+(87, 55, 'black', '[\"softcupbra_007_bk_1_resize\",\"softcupbra_007_bk_2_resize\", \"softcupbra_007_bk_3_resize\", \"softcupbra_007_bk_4_resize\", \"softcupbra_007_bk_5_resize\"]'),
+(88, 55, 'pink', '[\"softcupbra_007_pk_1_resize\",\"softcupbra_007_pk_2_resize\", \"softcupbra_007_pk_3_resize\", \"softcupbra_007_pk_4_resize\", \"softcupbra_007_pk_5_resize\"]'),
+(89, 56, 'white', '[\"softcupbra_008_w_1_resize\",\"softcupbra_008_w_2_resize\", \"softcupbra_008_w_3_resize\", \"softcupbra_008_w_4_resize\", \"softcupbra_008_w_5_resize\"]'),
+(90, 57, 'black', '[\"softcupbra_009_bk_1_resize\",\"softcupbra_009_bk_2_resize\", \"softcupbra_009_bk_3_resize\", \"softcupbra_009_bk_4_resize\", \"softcupbra_009_bk_5_resize\"]'),
+(91, 58, 'pink', '[\"softcupbra_010_pk_1_resize\",\"softcupbra_010_pk_2_resize\", \"softcupbra_010_pk_3_resize\", \"softcupbra_010_pk_4_resize\", \"softcupbra_010_pk_5_resize\"]'),
+(92, 59, 'black', '[\"softcupbra_011_bk_1_resize\",\"softcupbra_011_bk_2_resize\", \"softcupbra_011_bk_3_resize\", \"softcupbra_011_bk_4_resize\", \"softcupbra_011_bk_5_resize\"]'),
+(93, 60, 'grey', '[\"softcupbra_012_gr_1_resize\",\"softcupbra_012_gr_2_resize\", \"softcupbra_012_gr_3_resize\", \"softcupbra_012_gr_4_resize\", \"softcupbra_012_gr_5_resize\"]'),
+(94, 61, 'black', '[\"softcupbra_013_bk_1_resize\",\"softcupbra_013_bk_2_resize\", \"softcupbra_013_bk_3_resize\", \"softcupbra_013_bk_4_resize\", \"softcupbra_013_bk_5_resize\"]'),
+(95, 62, 'red', '[\"softcupbra_014_r_1_resize\",\"softcupbra_014_r_2_resize\", \"softcupbra_014_r_3_resize\", \"softcupbra_014_r_4_resize\", \"softcupbra_014_r_5_resize\"]'),
+(96, 63, 'black', '[\"softcupbra_015_bk_1_resize\",\"softcupbra_015_bk_2_resize\", \"softcupbra_015_bk_3_resize\", \"softcupbra_015_bk_4_resize\", \"softcupbra_015_bk_5_resize\"]'),
+(97, 64, 'black', '[\"softcupbra_016_bk_1_resize\",\"softcupbra_016_bk_2_resize\", \"softcupbra_016_bk_3_resize\", \"softcupbra_016_bk_4_resize\", \"softcupbra_016_bk_5_resize\"]'),
+(98, 65, 'red', '[\"softcupbra_017_r_1_resize\",\"softcupbra_017_r_2_resize\", \"softcupbra_017_r_3_resize\", \"softcupbra_017_r_4_resize\", \"softcupbra_017_r_5_resize\"]'),
+(99, 66, 'grew', '[\"softcupbra_018_gr_1_resize\",\"softcupbra_018_gr_2_resize\", \"softcupbra_018_gr_3_resize\", \"softcupbra_018_gr_4_resize\", \"softcupbra_018_gr_5_resize\"]'),
+(100, 66, 'white', '[\"softcupbra_018_w_1_resize\",\"softcupbra_018_w_2_resize\", \"softcupbra_018_w_3_resize\", \"softcupbra_018_w_4_resize\", \"softcupbra_018_w_5_resize\"]'),
+(101, 66, 'green', '[\"softcupbra_018_gn_1_resize\",\"softcupbra_018_gn_2_resize\", \"softcupbra_018_gn_3_resize\", \"softcupbra_018_gn_4_resize\", \"softcupbra_018_gn_5_resize\"]'),
+(102, 67, 'blue', '[\"softcupbra_019_bl_1_resize\",\"softcupbra_019_bl_2_resize\", \"softcupbra_019_bl_3_resize\", \"softcupbra_019_bl_4_resize\", \"softcupbra_019_bl_5_resize\"]'),
+(103, 67, 'pink', '[\"softcupbra_019_pk_1_resize\",\"softcupbra_019_pk_2_resize\", \"softcupbra_019_pk_3_resize\", \"softcupbra_019_pk_4_resize\", \"softcupbra_019_pk_5_resize\"]'),
+(104, 68, 'black', '[\"softcupbra_020_bk_1_resize\",\"softcupbra_020_bk_2_resize\", \"softcupbra_020_bk_3_resize\", \"softcupbra_020_bk_4_resize\", \"softcupbra_020_bk_5_resize\"]'),
+(105, 68, 'grey', '[\"softcupbra_020_gr_1_resize\",\"softcupbra_020_gr_2_resize\", \"softcupbra_020_gr_3_resize\", \"softcupbra_020_gr_4_resize\", \"softcupbra_020_gr_5_resize\"]'),
+(106, 69, 'blue', '[\"softcupbra_021_bl_1_resize\",\"softcupbra_021_bl_2_resize\", \"softcupbra_021_bl_3_resize\", \"softcupbra_021_bl_4_resize\", \"softcupbra_021_bl_5_resize\"]'),
+(107, 70, 'black', '[\"softcupbra_022_bk_1_resize\",\"softcupbra_022_bk_2_resize\", \"softcupbra_022_bk_3_resize\", \"softcupbra_022_bk_4_resize\", \"softcupbra_022_bk_5_resize\"]'),
+(108, 71, 'black', '[\"softcupbra_023_bk_1_resize\",\"softcupbra_023_bk_2_resize\", \"softcupbra_023_bk_3_resize\", \"softcupbra_023_bk_4_resize\", \"softcupbra_023_bk_5_resize\"]'),
+(109, 71, 'pink', '[\"softcupbra_023_pk_1_resize\",\"softcupbra_023_pk_2_resize\", \"softcupbra_023_pk_3_resize\", \"softcupbra_023_pk_4_resize\", \"softcupbra_023_pk_5_resize\"]'),
+(110, 72, 'black', '[\"softcupbra_024_bk_1_resize\",\"softcupbra_024_bk_2_resize\", \"softcupbra_024_bk_3_resize\", \"softcupbra_024_bk_4_resize\", \"softcupbra_024_bk_5_resize\"]'),
+(111, 72, 'blue', '[\"softcupbra_024_bl_1_resize\",\"softcupbra_024_bl_2_resize\", \"softcupbra_024_bl_3_resize\", \"softcupbra_024_bl_4_resize\", \"softcupbra_024_bl_5_resize\"]'),
+(112, 73, 'black', '[\"tees_000_bk_0_resize\",\"tees_000_bk_1_resize\", \"tees_000_bk_2_resize\", \"tees_000_bk_3_resize\", \"tees_000_bk_4_resize\"]'),
+(113, 73, 'blue', '[\"tees_000_bl_0_resize\",\"tees_000_bl_1_resize\", \"tees_000_bl_2_resize\", \"tees_000_bl_3_resize\", \"tees_000_bl_4_resize\"]'),
+(114, 74, 'black', '[\"tees_001_bk_0_resize\",\"tees_001_bk_1_resize\", \"tees_001_bk_2_resize\", \"tees_001_bk_3_resize\", \"tees_001_bk_4_resize\"]'),
+(115, 74, 'pink', '[\"tees_001_pk_0_resize\",\"tees_001_pk_1_resize\", \"tees_001_pk_2_resize\", \"tees_001_pk_3_resize\", \"tees_001_pk_4_resize\"]'),
+(116, 75, 'blue', '[\"tees_002_bl_0_resize\",\"tees_002_bl_1_resize\", \"tees_002_bl_2_resize\", \"tees_002_bl_3_resize\", \"tees_002_bl_4_resize\"]'),
+(117, 76, 'yellow', '[\"tees_003_y_0_resize\",\"tees_003_y_1_resize\", \"tees_003_y_2_resize\", \"tees_003_y_3_resize\", \"tees_003_y_4_resize\"]'),
+(118, 77, 'black', '[\"tees_004_bk_0_resize\",\"tees_004_bk_1_resize\", \"tees_004_bk_2_resize\", \"tees_004_bk_3_resize\", \"tees_004_bk_4_resize\"]'),
+(119, 77, 'brown', '[\"tees_004_br_0_resize\",\"tees_004_br_1_resize\", \"tees_004_br_2_resize\", \"tees_004_br_3_resize\", \"tees_004_br_4_resize\"]'),
+(120, 77, 'white', '[\"tees_004_w_0_resize\",\"tees_004_w_1_resize\", \"tees_004_w_2_resize\", \"tees_004_w_3_resize\", \"tees_004_w_4_resize\"]'),
+(121, 78, 'pink', '[\"tees_005_pk_0_resize\",\"tees_005_pk_1_resize\", \"tees_005_pk_2_resize\", \"tees_005_pk_3_resize\", \"tees_005_pk_4_resize\"]'),
+(122, 79, 'white', '[\"tees_006_w_0_resize\",\"tees_006_w_1_resize\", \"tees_006_w_2_resize\", \"tees_006_w_3_resize\", \"tees_006_w_4_resize\"]'),
+(123, 80, 'black', '[\"tanks_000_bk_0_resize\",\"tanks_000_bk_1_resize\", \"tanks_000_bk_2_resize\", \"tanks_000_bk_3_resize\", \"tanks_000_bk_4_resize\"]'),
+(124, 81, 'black', '[\"tanks_001_bk_0_resize\",\"tanks_001_bk_1_resize\", \"tanks_001_bk_2_resize\", \"tanks_001_bk_3_resize\", \"tanks_001_bk_4_resize\"]'),
+(125, 82, 'black', '[\"tanks_002_bk_0_resize\",\"tanks_002_bk_1_resize\", \"tanks_002_bk_2_resize\", \"tanks_002_bk_3_resize\", \"tanks_002_bk_4_resize\"]'),
+(126, 83, 'white', '[\"tanks_003_w_0_resize\",\"tanks_003_w_1_resize\", \"tanks_003_w_2_resize\", \"tanks_003_w_3_resize\", \"tanks_003_w_4_resize\"]'),
+(127, 84, 'black', '[\"tanks_004_bk_0_resize\",\"tanks_004_bk_1_resize\", \"tanks_004_bk_2_resize\", \"tanks_004_bk_3_resize\", \"tanks_004_bk_4_resize\"]'),
+(128, 85, 'pink', '[\"tanks_005_pk_0_resize\",\"tanks_005_pk_1_resize\", \"tanks_005_pk_2_resize\", \"tanks_005_pk_3_resize\", \"tanks_005_pk_4_resize\"]'),
+(129, 86, 'black', '[\"tanks_006_bk_0_resize\",\"tanks_006_bk_1_resize\", \"tanks_006_bk_2_resize\", \"tanks_006_bk_3_resize\", \"tanks_006_bk_4_resize\"]'),
+(130, 86, 'white', '[\"tanks_006_w_0_resize\",\"tanks_006_w_1_resize\", \"tanks_006_w_2_resize\", \"tanks_006_w_3_resize\", \"tanks_006_w_4_resize\"]'),
+(131, 87, 'blue', '[\"tanks_007_bl_0_resize\",\"tanks_007_bl_1_resize\", \"tanks_007_bl_2_resize\", \"tanks_007_bl_3_resize\", \"tanks_007_bl_4_resize\"]'),
+(132, 88, 'pink', '[\"tanks_008_pk_0_resize\",\"tanks_008_pk_1_resize\", \"tanks_008_pk_2_resize\", \"tanks_008_pk_3_resize\", \"tanks_008_pk_4_resize\"]'),
+(133, 89, 'black', '[\"tanks_007_bk_0_resize\",\"tanks_007_bk_1_resize\", \"tanks_007_bk_2_resize\", \"tanks_007_bk_3_resize\", \"tanks_007_bk_4_resize\"]'),
+(134, 89, 'white', '[\"tanks_007_w_0_resize\",\"tanks_007_w_1_resize\", \"tanks_007_w_2_resize\", \"tanks_007_w_3_resize\", \"tanks_007_w_4_resize\"]'),
+(135, 90, 'black', '[\"tanks_008_bk_0_resize\",\"tanks_008_bk_1_resize\", \"tanks_008_bk_2_resize\", \"tanks_098_bk_3_resize\", \"tanks_008_bk_4_resize\"]'),
+(136, 90, 'white', '[\"tanks_008_w_0_resize\",\"tanks_008_w_1_resize\", \"tanks_008_w_2_resize\", \"tanks_008_w_3_resize\", \"tanks_008_w_4_resize\"]'),
+(137, 91, 'blue', '[\"tanks_009_bl_0_resize\",\"tanks_009_bl_1_resize\", \"tanks_009_bl_2_resize\", \"tanks_009_bl_3_resize\", \"tanks_009_bl_4_resize\"]'),
+(138, 92, 'black', '[\"tanks_010_bk_0_resize\",\"tanks_010_bk_1_resize\", \"tanks_010_bk_2_resize\", \"tanks_010_bk_3_resize\", \"tanks_010_bk_4_resize\"]'),
+(139, 92, 'pink', '[\"tanks_011_pk_0_resize\",\"tanks_011_pk_1_resize\", \"tanks_011_pk_2_resize\", \"tanks_011_pk_3_resize\", \"tanks_011_pk_4_resize\"]'),
+(140, 93, 'pink', '[\"tanks_012_pk_0_resize\",\"tanks_012_pk_1_resize\", \"tanks_012_pk_2_resize\", \"tanks_012_pk_3_resize\", \"tanks_012_pk_4_resize\"]'),
+(141, 94, 'black', '[\"tanks_013_bk_0_resize\",\"tanks_013_bk_1_resize\", \"tanks_013_bk_2_resize\", \"tanks_013_bk_3_resize\", \"tanks_013_bk_4_resize\"]'),
+(142, 94, 'pink', '[\"tanks_013_pk_0_resize\",\"tanks_013_pk_1_resize\", \"tanks_013_pk_2_resize\", \"tanks_013_pk_3_resize\", \"tanks_013_pk_4_resize\"]'),
+(143, 95, 'blue', '[\"tanks_014_bl_0_resize\",\"tanks_014_bl_1_resize\", \"tanks_014_bl_2_resize\", \"tanks_014_bl_3_resize\", \"tanks_014_bl_4_resize\"]'),
+(144, 95, 'pink', '[\"tanks_014_pk_0_resize\",\"tanks_014_pk_1_resize\", \"tanks_014_pk_2_resize\", \"tanks_014_pk_3_resize\", \"tanks_014_pk_4_resize\"]'),
+(145, 96, 'pink', '[\"tanks_015_pk_0_resize\",\"tanks_015_pk_1_resize\", \"tanks_015_pk_2_resize\", \"tanks_015_pk_3_resize\", \"tanks_015_pk_4_resize\"]'),
+(146, 97, 'black', '[\"longsleeves_000_bk_0_resize\",\"longsleeves_000_bk_1_resize\", \"longsleeves_000_bk_2_resize\", \"longsleeves_000_bk_3_resize\", \"longsleeves_000_bk_4_resize\"]'),
+(147, 98, 'black', '[\"longsleeves_001_bk_0_resize\",\"longsleeves_001_bk_1_resize\", \"longsleeves_001_bk_2_resize\", \"longsleeves_001_bk_3_resize\", \"longsleeves_001_bk_4_resize\"]'),
+(148, 98, 'blue', '[\"longsleeves_001_bl_0_resize\",\"longsleeves_001_bl_1_resize\", \"longsleeves_001_bl_2_resize\", \"longsleeves_001_bl_3_resize\", \"longsleeves_001_bl_4_resize\"]'),
+(149, 99, 'black', '[\"longsleeves_002_bk_0_resize\",\"longsleeves_002_bk_1_resize\", \"longsleeves_002_bk_2_resize\", \"longsleeves_002_bk_3_resize\", \"longsleeves_002_bk_4_resize\"]'),
+(150, 100, 'black', '[\"longsleeves_003_bk_0_resize\",\"longsleeves_003_bk_1_resize\", \"longsleeves_003_bk_2_resize\", \"longsleeves_003_bk_3_resize\", \"longsleeves_003_bk_4_resize\"]'),
+(151, 101, 'orange', '[\"longsleeves_004_o_0_resize\",\"longsleeves_004_o_1_resize\", \"longsleeves_004_o_2_resize\", \"longsleeves_004_o_3_resize\", \"longsleeves_004_o_4_resize\"]'),
+(152, 102, 'pink', '[\"longsleeves_005_pk_0_resize\",\"longsleeves_005_pk_1_resize\", \"longsleeves_005_pk_2_resize\", \"longsleeves_005_pk_3_resize\", \"longsleeves_005_pk_4_resize\"]'),
+(153, 103, 'black', '[\"longsleeves_006_bk_0_resize\",\"longsleeves_006_bk_1_resize\", \"longsleeves_006_bk_2_resize\", \"longsleeves_006_bk_3_resize\", \"longsleeves_006_bk_4_resize\"]'),
+(154, 103, 'white', '[\"longsleeves_006_w_0_resize\",\"longsleeves_006_w_1_resize\", \"longsleeves_006_w_2_resize\", \"longsleeves_006_w_3_resize\", \"longsleeves_006_w_4_resize\"]'),
+(155, 104, 'black', '[\"longsleeves_007_bk_0_resize\",\"longsleeves_007_bk_1_resize\", \"longsleeves_007_bk_2_resize\", \"longsleeves_007_bk_3_resize\", \"longsleeves_007_bk_4_resize\"]'),
+(156, 105, 'pink', '[\"longsleeves_008_pk_0_resize\",\"longsleeves_008_pk_1_resize\", \"longsleeves_008_pk_2_resize\", \"longsleeves_008_pk_3_resize\", \"longsleeves_008_pk_4_resize\"]'),
+(157, 106, 'black', '[\"longsleeves_009_bk_0_resize\",\"longsleeves_009_bk_1_resize\", \"longsleeves_009_bk_2_resize\", \"longsleeves_009_bk_3_resize\", \"longsleeves_009_bk_4_resize\"]'),
+(158, 107, 'black', '[\"longsleeves_010_bk_0_resize\",\"longsleeves_010_bk_1_resize\", \"longsleeves_010_bk_2_resize\", \"longsleeves_010_bk_3_resize\", \"longsleeves_010_bk_4_resize\"]'),
+(159, 108, 'white', '[\"longsleeves_011_w_0_resize\",\"longsleeves_011_w_1_resize\", \"longsleeves_011_w_2_resize\", \"longsleeves_011_w_3_resize\", \"longsleeves_011_w_4_resize\"]'),
+(160, 109, 'black', '[\"longsleeves_012_bk_0_resize\",\"longsleeves_012_bk_1_resize\", \"longsleeves_012_bk_2_resize\", \"longsleeves_012_bk_3_resize\", \"longsleeves_012_bk_4_resize\"]'),
+(161, 110, 'black', '[\"longsleeves_013_bk_0_resize\",\"longsleeves_013_bk_1_resize\", \"longsleeves_013_bk_2_resize\", \"longsleeves_013_bk_3_resize\", \"longsleeves_013_bk_4_resize\"]'),
+(162, 111, 'white', '[\"longsleeves_014_w_0_resize\",\"longsleeves_014_w_1_resize\", \"longsleeves_014_w_2_resize\", \"longsleeves_014_w_3_resize\", \"longsleeves_014_w_4_resize\"]'),
+(163, 112, 'black', '[\"longsleeves_015_bk_0_resize\",\"longsleeves_015_bk_1_resize\", \"longsleeves_015_bk_2_resize\", \"longsleeves_015_bk_3_resize\", \"longsleeves_015_bk_4_resize\"]'),
+(164, 113, 'white', '[\"longsleeves_016_w_0_resize\",\"longsleeves_016_w_1_resize\", \"longsleeves_016_w_2_resize\", \"longsleeves_016_w_3_resize\", \"longsleeves_016_w_4_resize\"]'),
+(165, 114, 'black', '[\"longsleeves_017_bk_0_resize\",\"longsleeves_017_bk_1_resize\", \"longsleeves_017_bk_2_resize\", \"longsleeves_017_bk_3_resize\", \"longsleeves_017_bk_4_resize\"]'),
+(166, 114, 'blue', '[\"longsleeves_017_bl_0_resize\",\"longsleeves_017_bl_1_resize\", \"longsleeves_017_bl_2_resize\", \"longsleeves_017_bl_3_resize\", \"longsleeves_017_bl_4_resize\"]'),
+(167, 115, 'blue', '[\"longsleeves_018_bl_0_resize\",\"longsleeves_018_bl_1_resize\", \"longsleeves_018_bl_2_resize\", \"longsleeves_018_bl_3_resize\", \"longsleeves_018_bl_4_resize\"]'),
+(168, 116, 'black', '[\"longsleeves_019_bk_0_resize\",\"longsleeves_019_bk_1_resize\", \"longsleeves_019_bk_2_resize\", \"longsleeves_019_bk_3_resize\", \"longsleeves_019_bk_4_resize\"]'),
+(169, 116, 'white', '[\"longsleeves_019_w_0_resize\",\"longsleeves_019_w_1_resize\", \"longsleeves_019_w_2_resize\", \"longsleeves_019_w_3_resize\", \"longsleeves_019_w_4_resize\"]'),
+(170, 117, 'pink', '[\"longsleeves_020_pk_0_resize\",\"longsleeves_020_pk_1_resize\", \"longsleeves_020_pk_2_resize\", \"longsleeves_020_pk_3_resize\", \"longsleeves_020_pk_4_resize\"]'),
+(171, 117, 'white', '[\"longsleeves_020_w_0_resize\",\"longsleeves_020_w_1_resize\", \"longsleeves_020_w_2_resize\", \"longsleeves_020_w_3_resize\", \"longsleeves_020_w_4_resize\"]'),
+(172, 118, 'white', '[\"longsleeves_021_w_0_resize\",\"longsleeves_021_w_1_resize\", \"longsleeves_021_w_2_resize\", \"longsleeves_021_w_3_resize\", \"longsleeves_021_w_4_resize\"]'),
+(173, 119, 'black', '[\"longsleeves_022_bk_0_resize\",\"longsleeves_022_bk_1_resize\", \"longsleeves_022_bk_2_resize\", \"longsleeves_022_bk_3_resize\", \"longsleeves_022_bk_4_resize\"]'),
+(174, 119, 'blue', '[\"longsleeves_022_bl_0_resize\",\"longsleeves_022_bl_1_resize\", \"longsleeves_022_bl_2_resize\", \"longsleeves_022_bl_3_resize\", \"longsleeves_022_bl_4_resize\"]'),
+(175, 119, 'purple', '[\"longsleeves_022_p_0_resize\",\"longsleeves_022_p_1_resize\", \"longsleeves_022_p_2_resize\", \"longsleeves_022_p_3_resize\", \"longsleeves_022_p_4_resize\"]'),
+(176, 120, 'black', '[\"sweatshirts_000_bk_0_resize\",\"sweatshirts_000_bk_1_resize\", \"sweatshirts_000_bk_2_resize\", \"sweatshirts_000_bk_3_resize\", \"sweatshirts_000_bk_4_resize\"]'),
+(177, 120, 'blue', '[\"sweatshirts_000_bl_0_resize\",\"sweatshirts_000_bl_1_resize\", \"sweatshirts_000_bl_2_resize\", \"sweatshirts_000_bl_3_resize\", \"sweatshirts_000_bl_4_resize\"]'),
+(178, 121, 'grey', '[\"sweatshirts_001_gr_0_resize\",\"sweatshirts_001_gr_1_resize\", \"sweatshirts_001_gr_2_resize\", \"sweatshirts_001_gr_3_resize\", \"sweatshirts_001_gr_4_resize\"]'),
+(179, 122, 'grey', '[\"sweatshirts_002_gr_0_resize\",\"sweatshirts_002_gr_1_resize\", \"sweatshirts_002_gr_2_resize\", \"sweatshirts_002_gr_3_resize\", \"sweatshirts_002_gr_4_resize\"]'),
+(180, 123, 'black', '[\"outerwear_000_bk_0_resize\",\"outerwear_000_bk_1_resize\", \"outerwear_000_bk_2_resize\", \"outerwear_000_bk_3_resize\", \"outerwear_000_bk_4_resize\"]'),
+(181, 124, 'pink', '[\"outerwear_001_pk_0_resize\",\"outerwear_001_pk_1_resize\", \"outerwear_001_pk_2_resize\", \"outerwear_001_pk_3_resize\", \"outerwear_001_pk_4_resize\"]'),
+(182, 124, 'white', '[\"outerwear_001_w_0_resize\",\"outerwear_001_w_1_resize\", \"outerwear_001_w_2_resize\", \"outerwear_001_w_3_resize\", \"outerwear_001_w_4_resize\"]'),
+(183, 125, 'grey', '[\"outerwear_002_gr_0_resize\",\"outerwear_002_gr_1_resize\", \"outerwear_002_gr_2_resize\", \"outerwear_002_gr_3_resize\", \"outerwear_002_gr_4_resize\"]'),
+(184, 126, 'blue', '[\"outerwear_003_bl_0_resize\",\"outerwear_003_bl_1_resize\", \"outerwear_003_bl_2_resize\", \"outerwear_003_bl_3_resize\", \"outerwear_003_bl_4_resize\"]'),
+(185, 127, 'grey', '[\"outerwear_004_gr_0_resize\",\"outerwear_004_gr_1_resize\", \"outerwear_004_gr_2_resize\", \"outerwear_004_gr_3_resize\", \"outerwear_004_gr_4_resize\"]'),
+(186, 128, 'pink', '[\"outerwear_005_pk_0_resize\",\"outerwear_005_pk_1_resize\", \"outerwear_005_pk_2_resize\", \"outerwear_005_pk_3_resize\", \"outerwear_005_pk_4_resize\"]'),
+(187, 129, 'white', '[\"outerwear_006_w_0_resize\",\"outerwear_006_w_1_resize\", \"outerwear_006_w_2_resize\", \"outerwear_006_w_3_resize\", \"outerwear_006_w_4_resize\"]'),
+(188, 130, 'black', '[\"outerwear_007_bk_0_resize\",\"outerwear_007_bk_1_resize\", \"outerwear_007_bk_2_resize\", \"outerwear_007_bk_3_resize\", \"outerwear_007_bk_4_resize\"]'),
+(189, 131, 'red', '[\"outerwear_008_r_0_resize\",\"outerwear_008_r_1_resize\", \"outerwear_008_r_2_resize\", \"outerwear_008_r_3_resize\", \"outerwear_008_r_4_resize\"]'),
+(190, 132, 'white', '[\"outerwear_009_w_0_resize\",\"outerwear_009_w_1_resize\", \"outerwear_009_w_2_resize\", \"outerwear_009_w_3_resize\", \"outerwear_009_w_4_resize\"]'),
+(191, 133, 'black', '[\"outerwear_010_bk_0_resize\",\"outerwear_010_bk_1_resize\", \"outerwear_010_bk_2_resize\", \"outerwear_010_bk_3_resize\", \"outerwear_010_bk_4_resize\"]'),
+(192, 134, 'black', '[\"leggings_000_bk_1_resize\",\"leggings_000_bk_2_resize\", \"leggings_000_bk_3_resize\", \"leggings_000_bk_4_resize\", \"leggings_000_bk_5_resize\"]'),
+(193, 135, 'black', '[\"leggings_001_bk_1_resize\",\"leggings_001_bk_2_resize\", \"leggings_001_bk_3_resize\", \"leggings_001_bk_4_resize\", \"leggings_001_bk_5_resize\"]'),
+(194, 136, 'blue', '[\"leggings_002_bl_1_resize\",\"leggings_002_bl_2_resize\", \"leggings_002_bl_3_resize\", \"leggings_002_bl_4_resize\", \"leggings_002_bl_5_resize\"]'),
+(195, 137, 'black', '[\"leggings_003_bk_1_resize\",\"leggings_003_bk_2_resize\", \"leggings_003_bk_3_resize\", \"leggings_003_bk_4_resize\", \"leggings_003_bk_5_resize\"]'),
+(196, 138, 'black', '[\"leggings_004_bk_1_resize\",\"leggings_004_bk_2_resize\", \"leggings_004_bk_3_resize\", \"leggings_004_bk_4_resize\", \"leggings_004_bk_5_resize\"]'),
+(197, 139, 'black', '[\"leggings_005_bk_1_resize\",\"leggings_005_bk_2_resize\", \"leggings_005_bk_3_resize\", \"leggings_005_bk_4_resize\", \"leggings_005_bk_5_resize\"]'),
+(198, 140, 'brown', '[\"leggings_006_br_1_resize\",\"leggings_006_br_2_resize\", \"leggings_006_br_3_resize\", \"leggings_006_br_4_resize\", \"leggings_006_br_5_resize\"]'),
+(199, 141, 'blue', '[\"leggings_007_bl_1_resize\",\"leggings_007_bl_2_resize\", \"leggings_007_bl_3_resize\", \"leggings_007_bl_4_resize\", \"leggings_007_bl_5_resize\"]'),
+(200, 142, 'white', '[\"leggings_008_w_1_resize\",\"leggings_008_w_2_resize\", \"leggings_008_w_3_resize\", \"leggings_008_w_4_resize\", \"leggings_008_w_5_resize\"]'),
+(201, 143, 'black', '[\"leggings_009_bk_1_resize\",\"leggings_009_bk_2_resize\", \"leggings_009_bk_3_resize\", \"leggings_009_bk_4_resize\", \"leggings_009_bk_5_resize\"]'),
+(202, 144, 'black', '[\"leggings_010_bk_1_resize\",\"leggings_010_bk_2_resize\", \"leggings_010_bk_3_resize\", \"leggings_010_bk_4_resize\", \"leggings_010_bk_5_resize\"]'),
+(203, 145, 'black', '[\"leggings_011_bk_1_resize\",\"leggings_011_bk_2_resize\", \"leggings_011_bk_3_resize\", \"leggings_011_bk_4_resize\", \"leggings_011_bk_5_resize\"]'),
+(204, 146, 'black', '[\"leggings_012_bk_1_resize\",\"leggings_012_bk_2_resize\", \"leggings_012_bk_3_resize\", \"leggings_012_bk_4_resize\", \"leggings_012_bk_5_resize\"]'),
+(205, 147, 'brown', '[\"leggings_013_br_1_resize\",\"leggings_013_br_2_resize\", \"leggings_013_br_3_resize\", \"leggings_013_br_4_resize\", \"leggings_013_br_5_resize\"]'),
+(206, 148, 'black', '[\"leggings_014_bk_1_resize\",\"leggings_014_bk_2_resize\", \"leggings_014_bk_3_resize\", \"leggings_014_bk_4_resize\", \"leggings_014_bk_5_resize\"]'),
+(207, 149, 'brown', '[\"leggings_015_br_1_resize\",\"leggings_015_br_2_resize\", \"leggings_015_br_3_resize\", \"leggings_015_br_4_resize\", \"leggings_015_br_5_resize\"]'),
+(208, 150, 'black', '[\"leggings_016_bk_1_resize\",\"leggings_016_bk_2_resize\", \"leggings_016_bk_3_resize\", \"leggings_016_bk_4_resize\", \"leggings_016_bk_5_resize\"]'),
+(209, 151, 'blue', '[\"leggings_017_bl_1_resize\",\"leggings_017_bl_2_resize\", \"leggings_017_bl_3_resize\", \"leggings_017_bl_4_resize\", \"leggings_017_bl_5_resize\"]'),
+(210, 152, 'black', '[\"leggings_018_bk_1_resize\",\"leggings_018_bk_2_resize\", \"leggings_018_bk_3_resize\", \"leggings_018_bk_4_resize\", \"leggings_018_bk_5_resize\"]'),
+(211, 152, 'grey', '[\"leggings_018_gr_1_resize\",\"leggings_018_gr_2_resize\", \"leggings_018_gr_3_resize\", \"leggings_018_gr_4_resize\", \"leggings_018_gr_5_resize\"]'),
+(212, 153, 'blue', '[\"leggings_019_bl_1_resize\",\"leggings_019_bl_2_resize\", \"leggings_019_bl_3_resize\", \"leggings_019_bl_4_resize\", \"leggings_019_bl_5_resize\"]'),
+(213, 154, 'black', '[\"sweatpants_000_bk_1_resize\",\"sweatpants_000_bk_2_resize\", \"sweatpants_000_bk_3_resize\", \"sweatpants_000_bk_4_resize\", \"sweatpants_000_bk_5_resize\"]'),
+(214, 155, 'black', '[\"sweatpants_001_bk_1_resize\",\"sweatpants_001_bk_2_resize\", \"sweatpants_001_bk_3_resize\", \"sweatpants_001_bk_4_resize\", \"sweatpants_001_bk_5_resize\"]'),
+(215, 156, 'green', '[\"sweatpants_002_gn_1_resize\",\"sweatpants_002_gn_2_resize\", \"sweatpants_002_gn_3_resize\", \"sweatpants_002_gn_4_resize\", \"sweatpants_002_gn_5_resize\"]'),
+(216, 157, 'white', '[\"sweatpants_003_w_1_resize\",\"sweatpants_003_w_2_resize\", \"sweatpants_003_w_3_resize\", \"sweatpants_003_w_4_resize\", \"sweatpants_003_w_5_resize\"]'),
+(217, 158, 'black', '[\"sweatpants_004_bk_1_resize\",\"sweatpants_004_bk_2_resize\", \"sweatpants_004_bk_3_resize\", \"sweatpants_004_bk_4_resize\", \"sweatpants_004_bk_5_resize\"]'),
+(218, 159, 'black', '[\"sweatpants_005_bk_1_resize\",\"sweatpants_005_bk_2_resize\", \"sweatpants_005_bk_3_resize\", \"sweatpants_005_bk_4_resize\", \"sweatpants_005_bk_5_resize\"]'),
+(219, 160, 'orange', '[\"sweatpants_006_o_1_resize\",\"sweatpants_006_o_2_resize\", \"sweatpants_006_o_3_resize\", \"sweatpants_006_o_4_resize\", \"sweatpants_006_o_5_resize\"]'),
+(220, 161, 'grey', '[\"sweatpants_007_gr_1_resize\",\"sweatpants_007_gr_2_resize\", \"sweatpants_007_gr_3_resize\", \"sweatpants_007_gr_4_resize\", \"sweatpants_007_gr_5_resize\"]'),
+(221, 162, 'grey', '[\"sweatpants_008_gr_1_resize\",\"sweatpants_008_gr_2_resize\", \"sweatpants_008_gr_3_resize\", \"sweatpants_008_gr_4_resize\", \"sweatpants_008_gr_5_resize\"]'),
+(222, 163, 'white', '[\"sweatpants_009_w_1_resize\",\"sweatpants_009_w_2_resize\", \"sweatpants_009_w_3_resize\", \"sweatpants_009_w_4_resize\", \"sweatpants_009_w_5_resize\"]'),
+(223, 164, 'black', '[\"sweatpants_010_bk_1_resize\",\"sweatpants_010_bk_2_resize\", \"sweatpants_010_bk_3_resize\", \"sweatpants_010_bk_4_resize\", \"sweatpants_010_bk_5_resize\"]'),
+(224, 165, 'black', '[\"sweatpants_011_bk_1_resize\",\"sweatpants_011_bk_2_resize\", \"sweatpants_011_bk_3_resize\", \"sweatpants_011_bk_4_resize\", \"sweatpants_011_bk_5_resize\"]'),
+(225, 166, 'black', '[\"shorts_000_bk_1_resize\",\"shorts_000_bk_2_resize\", \"shorts_000_bk_3_resize\", \"shorts_000_bk_4_resize\", \"shorts_000_bk_5_resize\"]'),
+(226, 167, 'black', '[\"shorts_001_bk_1_resize\",\"shorts_001_bk_2_resize\", \"shorts_001_bk_3_resize\", \"shorts_001_bk_4_resize\", \"shorts_001_bk_5_resize\"]'),
+(227, 168, 'white', '[\"shorts_002_w_1_resize\",\"shorts_002_w_2_resize\", \"shorts_002_w_3_resize\", \"shorts_002_w_4_resize\", \"shorts_002_w_5_resize\"]'),
+(228, 169, 'grey', '[\"shorts_003_gr_1_resize\",\"shorts_003_gr_2_resize\", \"shorts_003_gr_3_resize\", \"shorts_003_gr_4_resize\", \"shorts_003_gr_5_resize\"]'),
+(229, 170, 'black', '[\"shorts_004_bk_1_resize\",\"shorts_004_bk_2_resize\", \"shorts_004_bk_3_resize\", \"shorts_004_bk_4_resize\", \"shorts_004_bk_5_resize\"]'),
+(230, 171, 'blue', '[\"shorts_005_bl_1_resize\",\"shorts_005_bl_2_resize\", \"shorts_005_bl_3_resize\", \"shorts_005_bl_4_resize\", \"shorts_005_bl_5_resize\"]'),
+(231, 172, 'black', '[\"bikershorts_001_bk_1_resize\",\"bikershorts_001_bk_2_resize\", \"bikershorts_001_bk_3_resize\", \"bikershorts_001_bk_4_resize\", \"bikershorts_001_bk_5_resize\"]'),
+(232, 173, 'orange', '[\"bikershorts_002_o_1_resize\",\"bikershorts_002_o_2_resize\", \"bikershorts_002_o_3_resize\", \"bikershorts_002_o_4_resize\", \"bikershorts_002_o_5_resize\"]'),
+(233, 174, 'black', '[\"bikershorts_003_bk_1_resize\",\"bikershorts_003_bk_2_resize\", \"bikershorts_003_bk_3_resize\", \"bikershorts_003_bk_4_resize\", \"bikershorts_003_bk_5_resize\"]'),
+(234, 174, 'grey', '[\"bikershorts_003_gr_1_resize\",\"bikershorts_003_gr_2_resize\", \"bikershorts_003_gr_3_resize\", \"bikershorts_003_gr_4_resize\", \"bikershorts_003_gr_5_resize\"]'),
+(235, 175, 'green', '[\"bikershorts_004_gn_1_resize\",\"bikershorts_004_gn_2_resize\", \"bikershorts_004_gn_3_resize\", \"bikershorts_004_gn_4_resize\", \"bikershorts_004_gn_5_resize\"]'),
+(236, 176, 'black', '[\"bikershorts_005_bk_1_resize\",\"bikershorts_005_bk_2_resize\", \"bikershorts_005_bk_3_resize\", \"bikershorts_005_bk_4_resize\", \"bikershorts_005_bk_5_resize\"]'),
+(237, 177, 'black', '[\"bikershorts_006_bk_1_resize\",\"bikershorts_006_bk_2_resize\", \"bikershorts_006_bk_3_resize\", \"bikershorts_006_bk_4_resize\", \"bikershorts_006_bk_5_resize\"]'),
+(238, 178, 'blue', '[\"bikershorts_007_bl_1_resize\",\"bikershorts_007_bl_2_resize\", \"bikershorts_007_bl_3_resize\", \"bikershorts_007_bl_4_resize\", \"bikershorts_007_bl_5_resize\"]'),
+(239, 179, 'black', '[\"capris_001_bk_1_resize\",\"capris_001_bk_2_resize\", \"capris_001_bk_3_resize\", \"capris_001_bk_4_resize\", \"capris_001_bk_5_resize\"]'),
+(240, 180, 'white', '[\"capris_002_w_1_resize\",\"capris_002_w_2_resize\", \"capris_002_w_3_resize\", \"capris_002_w_4_resize\", \"capris_002_w_5_resize\"]'),
+(241, 181, 'purple', '[\"capris_003_p_1_resize\",\"capris_003_p_2_resize\", \"capris_003_p_3_resize\", \"capris_003_p_4_resize\", \"capris_003_p_5_resize\"]'),
+(242, 182, 'black', '[\"capris_004_bk_1_resize\",\"capris_004_bk_2_resize\", \"capris_004_bk_3_resize\", \"capris_004_bk_4_resize\", \"capris_004_bk_5_resize\"]'),
+(243, 183, 'black', '[\"capris_005_bk_1_resize\",\"capris_005_bk_2_resize\", \"capris_005_bk_3_resize\", \"capris_005_bk_4_resize\", \"capris_005_bk_5_resize\"]'),
+(244, 183, 'blue', '[\"capris_005_bl_1_resize\",\"capris_005_bl_2_resize\", \"capris_005_bl_3_resize\", \"capris_005_bl_4_resize\", \"capris_005_bl_5_resize\"]'),
+(245, 184, 'grey', '[\"capris_006_gr_1_resize\",\"capris_006_gr_2_resize\", \"capris_006_gr_3_resize\", \"capris_006_gr_4_resize\", \"capris_006_gr_5_resize\"]'),
+(246, 184, 'purple', '[\"capris_006_bk_1_resize\",\"capris_006_bk_2_resize\", \"capris_006_bk_3_resize\", \"capris_006_bk_4_resize\", \"capris_006_bk_5_resize\"]'),
+(247, 185, 'black', '[\"pants_001_bk_1_resize\",\"pants_001_bk_2_resize\", \"pants_001_bk_3_resize\", \"pants_001_bk_4_resize\", \"pants_001_bk_5_resize\"]'),
+(248, 185, 'grey', '[\"pants_001_gr_1_resize\",\"pants_001_gr_2_resize\", \"pants_001_gr_3_resize\", \"pants_001_gr_4_resize\", \"pants_001_gr_5_resize\"]'),
+(249, 186, 'black', '[\"pants_002_bk_1_resize\",\"pants_002_bk_2_resize\", \"pants_002_bk_3_resize\", \"pants_002_bk_4_resize\", \"pants_002_bk_5_resize\"]'),
+(250, 186, 'green', '[\"pants_002_gn_1_resize\",\"pants_002_gn_2_resize\", \"pants_002_gn_3_resize\", \"pants_002_gn_4_resize\", \"pants_002_gn_5_resize\"]'),
+(251, 187, 'purple', '[\"pants_003_p_1_resize\",\"pants_003_p_2_resize\", \"pants_003_p_3_resize\", \"pants_003_p_4_resize\", \"pants_003_p_5_resize\"]'),
+(252, 188, 'black', '[\"pants_004_bk_1_resize\",\"pants_004_bk_2_resize\", \"pants_004_bk_3_resize\", \"pants_004_bk_4_resize\", \"pants_004_bk_5_resize\"]'),
+(253, 189, 'black', '[\"pants_005_bk_1_resize\",\"pants_005_bk_2_resize\", \"pants_005_bk_3_resize\", \"pants_005_bk_4_resize\", \"pants_005_bk_5_resize\"]'),
+(254, 190, 'purple', '[\"yoga_000_p_0_resize\",\"yoga_000_p_1_resize\", \"yoga_000_p_2_resize\", \"yoga_000_p_3_resize\", \"yoga_000_p_4_resize\"]'),
+(255, 190, 'pink', '[\"yoga_000_pk_0_resize\",\"yoga_000_pk_1_resize\", \"yoga_000_pk_2_resize\", \"yoga_000_pk_3_resize\", \"yoga_000_pk_4_resize\"]'),
+(256, 191, 'pink', '[\"yoga_001_pk_0_resize\",\"yoga_001_pk_1_resize\", \"yoga_001_pk_2_resize\", \"yoga_001_pk_3_resize\", \"yoga_001_pk_4_resize\"]'),
+(257, 192, 'pink', '[\"yoga_002_pk_0_resize\",\"yoga_002_pk_1_resize\", \"yoga_002_pk_2_resize\", \"yoga_002_pk_3_resize\", \"yoga_002_pk_4_resize\"]'),
+(258, 193, 'blue', '[\"yoga_003_bl_0_resize\",\"yoga_003_bl_1_resize\", \"yoga_003_bl_2_resize\", \"yoga_003_bl_3_resize\", \"yoga_003_bl_4_resize\"]'),
+(259, 194, 'green', '[\"yoga_004_gn_0_resize\",\"yoga_004_gn_1_resize\", \"yoga_004_gn_2_resize\", \"yoga_004_gn_3_resize\", \"yoga_004_gn_4_resize\"]'),
+(260, 195, 'blue', '[\"yoga_005_bl_0_resize\",\"yoga_005_bl_1_resize\", \"yoga_005_bl_2_resize\", \"yoga_005_bl_3_resize\", \"yoga_005_bl_4_resize\"]'),
+(261, 196, 'purple', '[\"yoga_006_p_0_resize\",\"yoga_006_p_1_resize\", \"yoga_006_p_2_resize\", \"yoga_006_p_3_resize\", \"yoga_006_p_4_resize\"]'),
+(262, 197, 'green', '[\"yoga_007_gn_0_resize\",\"yoga_007_gn_1_resize\", \"yoga_007_gn_2_resize\", \"yoga_007_gn_3_resize\", \"yoga_007_gn_4_resize\"]'),
+(263, 198, 'pink', '[\"yoga_008_pk_0_resize\",\"yoga_008_pk_1_resize\", \"yoga_008_pk_2_resize\", \"yoga_008_pk_3_resize\", \"yoga_008_pk_4_resize\"]'),
+(264, 199, 'pink', '[\"yoga_009_pk_0_resize\",\"yoga_009_pk_1_resize\", \"yoga_009_pk_2_resize\", \"yoga_009_pk_3_resize\", \"yoga_009_pk_4_resize\"]'),
+(265, 200, 'pink', '[\"yoga_010_bk_0_resize\",\"yoga_010_bk_1_resize\", \"yoga_010_bk_2_resize\", \"yoga_010_bk_3_resize\", \"yoga_010_bk_4_resize\"]');
+
+--
+-- 已傾印資料表的索引
+--
+
+--
+-- 資料表索引 `color`
+--
+ALTER TABLE `color`
+  ADD PRIMARY KEY (`sid`);
+
+--
+-- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
+--
+
+--
+-- 使用資料表自動遞增(AUTO_INCREMENT) `color`
+--
+ALTER TABLE `color`
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

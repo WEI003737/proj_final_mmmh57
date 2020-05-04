@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
     <!-- --fontawesome-- -->
     <link rel="stylesheet" href="./fontawesome-free-5.12.1-web/css/all.css">
-    <link rel="stylesheet" href="./css/main.css">
     <title>My Cart</title>
 
 </head>

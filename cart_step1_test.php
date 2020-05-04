@@ -116,9 +116,9 @@ print_r($cartProRows);
                                     <h6><?= $r['size']; ?></h6>
                                 </div>
                                 <div class="t_wea_product_main_count d-flex align-items-center">
-                                    <li><a><div id="minus<?= $j?>" class="minus" onclick="changeQty(event)">-</div></a></li>
-                                    <li><div id="countnum<?= $j?>" data-qty="<?= $r['quantity'] ?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" ></div></li>
-                                    <li><a><div id="plus<?= $j?> " class="plus" onclick="changeQty(event)"  data-stock="<?= $r['in_stock'] ?>">+</div></a></li>
+                                    <li><a><div id="minus" data-btnFunction="minus" class="<?= $r['quantity'] == 1 ? 'unckick' : '' ?>" onclick="changeQty(event)">-</div></a></li>
+                                    <li><div id="countnum" data-qty="<?= $r['quantity'] ?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" ></div></li>
+                                    <li><a><div id="plus" data-btnFunction="plus" class="<?= $r['quantity'] == $r['in_stock'] ? 'unckick' : '' ?>" onclick="changeQty(event)" >+</div></a></li>
                                 </div>
                                 <div>
                                     <h6 class="sub-total"></h6>
@@ -212,55 +212,6 @@ print_r($cartProRows);
             crossorigin="anonymous"></script>
     <script>
 
-        //數量
-        var selectMax ;
-        var selectCountNum ;
-        var thisnum ;
-
-        function countNumState(event){
-
-            if(selectCountNum == 1){
-                $(num).find("li").eq(0).find("div").addClass("unckick");
-            }else{
-                $(num).find("li").eq(0).find("div").removeClass("unckick");
-            }
-            if(selectCountNum == stocknum){
-                $(num).find("li").eq(2).find("div").addClass("unckick");
-            }else{
-                $(num).find("li").eq(2).find("div").removeClass("unckick");
-            }
-        }
-
-
-        // countNumState();
-        $(".plus").click(function(){
-            thisnum = $(this).closest(".t_wea_product_main_count").find("#countnum").text();
-            selectMax = $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").attr("data-maxnum");
-            console.log(thisnum );
-            if($(this).hasClass("unckick") == false){
-                selectCountNum = $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text();
-                selectCountNum = parseInt(selectCountNum) +1;
-                $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text(selectCountNum);
-                // countNumState(document.getElementById("countnum").data("stocknum"));
-                // console.log(selectMax);
-                countNumState(thisnum,selectMax);
-
-
-            }
-        })
-        $(".minus").click(function(){
-            thisnum = $(this).closest(".t_wea_product_main_count");
-            selectMax = $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").attr("data-maxnum");
-            if($(this).hasClass("unckick") == false){
-                selectCountNum = $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text();
-                selectCountNum = parseInt(selectCountNum) -1;
-                $(this).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text(selectCountNum);
-                countNumState(thisnum,selectMax);
-            }
-        })
-
-
-
         const dallorCommas = function(n){
             return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
         };
@@ -278,11 +229,36 @@ print_r($cartProRows);
         }
 
         function changeQty(event){
-            let cart_qty = $(event.target).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text();
+            btnFunction = $(event.target).attr("data-btnFunction")
+            thisnum = $(event.target).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text();
+            selectMax = $(event.target).closest(".t_wea_product_main_count").find("li").eq(1).find("div").attr("data-maxnum");
+
+            if(btnFunction == "plus"){
+                if(thisnum < selectMax){
+                    thisnum = parseInt(thisnum) +1;
+                    $(event.target).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text(thisnum);
+                    $(event.target).closest(".t_wea_product_main_count").find("li").eq(0).find("div").removeClass("unckick");
+                }
+            }else{
+                if(thisnum > 1){
+                    thisnum = parseInt(thisnum) -1;
+                    $(event.target).closest(".t_wea_product_main_count").find("li").eq(1).find("div").text(thisnum);
+                    $(event.target).closest(".t_wea_product_main_count").find("li").eq(2).find("div").removeClass("unckick");
+                }
+            }
+
+            if(thisnum == selectMax){
+                $(event.target).addClass("unckick");
+            }else if(thisnum == 1){
+                $(event.target).addClass("unckick");
+            }
+
+            let cart_qty = thisnum;
             let p_item = $(event.target).closest('div.p-item');
             let cart_sid = p_item.attr('data-sid');
-            console.log(cart_qty);
-            console.log(cart_sid);
+            console.log(`cart_qty: ${cart_qty}`);
+            console.log(`cart_sid: ${cart_sid}`);
+            console.log(`thisnum: ${thisnum}`);
 
             $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
                 countCartObj(data);
@@ -294,16 +270,9 @@ print_r($cartProRows);
         function calPrices() {
             const p_items = $('.p-item');
             let total = 0;
-            // if(! p_items.length){
-            //     alert('請先將商品加入購物車');
-            //     location.href = 'product-list.php';
-            //     return;
-            // }
+
 
             p_items.each(function(i, el){
-                // console.log( $(el).attr('data-sid') );
-                // let price = parseInt( $(el).find('.price').attr('data-price') );
-                // let price = $(el).find('.price').attr('data-price') * 1;
 
                 const $price = $(el).find('.price'); // 價格的 <td>
                 $price.text( '$ ' + $price.attr('data-price') );

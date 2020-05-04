@@ -14,7 +14,7 @@
                 </div>
                 <li><a href="cin_about.php">關於我們</a></li>
                 <li><a href="_product_list.php">商品</a></li>
-                <li><a>商品客製</a></li>
+                <li><a href="customized.php">商品客製</a></li>
                 <li><a>健康小教室</a></li>
             </div>
             <div class="header_nav_right">
@@ -27,27 +27,36 @@
                     </div>
                 </li>
                 <li class="position-relative">
-                    <img class="a_log_in" src="./icon/log_in.png"></img>
+                    <?php if(isset($_SESSION['loginUser'])): ?>
+                        <a href="member_information.php"><img class="a_log_in" src="./icon/log_in.png"></a>
                     <ul class="a_sub_nav a_transition">
-                        <li><a class="a_transition">會員中心</a></li>
-                        <li><a class="a_transition">訂單查詢</a></li>
-                        <li><a href="member_logout_api.php" class="a_transition">登出</a></li>
+                        <li><a class="a_transition" href="member_information.php">會員中心</a></li>
+                        <li><a class="a_transition" href="member_order.php">訂單查詢</a></li>
+                        <li><a  class="a_transition" href="member_logout_api.php">登出</a></li>
                     </ul>
+                    <?php else: ?>
+                        <a href="member_login.php"><img class="a_log_in" src="./icon/log_in.png"></a>
+                    <?php endif; ?>
                 </li>
-                <li>
+                <?php if(isset($_SESSION['loginUser'])): ?>
+                <li class="position-relative">
                     <a href="cart_step1.php"><img src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
+                <?php endif; ?>
                 <li class="a_menu">
                     <!-- bar1.2.3 上動畫用 -->
                     <div class="a_bar a_bar1 a_transition"></div>
                     <div class="a_bar a_bar2 a_transition"></div>
                     <div class="a_bar a_bar3 a_transition"></div>
                     <ul class="a_rwd_sub_nav a_transition">
-                        <li><a>關於我們</a></li>
-                        <li><a>商品客製</a></li>
+                        <li><a href="cin_about.php">關於我們</a></li>
+                        <li><a href="_product_list.php">商品</a></li>
+                        <li><a href="customized.php">商品客製</a></li>
                         <li><a>健康小教室</a></li>
-                        <li><a>登出</a></li>
+                        <?php if(isset($_SESSION['loginUser'])): ?>
+                        <li><a href="member_logout_api.php">登出</a></li>
+                        <?php endif; ?>
                     </ul>
                 </li>
             </div>
