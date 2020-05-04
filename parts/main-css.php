@@ -26,7 +26,7 @@ a{
     background-color: #CA054D;
     flex-shrink: 0;
 }
-.t_step_panel,ul li{
+.t_step_panel ul li{
     text-align: center;
     margin: 0 100px;
     line-height: 80px;
