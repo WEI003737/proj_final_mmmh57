@@ -725,10 +725,10 @@ console.log(a_picsOnlyArr)
         a_selectPicData = a_picsOnlyArr.filter(function(){
             console.log(a_selectColor);
             return a_picsOnlyArr.colorSid == a_selectColor;
-            console.log(a_selectColor);
+            // console.log(a_selectColor);
         });
         // a_picture = $(this).parent(".wea_product_list_item>img").attr("src","./product_images/<" + `?=$pictureArr[${colorNum}]` + "?>.png")
-        console.log(a_selectColor);
+        // console.log(a_selectColor);
     });
 
 //拿到 size 的 sid ------------------------------------------------------------------

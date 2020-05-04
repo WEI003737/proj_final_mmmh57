@@ -18,10 +18,15 @@ $customized_bars = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=1");
 $customized_tops = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=2");
 $customized_bottoms = $pdo->query("SELECT * FROM `customize` WHERE `cate_sid`=3");
 
+
+
+
 $customized_bars_each = $customized_bars->fetchAll(); //倒內衣資料
 $customized_tops_each = $customized_tops->fetchAll(); //倒上衣資料
 $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
-//var_dump($can_cus_color);
+
+
+//print_r($customized_recommend);
 //var_dump($a_color);
 //print_r($can_cus_color_count);
 
@@ -30,11 +35,6 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     header("location:./customized.php");
     exit();
 }
-
-
-
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -53,15 +53,16 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <link rel="stylesheet" href="./css/customized_final.css">
 
     <style>
-        /** {*/
-        /*    outline: #FA8000 solid 1px;*/
-        /*}*/
+        /* * {
+            outline: #FA8000 solid 1px;
+        } */
     </style>
 </head>
 
 <body>
-    <?php include __DIR__ . './parts/header.php' ?>
-    <div class="a_push_place"></div>
+    <?php include __DIR__ . './parts/header.php'
+    ?>
+    <div class="container nac_menu_reserve"></div>
     <!-- 導航列 -->
     <div class="container">
         <nav>
@@ -83,6 +84,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 <?= $row['cus_area_svg'] ?>
                 <!-- 混和層 -->
                 <img src="./images/<?= $row['pro_pic'] ?>_blend.png" alt="" id="nac_item_pic_blend">
+                <img src="./images/<?= $row['pro_pic'] ?>_screen.png" alt="" id="nac_item_pic_screen">
                 <!-- 即時色盤 -->
                 <div class="color-panel position-absolute" id="colorPanel">
                     <ul class="list-unstyled m-0">
@@ -156,14 +158,16 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <div class="nac_partingline"></div>
 
     <section class="customized_detail_more">
-       
+
         <div class="container">
-        <div class="customized_detail_more_title_box">
-            <h2 class="nac detail_itemtitle">設計更多屬於你的STYLE!</h2>
-            <h4 class="nac">DESIGN MORE BY YOURSELF</h4>
-        </div>
+            <div class="customized_detail_more_title_box">
+                <h2 class="nac detail_itemtitle">設計更多屬於你的STYLE!</h2>
+                <h4 class="nac">DESIGN MORE BY YOURSELF</h4>
+            </div>
             <ul class="nac_customized_item_box_outside customized_detail">
-                <?php foreach ($customized_bars_each as $row) : ?>
+                <?php
+                $customized_recommend = $pdo->query("SELECT * FROM `customize` WHERE `sid`!=$sid ORDER BY RAND() LIMIT 4")->fetchAll();
+                foreach ($customized_recommend as $row) : ?>
                     <li>
                         <a href="./customized_detail.php?sid=<?= $row['sid'] ?>" data-sid="<?= $row['sid'] ?>">
                             <div class="nac_customized_item_box">
@@ -198,7 +202,10 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         var nac_chose_pieces = "1";
         let cate_sid = <?= $cate_sid ?>;
 
-        /*顯示區域*/
+        /*亂數*/
+        function getRandom(x) {
+            return Math.floor(Math.random() * x) + 1;
+        };
 
         //MENU判斷
         switch (cate_sid) {
@@ -213,10 +220,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 break;
         }
 
+
         /*選擇顏色*/
-        // var colorChoseOne = "color2_nac_white";
-        // var colorChoseTwo = "color2_nac_white";
-        // var colorChoseThree = "color3_nac_white";
         let can_cus_color = <?= $can_cus_color_count ?>;
         let colors = ["#FFFFFF", "#505050", "#ca054d", "#ff9900", "#ffbe33", "#1eccbd", "#1d6be0", "#7226b1"];
         let pickId = "Clothes_area1";
@@ -242,15 +247,12 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         $("ul.nac_chose_color_area:eq(1) li").eq(0).addClass("active")
         $("ul.nac_chose_color_area:eq(2) li").eq(0).addClass("active")
 
-        console.log($("#Clothes_area1").css("fill"))
-        console.log($("#Clothes_area2").css("fill"))
-        console.log($("#Clothes_area3").css("fill"))
+        // console.log($("#Clothes_area1").css("fill"))
+        // console.log($("#Clothes_area2").css("fill"))
+        // console.log($("#Clothes_area3").css("fill"))
 
 
-
-
-
-        // 色盤放進網頁&點擊行為
+        // 色盤點擊行為
         $("ul.nac_chose_color_area li.nac_chose_color_btn").click(function(e) {
             e.stopPropagation(); //禁止往下(外)傳送行為
             let color = $(this).css("background-color"); //取得選中色碼
@@ -265,10 +267,10 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
             $(this).addClass("active").siblings().removeClass("active") //點到哪個提示
             $("#colorPanel").hide();
-            console.log(clothes_area)
-            console.log($("#Clothes_area1").css("fill"))
-            console.log($("#Clothes_area2").css("fill"))
-            console.log($("#Clothes_area3").css("fill"))
+            // console.log(clothes_area)
+            // console.log($("#Clothes_area1").css("fill"))
+            // console.log($("#Clothes_area2").css("fill"))
+            // console.log($("#Clothes_area3").css("fill"))
         })
 
         // 即時色盤消失
@@ -295,7 +297,6 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         });
 
 
-
         // 即時色盤填塞
         $("#colorPanel li").click(function(e) {
             e.stopPropagation();
@@ -313,13 +314,11 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 $("ul.nac_chose_color_area:eq(2) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
             }
 
-            console.log(clothes_area)
-            console.log($("#Clothes_area1").css("fill"))
-            console.log($("#Clothes_area2").css("fill"))
-            console.log($("#Clothes_area3").css("fill"))
+            // console.log(clothes_area)
+            // console.log($("#Clothes_area1").css("fill"))
+            // console.log($("#Clothes_area2").css("fill"))
+            // console.log($("#Clothes_area3").css("fill"))
         })
-
-
 
 
         /*尺寸選擇*/
@@ -344,8 +343,9 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             var count = document.getElementById("pieces_count").innerHTML;
             if (parseInt(count) > 1) {
                 document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
+                nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
             };
-            nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
+
             console.log(nac_chose_pieces)
         }
     </script>

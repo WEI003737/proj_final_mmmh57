@@ -62,6 +62,12 @@
         .foot img{
             cursor: pointer;
         }
+        .header a{
+            color:#333;
+        }
+        a, a:hover{
+            text-decoration: none;
+        }
         .a_transition{
             transition:all .5s;
             -webkit-transition: all .5s;

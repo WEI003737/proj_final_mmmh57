@@ -21,6 +21,7 @@ require __DIR__. '/__connect_db.php';
 <body>
 <?php include __DIR__. '/parts/header.php';?>
     <!----------------------   主視覺  -------------------------->
+    <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     <div class="position-relative" id="sportCover">
         <div class="cin_film">

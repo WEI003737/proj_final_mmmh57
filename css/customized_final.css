@@ -45,9 +45,9 @@ button:focus {
 
 /* 瞄點定位偏移 */
 
-.nac_target-fix {
+.nac_target_fix {
     position: relative;
-    top: -44px;
+    top: -160px;
     display: block;
     height: 0;
     overflow: hidden;
@@ -396,7 +396,8 @@ h6.customized_item_money {
 }
 
 .nac_customized_item_box_outside a:hover .nac_customized_item_box {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
+    transform: translateY(-10px);
     z-index: 3;
 }
 
@@ -431,7 +432,8 @@ h6.customized_item_money {
     .nac_customized_item_description h3 {
         width: 100%;
     }
-    .nac_customized_item_box_outside.customized_listus li {
+    .nac_customized_item_box_outside.customized_listus li,
+    .nac_customized_item_box_outside.customized_detail li{
         max-width: 50%;
     }
     .nac_customized_item_box {
@@ -600,6 +602,15 @@ h6.customized_item_money {
     pointer-events: none;
 }
 
+#nac_item_pic_screen{
+    position: absolute;
+    width: 100%;
+    left: 0px;
+    top: 0px;
+    mix-blend-mode: screen;
+    pointer-events: none;
+}
+
 @media all and (max-width: 768px) {
     .customized_detail_picture {
         align-items: center;
@@ -690,7 +701,10 @@ h2.nac.detail_itemtitle {
     border: 3px solid rgb(202, 5, 77, 0);
     transition: .5s;
 }
-
+.nac_chose_color_area .nac_chose_color_btn:hover {
+    opacity: .8;
+    cursor: pointer;
+}
 .nac_chose_color_btn_flot {
     display: block;
     padding: 15px;
@@ -703,6 +717,8 @@ h2.nac.detail_itemtitle {
     border: 3px solid rgb(202, 5, 77);
     box-shadow: 0px 2px 3px rgba(85, 85, 85, 0.5);
 }
+
+
 
 /*=====選尺寸===================================================*/
 
@@ -819,9 +835,8 @@ input.nac_size_btn.active, input.nac_size_btn:hover {
 
 .customized_detail_more_title_box {
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 60px;
     /* border-right: 6px solid rgb(202, 5, 77); */
-    padding: 10px 20px;
 }
 
 /* .customized_detail_more_box_outside {

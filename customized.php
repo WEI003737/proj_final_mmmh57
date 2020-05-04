@@ -43,6 +43,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
 <body>
     <?php include __DIR__ . './parts/header.php' ?>
+    <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     <section class="nac_banner" id="nac_banner">
         <article>
@@ -67,7 +68,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
 
 
-    <div class="nac_target-fix" id="nac_customized_main"></div>
+    <div class="nac_target_fix" id="nac_customized_main"></div>
 
     <section class="nac_customized_main">
 
@@ -87,12 +88,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
             <div class="nac_target_fix" id="customized_bars"></div>
 
-
-
-
-
-
-            <div class="nac_customized_item_area">
+           <div class="nac_customized_item_area">
 
                 <div class="nac_customized_item_description">
                     <h3 class="nac"><img src="./images/customized_icon.svg" alt="">運動內衣 客製化</h3>
@@ -109,7 +105,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
                                 <div class="nac_customized_item_box">
 
                                     <div class="nac_customized_item_box_tg">DESIGN</div>
-                                   
+
                                     <figure>
                                         <div class="nac_customized_item_box_cover">
                                             <h3 class="nac">開始設計</h3>
@@ -120,7 +116,7 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
 
                                     <h6 class="customized_item_title"><?= $row['name'] ?></h6>
                                     <h6 class="customized_item_money">NT<?= $row['price'] ?></h6>
-                                    
+
                                 </div>
 
                             </a>
