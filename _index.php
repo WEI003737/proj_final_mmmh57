@@ -20,6 +20,8 @@ require __DIR__. '/__connect_db.php';
 
 <body>
 <?php include __DIR__. '/parts/header.php';?>
+<?php include __DIR__ . '/parts/h_f_script.php'; ?>
+
     <!----------------------   主視覺  -------------------------->
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
