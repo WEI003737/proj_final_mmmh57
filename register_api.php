@@ -1,19 +1,20 @@
 <?php
-require  __DIR__ . '/member_connect_db.php';
+require  __DIR__ . '/__connect_db.php';
+
 
 //回應的資料型態為JSON
 header('Content-Type: application/json');
 
 $output = [
-  'success' => false,
-  'error' => '資料欄位不足',
-  'code' => 0,
-  'postData' => $_POST
+    'success' => false,
+    'error' => '資料欄位不足',
+    'code' => 0,
+    'postData' => $_POST
 ];
 
 $email = isset($_POST['register_email']) ? $_POST['register_email'] : '';
 
- if(isset($_POST['register_email']) and isset($_POST['register_name']) and isset($_POST['register_mobile']) and isset($_POST['register_pw'])){
+if(isset($_POST['register_email']) and isset($_POST['register_name']) and isset($_POST['register_mobile']) and isset($_POST['register_pw'])){
     // TODO: 欄位資料檢查
 
 
@@ -39,36 +40,15 @@ $email = isset($_POST['register_email']) ? $_POST['register_email'] : '';
         $_POST['register_mobile'],
         $_POST['register_name'],
     ]);
-    
+
 
     if($stmt_register->rowCount() == 1){
         $_SESSION['loginUser'] =  $email;
         $output['success'] = true;
     }else {
-        $output['error'] = '資料無法新增'; 
+        $output['error'] = '資料無法新增';
     };
 }
 
-// $sql_coupon = "SELECT * FROM `members` WHERE `email`=". $_SESSION['loginUser'];
-// $stmt_coupon = $pdo -> query($sql_coupon);
-// $stmt_coupon -> fetchAll();
-
-// if($stmt_coupon->rowCount()==1){
-//     $_SESSION['sid'] =$stmt_coupon;   
-//     $output['success'] = true;
-    
-//     // $output['data'] = $row_coupon;  
-// }
-
-   
-    
-// //     $sql_coupon_new = "INSERT INTO `coupon`(`mem_sid`, `name`, `description`, `discount`, `is_use`, `expire_date`) 
-// //     VALUES (?,'會員註冊禮卷','購物即可折抵100元','100','0', NOW())";
-// //     //設is_use 0未使用 1表示已使用
-
-// //     $stmt = $pdo->prepare( $sql_coupon_new);
-// //     $stmt->execute([
-// //         $_SESSION['sid'],
-// //         ]);
 
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
