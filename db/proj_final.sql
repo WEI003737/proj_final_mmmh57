@@ -56,7 +56,7 @@ INSERT INTO `categories` (`sid`, `parent_sid`, `parent`, `en_parent`, `name`, `e
 (11, 3, '', 'bottoms', '五分褲', 'biker shorts', ''),
 (12, 3, '', 'bottoms', '七八分褲', 'capris', ''),
 (13, 3, '', 'bottoms', '長褲', 'pants', ''),
-(17, 4, '運動配件', 'accessories', '瑜珈', 'yoga', '');
+(14, 4, '運動配件', 'accessories', '瑜珈', 'yoga', '');
 
 -- --------------------------------------------------------
 
@@ -203,27 +203,27 @@ INSERT INTO `color` (`sid`, `pro_sid`, `color`, `pro_pic`) VALUES
 (125, 82, 'black', '[\"tanks_002_bk_0_resize\",\"tanks_002_bk_1_resize\", \"tanks_002_bk_2_resize\", \"tanks_002_bk_3_resize\", \"tanks_002_bk_4_resize\"]'),
 (126, 83, 'white', '[\"tanks_003_w_0_resize\",\"tanks_003_w_1_resize\", \"tanks_003_w_2_resize\", \"tanks_003_w_3_resize\", \"tanks_003_w_4_resize\"]'),
 (127, 84, 'black', '[\"tanks_004_bk_0_resize\",\"tanks_004_bk_1_resize\", \"tanks_004_bk_2_resize\", \"tanks_004_bk_3_resize\", \"tanks_004_bk_4_resize\"]'),
-(128, 85, 'pink', '[\"tanks_005_pk_0_resize\",\"tanks_005_pk_1_resize\", \"tanks_005_pk_2_resize\", \"tanks_005_pk_3_resize\", \"tanks_005_pk_4_resize\"]'),
+(128, 85, 'purple', '[\"tanks_005_p_0_resize\",\"tanks_005_p_1_resize\", \"tanks_005_p_2_resize\", \"tanks_005_p_3_resize\", \"tanks_005_p_4_resize\"]'),
 (129, 86, 'black', '[\"tanks_006_bk_0_resize\",\"tanks_006_bk_1_resize\", \"tanks_006_bk_2_resize\", \"tanks_006_bk_3_resize\", \"tanks_006_bk_4_resize\"]'),
 (130, 86, 'white', '[\"tanks_006_w_0_resize\",\"tanks_006_w_1_resize\", \"tanks_006_w_2_resize\", \"tanks_006_w_3_resize\", \"tanks_006_w_4_resize\"]'),
 (131, 87, 'blue', '[\"tanks_007_bl_0_resize\",\"tanks_007_bl_1_resize\", \"tanks_007_bl_2_resize\", \"tanks_007_bl_3_resize\", \"tanks_007_bl_4_resize\"]'),
 (132, 88, 'pink', '[\"tanks_008_pk_0_resize\",\"tanks_008_pk_1_resize\", \"tanks_008_pk_2_resize\", \"tanks_008_pk_3_resize\", \"tanks_008_pk_4_resize\"]'),
-(133, 89, 'black', '[\"tanks_007_bk_0_resize\",\"tanks_007_bk_1_resize\", \"tanks_007_bk_2_resize\", \"tanks_007_bk_3_resize\", \"tanks_007_bk_4_resize\"]'),
-(134, 89, 'white', '[\"tanks_007_w_0_resize\",\"tanks_007_w_1_resize\", \"tanks_007_w_2_resize\", \"tanks_007_w_3_resize\", \"tanks_007_w_4_resize\"]'),
-(135, 90, 'black', '[\"tanks_008_bk_0_resize\",\"tanks_008_bk_1_resize\", \"tanks_008_bk_2_resize\", \"tanks_098_bk_3_resize\", \"tanks_008_bk_4_resize\"]'),
-(136, 90, 'white', '[\"tanks_008_w_0_resize\",\"tanks_008_w_1_resize\", \"tanks_008_w_2_resize\", \"tanks_008_w_3_resize\", \"tanks_008_w_4_resize\"]'),
-(137, 91, 'blue', '[\"tanks_009_bl_0_resize\",\"tanks_009_bl_1_resize\", \"tanks_009_bl_2_resize\", \"tanks_009_bl_3_resize\", \"tanks_009_bl_4_resize\"]'),
-(138, 92, 'black', '[\"tanks_010_bk_0_resize\",\"tanks_010_bk_1_resize\", \"tanks_010_bk_2_resize\", \"tanks_010_bk_3_resize\", \"tanks_010_bk_4_resize\"]'),
-(139, 92, 'pink', '[\"tanks_011_pk_0_resize\",\"tanks_011_pk_1_resize\", \"tanks_011_pk_2_resize\", \"tanks_011_pk_3_resize\", \"tanks_011_pk_4_resize\"]'),
-(140, 93, 'pink', '[\"tanks_012_pk_0_resize\",\"tanks_012_pk_1_resize\", \"tanks_012_pk_2_resize\", \"tanks_012_pk_3_resize\", \"tanks_012_pk_4_resize\"]'),
-(141, 94, 'black', '[\"tanks_013_bk_0_resize\",\"tanks_013_bk_1_resize\", \"tanks_013_bk_2_resize\", \"tanks_013_bk_3_resize\", \"tanks_013_bk_4_resize\"]'),
-(142, 94, 'pink', '[\"tanks_013_pk_0_resize\",\"tanks_013_pk_1_resize\", \"tanks_013_pk_2_resize\", \"tanks_013_pk_3_resize\", \"tanks_013_pk_4_resize\"]'),
-(143, 95, 'blue', '[\"tanks_014_bl_0_resize\",\"tanks_014_bl_1_resize\", \"tanks_014_bl_2_resize\", \"tanks_014_bl_3_resize\", \"tanks_014_bl_4_resize\"]'),
-(144, 95, 'pink', '[\"tanks_014_pk_0_resize\",\"tanks_014_pk_1_resize\", \"tanks_014_pk_2_resize\", \"tanks_014_pk_3_resize\", \"tanks_014_pk_4_resize\"]'),
-(145, 96, 'pink', '[\"tanks_015_pk_0_resize\",\"tanks_015_pk_1_resize\", \"tanks_015_pk_2_resize\", \"tanks_015_pk_3_resize\", \"tanks_015_pk_4_resize\"]'),
+(133, 89, 'black', '[\"tanks_009_bk_0_resize\",\"tanks_009_bk_1_resize\", \"tanks_009_bk_2_resize\", \"tanks_009_bk_3_resize\", \"tanks_009_bk_4_resize\"]'),
+(134, 89, 'white', '[\"tanks_009_w_0_resize\",\"tanks_009_w_1_resize\", \"tanks_009_w_2_resize\", \"tanks_009_w_3_resize\", \"tanks_009_w_4_resize\"]'),
+(135, 90, 'black', '[\"tanks_010_bk_0_resize\",\"tanks_010_bk_1_resize\", \"tanks_010_bk_2_resize\", \"tanks_010_bk_3_resize\", \"tanks_010_bk_4_resize\"]'),
+(136, 90, 'white', '[\"tanks_010_w_0_resize\",\"tanks_010_w_1_resize\", \"tanks_010_w_2_resize\", \"tanks_010_w_3_resize\", \"tanks_010_w_4_resize\"]'),
+(137, 91, 'blue', '[\"tanks_011_bl_0_resize\",\"tanks_011_bl_1_resize\", \"tanks_011_bl_2_resize\", \"tanks_011_bl_3_resize\", \"tanks_011_bl_4_resize\"]'),
+(138, 92, 'black', '[\"tanks_012_bk_0_resize\",\"tanks_012_bk_1_resize\", \"tanks_012_bk_2_resize\", \"tanks_012_bk_3_resize\", \"tanks_012_bk_4_resize\"]'),
+(139, 92, 'pink', '[\"tanks_012_pk_0_resize\",\"tanks_012_pk_1_resize\", \"tanks_012_pk_2_resize\", \"tanks_012_pk_3_resize\", \"tanks_012_pk_4_resize\"]'),
+(140, 93, 'pink', '[\"tanks_013_pk_0_resize\",\"tanks_013_pk_1_resize\", \"tanks_013_pk_2_resize\", \"tanks_013_pk_3_resize\", \"tanks_013_pk_4_resize\"]'),
+(141, 94, 'black', '[\"tanks_014_bk_0_resize\",\"tanks_014_bk_1_resize\", \"tanks_014_bk_2_resize\", \"tanks_014_bk_3_resize\", \"tanks_014_bk_4_resize\"]'),
+(142, 94, 'pink', '[\"tanks_014_pk_0_resize\",\"tanks_014_pk_1_resize\", \"tanks_014_pk_2_resize\", \"tanks_014_pk_3_resize\", \"tanks_014_pk_4_resize\"]'),
+(143, 95, 'blue', '[\"tanks_015_bl_0_resize\",\"tanks_015_bl_1_resize\", \"tanks_015_bl_2_resize\", \"tanks_015_bl_3_resize\", \"tanks_015_bl_4_resize\"]'),
+(144, 95, 'pink', '[\"tanks_015_pk_0_resize\",\"tanks_015_pk_1_resize\", \"tanks_015_pk_2_resize\", \"tanks_015_pk_3_resize\", \"tanks_015_pk_4_resize\"]'),
+(145, 96, 'black', '[\"tanks_016_bk_0_resize\",\"tanks_016_bk_1_resize\", \"tanks_016_bk_2_resize\", \"tanks_016_bk_3_resize\", \"tanks_016_bk_4_resize\"]'),
 (146, 97, 'black', '[\"longsleeves_000_bk_0_resize\",\"longsleeves_000_bk_1_resize\", \"longsleeves_000_bk_2_resize\", \"longsleeves_000_bk_3_resize\", \"longsleeves_000_bk_4_resize\"]'),
 (147, 98, 'black', '[\"longsleeves_001_bk_0_resize\",\"longsleeves_001_bk_1_resize\", \"longsleeves_001_bk_2_resize\", \"longsleeves_001_bk_3_resize\", \"longsleeves_001_bk_4_resize\"]'),
-(148, 98, 'blue', '[\"longsleeves_001_bl_0_resize\",\"longsleeves_001_bl_1_resize\", \"longsleeves_001_bl_2_resize\", \"longsleeves_001_bl_3_resize\", \"longsleeves_001_bl_4_resize\"]'),
+(148, 98, 'brown', '[\"longsleeves_001_br_0_resize\",\"longsleeves_001_br_1_resize\", \"longsleeves_001_br_2_resize\", \"longsleeves_001_br_3_resize\", \"longsleeves_001_br_4_resize\"]'),
 (149, 99, 'black', '[\"longsleeves_002_bk_0_resize\",\"longsleeves_002_bk_1_resize\", \"longsleeves_002_bk_2_resize\", \"longsleeves_002_bk_3_resize\", \"longsleeves_002_bk_4_resize\"]'),
 (150, 100, 'black', '[\"longsleeves_003_bk_0_resize\",\"longsleeves_003_bk_1_resize\", \"longsleeves_003_bk_2_resize\", \"longsleeves_003_bk_3_resize\", \"longsleeves_003_bk_4_resize\"]'),
 (151, 101, 'orange', '[\"longsleeves_004_o_0_resize\",\"longsleeves_004_o_1_resize\", \"longsleeves_004_o_2_resize\", \"longsleeves_004_o_3_resize\", \"longsleeves_004_o_4_resize\"]'),
@@ -237,17 +237,17 @@ INSERT INTO `color` (`sid`, `pro_sid`, `color`, `pro_pic`) VALUES
 (159, 108, 'white', '[\"longsleeves_011_w_0_resize\",\"longsleeves_011_w_1_resize\", \"longsleeves_011_w_2_resize\", \"longsleeves_011_w_3_resize\", \"longsleeves_011_w_4_resize\"]'),
 (160, 109, 'black', '[\"longsleeves_012_bk_0_resize\",\"longsleeves_012_bk_1_resize\", \"longsleeves_012_bk_2_resize\", \"longsleeves_012_bk_3_resize\", \"longsleeves_012_bk_4_resize\"]'),
 (161, 110, 'black', '[\"longsleeves_013_bk_0_resize\",\"longsleeves_013_bk_1_resize\", \"longsleeves_013_bk_2_resize\", \"longsleeves_013_bk_3_resize\", \"longsleeves_013_bk_4_resize\"]'),
-(162, 111, 'white', '[\"longsleeves_014_w_0_resize\",\"longsleeves_014_w_1_resize\", \"longsleeves_014_w_2_resize\", \"longsleeves_014_w_3_resize\", \"longsleeves_014_w_4_resize\"]'),
-(163, 112, 'black', '[\"longsleeves_015_bk_0_resize\",\"longsleeves_015_bk_1_resize\", \"longsleeves_015_bk_2_resize\", \"longsleeves_015_bk_3_resize\", \"longsleeves_015_bk_4_resize\"]'),
-(164, 113, 'white', '[\"longsleeves_016_w_0_resize\",\"longsleeves_016_w_1_resize\", \"longsleeves_016_w_2_resize\", \"longsleeves_016_w_3_resize\", \"longsleeves_016_w_4_resize\"]'),
+(162, 111, 'black', '[\"longsleeves_014_bk_0_resize\",\"longsleeves_014_bk_1_resize\", \"longsleeves_014_bk_2_resize\", \"longsleeves_014_bk_3_resize\", \"longsleeves_014_bk_4_resize\"]'),
+(163, 112, 'white', '[\"longsleeves_015_w_0_resize\",\"longsleeves_015_w_1_resize\", \"longsleeves_015_w_2_resize\", \"longsleeves_015_w_3_resize\", \"longsleeves_015_w_4_resize\"]'),
+(164, 113, 'black', '[\"longsleeves_016_bk_0_resize\",\"longsleeves_016_bk_1_resize\", \"longsleeves_016_bk_2_resize\", \"longsleeves_016_bk_3_resize\", \"longsleeves_016_bk_4_resize\"]'),
 (165, 114, 'black', '[\"longsleeves_017_bk_0_resize\",\"longsleeves_017_bk_1_resize\", \"longsleeves_017_bk_2_resize\", \"longsleeves_017_bk_3_resize\", \"longsleeves_017_bk_4_resize\"]'),
 (166, 114, 'blue', '[\"longsleeves_017_bl_0_resize\",\"longsleeves_017_bl_1_resize\", \"longsleeves_017_bl_2_resize\", \"longsleeves_017_bl_3_resize\", \"longsleeves_017_bl_4_resize\"]'),
-(167, 115, 'blue', '[\"longsleeves_018_bl_0_resize\",\"longsleeves_018_bl_1_resize\", \"longsleeves_018_bl_2_resize\", \"longsleeves_018_bl_3_resize\", \"longsleeves_018_bl_4_resize\"]'),
+(167, 115, 'black', '[\"longsleeves_018_bk_0_resize\",\"longsleeves_018_bk_1_resize\", \"longsleeves_018_bk_2_resize\", \"longsleeves_018_bk_3_resize\", \"longsleeves_018_bk_4_resize\"]'),
 (168, 116, 'black', '[\"longsleeves_019_bk_0_resize\",\"longsleeves_019_bk_1_resize\", \"longsleeves_019_bk_2_resize\", \"longsleeves_019_bk_3_resize\", \"longsleeves_019_bk_4_resize\"]'),
 (169, 116, 'white', '[\"longsleeves_019_w_0_resize\",\"longsleeves_019_w_1_resize\", \"longsleeves_019_w_2_resize\", \"longsleeves_019_w_3_resize\", \"longsleeves_019_w_4_resize\"]'),
 (170, 117, 'pink', '[\"longsleeves_020_pk_0_resize\",\"longsleeves_020_pk_1_resize\", \"longsleeves_020_pk_2_resize\", \"longsleeves_020_pk_3_resize\", \"longsleeves_020_pk_4_resize\"]'),
 (171, 117, 'white', '[\"longsleeves_020_w_0_resize\",\"longsleeves_020_w_1_resize\", \"longsleeves_020_w_2_resize\", \"longsleeves_020_w_3_resize\", \"longsleeves_020_w_4_resize\"]'),
-(172, 118, 'white', '[\"longsleeves_021_w_0_resize\",\"longsleeves_021_w_1_resize\", \"longsleeves_021_w_2_resize\", \"longsleeves_021_w_3_resize\", \"longsleeves_021_w_4_resize\"]'),
+(172, 118, 'black', '[\"longsleeves_021_bk_0_resize\",\"longsleeves_021_bk_1_resize\", \"longsleeves_021_bk_2_resize\", \"longsleeves_021_bk_3_resize\", \"longsleeves_021_bk_4_resize\"]'),
 (173, 119, 'black', '[\"longsleeves_022_bk_0_resize\",\"longsleeves_022_bk_1_resize\", \"longsleeves_022_bk_2_resize\", \"longsleeves_022_bk_3_resize\", \"longsleeves_022_bk_4_resize\"]'),
 (174, 119, 'blue', '[\"longsleeves_022_bl_0_resize\",\"longsleeves_022_bl_1_resize\", \"longsleeves_022_bl_2_resize\", \"longsleeves_022_bl_3_resize\", \"longsleeves_022_bl_4_resize\"]'),
 (175, 119, 'purple', '[\"longsleeves_022_p_0_resize\",\"longsleeves_022_p_1_resize\", \"longsleeves_022_p_2_resize\", \"longsleeves_022_p_3_resize\", \"longsleeves_022_p_4_resize\"]'),
@@ -321,7 +321,7 @@ INSERT INTO `color` (`sid`, `pro_sid`, `color`, `pro_pic`) VALUES
 (243, 183, 'black', '[\"capris_005_bk_1_resize\",\"capris_005_bk_2_resize\", \"capris_005_bk_3_resize\", \"capris_005_bk_4_resize\", \"capris_005_bk_5_resize\"]'),
 (244, 183, 'blue', '[\"capris_005_bl_1_resize\",\"capris_005_bl_2_resize\", \"capris_005_bl_3_resize\", \"capris_005_bl_4_resize\", \"capris_005_bl_5_resize\"]'),
 (245, 184, 'gray', '[\"capris_006_gr_1_resize\",\"capris_006_gr_2_resize\", \"capris_006_gr_3_resize\", \"capris_006_gr_4_resize\", \"capris_006_gr_5_resize\"]'),
-(246, 184, 'purple', '[\"capris_006_bk_1_resize\",\"capris_006_bk_2_resize\", \"capris_006_bk_3_resize\", \"capris_006_bk_4_resize\", \"capris_006_bk_5_resize\"]'),
+(246, 184, 'purple', '[\"capris_006_p_1_resize\",\"capris_006_p_2_resize\", \"capris_006_p_3_resize\", \"capris_006_p_4_resize\", \"capris_006_p_5_resize\"]'),
 (247, 185, 'black', '[\"pants_001_bk_1_resize\",\"pants_001_bk_2_resize\", \"pants_001_bk_3_resize\", \"pants_001_bk_4_resize\", \"pants_001_bk_5_resize\"]'),
 (248, 185, 'gray', '[\"pants_001_gr_1_resize\",\"pants_001_gr_2_resize\", \"pants_001_gr_3_resize\", \"pants_001_gr_4_resize\", \"pants_001_gr_5_resize\"]'),
 (249, 186, 'black', '[\"pants_002_bk_1_resize\",\"pants_002_bk_2_resize\", \"pants_002_bk_3_resize\", \"pants_002_bk_4_resize\", \"pants_002_bk_5_resize\"]'),
@@ -334,13 +334,13 @@ INSERT INTO `color` (`sid`, `pro_sid`, `color`, `pro_pic`) VALUES
 (256, 191, 'pink', '[\"yoga_001_pk_0_resize\",\"yoga_001_pk_1_resize\", \"yoga_001_pk_2_resize\", \"yoga_001_pk_3_resize\", \"yoga_001_pk_4_resize\"]'),
 (257, 192, 'pink', '[\"yoga_002_pk_0_resize\",\"yoga_002_pk_1_resize\", \"yoga_002_pk_2_resize\", \"yoga_002_pk_3_resize\", \"yoga_002_pk_4_resize\"]'),
 (258, 193, 'blue', '[\"yoga_003_bl_0_resize\",\"yoga_003_bl_1_resize\", \"yoga_003_bl_2_resize\", \"yoga_003_bl_3_resize\", \"yoga_003_bl_4_resize\"]'),
-(259, 194, 'green', '[\"yoga_004_gn_0_resize\",\"yoga_004_gn_1_resize\", \"yoga_004_gn_2_resize\", \"yoga_004_gn_3_resize\", \"yoga_004_gn_4_resize\"]'),
+(259, 194, 'gray', '[\"yoga_004_gr_0_resize\",\"yoga_004_gr_1_resize\", \"yoga_004_gr_2_resize\", \"yoga_004_gr_3_resize\", \"yoga_004_gr_4_resize\"]'),
 (260, 195, 'blue', '[\"yoga_005_bl_0_resize\",\"yoga_005_bl_1_resize\", \"yoga_005_bl_2_resize\", \"yoga_005_bl_3_resize\", \"yoga_005_bl_4_resize\"]'),
 (261, 196, 'purple', '[\"yoga_006_p_0_resize\",\"yoga_006_p_1_resize\", \"yoga_006_p_2_resize\", \"yoga_006_p_3_resize\", \"yoga_006_p_4_resize\"]'),
 (262, 197, 'green', '[\"yoga_007_gn_0_resize\",\"yoga_007_gn_1_resize\", \"yoga_007_gn_2_resize\", \"yoga_007_gn_3_resize\", \"yoga_007_gn_4_resize\"]'),
 (263, 198, 'pink', '[\"yoga_008_pk_0_resize\",\"yoga_008_pk_1_resize\", \"yoga_008_pk_2_resize\", \"yoga_008_pk_3_resize\", \"yoga_008_pk_4_resize\"]'),
 (264, 199, 'pink', '[\"yoga_009_pk_0_resize\",\"yoga_009_pk_1_resize\", \"yoga_009_pk_2_resize\", \"yoga_009_pk_3_resize\", \"yoga_009_pk_4_resize\"]'),
-(265, 200, 'pink', '[\"yoga_010_bk_0_resize\",\"yoga_010_bk_1_resize\", \"yoga_010_bk_2_resize\", \"yoga_010_bk_3_resize\", \"yoga_010_bk_4_resize\"]');
+(265, 200, 'pink', '[\"yoga_010_pk_0_resize\",\"yoga_010_pk_1_resize\", \"yoga_010_pk_2_resize\", \"yoga_010_pk_3_resize\", \"yoga_010_pk_4_resize\"]');
 
 -- --------------------------------------------------------
 
@@ -385,16 +385,34 @@ CREATE TABLE `customize` (
   `take_care` varchar(255) NOT NULL,
   `can_cus_color` varchar(255) NOT NULL,
   `pro_pic` varchar(255) NOT NULL,
-  `cus_pic` varchar(255) NOT NULL
+  `cus_area_svg` longtext NOT NULL,
+  `cus_area1` varchar(255) NOT NULL,
+  `cus_area2` varchar(255) NOT NULL,
+  `cus_area3` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `customize`
+--
+
+INSERT INTO `customize` (`sid`, `cate_sid`, `name`, `price`, `intro`, `material`, `take_care`, `can_cus_color`, `pro_pic`, `cus_area_svg`, `cus_area1`, `cus_area2`, `cus_area3`) VALUES
+(1, 1, 'Sunrise 時尚三色運動內衣', '3,280', 'Sunrise撞色拼接緊身運動褲，以亮眼高彩度的撞色拼接作為設計，採用機能性面料，不僅舒適親膚，絕佳彈性及透氣感讓妳能夠大膽嘗試任何運動，展現妳最青春的健康活力！\r\n\r\n- 高腰全長版型。\r\n- 撞色拼接設計。\r\n- 高彈性機能面料，透氣快乾，四面彈力設計，順滑親膚。', '【 尺寸材質 】成份：尼龍 70%、彈性纖維 30%', '【 建議洗滌方式】1.以洗標為準。2.使用洗衣網袋，反面清洗。3.使用中性洗滌劑，勿使用柔軟精。4.陰乾，勿烘乾。5.勿長時間浸泡。', '[\"客製化顏色(一)\", \"客製化顏色(二)\", \"客製化顏色(三)\"]', 'customized_sportsbras_01_pro_pic', '<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<!-- Generator: Adobe Illustrator 24.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->\r\n<svg version=\"1.1\" id=\"customize_x5F_blend\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"\r\n	 x=\"0px\" y=\"0px\" viewBox=\"0 0 1800 2331\" style=\"enable-background:new 0 0 1800 2331;\" xml:space=\"preserve\">\r\n<style type=\"text/css\">\r\n	.st0{fill:none;}\r\n</style>\r\n<path id=\"Clothes_area3\" class=\"\" d=\"M514.8,1454.6c-1.8-3.5-2.5-6.4-4.3-8.2c-5.4-5.6-11.3-10.8-16.9-16.3c-1.3-1.2-2.3-2.7-3.8-4.4\r\n	c5.2-2.6,9.8-5.2,14.5-7.4c15.4-7.2,30.9-14.1,46.3-21.3c15.2-7.1,30.3-14.5,45.6-21.5c26.7-12.3,53.3-25,80.4-36.5\r\n	c24.8-10.5,50-20.1,75.3-29.4c34.4-12.6,68.9-24.6,103.5-36.7c20.7-7.3,41.6-14.1,62.3-21.6c27-9.9,53.8-20.4,80.7-30.5\r\n	c23.4-8.8,46.7-17.7,70.3-25.8c17.9-6.1,36.7-8,55.4-10.2c30.2-3.6,60.6-5.9,91-7.1c20.9-0.8,41.9-2.2,62.8-2.9\r\n	c26-0.9,51.9-1.7,77.9-1.8c19.6-0.1,76.7,1.8,77,6.1c0.4,5.6,0.8,11.3,1.2,16.9c2.3,30,12.9,181.2,13.5,192.2c0.1,2.6-0.2,6-1.8,7.7\r\n	c-1,1-4.9-0.1-7.2-1.1c-32.6-13.9-71.5-20.9-114-20.2s-73.8,5.8-106.9,8.6s-108.5-0.8-117.5-0.8c1,2.9,2.9,6.8,3.8,9.4\r\n	c1.5,4.4,0.6,6.1-4.1,6c-7.5-0.2-188.5-13.2-199.9-13.2c-13.8,0-47.7,0.4-79.5,1.9s-77,6.8-117.5,16.3\r\n	c-25.1,5.9-78.1,18.6-124.6,31.8c-13.3,3.7-25.5,10.8-37.1,14.7C528,1453.9,515.7,1454.5,514.8,1454.6z\"/>\r\n<path id=\"Clothes_area2\" class=\"\" d=\"M514.8,1454.6c0.5-0.3-2.5-6.4-4.3-8.2c-5.4-5.6-11.3-10.8-16.9-16.3c-1.3-1.2-2.3-2.7-3.8-4.4\r\n	c5.2-2.6,9.8-5.2,14.5-7.4c15.4-7.2,30.9-14.1,46.3-21.3c15.2-7.1,30.3-14.5,45.6-21.5c26.7-12.3,53.3-25,80.4-36.5\r\n	c24.8-10.5,50-20.1,75.3-29.4c34.4-12.6,68.9-24.6,103.5-36.7c20.7-7.3,41.6-14.1,62.3-21.6c27-9.9,53.8-20.4,80.7-30.5\r\n	c23.4-8.8,46.7-17.7,70.3-25.8c17.9-6.1,36.7-8,55.4-10.2c30.2-3.6,60.6-5.9,91-7.1c20.9-0.8,41.9-2.2,62.8-2.9\r\n	c26-0.9,51.9-1.7,77.9-1.8c19.6-0.1,76.7,1.8,77,6.1c0,0-0.6-8.3-1.1-24.8c-0.5-16.4-5.6-53.3-9.9-78.6s-16.8-44.1-22.8-55.8\r\n	c-6-11.7-16.8-34.6-21.6-44.2c-12.7-0.6-30.4-1.4-51.6-1.8c-13.9-0.2-67.3-1-146.3,4.3c-44.6,3-66.9,4.5-91.9,9.2\r\n	c-31.2,5.9-53.4,11.8-86.1,23.8c-42.2,15.5-84.1,31.8-126.2,47.5c-30.4,11.4-60.9,22.5-91.5,33.5c-19.9,7.1-39.9,14.1-59.9,20.7\r\n	c-18.7,6.1-37.6,11.4-56.3,17.3c-38.5,12.1-77.1,23.7-115.2,36.7c-21.2,7.2-42.3,15.6-62.4,25.5c-20.9,10.2-41,22-60.6,34.5\r\n	c-18.4,11.7-33.5,26.4-44.6,44.3c-6.2,10-10,19.1-12.1,25.2c-10.1,28.5-7.6,52.8-6.1,65.7c1.2,10.6,4,25.7,10.9,42.9\r\n	c3.3,5.5,12.6,17.8,16.4,22.6s4.3,8.8,11.1,21.5s24.8,20.6,24.8,20.6s-0.5-2.8-0.4-5.3c0.1-2.5,1-5.7,3.3-5.8\r\n	c1.1,0,21.5,1.9,41.2,0.9C494.8,1458.5,514.3,1454.8,514.8,1454.6z\"/>\r\n<path id=\"Clothes_area1\" class=\"\" d=\"M1219,580.9c14.2,0.1,15-0.1,15.9,19.3c1.2,24.6,2.9,68.8,22.2,129.4\r\n	c20,62.8,79.3,168.9,96.6,201.6c6.5,12.3,13.5,23.9,20.6,36c1.7,2.9,3.1,8.7,3.1,8.7c-12.7-0.6-30.4-1.4-51.6-1.8\r\n	c-13.9-0.2-67.3-1-146.3,4.3c-44.6,3-66.9,4.5-91.9,9.2c-31.2,5.9-53.4,11.8-86.1,23.8c-42.2,15.5-84.1,31.8-126.2,47.5\r\n	c-30.4,11.4-60.9,22.5-91.5,33.5c-19.9,7.1-39.9,14.1-59.9,20.7c-18.7,6.1-37.6,11.4-56.3,17.3c-38.5,12.1-77.1,23.7-115.2,36.7\r\n	c-21.2,7.2-42.3,15.6-62.4,25.5c-20.9,10.2-41,22-60.6,34.5c-18.4,11.7-33.5,26.4-44.6,44.3c-6.2,10-10,19.1-12.1,25.2\r\n	c-10.1,28.5-7.6,52.8-6.1,65.7c1.2,10.6,4,25.7,10.9,42.9c-11.2-18.4-18.9-34.6-24-46.7c-4.7-11-20.6-49.8-27.8-105.1\r\n	c-0.4-3.3-1-7.8-1.6-13.9c-1.3-13.3-3.2-42.5,2.4-86.1c3.3-25.3,4.7-21.7,10.5-61.1c4.3-29,4.4-28.8,6.1-43.5\r\n	c2.8-23.3,9.4-45.1,21.8-65.2c14.5-23.5,31.3-45.1,50.5-64.8c21.5-22.1,46.1-40.2,72.5-55.9c29.7-17.6,35.6-22.3,42.1-19.5\r\n	c9.2,4,7.2,15.4,22.5,34.1c8.6,10.5,17.2,16.8,21.7,19.9c10,7.1,20.8,12.4,36.2,17.4c7.8,2.5,43.4,13.5,103,11.8\r\n	c11.1-0.3,20.1-1.1,38-2.6c19.3-1.6,32.9-3,45.3-4.6c11.4-1.4,21.1-2.9,25.5-3.6c58.7-9.4,112-36.6,112-36.6\r\n	c13.4-6.8,31.2-17,50.5-31.3c12.8-9.5,27.1-20.1,42.4-37.1c25.4-28.2,37.7-56.4,45.7-74.8c9-20.6,16.6-44.7,17.3-46.9\r\n	c2.2-7,3.3-10.5,4.7-15.8c4.3-15.3,8-30.9,12.2-46.2c1.4-5.1,2.5-8.2,9.3-11.5s22.5-11,29.2-13.4\r\n	C1170.2,593.1,1206,580.7,1219,580.9z\"/>\r\n</svg>\r\n', '', '', ''),
+(2, 1, 'Carmen 細肩綁帶運動內衣', '4,880', 'NYLORA Carmen細肩綁帶運動內衣，女人味十足的細肩帶設計搭配側邊綁帶及一字美背設計，簡約具有造型感，讓妳不論是去運動還是外出活動，舉手投足都充滿時尚魅力！\r\n\r\n- 有襯墊。\r\n- 細肩帶、美背設計。\r\n- 具造型感的撞色設計。', '【 尺寸材質 】\r\n成份：尼龍 70%、彈性纖維 30%', '【 建議洗滌方式】1.以洗標為準。2.使用洗衣網袋，反面清洗。3.使用中性洗滌劑，勿使用柔軟精。4.陰乾，勿烘乾。5.勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\"]', 'customized_sportsbras_02_pro_pic', '', '', '', ''),
+(3, 1, 'Bennetts班尼特條紋運動內衣', '3,280', '個性十足的Bennett條紋運動內衣，高包覆性的版型加上性感的V領，搭配亮眼的條紋色塊拼接閃耀的金屬感面料，讓妳從健身房到街頭都時尚迷人！    - 無襯墊。  - 特殊條紋拼接色塊。  - V領領圍，較寬肩帶。  - 如塑身衣般，提供適度壓縮力。  - 機能性面料，排汗快乾、舒適透氣。', '【 尺寸材質 】  成份：尼龍 69%、彈性纖維 31%', '【 建議洗滌方式】 1.以洗標為準。 2.使用洗衣網袋，反面清洗。3.使用中性洗滌劑，勿使用柔軟精。4.陰乾，勿烘乾。 5.勿長時間浸泡。重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。 下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\", \"客製化顏色(三)\"]', 'customized_sportsbras_03_pro_pic', '', '', '', ''),
+(4, 2, 'Flyweight 短版連帽上衣', '5,280', '朝氣十足的Flyweight短版連帽上衣，以高彩度的撞色拼接，加上拇指孔洞設計，為整體增添獨樹一格的造型感。採用舒適的高彈性機能面料，讓你輕鬆展現健康活力的時尚運動風！\r\n\r\n- 短版版型。\r\n- 高彩度撞色拼接設計。\r\n- 高彈性機能布料，舒適親膚。', '成份：尼龍 89%、彈性纖維 11%', '【 建議洗滌方式 】\r\n\r\n1. 以洗標為準。\r\n2. 使用洗衣網袋，反面清洗。\r\n3. 使用中性洗滌劑，勿使用柔軟精。\r\n4. 陰乾，勿烘乾。\r\n5. 勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\", \"客製化顏色(三)\"]', 'customized_sportatops_01_pro_pic', '', '', '', ''),
+(5, 2, 'Waltz Pull On 運動外套', '9,980', '充滿個性的 Waltz Pull On運動外套，別於一般的運動外套，從腰身設計到整體版型剪裁，多處精緻細節打造妳的個人特色！採用精緻的造型領型搭配logo設計細節，袖子與袖口採用抓皺設計，提升整體造型感並打破外套的既有風格，輕鬆打造休閒時尚風！\r\n\r\n\r\n- 鬆緊腰身設計。\r\n- 袖子縮口造型。\r\n- 造型衣領，拉鍊開衩設計。\r\n- 高質感機能性布料，舒適親膚，透氣涼爽。', '成份：聚酯纖維86%、尼龍14%', '【 建議洗滌方式 】\r\n\r\n1.以洗標為準。\r\n2.使用洗衣網袋，反面清洗。\r\n3.使用中性洗滌劑，勿使用柔軟精。\r\n4.陰乾，勿烘乾。\r\n5.勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\"]', 'customized_sportatops_02_pro_pic', '', '', '', ''),
+(6, 2, 'Wellesley 長袖連帽上衣', '7,280', 'Wellesley長袖連帽上衣，寬鬆版型搭配撞色異材質的拼接設計，大方不失精緻感。採用親膚手感的機能性布料，舒適柔軟的布料讓妳穿上後捨不得脫下！\r\n\r\n\r\n\r\n- 寬鬆舒適版型。\r\n\r\n- 袖子撞色異材質拼接。\r\n\r\n- 機能性布料，舒適親膚。\r\n\r\n', '成份：聚酯纖維 50%、尼龍 29%、萊卡 21%', '【 建議洗滌方式 】\r\n\r\n1.以洗標為準。\r\n2.使用洗衣網袋，反面清洗。\r\n3.使用中性洗滌劑，勿使用柔軟精。\r\n4.陰乾，勿烘乾。\r\n5.勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\", \"客製化顏色(三)\"]', 'customized_sportatops_03_pro_pic', '', '', '', ''),
+(7, 3, 'Bolt 撞色緊身運動褲', '6,280', 'Bolt撞色緊身運動褲，高腰頭以彈性網紗布作為內襯，提供適度壓縮力，有效收緊腹部肌群。高彩度的流線型撞色設計，為整體造型增添造型前衛感。建議搭配Curve 削肩運動內衣，體現潮流感十足的運動時尚風格。\r\n\r\n- 高腰版型。\r\n- 腰頭內袋設計。\r\n- 流線型撞色拼接。\r\n- 高彈性機能面料，柔滑親膚，透氣舒適。', '成份：尼龍 79%、彈性纖維 21%', '【 建議洗滌方式 】\r\n\r\n1. 以洗標為準。\r\n2. 使用洗衣網袋，反面清洗。\r\n3. 使用中性洗滌劑，勿使用柔軟精。\r\n4. 陰乾，勿烘乾。\r\n5. 勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\", \"客製化顏色(三)\"]', 'customized_sportsbottom_01_pro_pic', '', '', '', ''),
+(8, 3, 'Sunrise 撞色拼接緊身運動褲', '4,280', 'Sunrise撞色拼接緊身運動褲，以亮眼高彩度的撞色拼接作為設計，採用機能性面料，不僅舒適親膚，絕佳彈性及透氣感讓妳能夠大膽嘗試任何運動，展現妳最青春的健康活力！\r\n\r\n- 高腰全長版型。\r\n- 撞色拼接設計。\r\n- 高彈性機能面料，透氣快乾，四面彈力設計，順滑親膚。', '成份：尼龍 70%、彈性纖維 30%', '【 建議洗滌方式】\r\n\r\n1.以洗標為準。\r\n2.使用洗衣網袋，反面清洗。\r\n3.使用中性洗滌劑，勿使用柔軟精。\r\n4.陰乾，勿烘乾。\r\n5.勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\", \"客製化顏色(三)\"]', 'customized_sportsbottom_02_pro_pic', '', '', '', ''),
+(9, 3, 'Elia 撞色綁帶緊身褲', '5,980', '時髦的Elia撞色綁帶緊身褲，採用舒適的機能性面料，高腰版型搭配撞色拼接設計提升包覆支撐力，側邊綁帶設計，具有女人味不失俏麗，是妳不可或缺的時髦單品！\r\n\r\n\r\n\r\n- 高腰全長版型。\r\n\r\n- 腰頭撞色拼接搭配綁帶設計。\r\n\r\n- 機能性面料，排汗快乾，舒適透氣。', '成份：尼龍76%、彈性纖維24%', '【 建議洗滌方式 】\r\n\r\n1.以洗標為準。\r\n2.使用洗衣網袋，反面清洗。\r\n3.使用中性洗滌劑，勿使用柔軟精。\r\n4.陰乾，勿烘乾。\r\n5.勿長時間浸泡。\r\n\r\n\r\n重要提醒：基於衛生原則，貼身衣物如內衣褲、運動內衣、緊身運動褲、襪子等商品，恕無法提供退換貨服務。\r\n下單選購前，請您務必詳細閱讀購物說明，如欲對本商品有其他的疑問或需特殊尺寸之測量， 歡迎留言給官網線上客服。', '[\"客製化顏色(一)\", \"客製化顏色(二)\"]', 'customized_sportsbottom_03_pro_pic', '', '', '', '');
 
 -- --------------------------------------------------------
 
 --
--- 資料表結構 `like_box`
+-- 資料表結構 `like`
 --
 
-CREATE TABLE `like_box` (
+CREATE TABLE `like` (
   `sid` int(11) NOT NULL,
   `mem_sid` int(11) NOT NULL,
   `pro_sid` int(11) NOT NULL
@@ -415,15 +433,16 @@ CREATE TABLE `members` (
   `created_date` datetime NOT NULL,
   `receiver` varchar(255) NOT NULL,
   `receiver_mobile` varchar(255) NOT NULL,
-  `address` varchar(255) NOT NULL
+  `address` varchar(255) NOT NULL,
+  `branch` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- 傾印資料表的資料 `members`
 --
 
-INSERT INTO `members` (`sid`, `email`, `password`, `mobile`, `name`, `created_date`, `receiver`, `receiver_mobile`, `address`) VALUES
-(1, 'aaa@aaa.aa', '12345678', '2', 'aaa', '0000-00-00 00:00:00', 'aaa', '0900000000', '12345678');
+INSERT INTO `members` (`sid`, `email`, `password`, `mobile`, `name`, `created_date`, `receiver`, `receiver_mobile`, `address`, `branch`) VALUES
+(1, 'aaa@aaa.aaa', 'Aa123456', '0900000000', 'aaa', '2020-05-01 13:25:39', 'aaa', '0900000000', 'bbb', '');
 
 -- --------------------------------------------------------
 
@@ -447,6 +466,14 @@ CREATE TABLE `orders` (
   `created_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- 傾印資料表的資料 `orders`
+--
+
+INSERT INTO `orders` (`sid`, `mem_sid`, `order_num`, `coupon`, `amount`, `shipping`, `receiver`, `receiver_mobile`, `address`, `payment`, `receipt`, `order_status`, `created_date`) VALUES
+(1, 1, 'RJUGYJU675H', '', '2000', '取貨付款', 'aaa', '0900000000', 'aaa', '取貨付款', '捐贈', '配貨中', '2020-05-01 20:34:16'),
+(2, 1, 'RJUGYJU675O', '', '3100', '超商取貨', 'aaa', '0900000000', 'aaa', '信用卡', '捐贈', '配貨中', '2020-05-01 20:34:16');
+
 -- --------------------------------------------------------
 
 --
@@ -467,6 +494,15 @@ CREATE TABLE `order_details` (
   `is_cus` tinyint(1) NOT NULL,
   `cus_color` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- 傾印資料表的資料 `order_details`
+--
+
+INSERT INTO `order_details` (`sid`, `order_sid`, `pro_sid`, `color_sid`, `size_sid`, `name`, `color`, `size`, `price`, `gty`, `is_cus`, `cus_color`) VALUES
+(1, 1, 1, 1, 1, '123', 'white', 'S', '890', '2', 0, ''),
+(2, 1, 1, 1, 1, '123', 'white', 'S', '890', '2', 0, ''),
+(3, 1, 2, 1, 1, '123', 'white', 'S', '890', '2', 0, '');
 
 -- --------------------------------------------------------
 
@@ -1817,9 +1853,9 @@ ALTER TABLE `customize`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `like_box`
+-- 資料表索引 `like`
 --
-ALTER TABLE `like_box`
+ALTER TABLE `like`
   ADD PRIMARY KEY (`sid`);
 
 --
@@ -1866,7 +1902,7 @@ ALTER TABLE `size`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `color`
@@ -1884,12 +1920,12 @@ ALTER TABLE `coupon`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `customize`
 --
 ALTER TABLE `customize`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- 使用資料表自動遞增(AUTO_INCREMENT) `like_box`
+-- 使用資料表自動遞增(AUTO_INCREMENT) `like`
 --
-ALTER TABLE `like_box`
+ALTER TABLE `like`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -1902,13 +1938,13 @@ ALTER TABLE `members`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `products`

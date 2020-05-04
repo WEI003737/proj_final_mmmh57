@@ -29,8 +29,8 @@ CREATE TABLE `proj_final`.`customize` ( `sid` INT NOT NULL AUTO_INCREMENT , `cat
 PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 
 //categories-----------------------------
-CREATE TABLE `proj_final`.`categories` ( `sid` INT NOT NULL AUTO_INCREMENT , `parent_sid` INT NOT NULL , `en_parent` VARCHAR(255) NOT NULL ,
-`en_name` VARCHAR(255) NOT NULL , `size_chart` VARCHAR(255) NOT NULL , PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
+CREATE TABLE `proj_final`.`categories` ( `sid` INT NOT NULL AUTO_INCREMENT , `parent_sid` INT NOT NULL , `parent` VARCHAR(255) NOT NULL , `en_parent` VARCHAR(255) NOT NULL ,
+`name` VARCHAR(255) NOT NULL ,`en_name` VARCHAR(255) NOT NULL , `size_chart` VARCHAR(255) NOT NULL , PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 
 //products-----------------------------
 CREATE TABLE `proj_final`.`products` ( `sid` INT NOT NULL AUTO_INCREMENT , `cate_sid` INT NOT NULL , `name` VARCHAR(255) NOT NULL ,
