@@ -31,22 +31,22 @@ if(!empty($cate)) {
     $where .= " AND cate_sid = $cate ";
 //    $my_qs['cate'] = $cate;
 };
-//if(!empty($select)) {
-//    switch ($select) {
-//        case "NewToOld":
-//            $orderBy .= " ORDER BY created_date DESC ";
-//            break;
-//        case "OldToNew":
-//            $orderBy .= " ORDER BY created_date ASC ";
-//            break;
-//        case "HighToLow":
-//            $orderBy .= " ORDER BY price DESC ";
-//            break;
-//        case "LowToHigh":
-//            $orderBy .= " ORDER BY price ASC ";
-//    }
-//
-//};
+if(!empty($select)) {
+    switch ($select) {
+        case "NewToOld":
+            $orderBy .= " ORDER BY created_date DESC ";
+            break;
+        case "OldToNew":
+            $orderBy .= " ORDER BY created_date ASC ";
+            break;
+        case "HighToLow":
+            $orderBy .= " ORDER BY price DESC ";
+            break;
+        case "LowToHigh":
+            $orderBy .= " ORDER BY price ASC ";
+    }
+
+};
 //echo json_encode($cate);
 //echo json_encode($select);
 
@@ -597,21 +597,21 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                             <input type="text" placeholder="請輸入最低價格">
                             <input type="text" placeholder="請輸入最高價格">
                         </div>
-<!--                        <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">-->
-<!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "NewToOld";
-//                            echo http_build_query($my_qs_tmp);?><!--">新到舊</a><i class="fas fa-chevron-down"></i>-->
-<!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "OldToNew";
-//                            echo http_build_query($my_qs_tmp);?><!--">舊到新</a><i class="fas fa-chevron-down"></i>-->
-<!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "HighToLow";
-//                            echo http_build_query($my_qs_tmp);?><!--">價錢高到低</a><i class="fas fa-chevron-down"></i>-->
-<!--                            <a href="?--><?php
-//                            $my_qs_tmp["select"] = "LowToHigh";
-//                            echo http_build_query($my_qs_tmp);?><!--">價錢低到高</a><i class="fas fa-chevron-down"></i>-->
-<!---->
-<!--                        </div>-->
+                        <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
+                            <a href="?<?php
+                            $my_qs_tmp["select"] = "NewToOld";
+                            echo http_build_query($my_qs_tmp);?>">新到舊</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs_tmp["select"] = "OldToNew";
+                            echo http_build_query($my_qs_tmp);?>">舊到新</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs_tmp["select"] = "HighToLow";
+                            echo http_build_query($my_qs_tmp);?>">價錢高到低</a><i class="fas fa-chevron-down"></i>
+                            <a href="?<?php
+                            $my_qs_tmp["select"] = "LowToHigh";
+                            echo http_build_query($my_qs_tmp);?>">價錢低到高</a><i class="fas fa-chevron-down"></i>
+
+                        </div>
                     </div>
                     <!-- 手機 -->
                     <div class="show-mobile wea_product_list_header_mobile position-absolute">

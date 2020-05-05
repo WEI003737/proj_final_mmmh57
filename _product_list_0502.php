@@ -1,139 +1,97 @@
 <?php
 require __DIR__ . '/__connect_db.php';
-$page_name = 'product_list';
 
 //-------------------篩選:頁數、商品類別、---------------------------------
 
 $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
-$selectDate = isset($_GET['selectDate']) ? $_GET['selectDate'] : "";
-
-
-
-//get的內容 要用http_build_query輸出
-$my_qs_tmp = $_GET;
-$my_qs = $_GET;
-$my_qs_color = $_GET;
-
-
-//print_r($my_qs);
-//可篩選的顏色種類 (test)
-$selectColor = ['red','black','blue','pink'];
-$selectColorCount = count($selectColor);
-
-//-----------------------------點商品類別 列出該類別商品---------------------------------
-$where = " WHERE 1 ";
-$orderBy = "";
-$color = "";
-
-if(!empty($cate)) {
-    $where .= " AND cate_sid = $cate ";
-//    $my_qs['cate'] = $cate;
-};
-if(!empty($selectDate)) {
-    $orderBy .= " ORDER BY created_date $selectDate ";
-};
-if(!empty($color)) {
-    $color .= " AND color =  $color ";
-
-};
+//$cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
 
 //取得總筆數
-$totalRows = $pdo->query("SELECT COUNT(1) FROM products $where ")
+$totalRows = $pdo->query("SELECT COUNT(1) FROM products")
     ->fetch(PDO::FETCH_NUM)[0];
 
 //算總頁數
 $totalPages = ceil($totalRows / $perPage);
 
+//限定頁數 max min
 ($page < 1) ? ($page = 1) : false;
 ($page > $totalPages) ? ($page = $totalPages) : false;
 
 //-----------------------------總商品資料 + 商品圖---------------------------------
+
 //如果有資料
-if($totalRows>0){
+if($totalRows>0) {
     //總商品sql
-    $totalProductSql = sprintf("SELECT * FROM products $where $orderBy LIMIT %s, %s  ", ($page-1)*$perPage, $perPage);
+    $totalProductSql = sprintf("SELECT * FROM products LIMIT %s, %s  ", ($page - 1) * $perPage, $perPage);
     //總商品資料
-    $totalProductStmt = $pdo -> query($totalProductSql);
-    $totalProducts = $totalProductStmt -> fetchAll();
+    $totalProducts = $pdo->query($totalProductSql)->fetchAll();
 
-//    另一種資料撈法------------------------------------------------------------------------------------
-    $dictProducts = [];
-    $proSids = [];
+    $productsArr = [];
+//    $colorArr = [];
+//    $sizeArr = [];
+    $proSid = [];
+    $i=1;
 
+    //商品資料
     foreach($totalProducts as $pro){
-        $dictProducts[ $pro['sid'] ] = $pro;
-        $proSids[] = $pro['sid'];
+        $productsArr[ $pro['sid'] ] = $pro;
+        $proSid[] = $pro['sid'];
     }
 
-    $colorSql = sprintf("SELECT * FROM `color` WHERE `pro_sid` IN (%s)", implode(',', $proSids));
-    $totalColorStmt = $pdo -> query($colorSql);
-    $totalColors = $totalColorStmt -> fetchAll();
+    foreach($productsArr as $p){
+        //顏色&照片資料
+        $colorSql = "SELECT * FROM `color` WHERE `pro_sid` = ".$p['sid'];
+        $colorRows = $pdo -> query($colorSql) -> fetchAll();
 
-    $i=0;
-    foreach($totalColors as $c){
-        $dictProducts[$i]['color'] = $c;
-        $i++;
-    }
-//    print_r($totalColors);
-    print_r($totalColors);
+        $productsArr[$i]['colorArr'] = $colorRows;
 
-    exit;
-
-//    另一種資料撈法------------------------------------------------------------------------------------
-
-
-
-    //商品資料最後，塞入從 color 資料表拿出的，該商品的其中一種顏色的圖片(陣列)
-    $i=0;
-    foreach($totalProducts as $value){
-        //加入照片陣列
-        //LIMIT 限制筆數
-//        $productPics = $pdo -> query("SELECT `pro_pic` FROM `color` WHERE `pro_sid`= ".$value["sid"]);
-//        $totalProductPics = $productPics -> fetchAll();
-//        $totalProducts[$i]["pictures"]=$totalProductPics;
-
-        //加入每個款式的顏色數量
-        $colorLengthSql = $pdo -> query("SELECT *,count(pro_sid) FROM `color` WHERE `pro_sid`= ".$value["sid"]." GROUP BY `pro_sid`");
-        $colorLength = $colorLengthSql -> fetch();
-        $totalProducts[$i]["colorLength"] = $colorLength['count(pro_sid)'];
-
-        //加入顏色陣列
-        //加入顏色照片陣列
-        $colorArrSql = $pdo -> query("SELECT `color`,`sid` AS `color_sid`,`pro_pic`  FROM `color` WHERE `pro_sid`= ".$value["sid"]." ORDER BY `sid`");
-        $colorArr = $colorArrSql -> fetchAll();
-        $totalProducts[$i]["colorArr"] = $colorArr;
 
         $j=0;
-        foreach($totalProducts[$i]["colorArr"] as $color){
-            $sizeSql = $pdo->query("SELECT `sid` AS `size_sid`, `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $color["color_sid"]." ORDER BY `sid` ");
+        foreach($productsArr[$i]["colorArr"] as $c){
+            $sizeSql = $pdo->query("SELECT `sid` AS `size_sid`, `size`,`in_stock` FROM `size` WHERE `color_sid`= " . $c["sid"]." ORDER BY `sid` ");
             $sizeArr = $sizeSql -> fetchAll();
-            $totalProducts[$i]["colorArr"][$j]["size"] = $sizeArr;
+            $productsArr[$i]["colorArr"][$j]["size"] = $sizeArr;
             $j++;
         }
 
         $i++;
     }
 
-};
+}
 
-//echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
-
-//----------------------------- hover 商品用資料---------------------------------
-
-
-$picOnlySql = $pdo -> query("SELECT `sid` AS `colorSid`, `pro_pic` FROM `color` ");
-$picOnlyRows = $picOnlySql -> fetchAll();
-
-echo json_encode($picOnlyRows, JSON_UNESCAPED_UNICODE);
+echo json_encode($productsArr, JSON_UNESCAPED_UNICODE);
 
 
 //-----------------------------商品選單---------------------------------
 
 $categoriesStmt = $pdo -> query("SELECT * FROM `categories`");
 $categoriesRow = $categoriesStmt -> fetchAll();
+
+//$cateArr = [];
+//$parentSid = [];
+//$i=1;
+//
+//$categoriesSql = "SELECT `parent_sid`, `parent` FROM `categories`";
+//$categoriesRow = $pdo -> query($categoriesSql) -> fetchAll();
+//
+//foreach($categoriesRow as $c){
+//    $cateArr[$c["parent_sid"]] = $c;
+//    $parentSid = $c["parent_sid"];
+//
+//
+//    $j=0;
+//    foreach($cateArr[$i] as $ca){
+//        $subClassSql = "SELECT `sid` as `subClass_sid`, `name` FROM `categories` WHERE `parent_sid` = " . $ca[$i-1]["parent_sid"] ." ORDER BY `sid` ";
+//        $subClassRows = $pdo -> query($subClassSql) -> fetchAll();
+//        $cateArr[$i][$j]["subClass"] = $subClassRows;
+//        $j++;
+//    };
+//
+//    $i++;
+//};
 //echo json_encode($categoriesRow);
+
 
 
 ?>
@@ -708,19 +666,19 @@ $categoriesRow = $categoriesStmt -> fetchAll();
 const a_addToCartBtn = $(".a_add_to_cart_btn"),
     a_sizeBtn = $(".a_size_btn");
 
-const a_picsOnlyArr = <?= json_encode($picOnlyRows) ?>;
-
-console.log(a_picsOnlyArr)
-    $(document).on("click", ".wea_product_list_item_color", function(){
-        a_selectColor = $(this).attr("data-colorSid");
-        a_selectPicData = a_picsOnlyArr.filter(function(){
-            console.log(a_selectColor);
-            return a_picsOnlyArr.colorSid == a_selectColor;
-            console.log(a_selectColor);
-        });
-        // a_picture = $(this).parent(".wea_product_list_item>img").attr("src","./product_images/<" + `?=$pictureArr[${colorNum}]` + "?>.png")
-        console.log(a_selectColor);
-    });
+//const a_picsOnlyArr = <?//= json_encode($picOnlyRows) ?>//;
+//
+//console.log(a_picsOnlyArr)
+//    $(document).on("click", ".wea_product_list_item_color", function(){
+//        a_selectColor = $(this).attr("data-colorSid");
+//        a_selectPicData = a_picsOnlyArr.filter(function(){
+//            console.log(a_selectColor);
+//            return a_picsOnlyArr.colorSid == a_selectColor;
+//            console.log(a_selectColor);
+//        });
+//        // a_picture = $(this).parent(".wea_product_list_item>img").attr("src","./product_images/<" + `?=$pictureArr[${colorNum}]` + "?>.png")
+//        console.log(a_selectColor);
+//    });
 
 //拿到 size 的 sid ------------------------------------------------------------------
 //將 size 的 sid 以 data-sizeSid 設定給上一層 div---------------------------------------

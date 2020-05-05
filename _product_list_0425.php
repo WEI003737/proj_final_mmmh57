@@ -511,7 +511,7 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                         // var_dump(json_decode($t["pictures"]["pro_pic"], true));
                         ?>
                     <li class="wea_product_list_item">
-                        <img src="./images/<?=$pictureArr[0]?>.png" alt="">
+                        <img src="./product_images/<?=$pictureArr[0]?>.png" alt="">
                         <p><?= $t['name']; ?></p>
                         <div class="d-flex justify-content-between">
                             <p class="wea_product_list_item_price">$<?= $t['price']; ?></p>
