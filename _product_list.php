@@ -7,30 +7,43 @@ $page_name = 'product_list';
 $perPage = 8;
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $cate = isset($_GET['cate']) ? intval($_GET['cate']) : 0;
-$select = isset($_GET['$select']) ? $_GET['$select'] : '';
+$select = isset($_GET['select']) ? $_GET['select'] : '';
+$price = isset($_GET['price']) ? $_GET['price'] : '';
+
 
 
 
 //get的內容 要用http_build_query輸出
 
-$my_qs = $_GET;
-$my_qs_tmp = $_GET;
+$my_qs_page = $my_qs_select = $my_qs_price = $my_qs = $_GET;
+
 
 
 //print_r($my_qs);
 //可篩選的顏色種類 (test)
-$selectColor = ['red','black','blue','pink'];
+//$selectColor = ['red','black','blue','pink'];
 $selectColorCount = count($selectColor);
 
 //-----------------------------點商品類別 列出該類別商品---------------------------------
 $where = " WHERE 1 ";
 $orderBy = "";
-$color = "";
 
 if(!empty($cate)) {
     $where .= " AND cate_sid = $cate ";
-//    $my_qs['cate'] = $cate;
+    //    $my_qs['cate'] = $cate;
 };
+
+if(!empty($price)){
+    switch ($price) {
+        case "700up":
+            $where .= " AND price > 700 ";
+            break;
+        case "700down":
+            $where .= " AND price < 700 ";
+            break;
+    }
+}
+
 if(!empty($select)) {
     switch ($select) {
         case "NewToOld":
@@ -45,7 +58,6 @@ if(!empty($select)) {
         case "LowToHigh":
             $orderBy .= " ORDER BY price ASC ";
     }
-
 };
 //echo json_encode($cate);
 //echo json_encode($select);
@@ -65,7 +77,9 @@ $totalPages = ceil($totalRows / $perPage);
 //如果有資料
 if($totalRows>0){
     //總商品sql
+
     $totalProductSql = sprintf("SELECT * FROM products $where $orderBy LIMIT %s, %s  ", ($page-1)*$perPage, $perPage);
+    echo $totalProductSql;
     //總商品資料
     $totalProductStmt = $pdo -> query($totalProductSql);
     $totalProducts = $totalProductStmt -> fetchAll();
@@ -570,14 +584,26 @@ $categoriesRow = $categoriesStmt -> fetchAll();
             <div class="col-sm-2">
                 <ul class="show-desktop wea_product_select_bar">
                     <ul ><a href="?"><h5>所有商品</h5></a></a></ul>
-                    <?php foreach($categoriesRow as $nav):  ?>
+
+                    <?php for($i=0; $i<count($categoriesRow); $i++):?>
                         <ul><a href="?<?php
-                            $my_qs['cate'] = $nav['sid'];
-                            echo http_build_query($my_qs);?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                            $my_qs['cate'] = $categoriesRow[$i]['sid'];
+                            unset($my_qs["page"]);
+                            echo http_build_query($my_qs);?>"><h6><?= $categoriesRow[$i]['parent'] ?></h6></a></ul>
                         <li><a href="?<?php
-                            $my_qs['cate'] = $nav['sid'];
-                            echo http_build_query($my_qs);?>"><p><?= $nav['name'] ?></p></a></li>
-                    <?php endforeach; ?>
+                            $my_qs['cate'] = $categoriesRow[$i]['sid'];
+                            unset($my_qs["page"]);
+                            echo http_build_query($my_qs);?>"><p><?= $categoriesRow[$i]['name'] ?></p></a></li>
+                    <?php endfor; ?>
+
+<!--                    --><?php //foreach($categoriesRow as $nav):  ?>
+<!--                        <ul><a href="?--><?php
+//                            $my_qs['cate'] = $nav['sid'];
+//                            echo http_build_query($my_qs);?><!--"><h6>--><?//= $nav['parent'] ?><!--</h6></a></ul>-->
+<!--                        <li><a href="?--><?php
+//                            $my_qs['cate'] = $nav['sid'];
+//                            echo http_build_query($my_qs);?><!--"><p>--><?//= $nav['name'] ?><!--</p></a></li>-->
+<!--                    --><?php //endforeach; ?>
 
                 </ul>
             </div>
@@ -589,27 +615,40 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                     <div class="d-flex wea_product_list_header">
                         <h5 class="show-desktop wea_product_list_tital ">所有商品</h5>
                         <div id="wea_product_list_filter" class="wea_product_list_changebar d-flex">
-                            <span>顏色</span><i class="fas fa-chevron-down"></i>
-                            <?php for($c=0; $c<=($selectColorCount-1); $c++):?>
-                                <a href=""><?= $selectColor[$c] ?></a>
-                            <?php endfor; ?>
+<!--                            <span>顏色</span><i class="fas fa-chevron-down"></i>-->
+<!--                            --><?php //for($c=0; $c<=($selectColorCount-1); $c++):?>
+<!--                                <a href="">--><?//= $selectColor[$c] ?><!--</a>-->
+<!--                            --><?php //endfor; ?>
                             <span>價格</span><i class="fas fa-chevron-down"></i>
-                            <input type="text" placeholder="請輸入最低價格">
-                            <input type="text" placeholder="請輸入最高價格">
+                            <a href="?<?php
+                            $my_qs_price["price"] = "700up";
+                            unset($my_qs_price["page"]);
+                            echo http_build_query($my_qs_price);?>">700以上</a>
+                            <a href="?<?php
+                            $my_qs_price["price"] = "700down";
+                            unset($my_qs_price["page"]);
+                            echo http_build_query($my_qs_price);?>">700以下</a>
+
+<!--                            <input type="text" placeholder="請輸入最低價格">-->
+<!--                            <input type="text" placeholder="請輸入最高價格">-->
                         </div>
                         <div id="wea_product_list_sort" class="wea_product_list_changebar d-flex">
                             <a href="?<?php
-                            $my_qs_tmp["select"] = "NewToOld";
-                            echo http_build_query($my_qs_tmp);?>">新到舊</a><i class="fas fa-chevron-down"></i>
+                            $my_qs_select["select"] = "NewToOld";
+                            unset($my_qs_select["page"]);
+                            echo http_build_query($my_qs_select);?>">新到舊</a><i class="fas fa-chevron-down"></i>
                             <a href="?<?php
-                            $my_qs_tmp["select"] = "OldToNew";
-                            echo http_build_query($my_qs_tmp);?>">舊到新</a><i class="fas fa-chevron-down"></i>
+                            $my_qs_select["select"] = "OldToNew";
+                            unset($my_qs_select["page"]);
+                            echo http_build_query($my_qs_select);?>">舊到新</a><i class="fas fa-chevron-down"></i>
                             <a href="?<?php
-                            $my_qs_tmp["select"] = "HighToLow";
-                            echo http_build_query($my_qs_tmp);?>">價錢高到低</a><i class="fas fa-chevron-down"></i>
+                            $my_qs_select["select"] = "HighToLow";
+                            unset($my_qs_select["page"]);
+                            echo http_build_query($my_qs_select);?>">價錢高到低</a><i class="fas fa-chevron-down"></i>
                             <a href="?<?php
-                            $my_qs_tmp["select"] = "LowToHigh";
-                            echo http_build_query($my_qs_tmp);?>">價錢低到高</a><i class="fas fa-chevron-down"></i>
+                            $my_qs_select["select"] = "LowToHigh";
+                            unset($my_qs_select["page"]);
+                            echo http_build_query($my_qs_select);?>">價錢低到高</a><i class="fas fa-chevron-down"></i>
 
                         </div>
                     </div>
@@ -620,14 +659,25 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                             <div class="wea_product_list_tital_seclect position-absolute"></div>
                             <ul class="position-absolute wea_product_select_bar show-mobile">
                                 <ul><a class="d-flex"><h5>所有商品</h5></a></a></ul>
-                                <?php foreach($categoriesRow as $nav):  ?>
+                                <?php for($i=0; $i<count($categoriesRow); $i++):?>
                                     <ul><a href="?<?php
-                                        $my_qs['cate'] = $nav['sid'];
-                                        echo http_build_query($my_qs);?>"><h6><?= $nav['parent'] ?></h6></a></ul>
+                                        $my_qs['cate'] = $categoriesRow[$i]['sid'];
+                                        unset($my_qs["page"]);
+                                        echo http_build_query($my_qs_tmp);?>"><h6><?= $categoriesRow['parent'] ?></h6></a></ul>
                                     <li><a href="?<?php
-                                        $my_qs['cate'] = $nav['sid'];
-                                        echo http_build_query($my_qs);?>"><p><?= $nav['name'] ?></p></a></li>
-                                <?php endforeach; ?>
+                                        $my_qs['cate'] = $categoriesRow[$i]['sid'];
+                                        unset($my_qs["page"]);
+                                echo http_build_query($my_qs_tmp);?>"><p><?= $categoriesRow['name'] ?></p></a></li>
+                                <?php endfor; ?>
+
+<!--                                 --><?php //foreach($categoriesRow as $nav):?>
+<!--                                    <ul><a href="?--><?php
+//                                        $my_qs['cate'] = $nav['sid'];
+//                                        echo http_build_query($my_qs);?><!--"><h6>--><?//= $nav['parent'] ?><!--</h6></a></ul>-->
+<!--                                    <li><a href="?--><?php
+//                                        $my_qs['cate'] = $nav['sid'];
+//                                        echo http_build_query($my_qs);?><!--"><p>--><?//= $nav['name'] ?><!--</p></a></li>-->
+<!--                                --><?php //endforeach; ?><!-- -->
                             </ul>
                         </div>
                         <!-- 收起狀態 -->
@@ -681,17 +731,17 @@ $categoriesRow = $categoriesStmt -> fetchAll();
     <!-- ======================================= 頁碼 ====================================== -->
                 <div class="wea_product_list_page d-flex">
                     <a href="?<?=
-                    $my_qs_tmp['page']=$page-1;
-                    echo http_build_query($my_qs_tmp)?>">
+                    $my_qs_page['page']=$page-1;
+                    echo http_build_query($my_qs_page)?>">
                         <i class="fas fa-chevron-left"></i>
                     </a>
                     <?php for($i = 1; $i <= $totalPages; $i++):
-                        $my_qs_tmp['page']=$i;?>
-                        <a href="?<?= http_build_query($my_qs_tmp); ?>"><?= $i ?></a>
+                        $my_qs_page['page']=$i;?>
+                        <a href="?<?= http_build_query($my_qs_page); ?>"><?= $i ?></a>
                     <?php endfor; ?>
                     <a href="?<?=
-                    $my_qs_tmp['page']=$page+1;
-                    echo http_build_query($my_qs_tmp)?>">
+                    $my_qs_page['page']=$page+1;
+                    echo http_build_query($my_qs_page)?>">
                         <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
