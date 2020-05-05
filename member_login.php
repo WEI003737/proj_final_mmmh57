@@ -110,6 +110,7 @@ require __DIR__. '/__connect_db.php';
 
 
 <body>
+<?php include __DIR__. '/parts/header.php';?>
 
 
 <!-- 推出 header 空間-->
