@@ -22,7 +22,7 @@ $my_qs_page = $my_qs_select = $my_qs_price = $my_qs = $_GET;
 //print_r($my_qs);
 //可篩選的顏色種類 (test)
 //$selectColor = ['red','black','blue','pink'];
-$selectColorCount = count($selectColor);
+//$selectColorCount = count($selectColor);
 
 //-----------------------------點商品類別 列出該類別商品---------------------------------
 $where = " WHERE 1 ";
@@ -35,11 +35,14 @@ if(!empty($cate)) {
 
 if(!empty($price)){
     switch ($price) {
-        case "700up":
-            $where .= " AND price > 700 ";
-            break;
-        case "700down":
+        case "lt700":
             $where .= " AND price < 700 ";
+            break;
+        case "lt900":
+            $where .= " AND price < 900 ";
+            break;
+        case "gt900":
+            $where .= " AND price > 900 ";
             break;
     }
 }
@@ -621,13 +624,17 @@ $categoriesRow = $categoriesStmt -> fetchAll();
 <!--                            --><?php //endfor; ?>
                             <span>價格</span><i class="fas fa-chevron-down"></i>
                             <a href="?<?php
-                            $my_qs_price["price"] = "700up";
+                            $my_qs_price["price"] = "lt700";
                             unset($my_qs_price["page"]);
-                            echo http_build_query($my_qs_price);?>">700以上</a>
+                            echo http_build_query($my_qs_price);?>">lt700</a>
                             <a href="?<?php
-                            $my_qs_price["price"] = "700down";
+                            $my_qs_price["price"] = "lt900";
                             unset($my_qs_price["page"]);
-                            echo http_build_query($my_qs_price);?>">700以下</a>
+                            echo http_build_query($my_qs_price);?>">lt900</a>
+                            <a href="?<?php
+                            $my_qs_price["price"] = "gt900";
+                            unset($my_qs_price["page"]);
+                            echo http_build_query($my_qs_price);?>">gt900</a>
 
 <!--                            <input type="text" placeholder="請輸入最低價格">-->
 <!--                            <input type="text" placeholder="請輸入最高價格">-->
