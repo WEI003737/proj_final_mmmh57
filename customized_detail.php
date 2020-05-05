@@ -74,7 +74,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             </ul>
         </nav>
     </div>
-    <section class="container customized_detail_desi">
+    <section class="container customized_detail_desi" data-sid="<?= $sid ?>">
         <!-- 成品展示區 -->
         <div class="customized_detail_picture_outbox">
             <div class="customized_detail_picture" id="clothes">
@@ -108,7 +108,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 <?php for ($i = 0; $i < $can_cus_color_count; $i++) : ?>
                     <h4 class="nac"><?= $can_cus_color[$i] ?></h4>
                     <h6 class="nac">Color 0<?= $i + 1 ?></h6>
-                    <ul class="nac_chose_color_area" data-clothes_area="Clothes_area<?= $i + 1 ?>" id="clothesPick<?= $i + 1 ?>">
+                    <ul class="nac_chose_color_area clothesPick<?= $i + 1 ?>" data-clothes_area="Clothes_area<?= $i + 1 ?>" id="clothesPick<?= $i + 1 ?>">
                     </ul>
                 <?php endfor; ?>
             </div>
@@ -150,8 +150,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
             <div class="nac_buynow">
-                <button id="add_to_cart" type="submit">立即購買</button>
-                <button>加入購物車</button>
+                <button id="add_to_cart" type="submit" onclick="addToCart(event)">立即購買</button>
+                <button onclick="addToCart(event)">加入購物車</button>
             </div>
 
     </section>
@@ -196,7 +196,32 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <script defer src="./fontawesome-free-5.13.0-web/js/all.js"></script>
     <?php include __DIR__ . './parts/h_f_script.php' ?>
 
+    <script>
+        $("#clothesPick1 .nac_chose_color_btn").click(function(){
+            console.log("click")
+        })
 
+    //加入購物車
+        function addToCart(){
+            let cus_sid = $(".customized_detail_desi").attr("data-sid");
+            let cus_qty = $(".nac_chose_pieces_count").text();
+            let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
+            let cus_colorFirst = $(".clothesPick1 .nac_chose_color_btn.active").attr("date-color");
+            let cus_colorSecond = $("#clothesPick2 .nac_chose_color_btn.active").attr("date-color");
+            let cus_colorThird = $("#clothesPick3 .nac_chose_color_btn.active").attr("date-color");
+            let cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
+
+            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}, cus_color: ${cus_colorFirst}`)
+            // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
+
+            $.get("_add_to_cart_customized_api.php", {cus_sid, cus_qty, cus_size}, function(data){
+                console.log(data);
+                },"json");
+        }
+
+
+
+    </script>
     <script>
         var sizeChose = "M";
         var nac_chose_pieces = "1";
@@ -236,7 +261,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         colors.forEach(
             function(color) {
                 colorPick_nac += `
-            <li class="nac_chose_color_btn" date-colorChoseOne="color1_nac_${color}" style="background: ${color}"></li>`
+            <li class="nac_chose_color_btn" date-colorChoseOne="color1_nac_${color}" style="background: ${color}" data-color="${color}"></li>`
             });
 
         // 色盤放進網頁
