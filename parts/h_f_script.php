@@ -7,10 +7,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 
 <script>
+//購物車若沒有東西會提示 有就轉向
+    function haveSession () {
+        $.get("session.php", function (data) {
+            // if(data.cart){
+            //     location.href = "cart_step1.php";
+            // }else {
+            //     alert("購物車裡沒有東西");
+            // }
+            console.log(data);
+        }, "json");
+    }
 //讓所有頁面一進來就能讀到購物車內的商品數
-    $.get('add_to_cart_api.php', function(data){
+    $.get("add_to_cart_api.php", function(data){
         countCartObj(data);
-    }, 'json');
+    }, "json");
 
     function countCartObj(data){
         let total = 0;

@@ -197,9 +197,9 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <?php include __DIR__ . './parts/h_f_script.php' ?>
 
     <script>
-        $("#clothesPick1 .nac_chose_color_btn").click(function(){
+        $(document).on("click" ,".nac_chose_color_btn", function(){
             console.log("click")
-        })
+        });
 
     //加入購物車
         function addToCart(){

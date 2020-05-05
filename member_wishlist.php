@@ -1,6 +1,3 @@
-<?php
-require_once('./checkSession.php');
-?>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -141,68 +138,18 @@ require_once('./checkSession.php');
 
             <div class="j_wishlist_area col-md-10 flex justify-content-cneter flex-wrap">
 
+                    <li class="wea_product_list_item position-relative" data-colorLength="">
+                        <img src="./product_images/.png" alt="">
+                            <i class="a_add_to_like_unactive far fa-heart position-absolute" data-proSid=""></i>
+                            <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-proSid=""></i>
 
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Just perfect 運動內衣</p>
-                    <div class="flex">
-                        <p class="flex_grow_2">NT$2,280</p>
-                        <div>黑</div>
-                        <div>白</div>
-                        <div>紅</div>
-                    </div>
-                </div>
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Disco 運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Erin 細肩帶運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Veronica V領美背運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Just perfect 運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Just perfect 運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Just perfect 運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-
-                <div>
-                    <div class="j_whish_box"></div>
-                    <p>Just perfect 運動內衣</p>
-                    <p>NT$2,280</p>
-                </div>
-
-
-
-
-
-
-
-
+                        <!-- <div class="wea_product_list_item_img"></div> -->
+                        <p></p>
+                        <div class="d-flex justify-content-between a_product_data_last">
+                            <p class="wea_product_list_item_price">$</p>
+                                <div class="wea_product_list_item_color" data-colorSid="" data-colorPositionInArr="" style="background: pink"></div>
+                        </div>
+                    </li>
 
                 <button class="j_buy_btn" type="submit" formmethod="post" formaction="">繼續購物</button>
 

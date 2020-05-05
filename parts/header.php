@@ -39,8 +39,8 @@
                     <?php endif; ?>
                 </li>
                 <?php if(isset($_SESSION['loginUser'])): ?>
-                <li class="position-relative">
-                    <a href="cart_step1.php"><img src="./icon/cart.png"></a>
+                <li class="position-relative" onclick="haveSession(event)">
+                    <a><img src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
                 <?php endif; ?>

@@ -82,7 +82,7 @@ if($totalRows>0){
     //總商品sql
 
     $totalProductSql = sprintf("SELECT * FROM products $where $orderBy LIMIT %s, %s  ", ($page-1)*$perPage, $perPage);
-    echo $totalProductSql;
+//    echo $totalProductSql;
     //總商品資料
     $totalProductStmt = $pdo -> query($totalProductSql);
     $totalProducts = $totalProductStmt -> fetchAll();
@@ -147,7 +147,7 @@ if($totalRows>0){
 
 };
 
-//echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
+echo json_encode($totalProducts, JSON_UNESCAPED_UNICODE);
 
 //----------------------------- hover 商品用資料---------------------------------
 
@@ -670,11 +670,11 @@ $categoriesRow = $categoriesStmt -> fetchAll();
                                     <ul><a href="?<?php
                                         $my_qs['cate'] = $categoriesRow[$i]['sid'];
                                         unset($my_qs["page"]);
-                                        echo http_build_query($my_qs_tmp);?>"><h6><?= $categoriesRow['parent'] ?></h6></a></ul>
+                                        echo http_build_query($my_qs);?>"><h6><?= $categoriesRow['parent'] ?></h6></a></ul>
                                     <li><a href="?<?php
                                         $my_qs['cate'] = $categoriesRow[$i]['sid'];
                                         unset($my_qs["page"]);
-                                echo http_build_query($my_qs_tmp);?>"><p><?= $categoriesRow['name'] ?></p></a></li>
+                                echo http_build_query($my_qs);?>"><p><?= $categoriesRow['name'] ?></p></a></li>
                                 <?php endfor; ?>
 
 <!--                                 --><?php //foreach($categoriesRow as $nav):?>
@@ -774,19 +774,6 @@ $categoriesRow = $categoriesStmt -> fetchAll();
 const a_addToCartBtn = $(".a_add_to_cart_btn"),
     a_sizeBtn = $(".a_size_btn");
 
-const a_picsOnlyArr = <?= json_encode($picOnlyRows) ?>;
-
-console.log(a_picsOnlyArr)
-    $(document).on("click", ".wea_product_list_item_color", function(){
-        a_selectColor = $(this).attr("data-colorSid");
-        a_selectPicData = a_picsOnlyArr.filter(function(){
-            console.log(a_selectColor);
-            return a_picsOnlyArr.colorSid == a_selectColor;
-            // console.log(a_selectColor);
-        });
-        // a_picture = $(this).parent(".wea_product_list_item>img").attr("src","./product_images/<" + `?=$pictureArr[${colorNum}]` + "?>.png")
-        // console.log(a_selectColor);
-    });
 
 //拿到 size 的 sid ------------------------------------------------------------------
 //將 size 的 sid 以 data-sizeSid 設定給上一層 div---------------------------------------
