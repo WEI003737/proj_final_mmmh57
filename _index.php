@@ -19,6 +19,7 @@ require __DIR__. '/__connect_db.php';
 
 
 <body>
+<!--  公版:header  -->
 <?php include __DIR__. '/parts/header.php';?>
 <?php include __DIR__ . '/parts/h_f_script.php'; ?>
 
