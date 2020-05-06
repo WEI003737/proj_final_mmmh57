@@ -1,3 +1,9 @@
+<?php
+
+if(! isset($_SESSION)){
+    session_start();
+}
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -567,6 +573,10 @@
             </div> 
         </div>
     </div>
+      <!--  公版:footer  -->
+      <?php include __DIR__. '/parts/footer.php';?>
+      <!--  公版:script  -->
+      <?php include __DIR__ . '/parts/h_f_script.php'; ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -576,6 +586,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+
     <script>
         var index=0;
         var slideWidth=$(".wea_ootd_img").width();
@@ -664,8 +675,10 @@
         let uptext=`
             <li class="wea_product_list_item position-relative">
                 <img src="product_images/${obj.showImg}.png" alt="">
+                <?php if(isset($_SESSION['loginUser'])): ?>
                 <i class="far fa-heart position-absolute"></i>
                 <i class="fas fa-heart position-absolute display_none"></i>
+                 <?php endif; ?>
                 <p>${obj.name}</p>
                 <div class="d-flex justify-content-between">
                     <p class="wea_product_list_item_price">NT$ ${obj.price}</p>`
