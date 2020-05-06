@@ -197,28 +197,41 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <?php include __DIR__ . './parts/h_f_script.php' ?>
 
     <script>
-        $(document).on("click" ,".nac_chose_color_btn", function(){
-            console.log("click")
-        });
 
     //加入購物車
         function addToCart(){
+            //取得商品sid 數量 尺寸
             let cus_sid = $(".customized_detail_desi").attr("data-sid");
             let cus_qty = $(".nac_chose_pieces_count").text();
             let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
-            let cus_colorFirst = $(".clothesPick1 .nac_chose_color_btn.active").attr("date-color");
-            let cus_colorSecond = $("#clothesPick2 .nac_chose_color_btn.active").attr("date-color");
-            let cus_colorThird = $("#clothesPick3 .nac_chose_color_btn.active").attr("date-color");
-            let cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
+            cus_color = ["#FFFFFF", "FFFFFF", "FFFFFF"]; //預設值
 
-            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}, cus_color: ${cus_colorFirst}`)
+
+            //取得顏色資訊
+            cus_colorFirst = $("ul.nac_chose_color_area:eq(0) li.active").attr("data-color");
+            cus_colorSecond = $("ul.nac_chose_color_area:eq(1) li.active").attr("data-color");
+            cus_colorThird = $("ul.nac_chose_color_area:eq(2) li.active").attr("data-color");
+            cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
+
+            //包裝資料 送進購物車
+            let cus_data = {
+                cus_sid: cus_sid,
+                cus_qty: cus_qty,
+                cus_size: cus_size,
+                cus_color: cus_color
+            };
+
+            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
             // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
+            // console.log(`cus_color: ${cus_color}`)
+            console.log(cus_data)
 
-            $.get("_add_to_cart_customized_api.php", {cus_sid, cus_qty, cus_size}, function(data){
+
+            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
                 console.log(data);
+                alert("成功加入購物車");
                 },"json");
         }
-
 
 
     </script>
@@ -280,6 +293,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         // 色盤點擊行為
         $("ul.nac_chose_color_area li.nac_chose_color_btn").click(function(e) {
             e.stopPropagation(); //禁止往下(外)傳送行為
+
             let color = $(this).css("background-color"); //取得選中色碼
             let colorIndex = $(this).index(); //是第幾個色塊(index順序)
             let pick_which_area = $(this).parent().attr("data-clothes_area") //點到的色盤是控制哪個區域的
@@ -296,6 +310,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             // console.log($("#Clothes_area1").css("fill"))
             // console.log($("#Clothes_area2").css("fill"))
             // console.log($("#Clothes_area3").css("fill"))
+
+
         })
 
         // 即時色盤消失
@@ -343,6 +359,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             // console.log($("#Clothes_area1").css("fill"))
             // console.log($("#Clothes_area2").css("fill"))
             // console.log($("#Clothes_area3").css("fill"))
+
+
         })
 
 
