@@ -17,12 +17,12 @@
             }
             console.log(data);
         }, "json")
-            .done(function() {
-                console.log("success")
-        })
-            .fail(function(err) {
-               console.log(er)
-            });
+        //     .done(function() {
+        //         console.log("success")
+        // })
+        //     .fail(function(err) {
+        //        console.log(er)
+        //     });
     }
 
 //讓所有頁面一進來就能讀到購物車內的商品數 (普通商品 + 客製化)

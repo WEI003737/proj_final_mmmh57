@@ -20,11 +20,24 @@ foreach($prodColors as $c){
     $color_sids[] = $c['sid'];
 }
 
-$size_sql = sprintf("SELECT * FROm `size` WHERE color_sid IN (%s)", implode(',', $color_sids));
+$size_sql = sprintf("SELECT * FROM `size` WHERE color_sid IN (%s)", implode(',', $color_sids));
 $prodSizes = $pdo -> query($size_sql)
             ->fetchAll();
 
-  echo json_encode($prodColors, JSON_UNESCAPED_UNICODE);
+
+//設定size stock給按鈕用陣列
+$a_colorWithSizeForCart = $prodColors;
+$i=0;
+foreach($a_colorWithSizeForCart as $cs){
+    $a_size_sql = "SELECT * FROM `size` WHERE `color_sid` = ".$cs["sid"];
+    $a_prodSizes = $pdo -> query($a_size_sql)
+        ->fetchAll();
+    $a_colorWithSizeForCart[$i]["stock"] = $a_prodSizes;
+    $i++;
+}
+
+echo json_encode($a_colorWithSizeForCart, JSON_UNESCAPED_UNICODE);
+
 //  exit;
 // $colorArrAll =[];
 // foreach($prodColors as $c){
@@ -919,10 +932,10 @@ foreach($weaRecommend as $R){
                 </ul>
                 <ul class="wea_product_main_size d-flex align-items-center">
                     <li><h6>尺寸</h6></li>
-                    <li><a><div data-size="XS" data-sizenum="0" class="clothesSize active">XS</div></a></li>
-                    <li><a><div data-size="S" data-sizenum="1" class="clothesSize">S</div></a></li>
-                    <li><a><div data-size="M" data-sizenum="2" class="clothesSize">M</div></a></li>
-                    <li><a><div data-size="L" data-sizenum="3" class="clothesSize">L</div></a></li>
+                    <li><a><div data-size="XS" data-stock="" data-sizenum="" class="clothesSize active">XS</div></a></li>
+                    <li><a><div data-size="S" data-stock="" data-sizenum="" class="clothesSize">S</div></a></li>
+                    <li><a><div data-size="M" data-stock="" data-sizenum="" class="clothesSize">M</div></a></li>
+                    <li><a><div data-size="L" data-stock="" data-sizenum="" class="clothesSize">L</div></a></li>
                     <li class="wea_product_main_size_form"><a><i class="fas fa-question-circle"><span>尺寸表</span></i></a></li>
                 </ul>
                 <ul class="wea_product_main_count d-flex align-items-center">
@@ -932,8 +945,8 @@ foreach($weaRecommend as $R){
                     <li><a><div id="plus">+</div></a></li>
                 </ul>
                 <div class="wea_product_main_checkout d-flex align-items-center justify-content-between">
-                    <a><div id="add_to_car">加入購物車</div></a>
-                    <a><div id="checkout">立即結帳</div></a>
+                    <a><div id="add_to_car" onclick="proAddToCart(event)">加入購物車</div></a>
+                    <a><div id="checkout" onclick="proGoToCart(event)">立即結帳</div></a>
                 </div>
             </div>
         </div>
@@ -1033,8 +1046,10 @@ foreach($weaRecommend as $R){
                         <?php $recommendMainImg = json_decode($weaRecommendColor[$i][0]["pro_pic"]);?>
                         <img src="product_images/<?=$recommendMainImg[0]?>.png" alt="">
                         <!-- $colorSecondaryImg = json_decode($prodColors[0]['pro_pic']); -->
+                        <?php if(isset($_SESSION["loginUser"])): ?>
                         <i class="far fa-heart position-absolute"></i>
                         <i class="fas fa-heart position-absolute display_none"></i>
+                        <?php endif; ?>
                         <p><?=$R["name"]?></p>
                         <div class="d-flex justify-content-between">
                             <p class="wea_recommend_item_price">NT$ <?=$R["price"]?></p>
@@ -1073,48 +1088,19 @@ foreach($weaRecommend as $R){
             </div>
         </div>
     </div>
-    <?php include __DIR__.'/parts/footer.php' ?>
+  <?php include __DIR__.'/parts/footer.php' ?>
+
+  <?php include __DIR__.'/parts/h_f_script.php' ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<!--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"-->
+<!--          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="-->
+<!--          crossorigin="anonymous"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <?php include __DIR__.'/parts/h_f_script.php' ?>
+
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-      <script>
-          const a_addToCartBtn = $(".a_add_to_cart_btn"),
-              a_sizeBtn = $(".a_size_btn");
-
-
-          //加入購物車時 拿到 size_sid 跟 數量------------------------------------------------------
-          a_addToCartBtn.click(function(){
-              const cart_sid = $(this).parent().siblings('.a_get_data_size_sid').attr('data-sizeSid');
-              const cart_qty = $(this).siblings('.a_cart_qty').val();
-              // console.log({cart_sid, cart_qty});
-
-              //傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
-              //讓所有頁面一進來就能讀到購物車內的商品數
-              $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
-                  countCartObj(data);
-                  // if(data.success){
-                  //     $("#a_add_to_alarm").show().text('成功加入購物車');
-                  //     setTimeout(function(){
-                  //         $("#a_add_to_alarm").hide();
-                  //     }, 1000);
-                  // }else {
-                  //     $("#a_add_to__alarm").show().text('商品庫存不足');
-                  //     setTimeout(function(){
-                  //         $("#a_add_to_alarm").hide();
-                  //     }, 1000);
-                  // }
-                  // };
-                  $('.a_cart_count').text(total);
-              }, 'json');
-
-          });
-
-      </script>
 
     <script>
     var weaProduct = <?= json_encode($weaProduct) ?>;
@@ -1160,7 +1146,13 @@ foreach($weaRecommend as $R){
             }
         }
     }
-    
+//修改---------------------------------------
+    for(let $i=0; $i<selectColorSizes.length; $i++) {
+        $(".wea_product_main_size").find("li").eq($i+1).find("div").attr("data-sizenum", selectColorSizes[$i]["sid"]);
+        $(".wea_product_main_size").find("li").eq($i+1).find("div").attr("data-stock", selectColorSizes[$i]["in_stock"]);
+    }
+
+
     // 顏色控制抓取
     $(".wea_product_main_color li").has("div").click(function(){
         if($(this).find("div").hasClass("active") == false){
@@ -1201,9 +1193,9 @@ foreach($weaRecommend as $R){
             if($(this).find("div").hasClass("active") == false){
                 selectSizeSid= $(this).find("div").data('sizenum');
                 // parseInt(selectSizeSid);
-                // console.log(selectSizeSid);
-                stockNum = selectColorSizes[selectSizeSid]["in_stock"];
-                console.log(stockNum);
+                console.log(selectSizeSid);
+                stockNum = $(this).find("div").data('sizenum');
+                // console.log(stockNum);
                 $(this).find("div").addClass("active");
                 $(this).siblings().find("div").removeClass("active");
                 selectCountNum = 1;
@@ -1359,5 +1351,45 @@ foreach($weaRecommend as $R){
             }
         })
     </script>
+  <script>
+
+      //加入購物車時 拿到 size_sid 跟 數量------------------------------------------------------
+      function proAddToCart(event){
+          //抓取size_sid
+          cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
+          //抓取數量
+          cart_qty = $("#countnum").text();
+          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+
+          // 傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
+          // 讓所有頁面一進來就能讀到購物車內的商品數
+          $.get("add_to_cart_api.php", {cart_sid,cart_qty}, function(data){
+              console.log(data);
+              alert("成功加入購物車");
+          },"json");
+
+      };
+
+      function proGoToCart(event){
+          //抓取size_sid
+          cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
+          //抓取數量
+          cart_qty = $("#countnum").text();
+          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+
+          // 傳送資料給後端
+          // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
+          $.get("add_to_cart_api.php", {cart_sid,cart_qty}, function(data){
+              console.log(data);
+              if(data.success){
+                  countCartObj(data)
+                  location.href = "cart_step1.php";
+              }
+          },"json");
+
+      };
+
+  </script>
+
   </body>
 </html>

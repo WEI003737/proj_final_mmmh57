@@ -230,6 +230,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
                 console.log(data);
                 alert("成功加入購物車");
+                countCartObj(data)
                 },"json");
         }
 
@@ -260,9 +261,12 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             // console.log(`cus_color: ${cus_color}`)
             // console.log(cus_data)
 
+            // 傳送資料給後端
+            // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
             $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
                 console.log(data);
                 if(data.success){
+                    countCartObj(data)
                     location.href = "cart_step1.php";
                 }
             },"json");
