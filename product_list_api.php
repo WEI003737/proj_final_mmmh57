@@ -1,5 +1,18 @@
 <?php
 require __DIR__.'/__connect_db.php';
+//
+////點商品轉頁
+//if(!isset($_SESSION['proListSid'])){
+//
+//    $_SESSION['proListSid'] = [];
+//};
+//
+//$proListSid = isset($_SESSION["proListSid"]) ? $_SESSION["proListSid"] : "";
+//
+//if(!empty($proListSid)){
+//    $_SESSION['proListSid'] = $proListSid;
+//};
+
 //一頁顯示的數量
 $showNum = 16;
 // 目前頁碼，若無指定則顯示第一頁
@@ -25,6 +38,7 @@ foreach($rows as $r){
 }
 
 // echo json_encode($rowColor, JSON_UNESCAPED_UNICODE);
+
 $output = [
     'page' => $page,
     'showNum' =>$showNum,
@@ -32,6 +46,7 @@ $output = [
     'totalPages' =>$totalPages,
     'rows' =>$rows,
     'rowsColor' =>$rowsColor,
+//    'sessionSid' => $_SESSION['proListSid'],
 ];
 header('Content-Type:application/json');
 echo json_encode($output, JSON_UNESCAPED_UNICODE);

@@ -4,7 +4,7 @@ $page_name = 'product';
 
 //-----------------------------商品資料---------------------------------
 //商品列表頁取得的編號 -> sid
-$weaProductNum = 1;
+$weaProductNum = $_SESSION['proListSid'];
 //商品sql -> product表
 $weaProductSql = sprintf("SELECT * FROM `products` WHERE `sid` = $weaProductNum");
 //商品資料陣列
@@ -24,7 +24,8 @@ $size_sql = sprintf("SELECT * FROm `size` WHERE color_sid IN (%s)", implode(',',
 $prodSizes = $pdo -> query($size_sql)
             ->fetchAll();
 
- 
+  echo json_encode($prodColors, JSON_UNESCAPED_UNICODE);
+//  exit;
 // $colorArrAll =[];
 // foreach($prodColors as $c){
 //     $colorArrAll[] = json_decode($c['pro_pic']);
@@ -1081,7 +1082,39 @@ foreach($weaRecommend as $R){
     <?php include __DIR__.'/parts/h_f_script.php' ?>
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
-    
+      <script>
+          const a_addToCartBtn = $(".a_add_to_cart_btn"),
+              a_sizeBtn = $(".a_size_btn");
+
+
+          //加入購物車時 拿到 size_sid 跟 數量------------------------------------------------------
+          a_addToCartBtn.click(function(){
+              const cart_sid = $(this).parent().siblings('.a_get_data_size_sid').attr('data-sizeSid');
+              const cart_qty = $(this).siblings('.a_cart_qty').val();
+              // console.log({cart_sid, cart_qty});
+
+              //傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
+              //讓所有頁面一進來就能讀到購物車內的商品數
+              $.get('add_to_cart_api.php', {cart_sid, cart_qty}, function(data){
+                  countCartObj(data);
+                  // if(data.success){
+                  //     $("#a_add_to_alarm").show().text('成功加入購物車');
+                  //     setTimeout(function(){
+                  //         $("#a_add_to_alarm").hide();
+                  //     }, 1000);
+                  // }else {
+                  //     $("#a_add_to__alarm").show().text('商品庫存不足');
+                  //     setTimeout(function(){
+                  //         $("#a_add_to_alarm").hide();
+                  //     }, 1000);
+                  // }
+                  // };
+                  $('.a_cart_count').text(total);
+              }, 'json');
+
+          });
+
+      </script>
 
     <script>
     var weaProduct = <?= json_encode($weaProduct) ?>;
