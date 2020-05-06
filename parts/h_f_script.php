@@ -7,27 +7,42 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.4/gsap.min.js"></script>
 
 <script>
+
 //購物車若沒有東西會提示 有就轉向
     function haveSession () {
-        $.get("session.php", function (data) {
-            // if(data.cart){
-            //     location.href = "cart_step1.php";
-            // }else {
-            //     alert("購物車裡沒有東西");
-            // }
+        $.get("isset_session.php", function (data) {
+            if(data.cart){
+                location.href = "cart_step1.php";
+            }else {
+                alert("購物車裡沒有東西");
+            }
             console.log(data);
-        }, "json");
+        }, "json")
+            .done(function() {
+                console.log("success")
+        })
+            .fail(function(err) {
+               console.log(er)
+            });
     }
-//讓所有頁面一進來就能讀到購物車內的商品數
+
+//讓所有頁面一進來就能讀到購物車內的商品數 (普通商品 + 客製化)
     $.get("add_to_cart_api.php", function(data){
+        // console.log(data)
         countCartObj(data);
     }, "json");
 
     function countCartObj(data){
+        // console.log(data)
         let total = 0;
-        for(let i in data){
-            total += data[i];
+        for(let i in data.cart){
+            total += data.cart[i];
         }
+
+        for(let j in data.customized){
+            total+=parseInt(data.customized[j].cus_qty);
+        }
+
         $('.a_cart_count').text(total);
     }
 
