@@ -150,7 +150,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
             <div class="nac_buynow">
-                <button id="add_to_cart" type="submit" onclick="addToCart(event)">立即購買</button>
+                <button id="add_to_cart" type="submit" onclick="goToCart(event)">立即購買</button>
                 <button onclick="addToCart(event)">加入購物車</button>
             </div>
 
@@ -231,6 +231,41 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 console.log(data);
                 alert("成功加入購物車");
                 },"json");
+        }
+
+        function goToCart(){
+            //取得商品sid 數量 尺寸
+            let cus_sid = $(".customized_detail_desi").attr("data-sid");
+            let cus_qty = $(".nac_chose_pieces_count").text();
+            let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
+            cus_color = ["#FFFFFF", "FFFFFF", "FFFFFF"]; //預設值
+
+
+            //取得顏色資訊
+            cus_colorFirst = $("ul.nac_chose_color_area:eq(0) li.active").attr("data-color");
+            cus_colorSecond = $("ul.nac_chose_color_area:eq(1) li.active").attr("data-color");
+            cus_colorThird = $("ul.nac_chose_color_area:eq(2) li.active").attr("data-color");
+            cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
+
+            //包裝資料 送進購物車
+            let cus_data = {
+                cus_sid: cus_sid,
+                cus_qty: cus_qty,
+                cus_size: cus_size,
+                cus_color: cus_color
+            };
+
+            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
+            // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
+            // console.log(`cus_color: ${cus_color}`)
+            // console.log(cus_data)
+
+            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
+                console.log(data);
+                if(data.success){
+                    location.href = "cart_step1.php";
+                }
+            },"json");
         }
 
 

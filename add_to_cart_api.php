@@ -11,6 +11,8 @@ if(!isset($_SESSION['customized'])){
     $_SESSION['customized'] = [];
 };
 
+$data["success"] = false;
+
 //sid 是 size 的 sid 才能判斷庫存
 $cart_sid = isset($_GET['cart_sid']) ? intval($_GET['cart_sid']) : 0;
 $cart_qty = isset($_GET['cart_qty']) ? intval($_GET['cart_qty']) : 0;
@@ -28,16 +30,20 @@ if(! empty($cart_sid)){
         if(!empty($cart_qty) and $cart_qty <= $haveSizeSid['in_stock']) {
             $_SESSION['cart'][$cart_sid] = $cart_qty;
 //             $_SESSION['cart']['success'] = true;
+            $data["success"] = true;
+
         }
     }
 
 }else {
     unset($_SESSION['cart'][$cart_sid]);
+
 };
 
 //客製化
 if(!empty($cus_data)) {
     $_SESSION['customized'][$cus_data["cus_sid"]] = $cus_data;
+    $data["success"] = true;
 
 }
 
