@@ -153,10 +153,11 @@
         .header .a_sub_nav{
             position: absolute;
             background: rgb(255, 255, 255);
-            top: 47px;
+            top: 52px;
             width: 132px;
             max-height: 0;
             overflow: hidden;
+            box-shadow: 1px 1px 5px #ccc;
         }
         .header .a_sub_nav a{
             padding:8px 20px;
@@ -171,7 +172,7 @@
         }
         .a_input_search:hover .a_form_search{
             max-width: 150px;
-            border: 2px solid #CA054D;
+            border: 1px solid #CA054D;
             padding: 3px 10px;
         }
         .a_form_search{
@@ -197,6 +198,10 @@
         }
         .header .a_rwd_sub_nav{
             display: none;
+        }
+        .a_input_search_rwd{
+            display: none;
+
         }
         @media all and (max-width: 768px) {
             .a_wrapper{
@@ -287,9 +292,17 @@
             .header_nav_right{
                 padding-right: 0;
             }
+            .a_form_search{
+                display: none;
+            }
             .header_nav_right img{
                 width: 15px;
                 margin: 0 10px;
+            }
+            .header .header_nav_right .a_cart_count{
+                font-size: 8px;
+                right: 0px;
+                top: 19px;
             }
             .header .a_bar{
                 width: 18px;
@@ -303,6 +316,36 @@
             .active .a_bar3{
                 -webkit-transform: rotate(45deg) translate(-4px, -4px) ;
                 transform: rotate(45deg) translate(-4px, -4px) ;
+            }
+            .a_input_search_rwd{
+                display: block;
+                position: fixed;
+                font-size: 14px;
+                transform: translateY(-40px);
+                height: 40px;
+                top: 60px;
+                left: 0;
+                right: 0;
+                margin: 0 auto;
+                z-index: 998;
+            }
+            .a_input_search_rwd.active{
+                transform: translateY(0);
+            }
+            .a_input_search_rwd .a_wrapper>div{
+                justify-content: center;
+                padding-top: 8px;
+            }
+            .a_input_search_rwd img{
+                width: 15px;
+                margin-right: 10px;
+            }
+            .a_form_search_rwd{
+                border: 1px solid #ccc;
+                padding: 1px 10px;
+                width: 100%;
+                border-radius: 20px;
+
             }
         }
 

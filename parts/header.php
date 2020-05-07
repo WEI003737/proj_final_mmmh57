@@ -63,3 +63,10 @@
         </nav>
     </div>
 </div>
+<div class="a_input_search_rwd a_transition">
+    <div class="a_wrapper">
+        <div class="d-flex">
+            <input type="text" class="a_form_search_rwd" placeholder="找商品">
+        </div>
+    </div>
+</div>

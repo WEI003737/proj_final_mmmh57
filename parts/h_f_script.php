@@ -61,4 +61,9 @@
     $(".header .a_menu").on("click", function(){
         $(this).toggleClass("active")
     })
+// rwd手機板:search 動態 ----------------------------------
+    $(".a_input_search").click(function(){
+        $(".a_input_search_rwd").toggleClass("active");
+    })
+
 </script>
