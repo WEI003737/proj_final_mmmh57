@@ -881,7 +881,9 @@ foreach($weaRecommend as $R){
             <div>
                 <div class="wea_product_main_wordarea_name d-flex align-items-center justify-content-between" >
                     <h4><?=$weaProduct['name']?></h4>
+                    <?php if(isset($_SESSION["loginUser"])): ?>
                     <i class="far fa-heart"></i>
+                    <?php endif; ?>
                 </div>
                 
                 <h5>NT$ <?=$weaProduct['price']?></h5>

@@ -179,8 +179,11 @@ foreach($cusRows as $cus){
 
                         $j++;
                         endforeach; ?>
+
+                    <!-- ---------------------------- 客製化商品 (web)------------------------ -->
+
                     <?php foreach($a_cusData as $cus): ?>
-                    <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $cus['sid'] ?>">
+                    <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $cus['cus_sid'] ?>">
                         <div></div>
                         <div class="cart_img">
                             <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
@@ -196,7 +199,7 @@ foreach($cusRows as $cus){
                             <div style="color: black" ><i class="fas fa-circle fa-lg"></i></div>
                         </div>
                         <div>
-                            <h6>S</h6>
+                            <h6><?= $cus['cus_size'] ?></h6>
                         </div>
                         <div class="t_wea_product_main_count d-flex align-items-center">
                             <li><a><div id="minus<?= $j?>" class="minus <?= $cus['cus_qty'] == 1 ? "unckick" : "" ?>">-</div></a></li>
@@ -210,8 +213,9 @@ foreach($cusRows as $cus){
                             <a href="#" onclick="removeProductItem(event)"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
-                    <?php endforeach; ?>
                     </div>
+                    <?php endforeach; ?>
+
                 </div>
                     <!-- ---------------------商品細節web end--------------------- -->
 
@@ -221,7 +225,7 @@ foreach($cusRows as $cus){
                     <div>
                         <?php
                         $j=0;
-                            foreach($cartProRows as $r): 
+                            foreach($cartProRows as $r):
                                 // $item = $cartProRows[$sid]; 
                                 $colorArr = json_decode($r['color'][0]['pro_pic']);
                                 // print_r($colorArr);
@@ -258,6 +262,42 @@ foreach($cusRows as $cus){
                         <?php 
                             $j++;
                             endforeach; ?>
+
+                        <!-- ---------------------------- 客製化商品 (mobile)------------------------ -->
+
+                        <?php foreach($a_cusData as $cus): ?>
+                            <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $cus['cus_sid'] ?>">
+                                <div class="cart_img">
+                                    <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                </div>
+                                <div class="t_text_left">
+                                    <a href=""><?=$cus['name'] ?></a>
+                                    <br>
+                                    <label class="price" data-price="<?= $cus['price'] ?>"></label>
+                                    <div class="d-flex justify-content-start align-items-baseline">
+                                        <div style="color: <?= $r['color'][0]['color'] ?>" >
+                                            <i class="fas fa-circle t_color_size_between"></i>
+                                        </div>
+                                        <p><?= $cus['cus_size']; ?></p>
+                                    </div>
+                                    <div class="t_wea_product_main_count d-flex align-items-center">
+                                        <li><a><div id="minus<?= $j?>" class="minus <?= $cus['cus_qty'] == 1 ? "unckick" : "" ?>">-</div></a></li>
+                                        <li><div id="countnum<?= $j?>" class="quantity" data-maxnum="50" ><?= $cus['cus_qty'] ?></div></li>
+                                        <li><a><div id="plus<?= $j?> " class="plus <?= $cus['cus_qty'] == 50 ? "unckick" : "" ?>">+</div></a></li>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <div>
+                                        <a href="#" onclick="removeProductItem(event)"><i class="fas fa-times fa-2x"></i></a>
+                                    </div>
+                                    <div class="align-self-end">
+                                        <h6 class="sub-total"></h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            $j++;
+                        endforeach; ?>
                     </div>
                     <!-- ---------------------商品細節mobile end--------------------- -->
                     
@@ -393,18 +433,19 @@ foreach($cusRows as $cus){
         //     return;
         // }
 
+
         p_items.each(function(i, el){
             // console.log( $(el).attr('data-sid') );
             // let price = parseInt( $(el).find('.price').attr('data-price') );
             // let price = $(el).find('.price').attr('data-price') * 1;
 
             const $price = $(el).find('.price'); // 價格的 <td>
-            $price.text( '$ ' + $price.attr('data-price') );
+            $price.text( '$ ' + dallorCommas($price.attr('data-price')) );
             // console.log($price.attr('data-price'))
 
             const $qty =  $(el).find('.quantity'); // <select> combo box
             // console.log($qty)
-            
+
             // 如果有的話才設定
             if($qty.attr('data-qty')){
                 $qty.text( $qty.attr('data-qty') );
@@ -413,10 +454,13 @@ foreach($cusRows as $cus){
             // console.log("qty:"+$qty.text())
             totalQty+=parseInt($qty.text());
             $qty.removeAttr('data-qty'); // 設定完就移除
-
+            console.log($qty.text())
             const $sub_total = $(el).find('.sub-total');
             $sub_total.text('$ ' + dallorCommas($price.attr('data-price') * $qty.text()));
+
+
             total += $price.attr('data-price') * $qty.text();
+
         });
         $('#totalAmount').text( '$ ' + dallorCommas(total));
         $("#totalQty").text(totalQty)
