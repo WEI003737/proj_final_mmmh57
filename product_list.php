@@ -587,7 +587,7 @@ if(! isset($_SESSION)){
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <script>
-        function a_getSid(event){
+        function goto(event){
             let proListSid = $(event.target).closest(".wea_product_list_item").attr("data-sid");
             console.log(proListSid);
 
@@ -692,7 +692,7 @@ if(! isset($_SESSION)){
     const ProductListTpl = (obj) => {
         let uptext=`
             <li class="wea_product_list_item position-relative" data-sid="${obj.sid}">
-                <img src="product_images/${obj.showImg}.png" alt="" onclick="a_getSid(event)">
+                <a href="./product.php?sid=${obj.sid}"><img src="product_images/${obj.showImg}.png" alt="" onclick="a_getSid(event)"><a>
                 <?php if(isset($_SESSION['loginUser'])): ?>
                 <i class="far fa-heart position-absolute"></i>
                 <i class="fas fa-heart position-absolute display_none"></i>

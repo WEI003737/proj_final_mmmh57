@@ -4,7 +4,8 @@ $page_name = 'product';
 
 //-----------------------------商品資料---------------------------------
 //商品列表頁取得的編號 -> sid
-$weaProductNum = $_SESSION['proListSid'];
+
+$weaProductNum = isset($_GET['sid']) ? intval($_GET['sid']) : 1;
 //商品sql -> product表
 $weaProductSql = sprintf("SELECT * FROM `products` WHERE `sid` = $weaProductNum");
 //商品資料陣列
