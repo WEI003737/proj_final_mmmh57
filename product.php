@@ -37,7 +37,7 @@ foreach($a_colorWithSizeForCart as $cs){
     $i++;
 }
 
-echo json_encode($a_colorWithSizeForCart, JSON_UNESCAPED_UNICODE);
+//echo json_encode($a_colorWithSizeForCart, JSON_UNESCAPED_UNICODE);
 
 //  exit;
 // $colorArrAll =[];
@@ -882,7 +882,9 @@ foreach($weaRecommend as $R){
                 <div class="wea_product_main_wordarea_name d-flex align-items-center justify-content-between" >
                     <h4><?=$weaProduct['name']?></h4>
                     <?php if(isset($_SESSION["loginUser"])): ?>
-                    <i class="far fa-heart"></i>
+<!--                    <i class="far fa-heart"></i>-->
+                    <i class="a_add_to_like_unactive far fa-heart a_product_like " data-sid="<?=$weaProduct['sid']?>"></i>
+                    <i class="a_add_to_like_active fas fa-heart display_none a_product_like" data-sid="<?=$weaProduct['sid']?>"></i>
                     <?php endif; ?>
                 </div>
                 
@@ -1047,11 +1049,11 @@ foreach($weaRecommend as $R){
                     <?php $i=0; foreach($weaRecommend as $R) : ?>
                         <li class="wea_recommend_item position-relative desktop">
                         <?php $recommendMainImg = json_decode($weaRecommendColor[$i][0]["pro_pic"]);?>
-                        <img src="product_images/<?=$recommendMainImg[0]?>.png" alt="">
+                        <a href="./product.php?sid=<?= $R["sid"] ?>"><img src="product_images/<?=$recommendMainImg[0]?>.png" alt=""></a>
                         <!-- $colorSecondaryImg = json_decode($prodColors[0]['pro_pic']); -->
                         <?php if(isset($_SESSION["loginUser"])): ?>
-                        <i class="far fa-heart position-absolute"></i>
-                        <i class="fas fa-heart position-absolute display_none"></i>
+                        <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="<?=$R['sid']?>"></i>
+                        <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-sid="<?=$R['sid']?>"></i>
                         <?php endif; ?>
                         <p><?=$R["name"]?></p>
                         <div class="d-flex justify-content-between">
@@ -1391,6 +1393,64 @@ foreach($weaRecommend as $R){
           },"json");
 
       };
+
+
+      //加入最愛-----------------------------
+
+      $(document).on("click", ".a_add_to_like_unactive", function(){
+
+          //加入最愛圖示
+          $(event.target).siblings(".a_add_to_like_active").removeClass("display_none");
+          //處理主商品的愛心位置問題
+          if($(event.target).hasClass("a_product_like")){
+              $(event.target).addClass("display_none")
+          }
+          //傳送 colorSid 給後端
+          const a_likeProSid = $(event.target).attr("data-sid");
+
+          $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
+              if (data.success) {
+                  // console.log(data);
+                  alert('成功加入收藏');
+              }else {
+                  alert('已收藏此商品');
+              }
+          }, 'json')
+          .done(function(){
+              console.log("success")
+          })
+          .fail(function(er){
+              console.log(er);
+          })
+      });
+
+      //移除最愛-----------------------------
+      $(document).on("click", ".a_add_to_like_active", function(){
+
+          //移除最愛圖示
+          $(event.target).addClass("display_none");
+          //處理主商品的愛心位置問題
+          if($(event.target).hasClass("a_product_like")){
+              $(event.target).siblings(".a_add_to_like_unactive").removeClass("display_none");
+          }
+          //傳送 colorSid 給後端
+          const a_likeProSid = $(event.target).attr("data-sid");
+
+          $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
+              if (data.success) {
+
+                  alert('已移除收藏');
+              }
+
+          }, 'json')
+
+          // .done(function(){
+          //     console.log("success")
+          // })
+          // .fail(function(er){
+          //     console.log(er);
+          // })
+      })
 
   </script>
 

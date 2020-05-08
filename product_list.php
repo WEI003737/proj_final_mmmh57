@@ -587,23 +587,50 @@ if(! isset($_SESSION)){
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
     <script>
-        function goto(event){
-            let proListSid = $(event.target).closest(".wea_product_list_item").attr("data-sid");
-            console.log(proListSid);
 
-            $.get("product_change_api.php",{proListSid},function(data){
-                console.log(data)
-                if(data){
-                    location.href = "product.php";
+        //加入最愛-----------------------------
+        //登入才顯示愛心
+
+        $(document).on("click", ".a_add_to_like_unactive", function(){
+            //加入最愛圖示
+            $(event.target).siblings(".a_add_to_like_active").removeClass("display_none");
+            //傳送 colorSid 給後端
+            const a_likeProSid = $(event.target).attr("data-sid");
+
+            $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
+                if (data.success) {
+                    // console.log(data);
+                    alert('成功加入收藏');
+                }else {
+                    alert('已收藏此商品');
                 }
-            }, "json")
-            //     .done(function() {
+            }, 'json')
+        });
+
+        //移除最愛-----------------------------
+        $(document).on("click", ".a_add_to_like_active", function(){
+
+            //移除最愛圖示
+            $(event.target).addClass("display_none");
+            //傳送 colorSid 給後端
+            const a_likeProSid = $(event.target).attr("data-sid");
+
+            $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
+                if (data.success) {
+
+                    alert('已移除收藏');
+                }
+
+            }, 'json')
+
+            // .done(function(){
             //     console.log("success")
             // })
-            //     .fail(function(err) {
-            //         console.log(err)
-            //     });
-        };
+            // .fail(function(er){
+            //     console.log(er);
+            // })
+        })
+
     </script>
     <script>
         var index=0;
@@ -694,8 +721,8 @@ if(! isset($_SESSION)){
             <li class="wea_product_list_item position-relative" data-sid="${obj.sid}">
                 <a href="./product.php?sid=${obj.sid}"><img src="product_images/${obj.showImg}.png" alt="" onclick="a_getSid(event)"><a>
                 <?php if(isset($_SESSION['loginUser'])): ?>
-                <i class="far fa-heart position-absolute"></i>
-                <i class="fas fa-heart position-absolute display_none"></i>
+                <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="${obj.sid}"></i>
+                <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-sid="${obj.sid}"></i>
                  <?php endif; ?>
                 <p>${obj.name}</p>
                 <div class="d-flex justify-content-between">
