@@ -13,17 +13,17 @@ if(empty($email) or empty($password)){
     exit;
 }
 
-$sql = "SELECT `sid`,`email` FROM members WHERE email=? AND password=?";
+$sql = "SELECT `sid`,`email`, `selffie` FROM `members` WHERE `email`=? AND `password`=?";
 $stmt = $pdo->prepare($sql);
 $stmt->execute([$email, $password]);
 
 if($stmt->rowCount()){
     $row = $stmt->fetch();
-    $_SESSION['loginUser'] = $email;   //?
-   // $_SESSION['loginUser']['email'];
-   // $_SESSION['loginUser']= $rows;
+    $_SESSION['loginUser'] = $email; 
+    $_SESSION['sid'] = $row['sid'];
+    $_SESSION['selffie'] = $row['selffie'];
     $output['success'] = true;
-    $output['data'] = $row;  //不一定要顯示出 危險
+    $output['data'] = $row;  
 }
 header('Content-Type: application/json');
 echo json_encode($output);

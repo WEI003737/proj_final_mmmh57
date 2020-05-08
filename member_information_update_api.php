@@ -1,7 +1,6 @@
 <?php
 require __DIR__. '/__connect_db.php';
 
-
 $output = [
     'success' => false,
     'post' => $_POST
@@ -14,9 +13,8 @@ $sql_update = "UPDATE `members` SET
         
             $stmt = $pdo->prepare($sql_update);
             $stmt->execute([
-                //$_POST['email_new'],
                 // $_POST['pw_new'],
-                $_POST['mobile_new'],
+                $_POST['mobile_new'],                   
                 $_POST['name_new'],
                 $_POST['receiver'],
                 $_POST['receiver_mobile'],

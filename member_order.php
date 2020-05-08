@@ -1,19 +1,22 @@
 <?php
 require __DIR__. '/__connect_db.php';
 
-
+$memSid = isset($_SESSION["sid"]) ? intval($_SESSION["sid"]) : '';
 //歷史訂單
-$rows_o = [];
-$sql_o = "SELECT * FROM members LEFT JOIN orders ON members.sid = orders.mem_sid = 1";
-//$sql_o = "SELECT * FROM members LEFT JOIN orders ON members.sid = orders.mem_sid ='".$_SESSION['loginUser'][sid]."'";
+$rows_o = [];                                   
+//$sql_o = "SELECT * FROM members JOIN orders ON members.sid = orders.mem_sid = 1";
+$sql_o = "SELECT * FROM members JOIN orders ON members.sid = orders.mem_sid AND orders.mem_sid=".$_SESSION["sid"];                                                                        
 $stmt = $pdo->query($sql_o);
 $rows_o = $stmt->fetchAll();
+
+//echo json_encode($sql_o);
+//echo json_encode($rows_o);
 
 //訂單細節 order_details
 $rows2 = [];
 if(isset($_GET['order_num'])){
 
-    $sql_o_d = "SELECT * FROM orders JOIN order_details ON orders.sid = order_details.order_sid where orders.mem_sid= 1 " ;
+    $sql_o_d = "SELECT * FROM orders JOIN order_details ON orders.sid = order_details.order_sid where orders.mem_sid= ". $_SESSION['sid'] ;
     if( isset($_GET['order_num']) ){
         $sql_o_d .= " AND order_num = '".$_GET['order_num']."'";
     }
@@ -36,7 +39,6 @@ foreach($rows2 as $r2){
 
 //echo json_encode($rows2);
 
-
 ?>
 
 <!DOCTYPE html>
@@ -47,66 +49,14 @@ foreach($rows2 as $r2){
     <title>member_order</title>
 </head>
 <?php include __DIR__ . '/parts/h_f_css.php'; ?>
+<?php include __DIR__ . '/css/member_css.php'; ?>
 <?php include __DIR__ . '/parts/h_f_link.php'; ?>
 
 
 <style>
-
-    * {box-sizing: border-box;
-        font-family:sans-serif;}
-
-    .container{
-        max-width: 1440px;
-        margin: 0 auto;
-    }
-
     @media screen and (max-width: 700px){
         table {font-size:12px}
     }
-
-
-    /* 上標題  */
-    .j_eng_title{
-        font-size: 36px;
-        padding-right:30px;
-        font-family:sans-serif;
-    }
-
-    .j_chinese_title
-    {font-size: 36px;}
-
-    .j_dashline{
-        border-bottom-style:dashed;
-        border-bottom-color:#272838;
-        border-width: 1px;
-    }
-
-
-    /* 左側標 */
-    .member_left_list li{
-        list-style: none;
-        padding-top: 10px;
-        padding-bottom: 50px;
-    }
-
-    @media screen and (max-width: 700px){
-        .member_left_list{display:none}
-        .j_eng_title{font-size: 15px;}
-        .j_chinese_title,.j_eng_title2{font-size: 12px;}
-        .j_mobile_noshow{display:none}
-    }
-
-
-    .j_padb_100{padding-bottom: 100px;}
-    .j_padb_200{padding-bottom: 200px;}
-    .j_padt_100{padding-top:100px}
-
-    @media screen and (max-width: 700px){
-        .j_padb_100{padding-bottom: 25px;}
-        .j_padb_200{padding-bottom: 50px;}
-        .j_padt_100{padding-top:25px}
-    }
-
 
     /* 內容 */
     th,td{
@@ -144,7 +94,6 @@ foreach($rows2 as $r2){
     }
 
     .j_desk_noshow{display:none}
-
     .j_ordernum_title{color: #CA054D }
     .j_productpic{width:135px; height:120px }
 
@@ -155,7 +104,6 @@ foreach($rows2 as $r2){
     }
 
 
-
 </style>
 <body>
 <?php include __DIR__. '/parts/header.php';?>
@@ -163,6 +111,17 @@ foreach($rows2 as $r2){
 <!-- 推出 header 空間-->
 <div class="a_push_place"></div>
 <div class="container">
+
+    <!-- 手機 (左側標換到上方) -->
+    <div id="member_left_list_totop" >
+        <ul class="member_left_list_totop d-flex justify-content-between">
+            <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+            <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
+            <li class="leftlist_underline"><a href="member_order.php" style="color:#CA054D;" >訂單查詢</a></li>
+            <li class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></li>
+        </ul>
+    </div>  
+
 
     <div class="member_top_title">
         <div class="d-flex align-items-center justify-content-center j_padt_100 ">
@@ -174,14 +133,14 @@ foreach($rows2 as $r2){
     </div>
 
     <div class="d-flex justify-content-center j_padb_200">
+
         <div class="member_left_list col-lg-2">
-            <ul>
-                <li class="leftlist_circle"><a href="member_information.php">會員資料修改</a></li>
-                <li class="leftlist_circle"><a href="member_wishlist.php">我的收藏</a></li>
-                <li class="leftlist_circle"><a href="member_order.php" style="color:#CA054D;">訂單查詢</a></li>
-                <li class="leftlist_circle"><a>我的優惠卷</a></li>
-            </ul>
+                <div class="leftlist_underline "><a href="member_information_card_noflipnew.php">會員資料修改</a></div>
+                <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>
+                <div class="leftlist_underline"><a href="member_order.php" style="color:#CA054D;" >訂單查詢</a></div>
+                <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></div>
         </div>
+
 
 
         <div class="col-lg-10">
@@ -264,6 +223,7 @@ foreach($rows2 as $r2){
 
 
             <!-- 訂單細節 手機板-->
+            <?php if($rows2!=[]){ ?>
             <div class="j_desk_noshow ">
 
                 <p class="j_ordernum_title">訂單編號:<?= $_GET['order_num'] ?></p>
@@ -305,9 +265,11 @@ foreach($rows2 as $r2){
                 </table>
                 <p class="d-flex justify-content-end" style="font-weight:bold;">合計 NT:<?=  $r2['amount'] ?></p>
             </div>
+            <?php } ?>
 
         </div>
 
+    </div>
     </div>
 
 </body>

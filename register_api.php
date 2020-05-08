@@ -41,9 +41,26 @@ if(isset($_POST['register_email']) and isset($_POST['register_name']) and isset(
         $_POST['register_name'],
     ]);
 
-
+    
     if($stmt_register->rowCount() == 1){
-        $_SESSION['loginUser'] =  $email;
+       $_SESSION['loginUser'] =  $email;
+       $_SESSION['sid'] = $pdo->lastInsertId();
+        // $_SESSION['login'] = [
+        //     'sid' => $pdo->lastInsertId,
+        //     'email' => $email
+        // ]
+
+        // ===== 註冊成功 送出優惠卷=====
+        $sql_coupon_new = "INSERT INTO `coupon`(`mem_sid`, `name`, `description`, `discount`, `is_use`, `expire_date`) 
+        VALUES (?,'會員註冊禮卷','購物即可折抵100元','100','0', NOW())";
+        //設is_use 0未使用 1表示已使用
+
+        $stmt = $pdo->prepare( $sql_coupon_new);
+        $stmt->execute([
+            $_SESSION['sid'],
+        ]);
+       // ===== 註冊成功 送出優惠卷=====
+
         $output['success'] = true;
     }else {
         $output['error'] = '資料無法新增';
