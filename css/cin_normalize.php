@@ -11,7 +11,7 @@
 }  
 @media screen and (max-width: 360px){
 .container{
-    max-width: 310px;
+    max-width: 350px;
 }
 }
 .text-center{
@@ -35,7 +35,7 @@ h1{
 }
 @font-face{
     font-family: 'Lucida Sans';
-    src:url(./font/Lucida\ Sans);
+    src:url(../font/Lucida\ Sans);
     font-style: italic;
 }
 h2{
@@ -46,9 +46,9 @@ h2{
 @media screen and (max-width: 360px){
 h2{
    font-size: 40px;
+   margin: 0px auto; 
 }
 }
-
 /*============================= 主視覺 =================================*/
 .coverTitle{
     top:50%;
@@ -138,10 +138,14 @@ line#mobileSlash {
         opacity: 1;
         transform: scale(1);
     }
+    50%{
+        opacity: 0;
+        transform: scale(1.5);
+
+    }
     100%{
         opacity: 0;
-        transform: scale(2);
-
+        transform: scale(1.5);
     }
 }
 @keyframes title{
@@ -157,11 +161,16 @@ line#mobileSlash {
 }
 /*============================= 商品類 =================================*/
 .cin_items{
-    padding: 100px 0;
+    padding: 150px 0;
 }
+@media screen and (max-width: 650px){
+    .cin_items{
+        padding: 0;
+    }
+    }
 @media screen and (max-width: 360px){
 .cin_items{
-    padding: 50px 0;
+    padding: 80px 0;
 }
 }
 .cin_items_wrapper{
@@ -175,6 +184,11 @@ line#mobileSlash {
 .cin_items ul{
     justify-content: center;
     margin-top: 50px;
+}
+@media screen and (max-width: 360px){
+    .cin_items ul{
+        margin-top: 20px;
+    }
 }
 /* .cin_items_wrapper li{
     display: block;
@@ -242,29 +256,98 @@ line#mobileSlash {
 @media screen and (max-width: 360px){
     .cin_items_rec{
         bottom:25%;
+        margin: 0;
     }
 }
 /*============================= 客製化 =================================*/
 .cin_index_cust{
-margin: 100px auto;
+margin: 50px auto 200px;
+max-height: 900px;
+}
+@media screen and (max-width: 360px){
+    .cin_index_cust{
+    margin: 0;
+    max-height: 350px;
+    }
 }
 .cin_index_custBox{
     position: relative;
-    max-width: 50%;
+    object-fit: cover;
+    overflow: hidden;
+    max-width: 750px;
+    height: 1070px;
     margin: 0 auto;
 }
-.cin_index_custBox img{
+@media screen and (max-width: 650px){
+    .cin_index_custBox{
+        height: 800px;
+    }
+}
+@media screen and (max-width: 360px){
+    .cin_index_custBox{
+        height: 470px;
+    }
+}
+.cin_index_custBox svg{
     width: 100%;
 }
-.cin_index_custBtn{
-    position: absolute;
-    background: #ca054d;
-    color: #FFFF;
-    padding: 15px 50px;
-    left: 35%;
-    bottom: -2%;
-    cursor: pointer;
+
+#yellow{
+    animation: diversemove 5s ease-in-out infinite alternate;
+    transform-origin: 54% center;
+    transform-box: fill-box;
 }
+#red{
+    animation: diversemove 3s ease-in-out infinite alternate;
+    transform-origin: 54% center;
+    transform-box: fill-box;
+}
+#pink{
+    animation: pinkmove 3s ease-in-out infinite alternate;
+}
+#blue{
+    animation: bluemove 4s infinite linear;
+    transform-origin: 40% center;
+    transform-box: fill-box;
+}
+@keyframes bluemove{
+    100%{
+        transform: rotate(-360deg);
+    }
+}
+@keyframes pinkmove{
+    from {
+        transform: rotateX(0deg) rotateZ(0deg);
+    }
+    to {
+        transform: rotateX(20deg) rotateZ(10deg);
+    }
+}
+@keyframes diversemove{
+    from {
+        transform: rotate(0deg) rotateY(0deg);
+    }
+    to {
+        transform: rotate(100deg) rotateY(40deg);
+    }
+}
+#clothes, #bottomm{
+    transition: .5s;
+}
+.cin_index_custBox a{
+    text-decoration: none;
+    color: #fff;
+    background: #ca054d;
+    padding: 15px 40px; 
+    font-size: 18px;
+}
+@media screen and (max-width: 360px){
+    .cin_index_custBox a{
+        padding: 10px 25px; 
+        font-size: 14px;
+    }
+}
+
 /*============================= 關於我們 =================================*/
 .cin_index_about{
     margin: 180px auto 0px;
@@ -294,6 +377,16 @@ margin: 100px auto;
         width: 100%;
     }
 }
+.cin_logo{
+    max-width:120px;
+    margin-bottom: 10px;
+}
+@media screen and (max-width: 360px){
+    .cin_logo{
+        max-width:90px;
+        margin-bottom: 10px;    
+    }
+}
 .cin_yellow_text{
     position: absolute;
     padding: 50px 0 0 0;
@@ -312,6 +405,7 @@ margin: 100px auto;
         width: 80%;
         padding:0;
         right:10%;
+        padding: 50px 0;
     }
 }
 .cin_yellow_text p{
