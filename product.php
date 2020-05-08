@@ -948,8 +948,8 @@ foreach($weaRecommend as $R){
                     <li><a><div id="plus">+</div></a></li>
                 </ul>
                 <div class="wea_product_main_checkout d-flex align-items-center justify-content-between">
+                    <a><div id="checkout" onclick="proGoToCart(event)">立即購買</div></a>
                     <a><div id="add_to_car" onclick="proAddToCart(event)">加入購物車</div></a>
-                    <a><div id="checkout" onclick="proGoToCart(event)">立即結帳</div></a>
                 </div>
             </div>
         </div>
