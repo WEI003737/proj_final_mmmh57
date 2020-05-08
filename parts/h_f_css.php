@@ -85,6 +85,9 @@
         .a_push_place{
             height: 80px;
         }
+        .a_display_none{
+            display: none;
+        }
     /* ----------- header ----------- */
         .header{
             box-shadow: 0 0 5px #ccc;
@@ -172,8 +175,11 @@
         }
         .a_input_search:hover .a_form_search{
             max-width: 150px;
-            border: 1px solid #CA054D;
+            border: 1px solid #ccc;
             padding: 3px 10px;
+        }
+        .a_form_search:focus{
+            outline: none;
         }
         .a_form_search{
             max-width: 0;

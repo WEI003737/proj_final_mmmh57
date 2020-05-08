@@ -38,12 +38,11 @@
                         <a href="member_login.php"><img class="a_log_in" src="./icon/log_in.png"></a>
                     <?php endif; ?>
                 </li>
-                <?php if(isset($_SESSION['loginUser'])): ?>
+
                 <li class="position-relative" onclick="haveSession(event)">
                     <a><img src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
-                <?php endif; ?>
                 <li class="a_menu">
                     <!-- bar1.2.3 上動畫用 -->
                     <div class="a_bar a_bar1 a_transition"></div>

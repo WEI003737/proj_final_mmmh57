@@ -238,6 +238,14 @@ foreach($weaRecommend as $R){
         width: 50%;
         padding: 20px 10% 20px 5%;
     }
+    .a_accordion{
+        transition: .5s;
+        overflow: hidden;
+        max-height:0;
+    }
+    .a_accordion.active{
+        max-height:300px;
+    }
     .wea_product_main_wordarea_name h4{
         margin-bottom: 4px;
     }
@@ -890,42 +898,52 @@ foreach($weaRecommend as $R){
                 
                 <h5>NT$ <?=$weaProduct['price']?></h5>
                 <hr class="wea_product_main_wordarea_line">
+                <div id="a_accordion">
                     <div>
                         <div class="d-flex justify-content-between wea_product_main_collapse_tital">
                             <h6>商品特色</h6>
-                            <i class="fas fa-chevron-up"></i>
+                            <a><i class="fas fa-chevron-up"></i></a>
                         </div>
-                        <p class="wea_product_main_collapse_content"><?=$weaProduct['intro']?></p>
+                        <div class="a_accordion active">
+                            <p class="wea_product_main_collapse_content"><?=$weaProduct['intro']?></p>
+                        </div>
                         <hr class="wea_product_main_wordarea_line">
+
                     </div>
                     <div>
-                        <div class=" d-flex justify-content-between wea_product_main_collapse_tital">
+                        <div class="d-flex justify-content-between wea_product_main_collapse_tital">
                             <h6>商品材質</h6>
-                            <i class="fas fa-chevron-down"></i>
+                            <a><i class="fas fa-chevron-down"></i></a>
                         </div>
-                        <p class="display_none wea_product_main_collapse_content"><?=$weaProduct['material']?></p>
+                        <div class="a_accordion">
+                            <p class="wea_product_main_collapse_content"><?=$weaProduct['material']?></p>
+                        </div>
                         <hr class="wea_product_main_wordarea_line">
+
                     </div>
                     <div>
                         <div class="d-flex justify-content-between wea_product_main_collapse_tital">
                             <h6>保養方式</h6>
-                            <i class="fas fa-chevron-down"></i>
+                            <a><i class="fas fa-chevron-down"></i></a>
                         </div>
-                        <p class="display_none wea_product_main_collapse_content"><?=$weaProduct['take_care']?></p>
+                        <div class="a_accordion">
+                            <p class="wea_product_main_collapse_content"><?=$weaProduct['take_care']?></p>
+                        </div>
                         <hr class="wea_product_main_wordarea_line">
+
                     </div>
                     <div class="wea_product_main_wordarea_sizeform">
                         <div class="d-flex justify-content-between wea_product_main_collapse_tital">
                             <div class="d-flex align-items-center">
-                                <i class="fas fa-question-circle"></i>
+                                <a><i class="fas fa-question-circle"></i></a>
                                 <h6>尺寸表</h6>
                             </div>
-                            <i class="fas fa-chevron-down"></i>
+                            <a><i class="fas fa-chevron-down"></i></a>
                         </div>
                         <hr class="wea_product_main_wordarea_line">
                     </div>
                 </div>
-
+            </div>
             <!-- 下方訂購區 -->
             <div class="wea_product_main_selectarea">
                 <ul class="wea_product_main_color d-flex align-items-center">
@@ -1313,15 +1331,20 @@ foreach($weaRecommend as $R){
         $(".wea_ootd_img").swipe( {fingers:1} );
 
     //商品說明
-        $(".wea_product_main_collapse_tital").click(function(){
+    //     $(".wea_product_main_collapse_tital").click(function(){
+    //
+    //         $(".wea_product_main_collapse_tital").find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+    //         $(this).parents().find("p").addClass("display_none");
+    //         $(this).find("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+    //         $(this).parent().find("p").removeClass("display_none");
+    //
+    //
+    //     })
 
-            $(".wea_product_main_collapse_tital").find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
-            $(this).parents().find("p").addClass("display_none");
-            $(this).find("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
-            $(this).parent().find("p").removeClass("display_none");
-
-
-        })
+    $("#a_accordion a").click(function(){
+        $(this).find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+        $(this).parent().siblings("a_accordion").addClass("active");
+    });
 
     //推薦商品
         var recommend_position = -25 ;
