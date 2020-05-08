@@ -631,8 +631,28 @@ if(! isset($_SESSION)){
             // })
         })
 
+        //有登入就顯示已加入收藏的商品-----------------------------
+        function showWishList() {
+            $.get("member_wishlist_api.php", function (data) {
+                console.log(data)
+            }, "json")
+
+            .fail(function (err){
+                console.log(err)
+            })
+            .done(function (){
+                console.log("success")
+            })
+            //let arr = <?//= json_encode([1, 2, 3, 4, 6, 14]) ?>//;
+            //for (let val of arr) {
+            //    $('li.wea_product_list_item i[data-sid="' + val + '"]').click();
+            }
+
+
+        showWishList();
     </script>
     <script>
+
         var index=0;
         var slideWidth=$(".wea_ootd_img").width();
         var slideImages=[ "ootd1.png", "ootd2.jpg","ootd3.jpg","ootd4.png","ootd5.png"];
