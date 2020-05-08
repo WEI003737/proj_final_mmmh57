@@ -28,14 +28,22 @@
                 </li>
                 <li class="position-relative">
                     <?php if(isset($_SESSION['loginUser'])): ?>
-                        <a href="member_information.php"><img class="a_log_in" src="./icon/log_in.png"></a>
+                    <?php if(empty($_SESSION['selffie'])): ?>
+                    <a href="member_information.php">
+                        <img class="a_log_in" src="./icon/log_in.png">
+                    </a>
+                    <?php else: ?>
+                    <a href="member_information_card_noflipnew.php">
+                        <img style="width:30px;height:30px;border-radius:50%;background:pink"  id="jimg" src="./uploads/<?= $_SESSION['selffie'] ?>"   alt="">
+                    </a>
+                    <?php endif ?>
                     <ul class="a_sub_nav a_transition">
                         <li><a class="a_transition" href="member_information.php">會員中心</a></li>
                         <li><a class="a_transition" href="member_order.php">訂單查詢</a></li>
                         <li><a  class="a_transition" href="member_logout_api.php">登出</a></li>
                     </ul>
                     <?php else: ?>
-                        <a href="member_login.php"><img class="a_log_in" src="./icon/log_in.png"></a>
+                    <a href="member_login.php"><img class="a_log_in" src="./icon/log_in.png"></a>
                     <?php endif; ?>
                 </li>
 
