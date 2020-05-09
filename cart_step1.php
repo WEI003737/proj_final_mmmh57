@@ -53,12 +53,14 @@ if(!empty($_SESSION["cart"])) {
 
 
 //抓客製化商品資料---------------------------------------------------------------------------------------------------------
-$a_getcusData = isset($_SESSION["customized"]) ? $_SESSION["customized"] : '';
-$a_cusSid = [];
-$a_cusData = [];
-$j=0;
 
 if(!empty($_SESSION["customized"])) {
+
+    $a_getcusData = isset($_SESSION["customized"]) ? $_SESSION["customized"] : '';
+    $a_cusSid = [];
+    $a_cusData = [];
+    $j=0;
+
     foreach ($a_getcusData as $cus) {
         $a_cusData[$j] = $cus;
         $a_cusSid[] = $cus["cus_sid"];
@@ -96,16 +98,16 @@ if(!empty($_SESSION["customized"])) {
         <div class="t_wrap">
             <div class="t_step_panel">
                 <ul class="d-flex justify-content-center">
-                    <li class="t_step1">1<p>購物車</p></li>
+                    <li class="t_step1 t_icon_active">1<p>購物車</p></li>
                     <li class="t_step2">2<p>填寫資料</p></li>
                     <li class="t_step3">3<p>訂單確認</p></li>
                 </ul>
             </div>
             <div class="t_step_panel_mobile t_web_none">
                 <ul class="d-flex justify-content-center">
-                    <li class="t_step1_mobile">購物車</li>
-                    <li class="t_step2_mobile">填寫資料</li>
-                    <li class="t_step3_mobile">訂單確認</li>
+                    <li class="active">購物車</li>
+                    <li class="">填寫資料</li>
+                    <li class="">訂單確認</li>
                 </ul>
             </div>
             <section>
@@ -163,9 +165,9 @@ if(!empty($_SESSION["customized"])) {
                                         <h6><?= $r['size']; ?></h6>
                                     </div>
                                     <div class="t_wea_product_main_count d-flex align-items-center">
-                                        <li><a><div id="minus<?= $j?>" class="minus <?= $r['quantity'] == 1 ? "unckick" : "" ?>">-</div></a></li>
-                                        <li><div id="countnum<?= $j?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" ><?= $r['quantity'] ?></div></li>
-                                        <li><a><div id="plus<?= $j?> " class="plus <?= $r['quantity'] == $r['in_stock'] ? "unckick" : "" ?>">+</div></a></li>
+                                        <li><a><div class="minus <?= $r['quantity'] == 1 ? "unckick" : "" ?>">-</div></a></li>
+                                        <li><div  data-maxnum="<?= $r['in_stock'] ?>" class="quantity" ><?= $r['quantity'] ?></div></li>
+                                        <li><a><div class="plus <?= $r['quantity'] == $r['in_stock'] ? "unckick" : "" ?>">+</div></a></li>
                                     </div>
                                     <div>
                                         <h6 class="sub-total"></h6>
@@ -202,9 +204,9 @@ if(!empty($_SESSION["customized"])) {
                             <h6><?= $cus['cus_size'] ?></h6>
                         </div>
                         <div class="t_wea_product_main_count d-flex align-items-center">
-                            <li><a><div id="minus<?= $j?>" class="minus <?= $cus['cus_qty'] == 1 ? "unckick" : "" ?>">-</div></a></li>
-                            <li><div id="countnum<?= $j?>" data-maxnum="50" class="quantity" ><?= $cus['cus_qty'] ?></div></li>
-                            <li><a><div id="plus<?= $j?> " class="plus <?= $cus['cus_qty'] == 50 ? "unckick" : "" ?>">+</div></a></li>
+                            <li><a><div class="minus <?= $cus['cus_qty'] == 1 ? "unckick" : "" ?>">-</div></a></li>
+                            <li><div data-maxnum="50" class="quantity" ><?= $cus['cus_qty'] ?></div></li>
+                            <li><a><div class="plus <?= $cus['cus_qty'] == 50 ? "unckick" : "" ?>">+</div></a></li>
                         </div>
                         <div>
                             <h6 class="sub-total"></h6>
@@ -213,10 +215,9 @@ if(!empty($_SESSION["customized"])) {
                             <a href="#" onclick="removeProductItem(event)"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
-                    </div>
+
                     <?php endforeach; ?>
                     <?php endif; ?>
-
                 </div>
                     <!-- ---------------------商品細節web end--------------------- -->
 
@@ -248,9 +249,9 @@ if(!empty($_SESSION["customized"])) {
                                             <p><?= $r['size']; ?></p>
                                         </div>
                                         <div class="t_wea_product_main_count d-flex align-items-center">
-                                            <li><a><div id="minus<?= $j?>" class="minus <?= $r['quantity'] == 1 ? "unckick" : "" ?>">-</div></a></li>
-                                            <li><div id="countnum<?= $j?>" class="quantity" data-maxnum="<?= $r['in_stock'] ?>" ><?= $r['quantity'] ?></div></li>
-                                            <li><a><div id="plus<?= $j?> " class="plus <?= $r['quantity'] == $r['in_stock']? "unckick" : "" ?>">+</div></a></li>
+                                            <li><a><div class="minus <?= $r['quantity'] == 1 ? "unckick" : "" ?>">-</div></a></li>
+                                            <li><div class="quantity" data-maxnum="<?= $r['in_stock'] ?>" ><?= $r['quantity'] ?></div></li>
+                                            <li><a><div class="plus <?= $r['quantity'] == $r['in_stock']? "unckick" : "" ?>">+</div></a></li>
                                         </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -285,9 +286,9 @@ if(!empty($_SESSION["customized"])) {
                                         <p><?= $cus['cus_size']; ?></p>
                                     </div>
                                     <div class="t_wea_product_main_count d-flex align-items-center">
-                                        <li><a><div id="minus<?= $j?>" class="minus <?= $cus['cus_qty'] == 1 ? "unckick" : "" ?>">-</div></a></li>
-                                        <li><div id="countnum<?= $j?>" class="quantity" data-maxnum="50" ><?= $cus['cus_qty'] ?></div></li>
-                                        <li><a><div id="plus<?= $j?> " class="plus <?= $cus['cus_qty'] == 50 ? "unckick" : "" ?>">+</div></a></li>
+                                        <li><a><div class="minus <?= $cus['cus_qty'] == 1 ? "unckick" : "" ?>">-</div></a></li>
+                                        <li><div class="quantity" data-maxnum="50" ><?= $cus['cus_qty'] ?></div></li>
+                                        <li><a><div class="plus <?= $cus['cus_qty'] == 50 ? "unckick" : "" ?>">+</div></a></li>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-end">
@@ -305,7 +306,7 @@ if(!empty($_SESSION["customized"])) {
                         <?php endif; ?>
                     </div>
                     <!-- ---------------------商品細節mobile end--------------------- -->
-                    
+                </div>
                     <hr class="t_separation_line">
 
                     <section class="d-flex justify-content-end">
@@ -315,8 +316,8 @@ if(!empty($_SESSION["customized"])) {
                                 <div>商品總金額</div>
                                 <div class="t_text_right" id="totalAmount"></div>
                             </div>
-                            <a href="cart_step2.php"><div class="t_cart1_checkout_btn">
-                                <input type="submit" value="立即結帳→" class="btn">
+                            <a><div class="t_cart1_checkout_btn">
+                                <input value="立即結帳→" class="btn" onclick="a_goCartPageSecond()">
                             </div></a>
                         </div>
                     </section>    
@@ -476,5 +477,26 @@ if(!empty($_SESSION["customized"])) {
     calPrices();
     
     
+    </script>
+    <script>
+
+        function a_goCartPageSecond () {
+            location.reload();
+            $.get("isset_session.php", function (data) {
+                if(data.cart || data.customized){
+                    location.href = "cart_step2.php";
+                }else {
+                    alert("購物車裡沒有東西");
+                }
+                console.log(data);
+            }, "json")
+            //     .done(function() {
+            //         console.log("success")
+            // })
+            //     .fail(function(err) {
+            //        console.log(er)
+            //     });
+        }
+
     </script>
 <?php include __DIR__ . '/parts/html-foot.php'; ?>

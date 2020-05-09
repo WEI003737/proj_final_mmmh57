@@ -11,7 +11,7 @@
 //購物車若沒有東西會提示 有就轉向
     function haveSession () {
         $.get("isset_session.php", function (data) {
-            if(data.cart){
+            if(data.cart || data.customized){
                 location.href = "cart_step1.php";
             }else {
                 alert("購物車裡沒有東西");

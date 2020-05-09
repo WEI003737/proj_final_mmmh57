@@ -25,17 +25,19 @@ $prodSizes = $pdo -> query($size_sql)
             ->fetchAll();
 
 
+//
+////設定size stock給按鈕用陣列
+//$a_colorWithSizeForCart = $prodColors;
+//$i=0;
+//foreach($a_colorWithSizeForCart as $cs){
+//    $a_size_sql = "SELECT * FROM `size` WHERE `color_sid` = ".$cs["sid"];
+//    $a_prodSizes = $pdo -> query($a_size_sql)
+//        ->fetchAll();
+//    $a_colorWithSizeForCart[$i]["stock"] = $a_prodSizes;
+//    $i++;
+//}
 
-//設定size stock給按鈕用陣列
-$a_colorWithSizeForCart = $prodColors;
-$i=0;
-foreach($a_colorWithSizeForCart as $cs){
-    $a_size_sql = "SELECT * FROM `size` WHERE `color_sid` = ".$cs["sid"];
-    $a_prodSizes = $pdo -> query($a_size_sql)
-        ->fetchAll();
-    $a_colorWithSizeForCart[$i]["stock"] = $a_prodSizes;
-    $i++;
-}
+//  echo json_encode($a_colorWithSizeForCart, JSON_UNESCAPED_UNICODE);
 
 // $colorArrAll =[];
 // foreach($prodColors as $c){
@@ -1195,7 +1197,7 @@ foreach($weaRecommend as $R){
                 selectSizeSid= $(this).find("div").data('sizenum');
                 // parseInt(selectSizeSid);
                 // console.log(selectSizeSid);
-                stockNum = selectColorSizes[selectSizeSid]["in_stock"];
+                stockNum = $(this).find("div").data('sizenum');
                 console.log(stockNum);
                 $(this).find("div").addClass("active");
                 $(this).siblings().find("div").removeClass("active");

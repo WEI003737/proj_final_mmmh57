@@ -195,7 +195,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
 <div id="member_left_list_totop" >
        <ul class="member_left_list_totop d-flex justify-content-between">
             <li class="leftlist_underline"><a href="member_information_card_noflipnew.php" style="color:#CA054D;">會員資料修改</a></li>
-            <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
+            <li class="leftlist_underline"><a href="member_wishlist.php">我的收藏</a></li>
             <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
             <li class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></li>
         </ul>
