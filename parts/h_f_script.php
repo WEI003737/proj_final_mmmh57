@@ -47,7 +47,6 @@
         $('.a_cart_count').text(total);
     }
 
-//讓所有頁面一進來就能讀到收藏
 
 
 </script>

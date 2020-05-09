@@ -411,7 +411,7 @@ if(!empty($_SESSION["customized"])) {
         event.preventDefault(); // 避免 <a> 的連結
         const div = $(event.target).closest('div.p-item')
         const cart_sid = div.attr('data-sid');
-        console.log(cart_sid)
+        // console.log(cart_sid)
         $.get('remove_from_cart_api.php', {cart_sid}, function(data){
             div.remove();
             countCartObj(data);
@@ -422,8 +422,8 @@ if(!empty($_SESSION["customized"])) {
 
     function changeQty(cart_sid){
         let cart_qty = selectCountNum;
-        console.log(`cart_qty:${cart_qty}`)
-        console.log(`cart_sid:${cart_sid}`)
+        // console.log(`cart_qty:${cart_qty}`)
+        // console.log(`cart_sid:${cart_sid}`)
 
         $.get('add_to_cart_api.php', { cart_sid,cart_qty}, function(data){
             countCartObj(data);
@@ -465,7 +465,7 @@ if(!empty($_SESSION["customized"])) {
             // console.log("qty:"+$qty.text())
             totalQty+=parseInt($qty.text());
             $qty.removeAttr('data-qty'); // 設定完就移除
-            console.log($qty.text())
+            // console.log($qty.text())
             const $sub_total = $(el).find('.sub-total');
             $sub_total.text('$ ' + dallorCommas($price.attr('data-price') * $qty.text()));
 

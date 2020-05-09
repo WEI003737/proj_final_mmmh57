@@ -2,6 +2,10 @@
 require __DIR__. '/__connect_db.php';
 
 
+$totalItems = 0;
+$totalProductItems = 0;
+$totalCustomizedItems = 0;
+
 //將存進session的最新訂單編號拿出
 if(!empty($_SESSION["lastOrderSid"])){
 
@@ -32,6 +36,9 @@ if(!empty($_SESSION["lastOrderSid"])){
             $j++;
         };
 
+        //數量
+        $totalProductItems += $orderProductsRows[$i]['gty'];
+
         $i++;
     };
 
@@ -40,12 +47,18 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderCustomizedSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '1'";
     $orderCustomizedRows = $pdo -> query($orderCustomizedSql) -> fetchAll();
 
+    //數量
+    for($k = 0; $k < count($orderCustomizedRows); $k++){
+        $totalCustomizedItems += $orderCustomizedRows[$k]["gty"];
+    }
 
 
 };
 
+$numItems = count($orderProductsRows) + count($orderCustomizedRows);
+$totalItems = $totalProductItems + $totalCustomizedItems;
 
-echo json_encode($orderProductsRows)
+//echo json_encode($orderCustomizedRows)
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
@@ -120,7 +133,7 @@ echo json_encode($orderProductsRows)
                                 <h5>總金額：<span id="totalAmount">NT <?= number_format($orderRow["amount"]) ?></span></h5>
                                 <div class="d-flex">
                                     <i class="fas fa-angle-down fa-fw fa-2x"></i>
-                                    <h5>購物車(<?= $numItems ?>項，共<?=$totalItems?> 件)</h5>
+                                    <h5>購物車(<?= $numItems ?>項，共<?= $totalItems ?>件)</h5>
                                 </div>
                             </div>
                         </div> 
@@ -148,43 +161,83 @@ echo json_encode($orderProductsRows)
                             </div>
                             <!-- ---------------------商品細節web start--------------------- -->
                             <div>
-                                <?php
-                                $j=0;
-                                    foreach($cartProRows as $r): 
-                                        // $item = $cartProRows[$sid]; 
-                                        $colorArr = json_decode($r['color'][0]['pro_pic']);
-                                        // print_r($colorArr);
-                                        ?>
-                                        <div class="t_grid-container_cart3_productinfo p-item" data-sid="<?= $r['sid'] ?>">
+                                <?php if(count($orderProductsRows)): ?>
+                                    <?php
+                                    $j=0;
+                                    foreach($orderProductsRows as $op):
+                                    $picArr = json_decode($op["picture"]["pro_pic"]); ?>
+                                        <div class="t_grid-container_cart3_productinfo p-item" data-sizeSid="<?= $op['size_sid'] ?>">
                                             <div></div>
                                             <div class="cart_img">
-                                                <img src="./product_images/<?= $colorArr[0]?>.png" alt="">
+                                                <img src="./product_images/<?= $picArr[0] ?>.png" alt="">
                                             </div>
                                             <div class="t_text_left">
                                                 <h6>
-                                                    <a href=""><?=$r['product'][0]['name'] ?></a> 
+                                                    <a href=""><?=$op['name'] ?></a>
                                                     <br><br>
-                                                    <label class="price" data-price="<?= $r['product'][0]['price'] ?>"></label>
+                                                    <label class="price" data-price="<?= $op['price'] ?>"></label>
                                                 </h6>
                                             </div>
                                             <div class="t_text_center">
-                                                <div style="color: <?= $r['color'][0]['color'] ?>" ><i class="fas fa-circle fa-lg"></i></div>
+                                                <div style="color: <?= $op['color'] ?>" ><i class="fas fa-circle fa-lg"></i></div>
                                             </div>
                                             <div>
-                                                <h6><?= $r['size']; ?></h6>
+                                                <h6><?= $op['size']; ?></h6>
                                             </div>
                                             <div>
-                                                <div id="countnum<?= $j?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" onchange="changeQty(event)"><?= $r['quantity'] ?></div>
+                                                <div class="quantity" data-qty="<?= $op['gty'] ?>"></div>
                                             </div>
                                             <div>
                                                 <h6 class="sub-total"></h6>
                                             </div>
-                                            </div>
-                                <?php 
-                            
-                                $j++;
-                                endforeach; ?>
-                                        </div> 
+                                        </div>
+                                    <?php
+                                    $j++;
+                                    endforeach; ?>
+                                <?php endif; ?>
+
+                                <!-- --------------------------- 客製化 web ------------------------------ -->
+
+                                <?php if(count($orderCustomizedRows)): ?>
+
+                                    <?php
+                                    $j=0;
+                                    foreach($orderCustomizedRows as $oc):
+                                    $colorArr = json_decode($oc["cus_color"]); ?>
+
+                                    <div class="t_grid-container_cart3_productinfo p-item" data-proSid="<?= $oc['pro_sid'] ?>">
+                                        <div></div>
+                                        <div class="cart_img">
+                                            <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                        </div>
+                                        <div class="t_text_left">
+                                            <h6>
+                                                <a href=""><?=$oc['name'] ?></a>
+                                                <br><br>
+                                                <label class="price" data-price="<?= $oc['price'] ?>"></label>
+                                            </h6>
+                                        </div>
+                                        <div class="t_text_center">
+                                            <?php for($i=0 ; $i < count($colorArr) ;$i++): ?>
+                                            <div style="color: <?= $colorArr[$i] ?>" ><i class="fas fa-circle fa-lg"></i></div>
+                                            <?php endfor; ?>
+                                        </div>
+                                        <div>
+                                            <h6><?= $oc['size']; ?></h6>
+                                        </div>
+                                        <div>
+                                            <div class="quantity" data-qty="<?= $oc['gty'] ?>"></div>
+                                        </div>
+                                        <div>
+                                            <h6 class="sub-total"></h6>
+                                        </div>
+                                    </div>
+                                    <?php
+
+                                    $j++;
+                                    endforeach; ?>
+                                <?php endif; ?>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -194,8 +247,8 @@ echo json_encode($orderProductsRows)
                     <div class="t_grid-container_orderdetail_mobile">
                         <div class="t_text_center">訂單資訊</div>
                         <div class="t_orderdetail_info">
-                            <p>訂單日期 : 2020/03/30</p>
-                            <p>訂單狀態 :  處理中</p>
+                            <p>訂單日期 : <?= $orderRow["created_date"] ?></p>
+                            <p>訂單狀態 : <?= $orderRow["order_status"] ?></p>
                         </div>
                     </div>
                     <div class="t_grid-container_orderdetail_mobile">
@@ -208,20 +261,19 @@ echo json_encode($orderProductsRows)
                     <div class="t_grid-container_orderdetail_mobile">
                         <div class="t_text_center">寄送資訊</div>
                         <div class="t_orderdetail_info">
-                            <p>收件人姓名 : 海綿寶寶</p>
-                            <p>收件人電話 : 09xx-xxxxxx</p>
+                            <p>收件人姓名 : <?= $orderRow["receiver"] ?></p>
+                            <p>收件人電話 : <?= $orderRow["receiver_mobile"] ?></p>
                             <p>寄送方式 : 宅配寄送</p>
-                            <p>出貨狀態 : 未發貨</p>
-                            <p>地址 : 123-321 深海大鳳梨235號</p>
+                            <p>地址 : <?= $orderRow["address"] ?></p>
                         </div>
                     </div>
                     <div>
                         <hr class="t_separation_line">
                         <div class="t_cart3_subtotal">
-                            <h5>總金額：<span id="mobileTotalAmount">$ <?= number_format($totalPrice) ?></span></h5>
+                            <h5>總金額：<span id="mobileTotalAmount">$ <?= number_format($orderRow["amount"]) ?></span></h5>
                             <div class="d-flex t_justify_align_center">
                                 <i class="fas fa-angle-down fa-fw fa-2x"></i>
-                                <h5>購物車(<?= $numItems ?>項，共<?=$totalItems?> 件)</h5>
+                                <h5>購物車(<?= $numItems ?>項，共<?= $totalItems ?>件)</h5>
                             </div>
                         </div>
                     </div> 
@@ -229,29 +281,27 @@ echo json_encode($orderProductsRows)
                     <div class="t_unfold">
                         <div class="t_main_cart">
                             <div>
+                            <?php if(count($orderProductsRows)): ?>
                                 <?php
                                 $j=0;
-                                    foreach($cartProRows as $r): 
-                                        // $item = $cartProRows[$sid]; 
-                                        $colorArr = json_decode($r['color'][0]['pro_pic']);
-                                        // print_r($colorArr);
-                                        ?>
-                                    <div class="t_grid-container_cart3_productinfo_mobile t_web_none p-item" data-sid="<?= $r['sid'] ?>">
+                                foreach($orderProductsRows as $op):
+                                $picArr = json_decode($op["picture"]["pro_pic"]); ?>
+                                    <div class="t_grid-container_cart3_productinfo_mobile t_web_none p-item" data-sizeSid="<?= $op['size_sid'] ?>">
                                         <div class="cart_img">
-                                            <img src="./product_images/<?= $colorArr[0]?>.png" alt="">
+                                            <img src="./product_images/<?= $picArr[0] ?>.png" alt="">
                                         </div>
                                         <div class="t_text_left">
-                                                <a href=""><?=$r['product'][0]['name'] ?></a> 
+                                                <a href=""><?=$op['name'] ?></a>
                                                 <br>
-                                                <label class="price" data-price="<?= $r['product'][0]['price'] ?>"></label>
+                                                <label class="price" data-price="<?= $op['price'] ?>"></label>
                                                 <div class="d-flex justify-content-start align-items-baseline">
-                                                    <div style="color: <?= $r['color'][0]['color'] ?>" >
+                                                    <div style="color: <?= $op['color'] ?>" >
                                                         <i class="fas fa-circle t_color_size_between"></i>
                                                     </div>
-                                                    <p><?= $r['size']; ?></p>
+                                                    <p><?= $op['size']; ?></p>
                                                 </div>
                                                 <div>
-                                                    <div id="countnum<?= $j?>" class="quantity" data-maxnum="<?= $r['in_stock'] ?>" ><?= $r['quantity'] ?></div>
+                                                    <div class="quantity" data-qty="<?= $op['gty'] ?>"></div>
                                                 </div>
                                         </div>
                                         <div class="d-flex justify-content-end">
@@ -261,8 +311,48 @@ echo json_encode($orderProductsRows)
                                         </div>
                                     </div>
                                 <?php 
+                                $j++;
+                                endforeach; ?>
+                            <?php endif; ?>
+
+                                <!-- --------------------------- 客製化 mobile ------------------------------ -->
+
+                            <?php if(count($orderCustomizedRows)): ?>
+                                <?php
+                                $j=0;
+                                foreach($orderCustomizedRows as $oc):
+                                $colorArr = json_decode($oc["cus_color"]); ?>
+
+                                    <div class="t_grid-container_cart3_productinfo_mobile t_web_none p-item" data-proSid="<?= $oc['pro_sid'] ?>">
+                                        <div class="cart_img">
+                                            <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                        </div>
+                                        <div class="t_text_left">
+                                            <a href=""><?=$oc['name'] ?></a>
+                                            <br>
+                                            <label class="price" data-price="<?= $oc['price'] ?>"></label>
+                                            <div class="d-flex justify-content-start align-items-baseline">
+                                                <?php for($i=0 ; $i < count($colorArr) ;$i++): ?>
+                                                <div style="color: <?= $colorArr[$i] ?>" >
+                                                    <i class="fas fa-circle t_color_size_between"></i>
+                                                </div>
+                                                <?php endfor; ?>
+                                                <p><?= $oc['size']; ?></p>
+                                            </div>
+                                            <div>
+                                                <div class="quantity" data-qty="<?= $oc['gty'] ?>"></div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <div class="align-self-end">
+                                                <h6 class="sub-total"></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php
                                     $j++;
-                                    endforeach; ?>
+                                endforeach; ?>
+                            <?php endif; ?>
                             </div>
                         </div>
                     </div>
@@ -270,12 +360,17 @@ echo json_encode($orderProductsRows)
             </div>
             </section>
             <div class="d-flex justify-content-center">
-                <div class="t_cart3_orderpage_btn">
-                    <input type="submit" value="至訂單中心" class="btn btn-p">
-                </div>
-                <div class="t_cart3_goshop_btn">
-                    <input type="submit" value="繼續購物" class="btn">
-                </div>
+                <a href="member_order.php">
+                    <div class="t_cart3_orderpage_btn">
+                        <input type="submit" value="至訂單中心" class="btn btn-p">
+                    </div>
+                </a>
+                <a href="product_list.php">
+                    <div class="t_cart3_goshop_btn">
+                        <input type="submit" value="繼續購物" class="btn">
+                    </div>
+                </a>
+
             </div> 
         </div>
     </div>
@@ -307,6 +402,7 @@ echo json_encode($orderProductsRows)
         let total = 0;
         let totalQty=0;
         let productCount=p_items.length;
+        console.log
         $("#productItem").text(productCount);
         // if(! p_items.length){
         //     alert('請先將商品加入購物車');
@@ -336,7 +432,7 @@ echo json_encode($orderProductsRows)
             $qty.removeAttr('data-qty'); // 設定完就移除
 
             const $sub_total = $(el).find('.sub-total');
-            $sub_total.text('$ ' + dallorCommas($price.attr('data-price') * $qty.text()));
+            $sub_total.text('NT ' + dallorCommas($price.attr('data-price') * $qty.text()));
             total += $price.attr('data-price') * $qty.text();
         });
         

@@ -515,6 +515,13 @@ $customized_bottoms_each = $customized_bottoms->fetchAll(); //倒褲子資料
             $(".nac_go_customized_box").addClass("nac_go_customized_box_move");
         }, 1000);
     </script>
+    <script>
+
+        const dallorCommas = function(n){
+            return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+        };
+
+    </script>
 </body>
 
 </html>

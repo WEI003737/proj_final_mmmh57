@@ -736,7 +736,7 @@ if(! isset($_SESSION)){
     <script>
         var index=0;
         var slideWidth=$(".wea_ootd_img").width();
-        var slideImages=[ "ootd1.png", "ootd2.jpg","ootd3.jpg","ootd4.png","ootd5.png"];
+        var slideImages=[ "ootd1.jpg", "ootd2.png","ootd3.png","ootd4.jpg","ootd5.jpg"];
         var slideCount=slideImages.length;
         var slideImagesContent="";
         var slidePoint="";

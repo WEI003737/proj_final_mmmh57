@@ -38,7 +38,7 @@
                     </a>
                     <?php endif ?>
                     <ul class="a_sub_nav a_transition">
-                        <li><a class="a_transition" href="member_information.php">會員中心</a></li>
+                        <li><a class="a_transition" href="member_information_card_noflipnew.php">會員中心</a></li>
                         <li><a class="a_transition" href="member_order.php">訂單查詢</a></li>
                         <li><a  class="a_transition" href="member_logout_api.php">登出</a></li>
                     </ul>

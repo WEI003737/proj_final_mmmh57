@@ -69,7 +69,7 @@ require __DIR__. '/__connect_db.php';
         <h2>商品類別</h2>
         <div class="cin_items_wrapper">
             <ul class="cin_items_list d-flex">
-                <li><a href="">
+                <li><a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20IN(1,2)%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                             <img src="./img/abdtf-jo5ip.jpg" alt="">
                             <div class="cin_items_cover">
@@ -81,7 +81,7 @@ require __DIR__. '/__connect_db.php';
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20BETWEEN%208%20AND%2013%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                         <img src="./img/leggings_025_bk_1 copy.png" alt="">
                         <div class="cin_items_cover">
@@ -92,7 +92,7 @@ require __DIR__. '/__connect_db.php';
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20BETWEEN%203%20AND%207%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                         <img src="./img/sweatshirts_000_bl_1.jpg" alt="">
                         <div class="cin_items_cover">
@@ -103,7 +103,7 @@ require __DIR__. '/__connect_db.php';
                 </li>
 
                 <li>
-                    <a href="">
+                    <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20=%2014%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                         <img src="./img/yoga_009_pk_0.jpg" alt="">
                         <div class="cin_items_cover">
@@ -403,7 +403,7 @@ require __DIR__. '/__connect_db.php';
                         </defs>
                         </svg>
                 <div class="cin_cust_btn">        
-                <a href="#" data-title="前往客製化">前往客製化</a>
+                <a href="customized.php" data-title="前往客製化">前往客製化</a>
                 </div>
             </div>
         </div>

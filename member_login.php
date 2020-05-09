@@ -322,14 +322,14 @@ require __DIR__. '/__connect_db.php';
         
             if(data.success){
                 $('#info-bar').show().text('登入成功');
-                console.log(data)
+                // console.log(data)
                 setTimeout(function(){
                     //首頁檔名
                     location.href ='member_information_card_noflipnew.php';
                 }, 1000);
 
             } else {
-                console.log(data)
+                // console.log(data)
                 $('#info-bar').show().text('帳號或密碼錯誤');
             }
         }, 'json')
