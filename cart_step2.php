@@ -151,6 +151,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                             </div>
                             <!-- ---------------------商品細節web start--------------------- -->
                             <div>
+                                <?php if(!empty($_SESSION["cart"])): ?>
                                 <?php
                                 $j=0;
                                     foreach($cartProRows as $r): 
@@ -187,6 +188,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                             
                                 $j++;
                                 endforeach; ?>
+                                <?php endif; ?>
                                         <!-- </div>  -->
                                 <!-- ---------------------------- 客製化商品 (web)------------------------ -->
                                 <?php if(!empty($_SESSION["customized"])): ?>
@@ -227,6 +229,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                         <!-- ---------------------商品細節mobile start--------------------- -->
                         <div class="t_unfold">
                             <div>
+                                <?php if(!empty($_SESSION["cart"])): ?>
                                 <?php
                                 $j=0;
                                     foreach($cartProRows as $r): 
@@ -261,6 +264,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                 <?php 
                                     $j++;
                                     endforeach; ?>
+                                <?php endif; ?>
                                 <!-- ---------------------------- 客製化商品 (mobile)------------------------ -->
 
                                 <?php if(!empty($_SESSION["customized"])): ?>
@@ -784,7 +788,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                 // return false;
                 $.post('cart_step2_api.php', $(document.form1).serialize(), function(data){
 
-                    if(data.success){
+                    if(data.addCartSuccess && data.addCusSuccess){
                         alert('訂單送出成功');
                         setTimeout(function(){
                             //首頁檔名
@@ -799,9 +803,9 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                     console.log("success")
                     console.log(data);
                 })
-                // .fail(function(err){
-                //     console.log(err)
-                // })
+                .fail(function(err){
+                    console.log(err)
+                })
             }
             return false;
         }

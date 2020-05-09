@@ -1,11 +1,14 @@
 <?php
 require __DIR__. '/__connect_db.php';
 
-$pKeys = array_keys($_SESSION['cart']);
 
-$data_ar = [];
 $i=0;
 if(!empty($_SESSION["cart"])) {
+
+    $pKeys = array_keys($_SESSION['cart']);
+
+    $data_ar = [];
+
     if (!empty($pKeys)) {
         $cartProSql = sprintf("SELECT * FROM `size` WHERE `sid` IN(%s)", implode(',', $pKeys));
         $cartProStmt = $pdo->query($cartProSql);
@@ -78,7 +81,7 @@ if(!empty($_SESSION["customized"])) {
     };
 }
 
-//echo json_encode($a_cusData, JSON_UNESCAPED_UNICODE);
+echo json_encode($a_cusData, JSON_UNESCAPED_UNICODE);
 
 
 

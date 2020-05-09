@@ -2,7 +2,8 @@
 require __DIR__. '/__connect_db.php';
 
 $output = [
-    "success" => false,
+    "addCartSuccess" => false,
+    "addCusSuccess" => false,
 ];
 
 // print_r($_POST);
@@ -22,71 +23,66 @@ $totalItems = 0;
 $totalProductItems = 0;
 $totalCustomizedItems = 0;
 
-if(!empty($pKeys)) {
-    $cartProSql = sprintf("SELECT * FROM `size` WHERE `sid` IN(%s)", implode(',', $pKeys));
-    $cartProStmt = $pdo -> query($cartProSql);
-    $cartProRows = $cartProStmt -> fetchAll();
-    
-    foreach($cartProRows as $pro){
+    if (!empty($pKeys)) {
+        $cartProSql = sprintf("SELECT * FROM `size` WHERE `sid` IN(%s)", implode(',', $pKeys));
+        $cartProStmt = $pdo->query($cartProSql);
+        $cartProRows = $cartProStmt->fetchAll();
 
-        $cartProRows[$i]['quantity'] = $_SESSION['cart'][$pro['sid']];
+        foreach ($cartProRows as $pro) {
 
-        $colorSql = "SELECT * FROM `color` WHERE `sid`=".$pro['color_sid'];
-        $colorStmt = $pdo -> query($colorSql);
-        $colorRows = $colorStmt -> fetchAll();
-        $cartProRows[$i]['color'] = $colorRows;
+            $cartProRows[$i]['quantity'] = $_SESSION['cart'][$pro['sid']];
+
+            $colorSql = "SELECT * FROM `color` WHERE `sid`=" . $pro['color_sid'];
+            $colorStmt = $pdo->query($colorSql);
+            $colorRows = $colorStmt->fetchAll();
+            $cartProRows[$i]['color'] = $colorRows;
 
 
-        $proSql = "SELECT * FROM `products` WHERE `sid`=".$pro['pro_sid'];
-        $proStmt = $pdo -> query($proSql);
-        $proRows = $proStmt -> fetchAll();
+            $proSql = "SELECT * FROM `products` WHERE `sid`=" . $pro['pro_sid'];
+            $proStmt = $pdo->query($proSql);
+            $proRows = $proStmt->fetchAll();
 
-        $cartProRows[$i]['product'] = $proRows;
+            $cartProRows[$i]['product'] = $proRows;
 
-        $i++;
+            $i++;
+        }
     }
-} else {
-        header('Location: _product_list.php');
-        exit;
-}
 
 //客製化資訊---------------------------------------------------
 
 
+    if (!empty($_SESSION["customized"])) {
 
-if(!empty($_SESSION["customized"])) {
+        $a_getcusData = isset($_SESSION["customized"]) ? $_SESSION["customized"] : '';
+        $a_cusSid = [];
+        $a_cusData = [];
+        $j = 0;
 
-    $a_getcusData = isset($_SESSION["customized"]) ? $_SESSION["customized"] : '';
-    $a_cusSid = [];
-    $a_cusData = [];
-    $j=0;
+        foreach ($a_getcusData as $cus) {
+            $a_cusData[$j] = $cus;
+            $a_cusSid[] = $cus["cus_sid"];
+            $j++;
+        }
 
-    foreach ($a_getcusData as $cus) {
-        $a_cusData[$j] = $cus;
-        $a_cusSid[] = $cus["cus_sid"];
-        $j++;
-    }
+        $a_cusSql = sprintf("SELECT `sid`,`name`,`price` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
+        $a_cusRows = $pdo->query($a_cusSql)->fetchAll();
 
-    $a_cusSql = sprintf("SELECT `sid`,`name`,`price` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
-    $a_cusRows = $pdo->query($a_cusSql)->fetchAll();
+        $k = 0;
+        foreach ($a_cusRows as $cus) {
+            $a_cusData[$k]['name'] = $cus["name"];
+            $a_cusData[$k]['price'] = $cus["price"];
+            $k++;
+        };
 
-    $k = 0;
-    foreach ($a_cusRows as $cus) {
-        $a_cusData[$k]['name'] = $cus["name"];
-        $a_cusData[$k]['price'] = $cus["price"];
-        $k++;
+        //算普通商品價錢
+        //算普通商品數量
+        for ($k = 0; $k < count($a_cusSid); $k++) {
+            $totalPriceOfCustomized += $a_cusData[$k]["price"] * $a_cusData[$k]["cus_qty"];
+            $totalCustomizedItems += $a_cusData[$k]["cus_qty"];
+        }
+
+
     };
-
-    //算普通商品價錢
-    //算普通商品數量
-    for($k = 0; $k < count($a_cusSid); $k++){
-        $totalPriceOfCustomized += $a_cusData[$k]["price"] * $a_cusData[$k]["cus_qty"];
-        $totalCustomizedItems += $a_cusData[$k]["cus_qty"];
-    }
-
-
-
-};
 
 
 
@@ -110,7 +106,7 @@ $order_sid = $pdo->lastInsertId(); // 最近新增資料的 PK
 
 if($o_stmt -> rowCount() ==1){
 
-
+    //訂單細節:普通商品
     $od_sql = "INSERT INTO `order_details`(`order_sid`, `pro_sid`, `color_sid`, `size_sid`, `name`, `color`, `size`, `price`, `gty`) 
     VALUES (?, ?, ?, ? ,?, ?, ?, ? , ?)";
     $od_stmt = $pdo->prepare($od_sql);
@@ -130,11 +126,39 @@ if($o_stmt -> rowCount() ==1){
     }
 
     if($od_stmt -> rowCount() ==1){
-        $output["success"] = true;
-        unset($_SESSION['cart']); // 清除購物車內容
+        $output["addCartSuccess"] = true;
+
     }
+
+    //訂單細節:客製化
+    $cus_sql = "INSERT INTO `order_details`(`order_sid`, `pro_sid`, `name`, `color`, `size`, `price`, `gty`) 
+    VALUES (?, ?, ?, ? ,?, ?, ?)";
+    $cus_stmt = $pdo->prepare($cus_sql);
+
+    foreach($a_cusData as $cus){
+        $cus_stmt->execute([
+            $order_sid,
+            $cus['cus_sid'],
+            $cus['name'],
+            json_encode($cus['cus_color']),
+            $cus['cus_size'],
+            $cus['price'],
+            $cus['cus_qty'],
+        ]);
+    }
+
+    if($cus_stmt -> rowCount() ==1){
+        $output["addCusSuccess"] = true;
+
+    }
+
 }
 
+if($output["addCartSuccess"] &&  $output["addCusSuccess"]){
+    unset($_SESSION['cart']); // 清除購物車內容
+    unset($_SESSION['customized']); // 清除購物車內容
+
+}
 
 
 header('Content-Type: application/json');
