@@ -4,7 +4,6 @@ $page_name = 'product';
 
 //-----------------------------商品資料---------------------------------
 //商品列表頁取得的編號 -> sid
-
 $weaProductNum = isset($_GET['sid']) ? intval($_GET['sid']) : 1;
 //商品sql -> product表
 $weaProductSql = sprintf("SELECT * FROM `products` WHERE `sid` = $weaProductNum");
@@ -21,9 +20,10 @@ foreach($prodColors as $c){
     $color_sids[] = $c['sid'];
 }
 
-$size_sql = sprintf("SELECT * FROM `size` WHERE color_sid IN (%s)", implode(',', $color_sids));
+$size_sql = sprintf("SELECT * FROm `size` WHERE color_sid IN (%s)", implode(',', $color_sids));
 $prodSizes = $pdo -> query($size_sql)
             ->fetchAll();
+
 
 
 //設定size stock給按鈕用陣列
@@ -37,9 +37,6 @@ foreach($a_colorWithSizeForCart as $cs){
     $i++;
 }
 
-//echo json_encode($a_colorWithSizeForCart, JSON_UNESCAPED_UNICODE);
-
-//  exit;
 // $colorArrAll =[];
 // foreach($prodColors as $c){
 //     $colorArrAll[] = json_decode($c['pro_pic']);
@@ -882,50 +879,49 @@ foreach($weaRecommend as $R){
                 <div class="wea_product_main_wordarea_name d-flex align-items-center justify-content-between" >
                     <h4><?=$weaProduct['name']?></h4>
                     <?php if(isset($_SESSION["loginUser"])): ?>
-<!--                    <i class="far fa-heart"></i>-->
-                    <i class="a_add_to_like_unactive far fa-heart a_product_like " data-sid="<?=$weaProduct['sid']?>"></i>
-                    <i class="a_add_to_like_active fas fa-heart display_none a_product_like" data-sid="<?=$weaProduct['sid']?>"></i>
+                        <!-- <i class="far fa-heart"></i> -->
+                        <i class="a_add_to_like_unactive far fa-heart a_product_like " data-sid="<?=$weaProduct['sid']?>"></i>
+                        <i class="a_add_to_like_active fas fa-heart display_none a_product_like" data-sid="<?=$weaProduct['sid']?>"></i>
                     <?php endif; ?>
                 </div>
                 
                 <h5>NT$ <?=$weaProduct['price']?></h5>
                 <hr class="wea_product_main_wordarea_line">
-                    <div>
-                        <div class="d-flex justify-content-between wea_product_main_collapse_tital">
-                            <h6>商品特色</h6>
-                            <i class="fas fa-chevron-up"></i>
-                        </div>
-                        <p class="wea_product_main_collapse_content"><?=$weaProduct['intro']?></p>
-                        <hr class="wea_product_main_wordarea_line">
+                <div>
+                    <div class="d-flex justify-content-between wea_product_main_collapse_tital">
+                        <h6>商品特色</h6>
+                        <i class="fas fa-chevron-up"></i>
                     </div>
-                    <div>
-                        <div class=" d-flex justify-content-between wea_product_main_collapse_tital">
-                            <h6>商品材質</h6>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <p class="display_none wea_product_main_collapse_content"><?=$weaProduct['material']?></p>
-                        <hr class="wea_product_main_wordarea_line">
-                    </div>
-                    <div>
-                        <div class="d-flex justify-content-between wea_product_main_collapse_tital">
-                            <h6>保養方式</h6>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <p class="display_none wea_product_main_collapse_content"><?=$weaProduct['take_care']?></p>
-                        <hr class="wea_product_main_wordarea_line">
-                    </div>
-                    <div class="wea_product_main_wordarea_sizeform">
-                        <div class="d-flex justify-content-between wea_product_main_collapse_tital">
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-question-circle"></i>
-                                <h6>尺寸表</h6>
-                            </div>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <hr class="wea_product_main_wordarea_line">
-                    </div>
+                    <p class="wea_product_main_collapse_content"><?=$weaProduct['intro']?></p>
+                    <hr class="wea_product_main_wordarea_line">
                 </div>
-
+                <div>
+                    <div class="d-flex justify-content-between wea_product_main_collapse_tital">
+                        <h6>商品材質</h6>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <p class="display_none wea_product_main_collapse_content"><?=$weaProduct['material']?></p>
+                    <hr class="wea_product_main_wordarea_line">
+                </div>
+                <div>
+                    <div class="d-flex justify-content-between wea_product_main_collapse_tital">
+                        <h6>保養方式</h6>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <p class="display_none wea_product_main_collapse_content"><?=$weaProduct['take_care']?></p>
+                    <hr class="wea_product_main_wordarea_line">
+                </div>
+                <div class="wea_product_main_wordarea_sizeform">
+                    <div class="d-flex justify-content-between wea_product_main_collapse_tital">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-question-circle"></i>
+                            <h6>尺寸表</h6>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <hr class="wea_product_main_wordarea_line">
+                </div>
+            </div>
             <!-- 下方訂購區 -->
             <div class="wea_product_main_selectarea">
                 <ul class="wea_product_main_color d-flex align-items-center">
@@ -1050,7 +1046,9 @@ foreach($weaRecommend as $R){
                     <?php $i=0; foreach($weaRecommend as $R) : ?>
                         <li class="wea_recommend_item position-relative desktop">
                         <?php $recommendMainImg = json_decode($weaRecommendColor[$i][0]["pro_pic"]);?>
-                        <a href="./product.php?sid=<?= $R["sid"] ?>"><img src="product_images/<?=$recommendMainImg[0]?>.png" alt=""></a>
+                            <a href="./product.php?sid=<?= $R["sid"] ?>">
+                                <img src="product_images/<?=$recommendMainImg[0]?>.png" alt="">
+                            </a>
                         <!-- $colorSecondaryImg = json_decode($prodColors[0]['pro_pic']); -->
                         <?php if(isset($_SESSION["loginUser"])): ?>
                         <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="<?=$R['sid']?>"></i>
@@ -1094,19 +1092,16 @@ foreach($weaRecommend as $R){
             </div>
         </div>
     </div>
-  <?php include __DIR__.'/parts/footer.php' ?>
-
-  <?php include __DIR__.'/parts/h_f_script.php' ?>
+    <?php include __DIR__.'/parts/footer.php' ?>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!--    <script src="https://code.jquery.com/jquery-3.5.1.min.js"-->
-<!--          integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="-->
-<!--          crossorigin="anonymous"></script>-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <?php include __DIR__.'/parts/h_f_script.php' ?>
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+    
 
     <script>
     var weaProduct = <?= json_encode($weaProduct) ?>;
@@ -1136,7 +1131,13 @@ foreach($weaRecommend as $R){
     selectColorimg = JSON.parse(selectColorData.pro_pic);
     //  console.log(selectColorSizes);
     //  console.log(selectColorData);
-    
+
+    //將size sid 及 庫存藏入按鈕
+    for(let $i=0; $i<selectColorSizes.length; $i++) {
+        $(".wea_product_main_size").find("li").eq($i+1).find("div").attr("data-sizenum", selectColorSizes[$i]["sid"]);
+        $(".wea_product_main_size").find("li").eq($i+1).find("div").attr("data-stock", selectColorSizes[$i]["in_stock"]);
+    }
+
     firstLoadColor.find("div").addClass("active");
     let $Active=false;
     for(let $i=0; $i<selectColorSizes.length; $i++){
@@ -1152,13 +1153,7 @@ foreach($weaRecommend as $R){
             }
         }
     }
-//修改---------------------------------------
-    for(let $i=0; $i<selectColorSizes.length; $i++) {
-        $(".wea_product_main_size").find("li").eq($i+1).find("div").attr("data-sizenum", selectColorSizes[$i]["sid"]);
-        $(".wea_product_main_size").find("li").eq($i+1).find("div").attr("data-stock", selectColorSizes[$i]["in_stock"]);
-    }
-
-
+    
     // 顏色控制抓取
     $(".wea_product_main_color li").has("div").click(function(){
         if($(this).find("div").hasClass("active") == false){
@@ -1199,9 +1194,9 @@ foreach($weaRecommend as $R){
             if($(this).find("div").hasClass("active") == false){
                 selectSizeSid= $(this).find("div").data('sizenum');
                 // parseInt(selectSizeSid);
-                console.log(selectSizeSid);
-                stockNum = $(this).find("div").data('sizenum');
-                // console.log(stockNum);
+                // console.log(selectSizeSid);
+                stockNum = selectColorSizes[selectSizeSid]["in_stock"];
+                console.log(stockNum);
                 $(this).find("div").addClass("active");
                 $(this).siblings().find("div").removeClass("active");
                 selectCountNum = 1;
@@ -1314,15 +1309,14 @@ foreach($weaRecommend as $R){
 
     //商品說明
         $(".wea_product_main_collapse_tital").click(function(){
-
+            
             $(".wea_product_main_collapse_tital").find("i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
             $(this).parents().find("p").addClass("display_none");
             $(this).find("i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
             $(this).parent().find("p").removeClass("display_none");
-
+            
 
         })
-
     //推薦商品
         var recommend_position = -25 ;
         $(".wea_recommend_item_leftarrow").click(function(){
@@ -1358,6 +1352,7 @@ foreach($weaRecommend as $R){
             }
         })
     </script>
+
   <script>
 
       //加入購物車時 拿到 size_sid 跟 數量------------------------------------------------------
@@ -1372,6 +1367,7 @@ foreach($weaRecommend as $R){
           // 讓所有頁面一進來就能讀到購物車內的商品數
           $.get("add_to_cart_api.php", {cart_sid,cart_qty}, function(data){
               console.log(data);
+              countCartObj(data)
               alert("成功加入購物車");
           },"json");
 
@@ -1418,12 +1414,12 @@ foreach($weaRecommend as $R){
                   alert('已收藏此商品');
               }
           }, 'json')
-          .done(function(){
-              console.log("success")
-          })
-          .fail(function(er){
-              console.log(er);
-          })
+              .done(function(){
+                  console.log("success")
+              })
+              .fail(function(er){
+                  console.log(er);
+              })
       });
 
       //移除最愛-----------------------------
@@ -1455,6 +1451,5 @@ foreach($weaRecommend as $R){
       })
 
   </script>
-
   </body>
 </html>
