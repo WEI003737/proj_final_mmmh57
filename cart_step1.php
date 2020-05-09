@@ -227,7 +227,7 @@ if(!empty($_SESSION["customized"])) {
                             <h6 class="sub-total"></h6>
                         </div>
                         <div>
-                            <a href="#" onclick="removeProductItem(event)"><i class="fas fa-trash-alt"></i></a>
+                            <a href="#" onclick="removeCustomizedItem(event)"><i class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
 
@@ -308,7 +308,7 @@ if(!empty($_SESSION["customized"])) {
                                 </div>
                                 <div class="d-flex justify-content-end">
                                     <div>
-                                        <a href="#" onclick="removeProductItem(event)"><i class="fas fa-times fa-2x"></i></a>
+                                        <a href="#" onclick="removeCustomizedItem(event)"><i class="fas fa-times fa-2x"></i></a>
                                     </div>
                                     <div class="align-self-end">
                                         <h6 class="sub-total"></h6>
@@ -423,8 +423,10 @@ if(!empty($_SESSION["customized"])) {
         event.preventDefault(); // 避免 <a> 的連結
         const div = $(event.target).closest('div.p-item')
         const cart_sid = div.attr('data-sid');
-        // console.log(cart_sid)
+        console.log(cart_sid)
         $.get('remove_from_cart_api.php', {cart_sid}, function(data){
+            console.log(data)
+
             div.remove();
             countCartObj(data);
             calPrices();
@@ -433,7 +435,26 @@ if(!empty($_SESSION["customized"])) {
                 $('.alert.a_removeFromCart').fadeOut();
             }, 800);
         }, 'json')
+        location.reload();
+    }
 
+    function removeCustomizedItem(event){
+        event.preventDefault(); // 避免 <a> 的連結
+        const div = $(event.target).closest('div.p-item')
+        const cart_sid = div.attr('data-sid');
+        console.log(cart_sid)
+        $.get('remove_from_customized_api.php', {cart_sid}, function(data){
+            console.log(data)
+
+            div.remove();
+            countCartObj(data);
+            calPrices();
+            $('.alert.a_removeFromCart').fadeIn();
+            setTimeout(function(){
+                $('.alert.a_removeFromCart').fadeOut();
+            }, 800);
+        }, 'json')
+        location.reload();
     }
 
     function changeQty(cart_sid){
@@ -500,11 +521,17 @@ if(!empty($_SESSION["customized"])) {
     <script>
 
         function a_goCartPageSecond () {
+            event.preventDefault();
             $.get("isset_session.php", function (data) {
                 if(data.cart || data.customized){
                     location.href = "cart_step2.php";
+                }else{
+                    $('.alert.a_nothingInCart').fadeIn();
+                    setTimeout(function(){
+                        $('.alert.a_nothingInCart').fadeOut();
+                    }, 800);
+                    console.log(data);
                 }
-                console.log(data);
             }, "json")
             //     .done(function() {
             //         console.log("success")
@@ -512,10 +539,7 @@ if(!empty($_SESSION["customized"])) {
             //     .fail(function(err) {
             //        console.log(er)
             //     });
-            $('.alert.a_nothingInCart').fadeIn();
-            setTimeout(function(){
-                $('.alert.a_nothingInCart').fadeOut();
-            }, 800);
+
         }
 
     </script>

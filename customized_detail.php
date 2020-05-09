@@ -65,7 +65,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <?php include __DIR__ . './parts/header.php'
     ?>
     <!-- 提示 (css 在 h_f_script.php 裡) -->
-    <div class="alert">
+    <div class="alert a_addToCart">
         <i class="fas fa-shopping-basket fa-lg"></i>
         <h6><span>已</span>加入購物車</h6>
     </div>
@@ -417,6 +417,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
         //加入購物車
         function addToCart(){
+            event.preventDefault();
             //取得商品sid 數量 尺寸
             let cus_sid = $(".customized_detail_desi").attr("data-sid");
             let cus_qty = $(".nac_chose_pieces_count").text();
@@ -447,11 +448,11 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
                if(data) {
                    countCartObj(data)
-                   alert("已加入購物車")
-                   // $('.alert').fadeIn();
-                   //  setTimeout(function(){
-                   //      $('.alert').fadeOut();
-                   //  }, 800);
+                   // alert("已加入購物車")
+                   $('.alert.a_addToCart').fadeIn();
+                    setTimeout(function(){
+                        $('.alert.a_addToCart').fadeOut();
+                    }, 800);
                }
             },"json");
         }
