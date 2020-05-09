@@ -859,8 +859,25 @@ foreach($weaRecommend as $R){
   <body>
   <?php include __DIR__.'/parts/header.php' ?>
     <!-- =============================== 商品主區塊 ===================================  -->
+
+      <!-- 提示 (css 在 h_f_script.php 裡) -->
+      <div class="alert a_addToLike">
+          <i class="fab fa-gratipay fa-lg"></i>
+          <h6><span>已</span>加入收藏</h6>
+      </div>
+
+      <div class="alert a_removeFromLike">
+          <i class="fab fa-gratipay fa-lg"></i>
+          <h6><span>已</span>從收藏移除</h6>
+      </div>
+
+      <div class="alert a_addToCart">
+          <i class="fas fa-shopping-basket fa-lg"></i>
+          <h6><span>已</span>加入購物車</h6>
+      </div>
       <!-- 推出 header 空間-->
       <div class="a_push_place"></div>
+
     <div class="wea_wrapper wea_product_main d-flex ">
         <div class="wea_product_main_imgarea d-flex justify-content-end">
             <ul class="wea_product_main_imgbar">
@@ -1368,9 +1385,13 @@ foreach($weaRecommend as $R){
           // 傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
           // 讓所有頁面一進來就能讀到購物車內的商品數
           $.get("add_to_cart_api.php", {cart_sid,cart_qty}, function(data){
-              console.log(data);
-              countCartObj(data)
-              alert("成功加入購物車");
+              if(data) {
+                  countCartObj(data)
+                  $('.alert.a_addToCart').fadeIn();
+                  setTimeout(function(){
+                      $('.alert.a_addToCart').fadeOut();
+                  }, 800);
+              }
           },"json");
 
       };
@@ -1410,10 +1431,10 @@ foreach($weaRecommend as $R){
 
           $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
               if (data.success) {
-                  // console.log(data);
-                  alert('成功加入收藏');
-              }else {
-                  alert('已收藏此商品');
+                  $('.alert.a_addToLike').fadeIn();
+                  setTimeout(function(){
+                      $('.alert.a_addToLike').fadeOut();
+                  }, 800);
               }
           }, 'json')
               .done(function(){
@@ -1438,8 +1459,10 @@ foreach($weaRecommend as $R){
 
           $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
               if (data.success) {
-
-                  alert('已移除收藏');
+                  $('.alert.a_removeFromLike').fadeIn();
+                  setTimeout(function(){
+                      $('.alert.a_removeFromLike').fadeOut();
+                  }, 800);
               }
 
           }, 'json')

@@ -95,6 +95,18 @@ if(!empty($_SESSION["customized"])) {
 <?php include __DIR__ . '/parts/main-css.php'; ?>
 <!--  公版:header  -->
 <?php include __DIR__ . '/parts/header.php'; ?>
+
+    <!-- 提示 (css 在 h_f_script.php 裡) -->
+    <div class="alert a_removeFromCart">
+        <i class="fas fa-trash-alt fa-lg"></i>
+        <h6><span>已</span>移除商品</h6>
+    </div>
+
+    <div class="alert a_nothingInCart">
+        <i class="fas fa-exclamation-circle fa-lg"></i>
+        <h6><span>購</span>物車裡沒有東西</h6>
+    </div>
+
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     <div class="t_page_cart">
@@ -416,6 +428,10 @@ if(!empty($_SESSION["customized"])) {
             div.remove();
             countCartObj(data);
             calPrices();
+            $('.alert.a_removeFromCart').fadeIn();
+            setTimeout(function(){
+                $('.alert.a_removeFromCart').fadeOut();
+            }, 800);
         }, 'json')
 
     }
@@ -484,12 +500,9 @@ if(!empty($_SESSION["customized"])) {
     <script>
 
         function a_goCartPageSecond () {
-            location.reload();
             $.get("isset_session.php", function (data) {
                 if(data.cart || data.customized){
                     location.href = "cart_step2.php";
-                }else {
-                    alert("購物車裡沒有東西");
                 }
                 console.log(data);
             }, "json")
@@ -499,6 +512,10 @@ if(!empty($_SESSION["customized"])) {
             //     .fail(function(err) {
             //        console.log(er)
             //     });
+            $('.alert.a_nothingInCart').fadeIn();
+            setTimeout(function(){
+                $('.alert.a_nothingInCart').fadeOut();
+            }, 800);
         }
 
     </script>

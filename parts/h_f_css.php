@@ -90,15 +90,29 @@
         }
     /* ----------- alert ----------- */
         .alert{
-            width: 100%;
-            height: 60px;
+            width: 280px;
+            height: 100px;
             text-align: center;
-            background: #C9044D;
-            color: rgba(255,255,255,.8);
+            background: #ffffff;
+            color: #C9044D;
+            border: 1px solid #C9044D;
             position: fixed;
+            right: 0;
+            left: 0;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             top: 30%;
             z-index: 997;
         }
+        .alert span{
+            font-size: 24px;
+        }
+        .alert i{
+            margin-bottom: 5px;
+        }
+
     /* ----------- header ----------- */
 
         .header{

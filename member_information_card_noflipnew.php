@@ -187,6 +187,12 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
 
 <?php include __DIR__ . '/parts/header.php'; ?>
 
+<!-- 提示 (css 在 h_f_script.php 裡) -->
+<div class="alert uploadPic">
+    <i class="fab fa-gratipay fa-lg"></i>
+    <h6><span>照</span>片更新成功</h6>
+</div>
+
 <div class="container">
 <!-- 推出 header 空間-->
 <div class="a_push_place"></div>
@@ -380,8 +386,11 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
                             location.reload();
                             $("#jimg").attr("src", "./upload/"+data.newname)
                             $("#jimg-big").attr("src", "./upload/"+data.newname)
-                            //alert("更新成功");
-                            $('#info_bar_selffie').show();
+                            alert("更新成功");
+                            // $('.alert.uploadPic').fadeIn();
+                            // setTimeout(function(){
+                            //     $('.alert.uploadPic').fadeOut();
+                            // }, 800);
                         }
             })
                 .fail(function(err){
@@ -389,7 +398,8 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
                 })
                 .done(function(){
                     console.log("success")
-                })});
+                })
+            });
 
 </script>
 

@@ -64,6 +64,12 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 <body>
     <?php include __DIR__ . './parts/header.php'
     ?>
+    <!-- 提示 (css 在 h_f_script.php 裡) -->
+    <div class="alert">
+        <i class="fas fa-shopping-basket fa-lg"></i>
+        <h6><span>已</span>加入購物車</h6>
+    </div>
+
     <div class="container nac_menu_reserve"></div>
     <!-- 導航列 -->
     <div class="container">
@@ -439,9 +445,14 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
             $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
-                console.log(data);
-                alert("成功加入購物車");
-                countCartObj(data)
+               if(data) {
+                   countCartObj(data)
+                   alert("已加入購物車")
+                   // $('.alert').fadeIn();
+                   //  setTimeout(function(){
+                   //      $('.alert').fadeOut();
+                   //  }, 800);
+               }
             },"json");
         }
 

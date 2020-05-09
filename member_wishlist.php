@@ -1,5 +1,5 @@
 <?php
-require_once('./checkSession.php');
+require __DIR__. '/__connect_db.php';
 ?>
 
     <!DOCTYPE html>
@@ -99,7 +99,7 @@ require_once('./checkSession.php');
 <!--                                <a href="./product.php?sid=--><?//= $R["sid"] ?><!--">-->
 <!--                                    <img src="product_images/--><?//=$recommendMainImg[0]?><!--.png" alt="">-->
 <!--                                </a>-->
-<!--                                <!-- $colorSecondaryImg = json_decode($prodColors[0]['pro_pic']); -->-->
+<!--                                $colorSecondaryImg = json_decode($prodColors[0]['pro_pic']); -->
 <!--                                --><?php //if(isset($_SESSION["loginUser"])): ?>
 <!--                                    <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="--><?//=$R['sid']?><!--"></i>-->
 <!--                                    <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-sid="--><?//=$R['sid']?><!--"></i>-->

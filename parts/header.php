@@ -1,4 +1,9 @@
-<!--<div class="alert">已加入購物車</div>-->
+<!-- 提示 (css 在 h_f_script.php 裡) -->
+<div class="alert a_nothingInCart">
+    <i class="fas fa-exclamation-circle fa-lg"></i>
+    <h6><span>購</span>物車裡沒有東西</h6>
+</div>
+
 <div class="header">
     <div class="a_wrapper">
         <nav class="a_nav">

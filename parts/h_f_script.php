@@ -8,13 +8,30 @@
 
 <script>
 
+//行為提示
+    $(".alert").hide();
+
+<!-- 提示 (css 在 h_f_script.php 裡) -->
+// <div class="alert">
+//     <i class="fas fa-shopping-basket fa-lg"></i>
+//     <h6><span>已</span>加入購物車</h6>
+// </div>
+//
+// $('.alert').fadeIn();
+// setTimeout(function(){
+//     $('.alert').fadeOut();
+// }, 800);
+
 //購物車若沒有東西會提示 有就轉向
     function haveSession () {
         $.get("isset_session.php", function (data) {
             if(data.cart || data.customized){
                 location.href = "cart_step1.php";
             }else {
-                alert("購物車裡沒有東西");
+                $('.alert.a_nothingInCart').fadeIn();
+                setTimeout(function(){
+                    $('.alert.a_nothingInCart').fadeOut();
+                }, 800);
             }
             console.log(data);
         }, "json")
