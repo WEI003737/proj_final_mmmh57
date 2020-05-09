@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+<style>
 .container {
     max-width: 1400px;
     padding: 20px;
@@ -60,7 +61,7 @@ button:focus {
 /* 導航列預留 */
 
 .nac_menu_reserve {
-    height: 120px;
+    height: 80px;
     margin-bottom: 15px;
 }
 
@@ -109,21 +110,22 @@ button:focus {
     font-family: 'Roboto', 'Noto Sans TC', sans-serif;
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - 80px);
     /* background: rgb(238, 238, 238); */
     overflow: hidden;
     margin-bottom: 150px;
 }
 
-.nac_banner .nac_Color_block {
+.nac_banner .nac_Colorblock {
     position: absolute;
     top: -150vh;
     right: 62vw;
-    background: rgb(202, 5, 77, .8);
+    background: rgb(202, 5, 77);
     height: 300vh;
     width: 1920px;
     transform: rotate(25deg);
     transition: .5s;
+    opacity: 0;
 }
 
 .nac_banner figure {
@@ -153,19 +155,42 @@ button:focus {
 .nac_banner article h3 {
     font-size: 1.3rem;
     font-weight: 300;
+    margin-bottom: 10px;
+    opacity: 0;
 }
 
 .nac_banner article h2 {
-    color: #fff;
+    color: rgb(255, 255, 255, 0);
     font-size: 5rem;
     font-weight: bold;
-    margin: 18px 0px;
+    margin: 0px;
+    overflow: hidden;
+    position: relative;
+}
+
+.nac_banner_h2cover_box {
+    position: absolute;
+    overflow: hidden;
+    top: 0px;
+    left: 0px;
+    width: 400px;
+    height: 100%;
+}
+
+.nac_banner_h2cover {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 400px;
+    height: 100%;
+    background-color: rgb(255, 255, 255, 0);
 }
 
 .nac_banner article p {
     font-size: 1.125rem;
     font-weight: 200;
     line-height: 2rem;
+    opacity: 0;
 }
 
 .nac_go_customized_box {
@@ -173,6 +198,7 @@ button:focus {
     display: flex;
     flex-direction: column;
     align-items: center;
+    opacity: 0;
 }
 
 .nac_customized_title_box {
@@ -182,6 +208,7 @@ button:focus {
     justify-content: center;
     margin-bottom: 90px;
     text-align: center;
+    opacity: 0;
 }
 
 .nac_customized_title_box h2.nac {
@@ -190,16 +217,16 @@ button:focus {
 }
 
 a.nac_go_customized {
-    border-radius: 5px;
-    border: 1px solid #fff;
-    color: #fff;
+    font-size: 1.3rem;
+    border-radius: 999px;
+    border: 1px solid rgb(255, 255, 255, 1);
+    color: rgb(255, 255, 255);
     background: rgb(202, 5, 77);
     width: 150px;
     margin-top: 40px;
     text-align: center;
     transition: .5s;
     padding: 15px 0px;
-    box-shadow: 0px 1px 3px rgb(134, 10, 56);
 }
 
 a.nac_go_customized:hover {
@@ -211,9 +238,9 @@ a.nac_go_customized:hover {
 
 .nac_howtouse {
     opacity: .6;
-    transform: translateX(-8px);
     font-size: .9rem;
     transition: .5s;
+    margin: 15px 5px
 }
 
 .nac_howtouse:hover {
@@ -242,17 +269,31 @@ a.nac_btn:hover {
     }
 }
 
+/* 主視覺(mobile)animation========================================================================================================================================================================== */
+
 /* ========================MENU列表(PC)====================================================================================================================== */
 
-.nac_customized_menu ul {
+.nac_customized_menu {
+    transition: .5s;
+}
+
+.nac_customized_menu.nac_customized_menu_normal ul {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
+    transition: .5s;
 }
 
-.nac_customized_menu ul li a {
-    line-height: 55px;
+.nac_customized_menu.nac_customized_menu_normal ul li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+}
+
+.nac_customized_menu.nac_customized_menu_normal ul li a {
+    /* line-height: 55px; */
     color: #272838;
     text-decoration-line: none;
     padding: 10px 30px;
@@ -261,23 +302,198 @@ a.nac_btn:hover {
     transition: .5s;
 }
 
-.nac_customized_menu ul li::after {
+.nac_customized_menu.nac_customized_menu_normal ul li:nth-child(0):after, .nac_customized_menu.nac_customized_menu_normal ul li:nth-child(1):after, .nac_customized_menu.nac_customized_menu_normal ul li:nth-child(3):after, .nac_customized_menu.nac_customized_menu_normal ul li:nth-child(2):after {
     content: "/";
     padding: 0px 10px;
 }
 
-.nac_customized_menu ul li:last-child:after {
-    content: "";
+.nac_customized_menu.nac_customized_menu_normal ul li a:hover, .nac_customized_menu.nac_customized_menu_normal ul li a.active {
+    background: #fff;
+    color: rgb(202, 5, 77);
+    cursor: pointer;
+    box-shadow: rgb(202, 5, 77, .3) 0px 3px 5px;
+    transform: translateY(-5px);
 }
 
-.nac_customized_menu ul li a:hover {
-    background: rgb(202, 5, 77);
-    color: #fff;
+/* ---------------浮動MENU--------------------- */
+
+.nac_customized_menu_fixeduse_outsidebox {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    bottom: -300px;
+    width: 100%;
+    z-index: 9999;
+    transition: 1.5s;
+    opacity: 0;
+    padding: 1.5vw 2.5vw;
 }
 
-.nac_customized_menu ul li a.active {
+.nac_customized_menu_fixeduse_outsidebox.nac_scrolldown_menu {
+    bottom: 15px;
+    opacity: 1;
+    transition: 1.5s;
+}
+
+/* --------------浮動MENU的頭------------------- */
+
+.nac_customized_menu_fixeduse_head_box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 600;
+    font-size: .8rem;
+    margin: 0px 0px 0px 15px;
+    transition: .5s;
+}
+
+.nac_customized_menu_fixeduse_head_box:hover {
+    cursor: pointer;
+}
+
+.nac_fixeduse_head_txt {
+    width: 100%;
+    border: 2px solid rgb(255, 255, 255, 0);
+    text-align: center;
+    border-radius: 0px;
+    padding: 3px 10px;
+    transition: .5s;
+}
+
+.nac_fixeduse_head_txt.nac_over_the_footer {
+    background-color: #fff;
+    border: 2px solid rgb(202, 5, 77);
+    border-radius: 999px;
+    transition: .5s;
+}
+
+.nac_customized_menu_fixeduse_head_box.nac_menu_open .nac_fixeduse_head_txt {
+    color: rgb(202, 5, 77);
+    transition: .5s;
+}
+
+.nac_customized_menu_fixeduse_head_icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 45px;
+    width: 45px;
     background: rgb(202, 5, 77);
-    color: #fff;
+    border-radius: 50%;
+    margin: 5px 0px;
+    box-shadow: 0px 3px 4px#27283834;
+    border: 2px solid #ffff;
+    transition: .5s;
+}
+
+.nac_customized_menu_fixeduse_head_box.nac_menu_open .nac_customized_menu_fixeduse_head_icon {
+    transform: translateY(7px) scale(.8);
+    background: rgb(255, 255, 255);
+    border: 3px solid rgb(202, 5, 77);
+    box-shadow: 0px 0px 0px#27283800;
+}
+
+.nac_fixeduse_head_icon_menubar {
+    height: 4px;
+    width: 20px;
+    margin: 2px 0px;
+    border-radius: 999px;
+    background: #ffff;
+    transition: .5s;
+}
+
+.nac_fixeduse_head_icon_menubar:nth-child(1) {
+    transform: translate(3.5px, 3.5px) rotate(225deg);
+    width: 13px;
+}
+
+.nac_customized_menu_fixeduse_head_box.nac_menu_open .nac_fixeduse_head_icon_menubar:nth-child(1) {
+    background-color: rgb(202, 5, 77);
+    transform: translate(-.3px, 6.4px) rotate(45deg);
+    width: 20px;
+    height: 3px;
+}
+
+.nac_fixeduse_head_icon_menubar:nth-child(2) {
+    transform: translate(-3.5px, -4.5px) rotate(-225deg);
+    width: 13px;
+    opacity: 1;
+}
+
+.nac_customized_menu_fixeduse_head_box.nac_menu_open .nac_fixeduse_head_icon_menubar:nth-child(2) {
+    background-color: rgb(202, 5, 77);
+    transform: translate(0px, 0px) rotate(45deg);
+    width: 20px;
+    height: 3px;
+    opacity: 0;
+}
+
+.nac_fixeduse_head_icon_menubar:nth-child(3) {
+    transform: translate(-.4px, -6.5px) rotate(270deg);
+    width: 16px;
+}
+
+.nac_customized_menu_fixeduse_head_box.nac_menu_open .nac_fixeduse_head_icon_menubar:nth-child(3) {
+    background-color: rgb(202, 5, 77);
+    transform: translate(0px, -8px) rotate(-45deg);
+    width: 20px;
+    height: 3px;
+}
+
+/* ----------------浮動MENU的身體----------------- */
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box {
+    overflow: hidden;
+    transform: scalex(0);
+    transform-origin: right;
+}
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box.nac_menu_open {
+    width: auto;
+    border-radius: 9999px;
+    background-color: #fff;
+    box-shadow: 0px 1px 3px#27283873;
+    padding: 3px 20px;
+    transform: scaleY(1);
+    transition: .5s;
+}
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    transition: .5s;
+}
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box ul li a {
+    color: #27283800;
+    transition: .5s;
+}
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box.nac_menu_open ul li a {
+    border-bottom: 3px solid rgb(255, 255, 255);
+    line-height: 55px;
+    color: #272838;
+    text-decoration-line: none;
+    transform: translateY(-3px);
+    padding: 3px 0px;
+    margin: 0px 20px;
+    transition: .5s;
+}
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box.nac_menu_open ul li a.active {
+    border-bottom: 3px solid rgb(202, 5, 77);
+    color: rgb(202, 5, 77);
+}
+
+.nac_customized_menu.nac_customized_menu_fixeduse_body_box.nac_menu_open ul li a:hover {
+    border-bottom: 3px solid rgb(202, 5, 77);
+    color: rgb(202, 5, 77);
+    cursor: pointer;
 }
 
 /* ========================MENU列表(mobile)================================================================================================= */
@@ -306,6 +522,7 @@ a.nac_btn:hover {
     border-top: .5px solid rgb(200, 200, 200);
     padding: 110px 0px 80px 0px;
     justify-content: center;
+    opacity: 0;
 }
 
 /* 模板列表敘述 */
@@ -432,8 +649,7 @@ h6.customized_item_money {
     .nac_customized_item_description h3 {
         width: 100%;
     }
-    .nac_customized_item_box_outside.customized_listus li,
-    .nac_customized_item_box_outside.customized_detail li{
+    .nac_customized_item_box_outside.customized_listus li, .nac_customized_item_box_outside.customized_detail li {
         max-width: 50%;
     }
     .nac_customized_item_box {
@@ -450,9 +666,14 @@ h6.customized_item_money {
 
 /* ========================流程_PC==================================================================================================================================== */
 
+.nac_customized_help_info {
+    padding-bottom: 0px;
+}
+
 .nac_customized_help {
     margin: 150px 0px 0px 0px;
     background-color: #fff;
+    opacity: 0;
 }
 
 .nac_step {
@@ -481,6 +702,11 @@ h6.customized_item_money {
     padding: 0px 40px;
 }
 
+.nac_step_info h2.nac {
+    font-weight: 500;
+    font-size: 4rem;
+}
+
 .nac_step figure {
     flex: 1 1 0;
     padding: 0px 60px;
@@ -495,6 +721,9 @@ h6.customized_item_money {
 @media all and (max-width: 768px) {
     .nac_step {
         flex-direction: column;
+    }
+    .nac_step_number h2.nac {
+        font-size: 160px;
     }
 }
 
@@ -602,7 +831,7 @@ h6.customized_item_money {
     pointer-events: none;
 }
 
-#nac_item_pic_screen{
+#nac_item_pic_screen {
     position: absolute;
     width: 100%;
     left: 0px;
@@ -624,24 +853,38 @@ h6.customized_item_money {
 /*===========圖上的色盤================*/
 
 .color-panel {
-    background: #fff;
+    /* background: #fff; */
     padding: 10px;
     border-radius: 10px;
     z-index: 11;
-    width: 150px;
     display: none;
 }
 
-.color-panel li {
-    height: 20px;
-}
+/* svg path:hover {
+    fill-opacity: .8;
+} */
 
-svg path:hover {
+path:hover {
+    cursor: pointer;
     fill-opacity: .8;
 }
 
-.color-panel li {
-    height: 20px;
+.color_panel_pigment {
+    position: absolute;
+    border-radius: 50%;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    box-shadow: 0px 2px 4px #27283838;
+    border: 2px solid #ffffff8c;
+    transition: .5s;
+}
+.color_panel_pigment:hover{
+    cursor: pointer;
+    /* filter: contrast(150%); */
+    border: 2px solid #fff;
+    box-shadow: 0px 6px 4px #27283838;
+    transform: translateY(-5px);
 }
 
 /*=====內容框===================================================*/
@@ -701,10 +944,12 @@ h2.nac.detail_itemtitle {
     border: 3px solid rgb(202, 5, 77, 0);
     transition: .5s;
 }
+
 .nac_chose_color_area .nac_chose_color_btn:hover {
     opacity: .8;
     cursor: pointer;
 }
+
 .nac_chose_color_btn_flot {
     display: block;
     padding: 15px;
@@ -717,8 +962,6 @@ h2.nac.detail_itemtitle {
     border: 3px solid rgb(202, 5, 77);
     box-shadow: 0px 2px 3px rgba(85, 85, 85, 0.5);
 }
-
-
 
 /*=====選尺寸===================================================*/
 
@@ -829,23 +1072,160 @@ input.nac_size_btn.active, input.nac_size_btn:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    /* box-shadow:0px -5px 5px rgb(202, 5, 77); */
     margin-bottom: 150px;
 }
 
 .customized_detail_more_title_box {
     text-align: center;
     margin-bottom: 60px;
-    /* border-right: 6px solid rgb(202, 5, 77); */
 }
 
-/* .customized_detail_more_box_outside {
-    justify-content: space-between;
-    flex-wrap: wrap;
-    display: flex;
+/*================ 動畫=========================================================================================== */
+
+.nac_go_customized_box_move {
+    animation: nac_go_customized_box_move;
+    animation-timing-function: cubic-bezier(.26, .26, .42, 1.01);
+    animation-fill-mode: forwards;
+    animation-duration: .8s;
+    opacity: 0;
 }
 
-.nac_customized_item_box_outside.nac_detileuse li {
-    max-width: 25%;
-    margin: 35px 0px;
-} */
+@keyframes nac_go_customized_box_move {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(-5px);
+    }
+}
+
+a.nac_go_customized.nac_go_customized_lineAnimation {
+    animation: nac_go_customized_lineAnimation;
+    box-shadow: 0px 7px 6px rgba(92, 8, 39, .3);
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    animation-duration: 4s;
+}
+
+@keyframes nac_go_customized_lineAnimation {
+    0% {
+        border: 1px solid rgb(255, 255, 255, .5);
+        transform: translateY(-9px);
+    }
+    50% {
+        border: 1px solid rgb(255, 255, 255, 1);
+        transform: translateY(-3px);
+    }
+    100% {
+        border: 1px solid rgb(255, 255, 255, .5);
+        transform: translateY(-9px);
+    }
+}
+
+.customized_title_movein {
+    animation: customized_title_movein;
+    animation-timing-function: cubic-bezier(.67, 0, 0, 1);
+    animation-duration: 1s;
+    animation-iteration-count: initial;
+    animation-fill-mode: forwards;
+}
+
+@keyframes customized_title_movein {
+    0% {
+        transform: translate(-50px, 0px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0px, 0px);
+        opacity: 1;
+    }
+}
+
+.nac_banner h2.nac.customized_title_changebacktow {
+    animation: customized_title_changebacktow;
+    color: rgb(202, 5, 77, 0);
+    animation-timing-function: cubic-bezier(.55, 0, .31, 1.01);
+    animation-duration: .5s;
+    animation-iteration-count: initial;
+    animation-fill-mode: forwards;
+}
+
+@keyframes customized_title_changebacktow {
+    0% {
+        color: rgb(202, 5, 77, 0);
+    }
+    50% {
+        color: rgb(202, 5, 77, 0);
+    }
+    60% {
+        color: rgb(202, 5, 77, .8);
+    }
+    100% {
+        color: rgb(255, 255, 255, 1);
+    }
+}
+
+.nac_banner_h2cover_move {
+    transform-origin: left;
+    animation: nac_banner_h2cover_move;
+    animation-timing-function: cubic-bezier(.55, 0, .31, 1.01);
+    animation-duration: .6s;
+    animation-iteration-count: initial;
+    animation-fill-mode: forwards;
+}
+
+@keyframes nac_banner_h2cover_move {
+    0% {
+        background-color: rgb(202, 5, 77, 1);
+        transform: translateX(400px);
+    }
+    100% {
+        background-color: rgb(202, 5, 77, 1);
+        transform: translateX(-400px);
+    }
+}
+
+/*banner色塊*/
+
+.nac_banner .nac_Colorblock.nac_block_B {
+    animation: nac_Color_block_animation_B;
+    animation-timing-function: ease-in-out;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes nac_Color_block_animation_B {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        /* right: 62vw; */
+        opacity: .75;
+    }
+}
+
+/*menu出現*/
+
+.nac_customized_title_box.nac_customized_flotup_cansee, .nac_customized_menu ul li.nac_customized_flotup_cansee, .nac_customized_item_area.nac_customized_flotup_cansee, .nac_customized_help.nac_customized_flotup_cansee {
+    animation: nac_customized_flotup_cansee;
+    animation-duration: .8s;
+    /* animation-fill-mode: forwards; */
+}
+
+.nac_customized_title_box.nac_animation_is_run, .nac_customized_menu ul li.nac_animation_is_run, .nac_customized_item_area.nac_animation_is_run, .nac_customized_help.nac_animation_is_run {
+    opacity: 1;
+}
+
+@keyframes nac_customized_flotup_cansee {
+    0% {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+</style>

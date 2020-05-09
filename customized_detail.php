@@ -44,13 +44,15 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <?php include __DIR__ . './parts/h_f_link.php' ?>
-    <?php include __DIR__ . './parts/h_f_link.php' ?>
     <?php include __DIR__ . './parts/h_f_css.php' ?>
     <title>Customized_Redcore</title>
 
 
     <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all.min.css">
-    <link rel="stylesheet" href="./css/customized_final.css">
+<!--    <link rel="stylesheet" href="./css/customized_final.css">-->
+    <?php include __DIR__ . '/css/customized_final.php' ?>
+
+
 
     <style>
         /* * {
@@ -87,7 +89,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 <img src="./images/<?= $row['pro_pic'] ?>_screen.png" alt="" id="nac_item_pic_screen">
                 <!-- 即時色盤 -->
                 <div class="color-panel position-absolute" id="colorPanel">
-                    <ul class="list-unstyled m-0">
+                    <ul class="nax_panel_color_outsidebox">
                     </ul>
                 </div>
             </div>
@@ -108,7 +110,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 <?php for ($i = 0; $i < $can_cus_color_count; $i++) : ?>
                     <h4 class="nac"><?= $can_cus_color[$i] ?></h4>
                     <h6 class="nac">Color 0<?= $i + 1 ?></h6>
-                    <ul class="nac_chose_color_area clothesPick<?= $i + 1 ?>" data-clothes_area="Clothes_area<?= $i + 1 ?>" id="clothesPick<?= $i + 1 ?>">
+                    <ul class="nac_chose_color_area" data-clothes_area="Clothes_area<?= $i + 1 ?>" id="clothesPick<?= $i + 1 ?>">
                     </ul>
                 <?php endfor; ?>
             </div>
@@ -150,7 +152,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
             <div class="nac_buynow">
-                <button id="add_to_cart" type="submit" onclick="goToCart(event)">立即購買</button>
+                <button id="add_to_cart" onclick="goToCart(event)">立即購買</button>
                 <button onclick="addToCart(event)">加入購物車</button>
             </div>
 
@@ -196,84 +198,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <script defer src="./fontawesome-free-5.13.0-web/js/all.js"></script>
     <?php include __DIR__ . './parts/h_f_script.php' ?>
 
-    <script>
 
-    //加入購物車
-        function addToCart(){
-            //取得商品sid 數量 尺寸
-            let cus_sid = $(".customized_detail_desi").attr("data-sid");
-            let cus_qty = $(".nac_chose_pieces_count").text();
-            let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
-            cus_color = ["#FFFFFF", "FFFFFF", "FFFFFF"]; //預設值
-
-
-            //取得顏色資訊
-            cus_colorFirst = $("ul.nac_chose_color_area:eq(0) li.active").attr("data-color");
-            cus_colorSecond = $("ul.nac_chose_color_area:eq(1) li.active").attr("data-color");
-            cus_colorThird = $("ul.nac_chose_color_area:eq(2) li.active").attr("data-color");
-            cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
-
-            //包裝資料 送進購物車
-            let cus_data = {
-                cus_sid: cus_sid,
-                cus_qty: cus_qty,
-                cus_size: cus_size,
-                cus_color: cus_color
-            };
-
-            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
-            // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
-            // console.log(`cus_color: ${cus_color}`)
-            console.log(cus_data)
-
-
-            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
-                console.log(data);
-                alert("成功加入購物車");
-                countCartObj(data)
-                },"json");
-        }
-
-        function goToCart(){
-            //取得商品sid 數量 尺寸
-            let cus_sid = $(".customized_detail_desi").attr("data-sid");
-            let cus_qty = $(".nac_chose_pieces_count").text();
-            let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
-            cus_color = ["#FFFFFF", "FFFFFF", "FFFFFF"]; //預設值
-
-
-            //取得顏色資訊
-            cus_colorFirst = $("ul.nac_chose_color_area:eq(0) li.active").attr("data-color");
-            cus_colorSecond = $("ul.nac_chose_color_area:eq(1) li.active").attr("data-color");
-            cus_colorThird = $("ul.nac_chose_color_area:eq(2) li.active").attr("data-color");
-            cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
-
-            //包裝資料 送進購物車
-            let cus_data = {
-                cus_sid: cus_sid,
-                cus_qty: cus_qty,
-                cus_size: cus_size,
-                cus_color: cus_color
-            };
-
-            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
-            // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
-            // console.log(`cus_color: ${cus_color}`)
-            // console.log(cus_data)
-
-            // 傳送資料給後端
-            // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
-            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
-                console.log(data);
-                if(data.success){
-                    countCartObj(data)
-                    location.href = "cart_step1.php";
-                }
-            },"json");
-        }
-
-
-    </script>
     <script>
         var sizeChose = "M";
         var nac_chose_pieces = "1";
@@ -317,7 +242,56 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             });
 
         // 色盤放進網頁
-        $(".nac_chose_color_area, #colorPanel ul").append(colorPick_nac);
+        $(".nac_chose_color_area").append(colorPick_nac);
+        // $(".nac_chose_color_area, #colorPanel ul").append(colorPick_nac);
+        const nac_colorPanel = $('#colorPanel ul.nax_panel_color_outsidebox')
+
+
+        var nac_windw_width = $(window).width();
+        $(window).resize(function() {
+            nac_windw_width = $(window).width();
+
+        })
+
+        let picture_outbox_size = $(".customized_detail_picture_outbox").width()
+        let nac_pigment_spacing = picture_outbox_size / 7
+        let nac_pigment_move = picture_outbox_size / 5.3
+        let nac_pigment_size = picture_outbox_size /11
+        console.log(picture_outbox_size)
+
+        if (nac_windw_width > 768) {
+            let b, i, unitRad, ballNum
+            ballNum = colors.length
+            unitRad = 2 * Math.PI / ballNum
+            for (let i = 0; i < ballNum; i++) {
+                b = document.createElement('li')
+                b.className = 'color_panel_pigment'
+                b.style.background = colors[i]
+                b.style.width = nac_pigment_size + "px"
+                b.style.height = nac_pigment_size + "px"
+                b.style.left = nac_pigment_spacing + nac_pigment_spacing * Math.cos(i * unitRad) + 'px'
+                b.style.top = nac_pigment_spacing + nac_pigment_spacing * Math.sin(i * unitRad) + 'px'
+                $(nac_colorPanel).append(b)
+            }
+        } else {
+            let b, i, unitRad, ballNum
+            ballNum = colors.length
+            unitRad = 2 * Math.PI / ballNum
+            for (let i = 0; i < ballNum; i++) {
+                b = document.createElement('li')
+                b.className = 'color_panel_pigment'
+                b.style.background = colors[i]
+                b.style.width = 45 + "px"
+                b.style.height = 45 + "px"
+                b.style.left = 75 + 75 * Math.cos(i * unitRad) + 'px'
+                b.style.top = 75 + 75 * Math.sin(i * unitRad) + 'px'
+                $(nac_colorPanel).append(b)
+            }
+        }
+
+
+
+
 
         //預設ACTIVE
         $("ul.nac_chose_color_area:eq(0) li").eq(0).addClass("active")
@@ -332,7 +306,6 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         // 色盤點擊行為
         $("ul.nac_chose_color_area li.nac_chose_color_btn").click(function(e) {
             e.stopPropagation(); //禁止往下(外)傳送行為
-
             let color = $(this).css("background-color"); //取得選中色碼
             let colorIndex = $(this).index(); //是第幾個色塊(index順序)
             let pick_which_area = $(this).parent().attr("data-clothes_area") //點到的色盤是控制哪個區域的
@@ -349,8 +322,6 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             // console.log($("#Clothes_area1").css("fill"))
             // console.log($("#Clothes_area2").css("fill"))
             // console.log($("#Clothes_area3").css("fill"))
-
-
         })
 
         // 即時色盤消失
@@ -362,18 +333,24 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         $('svg path').click(function(e) { //Default mouse Position 
             e.stopPropagation();
             let elm = $(".customized_detail_picture");
-            let xPos = e.pageX - elm.offset().left;
-            let yPos = e.pageY - elm.offset().top;
+            let xPos = e.pageX - (elm.offset().left);
+            let yPos = e.pageY - (elm.offset().top);
             pickId = $(this).attr("id")
-
-            //console.log(pickId)
             pickClothes = $("#" + pickId)
-
             $("#colorPanel").show();
-            $("#colorPanel").css({
-                left: xPos,
-                top: yPos
-            })
+
+            if (nac_windw_width > 768) {
+                $("#colorPanel").css({
+                    left: xPos - nac_pigment_move,
+                    top: yPos - nac_pigment_move
+                })
+            } else {
+                $("#colorPanel").css({
+                    left: xPos - 95,
+                    top: yPos - 95
+                })
+            }
+
         });
 
 
@@ -394,12 +371,10 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 $("ul.nac_chose_color_area:eq(2) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
             }
 
-            // console.log(clothes_area)
-            // console.log($("#Clothes_area1").css("fill"))
-            // console.log($("#Clothes_area2").css("fill"))
-            // console.log($("#Clothes_area3").css("fill"))
-
-
+            //console.log(clothes_area)
+            console.log($("#Clothes_area1").css("fill"))
+            console.log($("#Clothes_area2").css("fill"))
+            console.log($("#Clothes_area3").css("fill"))
         })
 
 
@@ -430,6 +405,85 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
             console.log(nac_chose_pieces)
         }
+    </script>
+
+    <script>
+
+        //加入購物車
+        function addToCart(){
+            //取得商品sid 數量 尺寸
+            let cus_sid = $(".customized_detail_desi").attr("data-sid");
+            let cus_qty = $(".nac_chose_pieces_count").text();
+            let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
+            cus_color = ["#FFFFFF", "FFFFFF", "FFFFFF"]; //預設值
+
+
+            //取得顏色資訊
+            cus_colorFirst = $("ul.nac_chose_color_area:eq(0) li.active").attr("data-color");
+            cus_colorSecond = $("ul.nac_chose_color_area:eq(1) li.active").attr("data-color");
+            cus_colorThird = $("ul.nac_chose_color_area:eq(2) li.active").attr("data-color");
+            cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
+
+            //包裝資料 送進購物車
+            let cus_data = {
+                cus_sid: cus_sid,
+                cus_qty: cus_qty,
+                cus_size: cus_size,
+                cus_color: cus_color
+            };
+
+            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
+            // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
+            // console.log(`cus_color: ${cus_color}`)
+            console.log(cus_data)
+
+
+            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
+                console.log(data);
+                alert("成功加入購物車");
+                countCartObj(data)
+            },"json");
+        }
+
+        function goToCart(){
+            //取得商品sid 數量 尺寸
+            let cus_sid = $(".customized_detail_desi").attr("data-sid");
+            let cus_qty = $(".nac_chose_pieces_count").text();
+            let cus_size = $(".nac_size_btn.active").attr("date-sizeChose");
+            cus_color = ["#FFFFFF", "FFFFFF", "FFFFFF"]; //預設值
+
+
+            //取得顏色資訊
+            cus_colorFirst = $("ul.nac_chose_color_area:eq(0) li.active").attr("data-color");
+            cus_colorSecond = $("ul.nac_chose_color_area:eq(1) li.active").attr("data-color");
+            cus_colorThird = $("ul.nac_chose_color_area:eq(2) li.active").attr("data-color");
+            cus_color = [cus_colorFirst, cus_colorSecond, cus_colorThird];
+
+            //包裝資料 送進購物車
+            let cus_data = {
+                cus_sid: cus_sid,
+                cus_qty: cus_qty,
+                cus_size: cus_size,
+                cus_color: cus_color
+            };
+
+            // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
+            // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
+            // console.log(`cus_color: ${cus_color}`)
+            // console.log(cus_data)
+
+            // 傳送資料給後端
+            // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
+            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
+                console.log(data);
+                if(data.success){
+                    countCartObj(data)
+                    location.href = "cart_step1.php";
+                }
+            },"json");
+        }
+
+
     </script>
 </body>
 
