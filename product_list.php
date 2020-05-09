@@ -89,25 +89,25 @@ if(! isset($_SESSION)){
         background: black;
     }
     .red{
-        background: red;
+        background: rgb(246, 105, 105);
     }
     .orange{
-        background: orange;
+        background: #ffb265;
     }
     .yellow{
-        background: yellow;
+        background: #ffed37;
     }
     .green{
-        background: green;
+        background: #5ede94;
     }
     .blue{
-        background: blue;
+        background: #66b6ff;
     }
     .purple{
-        background: purple;
+        background: #ce87e4;
     }
     .brown{
-        background: brown;
+        background: #bb7878;
     }
     .white{
         background: #F6F4F4;
@@ -229,6 +229,9 @@ if(! isset($_SESSION)){
     .wea_product_select_bar{
         padding: 0 30px;
     }
+    .wea_product_select_bar.show-desktop a.active h5,.wea_product_select_bar.show-desktop a.active h6,.wea_product_select_bar.show-desktop a.active p{
+        color: #C9044D
+    }
     .wea_product_select_bar ul{
         margin-bottom: 20px;
     }
@@ -262,10 +265,93 @@ if(! isset($_SESSION)){
         margin-right: 30px;
     }
     .wea_product_list_changebar span{
+        -webkit-user-select:none;
         margin: 0 4px 0 8px;
     }
     .wea_product_list_changebar i{
         margin: 0 8px 0 4px;
+    }
+    /* #wea_filter_btn.active{
+        color: #CA054D;
+    }
+    .wea_filter_hidearea{
+        overflow: hidden;
+        right: 0;
+        top:28px;
+        width: 305px;
+        height: 0px;
+        background: white;
+        box-shadow: 0px 0px 5px #ccc;
+        z-index: 2;
+        transition: .5s;
+    }
+    .wea_filter_hidearea.active{
+        height: 100px;
+        transition: .5s;
+    }
+    .wea_filter_hidearea ul{
+        width: 100%;
+        height: 100%;
+        padding: 15px;
+    }
+    .wea_filter_colorbar{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin:0 8px 8px 0;
+    }
+    .wea_filter_colorbar.active{
+        border: 2px solid #CA054D;
+    } */
+    /* .wea_filter_hidearea>div:nth-child(1){
+        padding: 15px 15px 0 15px;
+    }
+    .wea_filter_hidearea>div:nth-child(2){
+        padding: 15px;
+    }
+    .wea_filter_hidearea>div>h6{
+        margin-bottom: 10px;
+    }
+    .wea_filter_color{
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+    }
+    .wea_filter_colorbar{
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin:0 8px 8px 0;
+    }
+    .wea_filter_price input{
+        width: 120px
+    } */
+    #wea_sort_btn.active{
+        color: #CA054D;
+    }
+    .wea_sort_hidearea{
+        overflow: hidden;
+        right: 0;
+        top:28px;
+        width: 105px;
+        height: 0px;
+        background: white;
+        box-shadow: 0px 0px 5px #ccc;
+        z-index: 2;
+        transition: .5s;
+    }
+    .wea_sort_hidearea.active{
+        height: 150px;
+        transition: .5s;
+    }
+    .wea_sort_hidearea ul{
+        padding: 15px 15px 7px 15px;
+    }
+    .wea_sort_bar{
+        margin-bottom: 8px ;
+        -webkit-user-select:none;
+    }
+    .wea_sort_bar.active{
+       color: #CA054D;
     }
     /* 手機 */
     /* 展開 */
@@ -278,7 +364,7 @@ if(! isset($_SESSION)){
     }
     .wea_product_list_tital_seclect{
         width: 220px;
-        height:720px;
+        height:780px;
         top: 3px;
         left: -20px;
         transform: rotate(-2deg);
@@ -301,6 +387,7 @@ if(! isset($_SESSION)){
         color: white;
     }
     .wea_product_list_header_mobile{
+        z-index: 2;
         width: 150px;
         height: 60px;
         left: 0;
@@ -360,6 +447,9 @@ if(! isset($_SESSION)){
     .wea_product_list_changebar i{
         margin: 0 4px 0 2px;
     }
+    .wea_sort_hidearea{
+        top:24px;
+    }
     }
     /* ======================================= 商品 ======================================= */
     .wea_product_list{
@@ -385,6 +475,11 @@ if(! isset($_SESSION)){
     }
     .wea_product_list_item>p{
         margin-top: 4px;
+        display : inline-block;
+        overflow : hidden;
+        text-overflow : ellipsis;
+        white-space : nowrap;
+        width: 100%
     }
     /* .wea_product_list_item_img{
         width: 285px;
@@ -411,7 +506,9 @@ if(! isset($_SESSION)){
     }
     @media screen and (max-width: 625px){
         .wea_product_list_item{
-        width: 47.5%;
+        width: 47%;
+        margin: 1.5%;
+
     }
         .wea_product_list_item img{
         width: 100%;
@@ -466,32 +563,28 @@ if(! isset($_SESSION)){
     <div id="#" class="wea_wrapper">
         <div class="row no-gutters">
             <div class="col-sm-2">
-                <ul class="show-desktop wea_product_select_bar">
-                    <ul ><a href=""><h5>所有商品</h5></a></a></ul>
-                    <ul ><a href="" data-cate=""><h6>運動內衣</h6></a>
-                        <li><a href=""><p>有襯墊內衣</p></a></li>
-                        <li><a href=""><p>無襯墊內衣</p></a></li>
+                <ul id="categoriesInput" class="show-desktop wea_product_select_bar" data-categories="">
+                <ul><a data-categories=""><h5>所有商品</h5></a></a></ul>
+                    <ul ><a data-categories="`cate_sid` IN(1,2)"><h6>運動內衣</h6></a>
+                        <li><a data-categories="`cate_sid` = 1"><p>有襯墊內衣</p></a></li>
+                        <li><a data-categories="`cate_sid` = 2"><p>無襯墊內衣</p></a></li>
                     </ul>
-                    <ul><a href=""><h6>上身類</h6></a>
-                        <li><a href=""><p>短袖上衣</p></a></li>
-                        <li><a href=""><p>長袖上衣</p></a></li>
-                        <li><a href=""><p>無袖背心</p></a></li>
-                        <li><a href=""><p>運動棉衫</p></a></li>
-                        <li><a href=""><p>外套罩衫</p></a></li>
+                    <ul><a data-categories="`cate_sid` BETWEEN 3 AND 7"><h6>上身類</h6></a>
+                        <li><a data-categories="`cate_sid` = 3"><p>短袖上衣</p></a></li>
+                        <li><a data-categories="`cate_sid` = 4"><p>無袖背心</p></a></li>
+                        <li><a data-categories="`cate_sid` = 5"><p>長袖上衣</p></a></li>
+                        <li><a data-categories="`cate_sid` = 6"><p>運動棉衫</p></a></li>
+                        <li><a data-categories="`cate_sid` = 7"><p>外套罩衫</p></a></li>
                     </ul>
-                    <ul><a href=""><h6>下著類</h6></a>
-                        <li><a href=""><p>短褲</p></a></li>
-                        <li><a href=""><p>長褲</p></a></li>
-                        <li><a href=""><p>五分褲</p></a></li>
-                        <li><a href=""><p>七/八分褲</p></a></li>
-                        <li><a href=""><p>緊身褲</p></a></li>
+                    <ul><a data-categories="`cate_sid` BETWEEN 8 AND 13"><h6>下著類</h6></a>
+                        <li><a data-categories="`cate_sid` = 8"><p>緊身褲</p></a></li>
+                        <li><a data-categories="`cate_sid` = 9"><p>運動褲</p></a></li>
+                        <li><a data-categories="`cate_sid` = 10"><p>短褲</p></a></li>
+                        <li><a data-categories="`cate_sid` = 11"><p>五分褲</p></a></li>
+                        <li><a data-categories="`cate_sid` = 12"><p>七/八分褲</p></a></li>
+                        <li><a data-categories="`cate_sid` = 13"><p>長褲</p></a></li>
                     </ul>
-                    <ul ><a href=""><h6>配件</h6></a>
-                        <li><a href=""><p>水壺</p></a></li>
-                        <li><a href=""><p>保養與清潔</p></a></li>
-                        <li><a href=""><p>運動襪</p></a></li>
-                        <li><a href=""><p>瑜珈</p></a></li>
-                    </ul>
+                    <ul ><a class="d-flex" data-categories="`cate_sid` = 14"><h6>配件</h6></a></ul>
                 </ul>
             </div>
     <!-- ===================================== 商品列表 ===================================== -->
@@ -500,11 +593,64 @@ if(! isset($_SESSION)){
                 <div class="position-relative">
                     <div class="d-flex wea_product_list_header">
                         <h5 class="show-desktop wea_product_list_tital ">所有商品</h5>
-                        <div id="wea_product_list_filter" class="wea_product_list_changebar">
-                            <span>分類篩選</span><i class="fas fa-chevron-down"></i>
+                        <div id="wea_product_list_filter" class="wea_product_list_changebar position-relative display_none">
+                            <div id="wea_filter_btn">
+                                <span>顏色篩選</span><i class="fas fa-chevron-down"></i>
+                            </div>    
+                            <div class="wea_filter_hidearea position-absolute">
+                                <div>
+                                    <ul class="d-flex flex-wrap wea_filter_color ">
+                                        <li class="wea_filter_colorbar pink"></li>
+                                        <li class="wea_filter_colorbar red"></li>
+                                        <li class="wea_filter_colorbar orange"></li>
+                                        <li class="wea_filter_colorbar yellow"></li>
+                                        <li class="wea_filter_colorbar green"></li>
+                                        <li class="wea_filter_colorbar blue"></li>
+                                        <li class="wea_filter_colorbar purple"></li>
+                                        <li class="wea_filter_colorbar brown"></li>
+                                        <li class="wea_filter_colorbar white"></li>
+                                        <li class="wea_filter_colorbar gray"></li>
+                                        <li class="wea_filter_colorbar black"></li>
+                                    </ul>
+                                </div>
+                                <!--<div>
+                                    <h6>顏色篩選</h6>
+                                    <ul class="d-flex flex-wrap wea_filter_color ">
+                                        <li class="wea_filter_colorbar pink"></li>
+                                        <li class="wea_filter_colorbar red"></li>
+                                        <li class="wea_filter_colorbar orange"></li>
+                                        <li class="wea_filter_colorbar yellow"></li>
+                                        <li class="wea_filter_colorbar green"></li>
+                                        <li class="wea_filter_colorbar blue"></li>
+                                        <li class="wea_filter_colorbar purple"></li>
+                                        <li class="wea_filter_colorbar brown"></li>
+                                        <li class="wea_filter_colorbar white"></li>
+                                        <li class="wea_filter_colorbar gray"></li>
+                                        <li class="wea_filter_colorbar black"></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h6>價格範圍篩選</h6>
+                                    <div class="d-flex flex-wrap wea_filter_price justify-content-between">
+                                        <input type="text" placeholder="請輸入最低價格">
+                                        <p> - </p>
+                                        <input type="text" placeholder="請輸入最高價格">
+                                    </div>
+                                </div> -->
+                            </div>
                         </div>
-                        <div id="wea_product_list_sort" class="wea_product_list_changebar">
-                            <span>排序方式</span><i class="fas fa-chevron-down"></i>
+                        <div id="wea_product_list_sort" class="wea_product_list_changebar position-relative">
+                            <div id="wea_sort_btn" data-ordertype="" data-orderway="">
+                                <span>排序方式</span><i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="wea_sort_hidearea position-absolute">
+                                <ul>
+                                    <li class="wea_sort_bar" data-ordertype="`created_date`" data-orderway="DESC">由新到舊</li>
+                                    <li class="wea_sort_bar" data-ordertype="`created_date`" data-orderway="ASC">由舊到新</li>
+                                    <li class="wea_sort_bar" data-ordertype="`price`" data-orderway="ASC">價低到高</li>
+                                    <li class="wea_sort_bar" data-ordertype="`price`" data-orderway="DESC">價高到低</li>
+                                </ul>
+                            </div>
                          </div>
                     </div>
                     <!-- 手機 -->
@@ -513,27 +659,27 @@ if(! isset($_SESSION)){
                         <div class="position-relative wea_product_list_showall_mobile">
                             <div class="wea_product_list_tital_seclect position-absolute"></div>
                             <ul class="position-absolute wea_product_select_bar show-mobile">
-                                <ul><a class="d-flex"><h5>所有商品</h5></a></a></ul>
-                                <!-- <ul ><a href=""><h5>所有商品</h5></a></a></ul> -->
-                                <ul ><a class="d-flex"><h6>運動內衣</h6></a>
-                                    <li><a class="d-flex"><p>有襯墊內衣</p></a></li>
-                                    <li><a class="d-flex"><p>無襯墊內衣</p></a></li>
+                                <ul><a class="d-flex" data-categories=""><h5>所有商品</h5></a></a></ul>
+                                <ul ><a class="d-flex" data-categories="`cate_sid` IN(1,2)"><h6>運動內衣</h6></a>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 1"><p>有襯墊內衣</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 2"><p>無襯墊內衣</p></a></li>
                                 </ul>
-                                <ul><a class="d-flex"><h6>上身類</h6></a>
-                                    <li><a class="d-flex"><p>短袖上衣</p></a></li>
-                                    <li><a class="d-flex"><p>長袖上衣</p></a></li>
-                                    <li><a class="d-flex"><p>無袖背心</p></a></li>
-                                    <li><a class="d-flex"><p>運動棉衫</p></a></li>
-                                    <li><a class="d-flex"><p>外套罩衫</p></a></li>
+                                <ul><a class="d-flex" data-categories="`cate_sid` BETWEEN 3 AND 7"><h6>上身類</h6></a>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 3"><p>短袖上衣</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 4"><p>無袖背心</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 5"><p>長袖上衣</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 6"><p>運動棉衫</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 7"><p>外套罩衫</p></a></li>
                                 </ul>
-                                <ul><a class="d-flex"><h6>下著類</h6></a>
-                                    <li><a class="d-flex"><p>短褲</p></a></li>
-                                    <li><a class="d-flex"><p>長褲</p></a></li>
-                                    <li><a class="d-flex"><p>五分褲</p></a></li>
-                                    <li><a class="d-flex"><p>七/八分褲</p></a></li>
-                                    <li><a class="d-flex"><p>緊身褲</p></a></li>
+                                <ul><a class="d-flex" data-categories="`cate_sid` BETWEEN 8 AND 13"><h6>下著類</h6></a>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 8"><p>緊身褲</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 9"><p>運動褲</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 10"><p>短褲</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 11"><p>五分褲</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 12"><p>七/八分褲</p></a></li>
+                                    <li><a class="d-flex" data-categories="`cate_sid` = 13"><p>長褲</p></a></li>
                                 </ul>
-                                <ul ><a class="d-flex"><h6>配件</h6></a></ul>
+                                <ul ><a class="d-flex" data-categories="`cate_sid` = 14"><h6>配件</h6></a></ul>
                             </ul>
                         </div>
                         <!-- 收起狀態 -->
@@ -580,79 +726,14 @@ if(! isset($_SESSION)){
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<!--    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>-->
+    <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/fontawesome.min.js"></script>
     <!-- 滑動圖片 -->
     <script type="text/javascript" src="js/jquery.touchSwipe.min.js"></script>
+
     <script>
-
-        //加入最愛-----------------------------
-        //登入才顯示愛心
-
-        $(document).on("click", ".a_add_to_like_unactive", function(){
-            //加入最愛圖示
-            $(event.target).siblings(".a_add_to_like_active").removeClass("display_none");
-            //傳送 colorSid 給後端
-            const a_likeProSid = $(event.target).attr("data-sid");
-
-            $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
-                if (data.success) {
-                    // console.log(data);
-                    alert('成功加入收藏');
-                }else {
-                    alert('已收藏此商品');
-                }
-            }, 'json')
-        });
-
-        //移除最愛-----------------------------
-        $(document).on("click", ".a_add_to_like_active", function(){
-
-            //移除最愛圖示
-            $(event.target).addClass("display_none");
-            //傳送 colorSid 給後端
-            const a_likeProSid = $(event.target).attr("data-sid");
-
-            $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
-                if (data.success) {
-
-                    alert('已移除收藏');
-                }
-
-            }, 'json')
-
-            // .done(function(){
-            //     console.log("success")
-            // })
-            // .fail(function(er){
-            //     console.log(er);
-            // })
-        })
-
-        //有登入就顯示已加入收藏的商品-----------------------------
-        function showWishList() {
-            $.get("member_wishlist_api.php", function (data) {
-                console.log(data)
-            }, "json")
-
-            .fail(function (err){
-                console.log(err)
-            })
-            .done(function (){
-                console.log("success")
-            })
-            //let arr = <?//= json_encode([1, 2, 3, 4, 6, 14]) ?>//;
-            //for (let val of arr) {
-            //    $('li.wea_product_list_item i[data-sid="' + val + '"]').click();
-            }
-
-
-        showWishList();
-    </script>
-    <script>
-
         var index=0;
         var slideWidth=$(".wea_ootd_img").width();
         var slideImages=[ "ootd1.png", "ootd2.jpg","ootd3.jpg","ootd4.png","ootd5.png"];
@@ -727,19 +808,22 @@ if(! isset($_SESSION)){
         3. 生資料表格
 
     */
+    var totalpage ;
+    var prepagenum = 1; 
+    var nextpagenum = 1;
     const ProductList = $('.wea_product_list'),
           ListPage = $('.wea_product_list_page');
 
     const ListPageTpl = (obj) => {
         //{active:true , page:1}
         return`
-            <li class="${obj.active ? 'active' : ''}"><a href="#${obj.page}">${obj.page}</a></li>
+            <li class="${obj.active ? 'active' : ''}"><a href="javascript:goPage(${obj.page})">${obj.page}</a></li>
         `;
     }
     const ProductListTpl = (obj) => {
         let uptext=`
             <li class="wea_product_list_item position-relative" data-sid="${obj.sid}">
-                <a href="./product.php?sid=${obj.sid}"><img src="product_images/${obj.showImg}.png" alt="" onclick="a_getSid(event)"><a>
+                <a href="./product.php?sid=${obj.sid}"><img src="product_images/${obj.showImg}.png" alt=""></a>
                 <?php if(isset($_SESSION['loginUser'])): ?>
                 <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="${obj.sid}"></i>
                 <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-sid="${obj.sid}"></i>
@@ -759,18 +843,28 @@ if(! isset($_SESSION)){
         return uptext+colortext+downtext;
     }
 
-    function getDataByPage(page = 1){
-        $.get('product_list_api.php', {page:page}, function(data){
+    function getDataByPage(pageapi = 1,cateapi = "",ordertypeapi = "",orderwayapi=""){
+        // console.log("getDataByPage收到的orderwayapi:"+orderwayapi);
+        // return;
+        $.get('product_list_api.php', {page:pageapi,categories:cateapi,ordertype:ordertypeapi,orderway:orderwayapi}, function(data){
             // let imm = JSON.parse(data.rowsColor[0][0].pro_pic) ;
             // console.log(JSON.parse(data.rowsColor[0][0].pro_pic)[0]);
+            // console.log(data);
+
             //抓頁碼
             let ListPageStr='';
-            for(let i=1 ; i<=data.totalPages ; i++){
+            totalpage = data.totalPages;
+            if(data.totalPages>1){
+                ListPageStr += '<li><a  href="javascript:goPage(prepagenum)"><i class="fas fa-chevron-left"></i></a></li>';
+                for(let i=1 ; i<=data.totalPages ; i++){
                 ListPageStr += ListPageTpl({
-                    active : page===i,
+                    active : pageapi === i,
                     page : i,
-                })
+                    })
+                }
+            ListPageStr += '<li><a  href="javascript:goPage(nextpagenum)"><i class="fas fa-chevron-right"></i></a></li>';
             }
+            
             ListPage.html(ListPageStr);
             //抓商品
             let ProductListStr='';
@@ -784,30 +878,95 @@ if(! isset($_SESSION)){
                 })
             }
             ProductList.html(ProductListStr);
-        },'json');
+        },'json')
+        // .done(function(){
+        //     alert("success");
+        // })
+        // .fail(function(){
+        //     alert("fail");
+        // })
     }
-    getDataByPage();
+    // getDataByPage();
 
     function whenHashChange(){
-    let hashStr = location.hash.slice(1); //去掉#
-    let page = parseInt(hashStr);
+        let hashStr = location.hash.slice(1); //去掉#
+        // console.log('hashStr:', hashStr);
+        // console.log('hashStr2:', decodeURIComponent(hashStr));
+        hashStr = decodeURIComponent(hashStr); // url decode
+        let obj = {};
+        // console.log( hashStr);
 
-    if(page){
-        getDataByPage(page);
-    } else {
-        getDataByPage(1);
+        try{
+            obj = JSON.parse(hashStr);
+        } catch(ex){
+            console.log(ex);
+        }
+
+        // console.log('obj:', obj.categories);
+        let page = obj.page;
+        const categories = obj.categories;
+        const ordertype = obj.ordertype;
+        const orderway = obj.orderway;
+
+        // // 由 hash 設定到搜尋欄
+        if(categories !== $('#categoriesInput').attr("data-categories")){
+            $('#categoriesInput').attr("data-categories",categories);
+            for(i=0;i<18;i++){
+                if(categories == $(".wea_product_select_bar.show-desktop a").eq(i).attr("data-categories")){
+                    $(".wea_product_select_bar.show-desktop a").eq(i).addClass("active");
+                    $(".wea_product_select_bar.show-mobile a").eq(i).prepend(`<i class="fas fa-chevron-right"></i>`);
+                    $(".show-desktop.wea_product_list_tital").text($(".wea_product_select_bar.show-desktop a").eq(i).text());
+                    $(".wea_product_list_tital_mobile span").text($(".wea_product_select_bar.show-desktop a").eq(i).text());
+                }
+            }
+        // comsole.log($('#categoriesInput').attr("data-categories"));
+        }
+        if(ordertype !== $("#wea_sort_btn").attr("data-ordertype")){
+            $("#wea_sort_btn").attr("data-ordertype",ordertype);
+            $("#wea_sort_btn").attr("data-orderway",orderway);
+            for(i=0 ; i<4 ; i++ ){
+                if(ordertype == $(".wea_sort_bar").eq(i).attr("data-ordertype") && orderway == $(".wea_sort_bar").eq(i).attr("data-orderway")){
+                    $(".wea_sort_bar").eq(i).addClass("active");
+                    $("#wea_sort_btn span").text($(".wea_sort_bar").eq(i).text());
+                }
+            }
+        }
+        // // let page = parseInt(hashStr);
+        prepagenum = page - 1;
+        if(prepagenum < 1){
+            prepagenum =  1;
+        }
+        nextpagenum = page + 1;
+        if(nextpagenum > totalpage){
+            nextpagenum = totalpage;
+        }    
+        
+        if(page){
+            getDataByPage(page,categories,ordertype,orderway);
+            console.log("page 執行 getDataByPage");
+        } else {
+            getDataByPage(1,categories,ordertype,orderway);
+            console.log("1 執行 getDataByPage");
+        }
     }
-}
 
-window.addEventListener('hashchange', whenHashChange);
+    window.addEventListener('hashchange', whenHashChange);
 
-whenHashChange();
-
+    whenHashChange();
+    
+    function goPage(pagenum = 1){
+            location.href = '#' + JSON.stringify({
+            page: pagenum,
+            categories: $('#categoriesInput').attr("data-categories"),
+            ordertype: $("#wea_sort_btn").attr("data-ordertype"),
+            orderway: $("#wea_sort_btn").attr("data-orderway")
+            });
+    }
     </script>
     <!-- 商品預覽換圖 -->
     <script>
         $(Document).on("mouseenter",".wea_product_list_item_color",function(){
-            console.log("哈囉!");
+            // console.log("哈囉!");
             var select_recommend_product = $(this).closest("li").find("img").attr("src");
             // console.log(select_recommend_product);
             if(select_recommend_product != $(this).attr("data-hoverimg")){
@@ -817,12 +976,46 @@ whenHashChange();
             }
         })
     </script>
-    <!-- 手機版的選單 -->
+    <!-- 選單 -->
     <script>
-        // 宣告＋預設值
-        let select_tital ="";
-        $(".wea_product_select_bar.show-mobile a:has(h5)").prepend(`<i class="fas fa-chevron-right"></i>`);
+        // 宣告+預設值
+        let select_tital =$(".wea_product_select_bar.show-desktop a").find("h5").text();
+        
+        if($(".wea_product_select_bar.show-desktop a").hasClass("active") == false){
+            $(".wea_product_select_bar.show-desktop a:has(h5)").addClass("active");
+            $(".wea_product_select_bar.show-mobile a:has(h5)").prepend(`<i class="fas fa-chevron-right"></i>`);
+        }
+        // $(".wea_product_select_bar.show-desktop a:has(h5)").addClass("active");
+        // $(".wea_product_select_bar.show-mobile a:has(h5)").prepend(`<i class="fas fa-chevron-right"></i>`);
         // 變化開始
+        // 點桌機板
+        $(".wea_product_select_bar.show-desktop a").click(function(){
+            console.log($(this).text());
+            if(select_tital != $(this).text()){
+                select_tital=$(this).text();
+                $('#categoriesInput').attr("data-categories",$(this).attr("data-categories"));
+                // desktop
+                $(".show-desktop.wea_product_list_tital").text(select_tital);
+                $(".wea_product_select_bar.show-desktop a").removeClass("active");
+                $(this).addClass("active");
+                //mobile
+                $(".wea_product_select_bar.show-mobile i").remove();
+                let datatext = $(this).attr("data-categories");
+                for(i=0;i<18;i++){
+                    if(datatext == $(".wea_product_select_bar.show-mobile a").eq(i).attr("data-categories")){
+                        $(".wea_product_select_bar.show-mobile a").eq(i).prepend(`<i class="fas fa-chevron-right"></i>`);
+                    }
+                }
+                $(".wea_product_list_tital_mobile span").text(select_tital);
+                $(".wea_product_list_showall_mobile").removeClass("active");
+                setTimeout(() => {
+                    $(".wea_product_list_one_mobile").removeClass("active");
+                }, 100);
+                //呼叫
+                goPage(1);
+            }
+        })
+        // 點手機版
         $(".wea_product_list_one_mobile").click(function(){
             $(this).addClass("active");
             setTimeout(() => {
@@ -831,14 +1024,135 @@ whenHashChange();
         })
         $(".wea_product_select_bar.show-mobile a").click(function(){
             select_tital=$(this).text();
+            $('#categoriesInput').attr("data-categories",$(this).attr("data-categories"));
+            // desktop
+            let datatext = $(this).attr("data-categories");
+            $(".show-desktop.wea_product_list_tital").text(select_tital);
+            $(".wea_product_select_bar.show-desktop a").removeClass("active");
+            for(i=0;i<18;i++){
+                if(datatext == $(".wea_product_select_bar.show-desktop a").eq(i).attr("data-categories")){
+                    $(".wea_product_select_bar.show-desktop a").eq(i).addClass("active");
+                }
+            }
+            // mobile
             $(".wea_product_select_bar.show-mobile i").remove();
             $(this).prepend(`<i class="fas fa-chevron-right"></i>`);
             $(".wea_product_list_tital_mobile span").text(select_tital);
             $(".wea_product_list_showall_mobile").removeClass("active");
             setTimeout(() => {
-            $(".wea_product_list_one_mobile").removeClass("active");
-        }, 100);
+                $(".wea_product_list_one_mobile").removeClass("active");
+            }, 100);
+            //呼叫
+            goPage(1);
         })
+
+        $("#wea_filter_btn").click(function(){
+            $(".wea_filter_hidearea").toggleClass("active");
+            $("#wea_filter_btn").toggleClass("active");
+            if($("#wea_filter_btn i").hasClass("fa-chevron-down")){
+                $("#wea_filter_btn i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            }else{
+                $("#wea_filter_btn i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            }
+        })
+        $("#wea_sort_btn").click(function(){
+            $(".wea_sort_hidearea").toggleClass("active");
+            $("#wea_sort_btn").toggleClass("active");
+            if($("#wea_sort_btn i").hasClass("fa-chevron-down")){
+                $("#wea_sort_btn i").removeClass("fa-chevron-down").addClass("fa-chevron-up");
+            }else{
+                $("#wea_sort_btn i").removeClass("fa-chevron-up").addClass("fa-chevron-down");
+            }
+        })
+        $(".wea_sort_bar").click(function(){
+            if($(this).hasClass("active") == false){
+                //網頁上看的到的效果
+                $(".wea_sort_bar").removeClass("active");
+                $(this).addClass("active");
+                $("#wea_sort_btn span").text($(this).text());
+                $(".wea_sort_hidearea").toggleClass("active");
+                $("#wea_sort_btn").toggleClass("active");
+                //存值
+                $("#wea_sort_btn").attr("data-ordertype",$(this).attr("data-ordertype"))
+                                  .attr("data-orderway",$(this).attr("data-orderway"));
+                // 抓資料
+                goPage(1);
+            }
+        })
+
+        //頁碼
+        // $("#previous_page").click(function(){
+        //         nowpagenum-=1;
+        //         console.log(nowpagenum);
+        //         goPage(nowpagenum);
+        // })
     </script>
+
+
+      <script>
+
+          //加入最愛-----------------------------
+          //登入才顯示愛心
+
+          $(document).on("click", ".a_add_to_like_unactive", function(){
+              //加入最愛圖示
+              $(event.target).siblings(".a_add_to_like_active").removeClass("display_none");
+              //傳送 colorSid 給後端
+              const a_likeProSid = $(event.target).attr("data-sid");
+
+              $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
+                  if (data.success) {
+                      // console.log(data);
+                      alert('成功加入收藏');
+                  }else {
+                      alert('已收藏此商品');
+                  }
+              }, 'json')
+          });
+
+          //移除最愛-----------------------------
+          $(document).on("click", ".a_add_to_like_active", function(){
+
+              //移除最愛圖示
+              $(event.target).addClass("display_none");
+              //傳送 colorSid 給後端
+              const a_likeProSid = $(event.target).attr("data-sid");
+
+              $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
+                  if (data.success) {
+
+                      alert('已移除收藏');
+                  }
+
+              }, 'json')
+
+              // .done(function(){
+              //     console.log("success")
+              // })
+              // .fail(function(er){
+              //     console.log(er);
+              // })
+          })
+
+          //有登入就顯示已加入收藏的商品-----------------------------
+          function showWishList() {
+              $.get("member_wishlist_api.php", function (data) {
+                  console.log(data)
+              }, "json")
+
+                  .fail(function (err){
+                      console.log(err)
+                  })
+                  .done(function (){
+                      console.log("success")
+                  })
+              //let arr = <?//= json_encode([1, 2, 3, 4, 6, 14]) ?>//;
+              //for (let val of arr) {
+              //    $('li.wea_product_list_item i[data-sid="' + val + '"]').click();
+          }
+
+
+          showWishList();
+      </script>
   </body>
 </html>

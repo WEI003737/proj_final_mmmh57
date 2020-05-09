@@ -1,25 +1,33 @@
 <?php
 require __DIR__.'/__connect_db.php';
-//
-////點商品轉頁
-//if(!isset($_SESSION['proListSid'])){
-//
-//    $_SESSION['proListSid'] = [];
-//};
-//
-//$proListSid = isset($_SESSION["proListSid"]) ? $_SESSION["proListSid"] : "";
-//
-//if(!empty($proListSid)){
-//    $_SESSION['proListSid'] = $proListSid;
-//};
-
 //一頁顯示的數量
 $showNum = 16;
 // 目前頁碼，若無指定則顯示第一頁
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$categories = isset($_GET['categories']) ? $_GET['categories'] : "";
+$ordertype = isset($_GET['ordertype']) ? $_GET['ordertype'] : "";
+$orderway = isset($_GET['orderway']) ? $_GET['orderway'] : "";
+
+// echo json_encode($_GET['page']);
+// exit;
+
+$where = ' WHERE 1';
+if($categories != ""){
+// $where .= $pdo->quote("%${categories}%"); // 跳脫;
+    $where .= " AND {$categories}"; // 跳脫;
+
+}
+$order = '';
+if($ordertype != ""){
+    $order .= " ORDER BY {$ordertype} {$orderway} ";
+    // ordertype="`created_time`"&orderway="ASC"
+}else{
+    $order .= " ORDER BY `sid`";
+}
+
 
 // 總筆數
-$totalRows = $pdo -> query("SELECT COUNT(1) FROM `products`")
+$totalRows = $pdo -> query("SELECT COUNT(1) FROM `products` $where")
                   -> fetch(PDO::FETCH_NUM)[0];
 // echo $totalRows;
 // 算總頁數
@@ -28,7 +36,7 @@ $totalPages = ceil($totalRows / $showNum);
 ($page < 1) ? ($page = 1) : false;
 ($page > $totalPages) ? ($page = $totalPages) : false;
 
-$rowsSql = sprintf("SELECT * FROM`products` ORDER BY`sid` ASC LIMIT %s,%s",($page-1)*$showNum,$showNum);
+$rowsSql = sprintf( "SELECT * FROM `products` %s %s LIMIT %s,%s",$where,$order,($page-1)*$showNum,$showNum);
 $rowsStmt = $pdo -> query($rowsSql);
 $rows = $rowsStmt->fetchAll();
 
@@ -38,7 +46,6 @@ foreach($rows as $r){
 }
 
 // echo json_encode($rowColor, JSON_UNESCAPED_UNICODE);
-
 $output = [
     'page' => $page,
     'showNum' =>$showNum,
@@ -46,7 +53,6 @@ $output = [
     'totalPages' =>$totalPages,
     'rows' =>$rows,
     'rowsColor' =>$rowsColor,
-//    'sessionSid' => $_SESSION['proListSid'],
 ];
 header('Content-Type:application/json');
 echo json_encode($output, JSON_UNESCAPED_UNICODE);
