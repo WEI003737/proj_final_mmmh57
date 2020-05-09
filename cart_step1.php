@@ -81,7 +81,7 @@ if(!empty($_SESSION["customized"])) {
     };
 }
 
-echo json_encode($a_cusData, JSON_UNESCAPED_UNICODE);
+//echo json_encode($a_cusData, JSON_UNESCAPED_UNICODE);
 
 
 

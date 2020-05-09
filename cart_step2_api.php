@@ -107,8 +107,8 @@ $order_sid = $pdo->lastInsertId(); // 最近新增資料的 PK
 if($o_stmt -> rowCount() ==1){
 
     //訂單細節:普通商品
-    $od_sql = "INSERT INTO `order_details`(`order_sid`, `pro_sid`, `color_sid`, `size_sid`, `name`, `color`, `size`, `price`, `gty`) 
-    VALUES (?, ?, ?, ? ,?, ?, ?, ? , ?)";
+    $od_sql = "INSERT INTO `order_details`(`order_sid`, `pro_sid`, `color_sid`, `size_sid`, `name`, `color`, `size`, `price`, `gty`, `is_cus`) 
+    VALUES (?, ?, ?, ? ,?, ?, ?, ? , ?, ?)";
     $od_stmt = $pdo->prepare($od_sql);
 
     foreach($cartProRows as $c){
@@ -122,6 +122,7 @@ if($o_stmt -> rowCount() ==1){
             $c['size'],
             $c['product'][0]['price'],
             $c['quantity'],
+            "0",
         ]);
     }
 
@@ -131,8 +132,8 @@ if($o_stmt -> rowCount() ==1){
     }
 
     //訂單細節:客製化
-    $cus_sql = "INSERT INTO `order_details`(`order_sid`, `pro_sid`, `name`, `color`, `size`, `price`, `gty`) 
-    VALUES (?, ?, ?, ? ,?, ?, ?)";
+    $cus_sql = "INSERT INTO `order_details`(`order_sid`, `pro_sid`, `name`, `size`, `price`, `gty`,`is_cus`,`cus_color`) 
+    VALUES (?, ?, ?, ? ,?, ?, ?,?)";
     $cus_stmt = $pdo->prepare($cus_sql);
 
     foreach($a_cusData as $cus){
@@ -140,10 +141,11 @@ if($o_stmt -> rowCount() ==1){
             $order_sid,
             $cus['cus_sid'],
             $cus['name'],
-            json_encode($cus['cus_color']),
             $cus['cus_size'],
             $cus['price'],
             $cus['cus_qty'],
+            "1",
+            json_encode($cus['cus_color']),
         ]);
     }
 
@@ -153,6 +155,14 @@ if($o_stmt -> rowCount() ==1){
     }
 
 }
+
+if(!isset($_SESSION['lastOrderSid'])){
+
+    $_SESSION['lastOrderSid'] = [];
+};
+
+$_SESSION['lastOrderSid'] = $order_sid;
+
 
 if($output["addCartSuccess"] &&  $output["addCusSuccess"]){
     unset($_SESSION['cart']); // 清除購物車內容
