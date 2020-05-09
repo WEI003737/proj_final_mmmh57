@@ -1,3 +1,4 @@
+<!--<div class="alert">已加入購物車</div>-->
 <div class="header">
     <div class="a_wrapper">
         <nav class="a_nav">

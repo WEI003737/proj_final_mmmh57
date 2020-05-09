@@ -2,9 +2,9 @@
 //orders--------------------------------------
 CREATE TABLE
 `proj_final`.`orders`
-( `sid` INT NOT NULL AUTO_INCREMENT , `mem_sid` INT NOT NULL , `order_num` VARCHAR NOT NULL , `coupon` VARCHAR NOT NULL ,
-`amount` VARCHAR NOT NULL , `shipping` VARCHAR NOT NULL , `receiver` VARCHAR NOT NULL , `receiver_mobile` VARCHAR NOT NULL ,
-`address` VARCHAR NOT NULL , `payment` VARCHAR NOT NULL , `receipt` VARCHAR NOT NULL , `order_status` VARCHAR NOT NULL ,
+( `sid` INT NOT NULL AUTO_INCREMENT , `mem_sid` INT NOT NULL , `order_num` VARCHAR(255) NOT NULL , `coupon` VARCHAR(255) NOT NULL ,
+`amount` VARCHAR(255) NOT NULL , `shipping` VARCHAR(255) NOT NULL , `receiver` VARCHAR(255) NOT NULL , `receiver_mobile` VARCHAR(255) NOT NULL ,
+`address` VARCHAR(255) NOT NULL , `payment` VARCHAR(255) NOT NULL , `receipt` VARCHAR(255) NOT NULL , `order_status` VARCHAR(255) NOT NULL ,
 `created_date` DATETIME NOT NULL , PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 
 //order_details-----------------------------
@@ -14,7 +14,7 @@ CREATE TABLE `proj_final`.`order_details` ( `sid` INT NOT NULL AUTO_INCREMENT , 
 `cus_color` VARCHAR(255) NOT NULL , PRIMARY KEY (`sid`)) ENGINE = InnoDB CHARSET=utf8 COLLATE utf8_general_ci;
 
 //like_box-----------------------------
-CREATE TABLE `proj_final`.`like` ( `sid` INT NOT NULL AUTO_INCREMENT , `mem_sid` INT NOT NULL , `pro_sid` INT NOT NULL ,
+CREATE TABLE `proj_final`.`like_box` ( `sid` INT NOT NULL AUTO_INCREMENT , `mem_sid` INT NOT NULL , `pro_sid` INT NOT NULL ,
 PRIMARY KEY (`sid`)) ENGINE = InnoDB;
 
 //coupon-----------------------------

@@ -50,12 +50,12 @@ INSERT INTO `categories` (`sid`, `parent_sid`, `parent`, `en_parent`, `name`, `e
 (5, 2, '上衣', 'tops', '長袖上衣', 'longsleeves', ''),
 (6, 2, '上衣', 'tops', '運動棉衫', 'sweatshirts', ''),
 (7, 2, '上衣', 'tops', '外套罩衫', 'outerwear', ''),
-(8, 3, '下身', 'bottoms', '緊身褲', 'leggings', ''),
-(9, 3, '下身', 'bottoms', '運動褲', 'sweatpants', ''),
-(10, 3, '下身', 'bottoms', '短褲', 'shorts', ''),
-(11, 3, '下身', 'bottoms', '五分褲', 'biker shorts', ''),
-(12, 3, '下身', 'bottoms', '七八分褲', 'capris', ''),
-(13, 3, '下身', 'bottoms', '長褲', 'pants', ''),
+(8, 3, '下著', 'bottoms', '緊身褲', 'leggings', ''),
+(9, 3, '下著', 'bottoms', '運動褲', 'sweatpants', ''),
+(10, 3, '下著', 'bottoms', '短褲', 'shorts', ''),
+(11, 3, '下著', 'bottoms', '五分褲', 'biker shorts', ''),
+(12, 3, '下著', 'bottoms', '七八分褲', 'capris', ''),
+(13, 3, '下著', 'bottoms', '長褲', 'pants', ''),
 (14, 4, '運動配件', 'accessories', '瑜珈', 'yoga', '');
 
 -- --------------------------------------------------------
@@ -421,13 +421,6 @@ CREATE TABLE `like_box` (
   `pro_sid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- 傾印資料表的資料 `like_box`
---
-
-INSERT INTO `like_box` (`sid`, `mem_sid`, `pro_sid`) VALUES
-(18, 1, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -453,9 +446,9 @@ CREATE TABLE `members` (
 
 INSERT INTO `members` (`sid`, `email`, `password`, `mobile`, `name`, `created_date`, `receiver`, `receiver_mobile`, `address`, `selffie`) VALUES
 (1, 'aaa@aaa.aaa', 'Aa123456', '0900000000', 'aaa', '2020-05-01 13:25:39', 'aaa', '0900000001', '123', '0fed959f16fbd63724460acb0d5bc367.jpg'),
-(2, 'bbb@bbb.bb', 'Aa123456', '0900000000', 'bbb', '2020-05-05 00:31:33', '', '', '', ''),
-(3, 'ccc@ccc.cc', 'Aa123456', '0900000000', 'ccc', '2020-05-05 00:32:11', '', '', '', ''),
-(4, 'ccc1@ccc.cc', 'Aa123456', '0900000000', 'ccc', '2020-05-05 00:32:44', '', '', '', '');
+(2, 'bbb@bbb.bbb', 'Aa123456', '0900000000', 'bbb', '2020-05-05 00:31:33', '', '', '', ''),
+(3, 'ccc@ccc.ccc', 'Aa123456', '0900000000', 'ccc', '2020-05-05 00:32:11', '', '', '', ''),
+(4, 'ddd@ddd.ddd', 'Aa123456', '0900000000', 'ddd', '2020-05-05 00:32:44', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -484,8 +477,7 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`sid`, `mem_sid`, `order_num`, `coupon`, `amount`, `shipping`, `receiver`, `receiver_mobile`, `address`, `payment`, `receipt`, `order_status`, `created_date`) VALUES
-(1, 1, 'RJUGYJU675H', '', '2000', '取貨付款', 'aaa', '0900000000', 'aaa', '取貨付款', '捐贈', '配貨中', '2020-05-01 20:34:16'),
-(2, 1, 'RJUGYJU675O', '', '3100', '超商取貨', 'aaa', '0900000000', 'aaa', '信用卡', '捐贈', '配貨中', '2020-05-01 20:34:16');
+(1, 1, 'EG385DH84K01', '會員註冊禮卷', '4310', '宅配寄送', '扁布', '0921123456', '新北市新店區中正路000號', '信用卡', '個人 - 二聯電子發票', '處理中', '2020-05-09 23:33:21');
 
 -- --------------------------------------------------------
 
@@ -513,9 +505,9 @@ CREATE TABLE `order_details` (
 --
 
 INSERT INTO `order_details` (`sid`, `order_sid`, `pro_sid`, `color_sid`, `size_sid`, `name`, `color`, `size`, `price`, `gty`, `is_cus`, `cus_color`) VALUES
-(1, 1, 1, 1, 1, '123', 'white', 'S', '890', '2', 0, ''),
-(2, 1, 1, 1, 1, '123', 'white', 'S', '890', '2', 0, ''),
-(3, 1, 2, 1, 1, '123', 'white', 'S', '890', '2', 0, '');
+(1, 1, 7, 12, 46, 'Pring 細肩帶運動內衣', 'blue', 'S', '1000', '2', 0, ''),
+(2, 1, 11, 16, 62, 'Asport V領運動內衣', 'white', 'S', '790', '1', 0, ''),
+(3, 1, 1, 0, 0, 'Sunrise 時尚三色運動內衣', '', 'XL', '1480', '1', 1, '[\"#505050\",\"#ff9900\",\"#ca054d\"]');
 
 -- --------------------------------------------------------
 
@@ -739,23 +731,6 @@ INSERT INTO `products` (`sid`, `cate_sid`, `name`, `price`, `intro`, `material`,
 (198, 14, 'SUGARMAT 旅行系列瑜珈墊', 540, '布料的低調奢華的啞光感，搭配五分高腰合身剪裁，不僅能展現腿部線條，同時展現輕奢運動時尚感，是一件時尚與舒適的完美結合。', '聚酯纖維 50%、尼龍 29%、彈性纖維 21%', '使用中性洗滌劑，勿使用柔軟精', '0000-00-00 00:00:00'),
 (199, 14, 'SUGARMAT 旅行系列瑜珈墊', 540, '布料的低調奢華的啞光感，搭配五分高腰合身剪裁，不僅能展現腿部線條，同時展現輕奢運動時尚感，是一件時尚與舒適的完美結合。', '聚酯纖維 50%、尼龍 29%、彈性纖維 21%', '使用中性洗滌劑，勿使用柔軟精', '0000-00-00 00:00:00'),
 (200, 14, 'SUGARMAT 粉紅瑜珈墊背帶', 540, '材質選用柔軟的仿麂皮絨，搭配精緻的串珠鸚鵡及流蘇作為配飾，外觀精美時尚，不但讓瑜珈墊更加方便攜帶，亦可與任何服飾搭配使用。', '聚酯纖維 50%、尼龍 29%、彈性纖維 21%', '使用中性洗滌劑，勿使用柔軟精', '0000-00-00 00:00:00');
-
--- --------------------------------------------------------
-
---
--- 資料表結構 `products_intro`
---
-
-CREATE TABLE `products_intro` (
-  `sid` int(11) NOT NULL,
-  `cate_sid` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `en_name` varchar(255) NOT NULL,
-  `en_material` varchar(255) NOT NULL,
-  `hash_tag` varchar(255) NOT NULL,
-  `description` varchar(255) NOT NULL,
-  `pro_color` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1896,12 +1871,6 @@ ALTER TABLE `products`
   ADD PRIMARY KEY (`sid`);
 
 --
--- 資料表索引 `products_intro`
---
-ALTER TABLE `products_intro`
-  ADD PRIMARY KEY (`sid`);
-
---
 -- 資料表索引 `size`
 --
 ALTER TABLE `size`
@@ -1939,7 +1908,7 @@ ALTER TABLE `customize`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `like_box`
 --
 ALTER TABLE `like_box`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `members`
@@ -1951,7 +1920,7 @@ ALTER TABLE `members`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `order_details`
@@ -1964,12 +1933,6 @@ ALTER TABLE `order_details`
 --
 ALTER TABLE `products`
   MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
-
---
--- 使用資料表自動遞增(AUTO_INCREMENT) `products_intro`
---
-ALTER TABLE `products_intro`
-  MODIFY `sid` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用資料表自動遞增(AUTO_INCREMENT) `size`

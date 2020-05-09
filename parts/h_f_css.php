@@ -88,7 +88,19 @@
         .a_display_none{
             display: none;
         }
+    /* ----------- alert ----------- */
+        .alert{
+            width: 100%;
+            height: 60px;
+            text-align: center;
+            background: #C9044D;
+            color: rgba(255,255,255,.8);
+            position: fixed;
+            top: 30%;
+            z-index: 997;
+        }
     /* ----------- header ----------- */
+
         .header{
             box-shadow: 0 0 5px #ccc;
             background: #fff;
