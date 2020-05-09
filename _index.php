@@ -26,7 +26,7 @@ require __DIR__. '/__connect_db.php';
 </head>
 
 <body>
-<?php include __DIR__. '/parts/header.php';?>
+    <?php include __DIR__. '/parts/header.php';?>
     <!----------------------   主視覺  -------------------------->
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
@@ -433,12 +433,12 @@ require __DIR__. '/__connect_db.php';
             </div>
 
         </div>
-        <?php include __DIR__. '/parts/footer.php';?>
-    </section>
 
+    </section>
+    <?php include __DIR__. '/parts/footer.php';?>
     <?php include __DIR__. '/parts/h_f_script.php';?>
     <!-- Optional JavaScript -->
-     jQuery first, then Popper.js, then Bootstrap JS
+<!--     jQuery first, then Popper.js, then Bootstrap JS-->
 <!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
 <!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
 <!--        crossorigin="anonymous"></script>-->

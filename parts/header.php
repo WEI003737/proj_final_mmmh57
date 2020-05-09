@@ -15,7 +15,7 @@
                 <li><a href="cin_about.php">關於我們</a></li>
                 <li><a href="product_list.php">商品</a></li>
                 <li><a href="customized.php">商品客製</a></li>
-                <li><a>健康小教室</a></li>
+                <li><a href="article_cover.php">健康小教室</a></li>
             </div>
             <div class="header_nav_right">
                 <li>
@@ -60,7 +60,7 @@
                         <li><a href="cin_about.php">關於我們</a></li>
                         <li><a href="product_list.php">商品</a></li>
                         <li><a href="customized.php">商品客製</a></li>
-                        <li><a>健康小教室</a></li>
+                        <li><a href="article_cover.php">健康小教室</a></li>
                         <?php if(isset($_SESSION['loginUser'])): ?>
                         <li><a href="member_logout_api.php">登出</a></li>
                         <?php endif; ?>
