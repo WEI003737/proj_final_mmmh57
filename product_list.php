@@ -1146,7 +1146,7 @@ if(! isset($_SESSION)){
               // })
           })
 
-          //有登入就顯示已加入收藏的商品-----------------------------
+          //有登入就顯示已加入收藏的商品----------------------------- (還沒寫完)
           // function showWishList() {
           //     $.get("member_wishlist_api.php", function (data) {
           //         console.log(data)
@@ -1161,7 +1161,7 @@ if(! isset($_SESSION)){
               //let arr = <?//= json_encode([1, 2, 3, 4, 6, 14]) ?>//;
               //for (let val of arr) {
               //    $('li.wea_product_list_item i[data-sid="' + val + '"]').click();
-          }
+          // }
 
 
           showWishList();

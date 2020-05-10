@@ -331,9 +331,15 @@ if(!empty($_SESSION["customized"])) {
                                 <div>商品總金額</div>
                                 <div class="t_text_right" id="totalAmount"></div>
                             </div>
+                            <?php if(!empty($_SESSION["loginUser"])): ?>
                             <a><div class="t_cart1_checkout_btn">
                                 <input value="立即結帳→" class="btn" onclick="a_goCartPageSecond()">
                             </div></a>
+                            <?php else: ?>
+                                <a href="member_login.php"><div class="t_cart1_checkout_btn">
+                                        <input value="請先登入會員" class="btn" ">
+                                    </div></a>
+                            <?php endif; ?>
                         </div>
                     </section>    
                 </div>
