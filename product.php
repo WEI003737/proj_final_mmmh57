@@ -1421,6 +1421,11 @@ foreach($weaRecommend as $R){
                   setTimeout(function(){
                       $('.a_alert.a_addToLike').fadeOut();
                   }, 800);
+              }else {
+                  $('.a_alert.a_addToLike').fadeIn();
+                  setTimeout(function(){
+                      $('.a_alert.a_addToLike').fadeOut();
+                  }, 800);
               }
           }, 'json')
               .done(function(){

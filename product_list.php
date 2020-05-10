@@ -1107,6 +1107,11 @@ if(! isset($_SESSION)){
                         setTimeout(function(){
                             $('.a_alert.a_addToLike').fadeOut();
                         }, 800);
+                  }else {
+                      $('.a_alert.a_addToLike').fadeIn();
+                      setTimeout(function(){
+                          $('.a_alert.a_addToLike').fadeOut();
+                      }, 800);
                   }
               }, 'json')
           });
