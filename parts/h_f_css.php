@@ -112,6 +112,9 @@
         .alert i{
             margin-bottom: 5px;
         }
+        .alert .svg-inline--fa.fa-w-18{
+            width: 100%;
+        }
 
     /* ----------- header ----------- */
 

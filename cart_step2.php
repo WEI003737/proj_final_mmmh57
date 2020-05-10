@@ -14,6 +14,7 @@ $totalItems = 0;
 $totalProductItems = 0;
 $totalCustomizedItems = 0;
 
+//抓普通商品資料---------------------------------------------------------------------------------------------------------
 if(!empty($pKeys)) {
     $cartProSql = sprintf("SELECT * FROM `size` WHERE `sid` IN(%s)", implode(',', $pKeys));
     $cartProStmt = $pdo -> query($cartProSql);
@@ -93,6 +94,14 @@ $totalPrice = $totalPriceOfProducts + $totalPriceOfCustomized;
 $totalItems = $totalProductItems + $totalCustomizedItems;
 
 //echo json_encode($totalPrice, JSON_UNESCAPED_UNICODE);
+
+
+//同會員資料功能----------------------------------------------------------------------------------------------------------
+$asMemDataSql = "SELECT * FROM members where email='" . $_SESSION['loginUser'] . "'";
+$asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
+
+//echo json_encode($asMemDataRow, JSON_UNESCAPED_UNICODE);
+
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
@@ -325,12 +334,12 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                 </div>
                                 <div class="form-group col-md-3">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="autoSizingCheck">
-                                        <label class="form-check-label" for="autoSizingCheck">
+                                        <input class="form-check-input a_asNumData" type="checkbox" id="autoSizingCheck">
+                                        <label class="form-check-label " for="autoSizingCheck">
                                         同會員資料
                                         </label>
                                     </div>
-                            </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="receiver_mobile" id="mobileTarget">收件人電話</label>
@@ -860,6 +869,37 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
         countAmount();
 
     </script>
+    <script>
+        //同會員資料----------------------------------------------
+        memDataJson = <?= json_encode($asMemDataRow[0], JSON_UNESCAPED_UNICODE) ?>;
+        memReceiver = memDataJson.receiver;
+        memReceiverMobile = memDataJson.receiver_mobile;
+        memAddress = memDataJson.address;
+        // console.log(memReceiver)
+        // console.log(memDataJson)
 
+        //如果沒有設定
+        if(!memReceiver){
+            memReceiver = "無預設收件人";
+        };
+        if(!memReceiverMobile){
+            memReceiverMobile = "無預設收件人電話";
+        };
+        if(!memAddress){
+            memAddress = "無預設收件地址";
+        };
+
+        $(".a_asNumData").click(function(){
+
+            if($(".a_asNumData").prop("checked")){
+
+                    $("#receiver_name").val(memReceiver);
+                    $("#receiver_mobile").val(memReceiverMobile);
+                    $("#receiver_address").val(memAddress);
+
+            }
+        })
+
+    </script>
 
 <?php include __DIR__ . '/parts/html-foot.php'; ?>
