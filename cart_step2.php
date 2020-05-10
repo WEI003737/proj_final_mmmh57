@@ -513,11 +513,21 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                         <input type="submit" value="←返回購物車" class="btn btn-p">
                     </div>
                 </a>
+                <?php if(!empty($_SESSION["loginUser"])): ?>
+
                 <a>
                     <div class="t_cart2_sendorder_btn">
                         <input type="button" value="送出訂單" class="btn" onclick="checkForm()">
                     </div>
                 </a>
+
+                <?php else: ?>
+                    <a href="member_login.php">
+                        <div class="t_cart2_sendorder_btn">
+                            <input type="button" value="請先登入會員" class="btn">
+                        </div>
+                    </a>
+                <?php endif; ?>
             </div> 
 
         </div>
@@ -799,14 +809,20 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                 $.post('cart_step2_api.php', $(document.form1).serialize(), function(data){
 
                     if(data.addCartSuccess && data.addCusSuccess){
-                        alert('訂單送出成功');
+                        $('.a_alert.a_sandOrder').fadeIn();
+                        setTimeout(function(){
+                            $('.a_alert.a_sandOrder').fadeOut();
+                        }, 800);
                         setTimeout(function(){
                             //首頁檔名
                             location.href ='cart_step3.php';
                         }, 1000);
 
                     } else {
-                        alert('訂單送出失敗');
+                        $('.a_alert.a_sandOrder').fadeIn();
+                        setTimeout(function(){
+                            $('.a_alert.a_sandOrder').fadeOut();
+                        }, 800);
                     }
                 }, 'JSON')
                 .done(function(){

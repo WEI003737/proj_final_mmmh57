@@ -60,6 +60,16 @@
     <h6><span>已</span>移除商品</h6>
 </div>
 
+<div class="a_alert a_sandOrder">
+    <i class="fas fa-check-circle fa-lg"></i>
+    <h6><span>訂</span>單送出成功</h6>
+</div>
+
+<div class="a_alert a_sandOrderErr">
+    <i class="fas fa-exclamation fa-lg"></i>
+    <h6><span>訂</span>單送出失敗</h6>
+</div>
+
 <!-- 提示 (css 在 h_f_script.php 裡) -->
 
 
