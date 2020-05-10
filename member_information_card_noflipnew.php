@@ -24,7 +24,16 @@ $rowss = $stmt->fetchAll();
 <?php include __DIR__ . '/css/member_css.php'; ?>
 <?php include __DIR__ . '/parts/h_f_link.php'; ?>
    
-<style>       
+<style>
+body{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.header a{
+    color:#333;
+}
+a, a:hover{
+    text-decoration: none;
+}
 .inputcss_information{padding:0px 100px 0px 5px; border:1px white solid;
 cursor:pointer; text-align:left;margin:0px auto 10px;}
 
@@ -117,7 +126,6 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 }
 
 .j_storage_btn{
-    font-family:sans-serif;
     font-size:16px;
     color:white;
     background: #CA054D;
@@ -368,7 +376,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
                         type: 'post',
                     success: function(data){
                             //  console.log(data);
-                            location.reload();
+
                             $("#jimg").attr("src", "./upload/"+data.newname)
                             $("#jimg-big").attr("src", "./upload/"+data.newname)
                             //alert("更新成功");
@@ -376,6 +384,10 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
                             setTimeout(function(){
                                 $('.a_alert.a_uploadPic').fadeOut();
                             }, 800);
+
+                            setTimeout(function(){
+                                location.reload();
+                            }, 1600);
                         }
             });
         });

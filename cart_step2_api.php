@@ -84,13 +84,24 @@ $totalCustomizedItems = 0;
 
     };
 
+//產生order編號
+function generateRandomString($length = 10) {
+    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $charactersLength = strlen($characters);
+    $randomString = 'ET';
+    for ($i = 0; $i < $length; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
 
+$a_orderNum = generateRandomString();
 
 $o_sql = "INSERT INTO `orders`(`mem_sid`, `order_num`, `coupon`, `amount`, `shipping`, `receiver`, `receiver_mobile`, `address`, `payment`, `receipt`, `order_status`, `created_date`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 $o_stmt = $pdo->prepare($o_sql);
 $o_stmt->execute([
     $_SESSION["sid"],
-    "EG385DH84K01",
+    $a_orderNum,
     "會員註冊禮卷",
     $_POST["amount"],
     $_POST["shipping"],

@@ -16,6 +16,16 @@
 
 * {box-sizing: border-box;}
 
+body{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.header a{
+    color:#333;
+}
+a, a:hover{
+    text-decoration: none;
+}
+
 .container{
     max-width: 1440px;
     margin: 0 auto;

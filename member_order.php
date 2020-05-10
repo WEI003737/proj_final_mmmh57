@@ -54,6 +54,15 @@ foreach($rows2 as $r2){
 
 
 <style>
+    body{
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+    .header a{
+        color:#333;
+    }
+    a, a:hover{
+        text-decoration: none;
+    }
     @media screen and (max-width: 700px){
         table {font-size:12px}
     }
@@ -212,7 +221,7 @@ foreach($rows2 as $r2){
                             <tbody>
                             <tr>
                                 <td>
-                                    <img src="./images-2020/images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
+                                    <img src="./product_images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
                                 </td>
                                 <td><?= $r2['name'] ?></td>
                                 <td><?=  $r2['color'] ?></td>
@@ -250,7 +259,7 @@ foreach($rows2 as $r2){
                         <tbody>
                         <tr>
                             <td>
-                                <img src="./images-2020/images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
+                                <img src="./product_images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
                             </td>
 
                             <td>

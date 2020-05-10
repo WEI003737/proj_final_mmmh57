@@ -20,7 +20,15 @@ $coupon_used = $stmt_coupon_used -> fetch();
 <?php include __DIR__ . '/parts/h_f_link.php'; ?>
 
 <style>
-
+body{
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.header a{
+    color:#333;
+}
+a, a:hover{
+    text-decoration: none;
+}
 .j_gray{
     Width:100%;
     height:100%;

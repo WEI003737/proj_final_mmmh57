@@ -15,6 +15,15 @@ require __DIR__. '/__connect_db.php';
 
  
 <style>
+    body{
+        font-family: 'Noto Sans TC', sans-serif;
+    }
+    .header a{
+        color:#333;
+    }
+    a, a:hover{
+        text-decoration: none;
+    }
     .container{
         max-width: 1440px;
         min-height:100vh;

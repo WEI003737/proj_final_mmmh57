@@ -96,6 +96,7 @@
             background: #ffffff;
             color: #C9044D;
             border: 1px solid #C9044D;
+            border-radius: 5px;
             position: fixed;
             right: 0;
             left: 0;

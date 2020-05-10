@@ -16,6 +16,15 @@ require __DIR__. '/__connect_db.php';
     <?php include __DIR__ . '/parts/h_f_link.php'; ?>
 
     <style>
+        body{
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+        .header a{
+            color:#333;
+        }
+        a, a:hover{
+            text-decoration: none;
+        }
         .flex-wrap
         {flex-wrap: wrap;}
 
