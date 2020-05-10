@@ -860,21 +860,7 @@ foreach($weaRecommend as $R){
   <?php include __DIR__.'/parts/header.php' ?>
     <!-- =============================== 商品主區塊 ===================================  -->
 
-      <!-- 提示 (css 在 h_f_script.php 裡) -->
-      <div class="alert a_addToLike">
-          <i class="fab fa-gratipay fa-lg"></i>
-          <h6><span>已</span>加入收藏</h6>
-      </div>
 
-      <div class="alert a_removeFromLike">
-          <i class="fab fa-gratipay fa-lg"></i>
-          <h6><span>已</span>從收藏移除</h6>
-      </div>
-
-      <div class="alert a_addToCart">
-          <i class="fas fa-shopping-basket fa-lg"></i>
-          <h6><span>已</span>加入購物車</h6>
-      </div>
       <!-- 推出 header 空間-->
       <div class="a_push_place"></div>
 
@@ -1387,9 +1373,9 @@ foreach($weaRecommend as $R){
           $.get("add_to_cart_api.php", {cart_sid,cart_qty}, function(data){
               if(data) {
                   countCartObj(data)
-                  $('.alert.a_addToCart').fadeIn();
+                  $('.a_alert.a_addToCart').fadeIn();
                   setTimeout(function(){
-                      $('.alert.a_addToCart').fadeOut();
+                      $('.a_alert.a_addToCart').fadeOut();
                   }, 800);
               }
           },"json");
@@ -1431,9 +1417,9 @@ foreach($weaRecommend as $R){
 
           $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
               if (data.success) {
-                  $('.alert.a_addToLike').fadeIn();
+                  $('.a_alert.a_addToLike').fadeIn();
                   setTimeout(function(){
-                      $('.alert.a_addToLike').fadeOut();
+                      $('.a_alert.a_addToLike').fadeOut();
                   }, 800);
               }
           }, 'json')
@@ -1459,9 +1445,9 @@ foreach($weaRecommend as $R){
 
           $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
               if (data.success) {
-                  $('.alert.a_removeFromLike').fadeIn();
+                  $('.a_alert.a_removeFromLike').fadeIn();
                   setTimeout(function(){
-                      $('.alert.a_removeFromLike').fadeOut();
+                      $('.a_alert.a_removeFromLike').fadeOut();
                   }, 800);
               }
 

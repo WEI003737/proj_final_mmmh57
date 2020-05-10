@@ -64,11 +64,6 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 <body>
     <?php include __DIR__ . './parts/header.php'
     ?>
-    <!-- 提示 (css 在 h_f_script.php 裡) -->
-    <div class="alert a_addToCart">
-        <i class="fas fa-shopping-basket fa-lg"></i>
-        <h6><span>已</span>加入購物車</h6>
-    </div>
 
     <div class="container nac_menu_reserve"></div>
     <!-- 導航列 -->
@@ -449,9 +444,9 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                if(data) {
                    countCartObj(data)
                    // alert("已加入購物車")
-                   $('.alert.a_addToCart').fadeIn();
+                   $('.a_alert.a_addToCart').fadeIn();
                     setTimeout(function(){
-                        $('.alert.a_addToCart').fadeOut();
+                        $('.a_alert.a_addToCart').fadeOut();
                     }, 800);
                }
             },"json");

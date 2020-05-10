@@ -317,12 +317,16 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
                 
                 $.post('member_information_update_api.php', $(document.form3).serialize(), function (data){
                     if(data.success){
-                        $('#info-bar3').show();
-                        $('#info-bar4').hide();
+                        $('.a_alert.a_editData').fadeIn();
+                        setTimeout(function(){
+                            $('.a_alert.a_editData').fadeOut();
+                        }, 800);
                         //console.log(data)
                     } else {
-                        $('#info-bar4').show();
-                        $('#info-bar3').hide();
+                        $('.a_alert.a_editDataErr').fadeIn();
+                        setTimeout(function(){
+                            $('.a_alert.a_editDataErr').fadeOut();
+                        }, 800);
                     }
                     
                 }, 'json');
@@ -368,7 +372,10 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
                             $("#jimg").attr("src", "./upload/"+data.newname)
                             $("#jimg-big").attr("src", "./upload/"+data.newname)
                             //alert("更新成功");
-                            $('#info_bar_selffie').show();
+                            $('.a_alert.a_uploadPic').fadeIn();
+                            setTimeout(function(){
+                                $('.a_alert.a_uploadPic').fadeOut();
+                            }, 800);
                         }
             });
         });

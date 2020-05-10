@@ -108,26 +108,6 @@ require __DIR__. '/__connect_db.php';
 
 <?php include __DIR__ . '/parts/header.php'; ?>
 
-<!-- 提示 (css 在 h_f_script.php 裡) -->
-<div class="alert a_login">
-    <i class="fas fa-smile fa-lg"></i>
-    <h6><span>登</span>入成功</h6>
-</div>
-
-<div class="alert a_loginErr">
-    <i class="fas fa-exclamation-triangle fa-lg"></i>
-    <h6><span>帳</span>號或密碼錯誤</h6>
-</div>
-
-<div class="alert a_registrationErr">
-    <i class="fas fa-exclamation fa-lg""></i>
-    <h6><span>請</span>檢查輸入資料有無錯誤</h6>
-</div>
-
-<div class="alert a_registration">
-    <i class="fas fa-ticket-alt fa-lg"></i>
-    <h6><span>註</span>冊成功<br>恭喜您得到一張新會員優惠卷</h6>
-</div>
 
 <!-- 推出 header 空間-->
 <div class="a_push_place"></div>
@@ -261,9 +241,9 @@ require __DIR__. '/__connect_db.php';
         $.post('members_login_api.php', $(document.form1).serialize(), function(data){
         
             if(data.success){
-                $('.alert.a_login').fadeIn();
+                $('.a_alert.a_login').fadeIn();
                 setTimeout(function(){
-                    $('.alert.a_login').fadeOut();
+                    $('.a_alert.a_login').fadeOut();
                 }, 800);
                 setTimeout(function(){
                     //首頁檔名
@@ -272,9 +252,9 @@ require __DIR__. '/__connect_db.php';
 
             } else {
                 console.log(data)
-                $('.alert.a_loginErr').fadeIn();
+                $('.a_alert.a_loginErr').fadeIn();
                 setTimeout(function(){
-                    $('.alert.a_loginErr').fadeOut();
+                    $('.a_alert.a_loginErr').fadeOut();
                 }, 800);
             }
         }, 'json');
@@ -311,17 +291,17 @@ require __DIR__. '/__connect_db.php';
                 if(data.success){
                     //註冊成功
                     //得到優惠卷
-                    $('.alert.a_registration').fadeIn();
+                    $('.a_alert.a_registration').fadeIn();
                     setTimeout(function(){
-                        $('.alert.a_registration').fadeOut();
+                        $('.a_alert.a_registration').fadeOut();
                     }, 1600);
                     setTimeout(function(){
                         location.href ='member_information_card_noflipnew.php';
                     }, 2400);
                 } else {
-                    $('.alert.a_registrationErr').fadeIn();
+                    $('.a_alert.a_registrationErr').fadeIn();
                     setTimeout(function(){
-                        $('.alert.a_registrationErr').fadeOut();
+                        $('.a_alert.a_registrationErr').fadeOut();
                     }, 800);
                 }
             }, 'json');

@@ -9,7 +9,7 @@
 <script>
 
 //行為提示
-    $(".alert").hide();
+    $(".a_alert").hide();
 
 <!-- 提示 (css 在 h_f_script.php 裡) -->
 // <div class="alert">
@@ -28,9 +28,9 @@
             if(data.cart || data.customized){
                 location.href = "cart_step1.php";
             }else {
-                $('.alert.a_nothingInCart').fadeIn();
+                $('.a_alert.a_nothingInCart').fadeIn();
                 setTimeout(function(){
-                    $('.alert.a_nothingInCart').fadeOut();
+                    $('.a_alert.a_nothingInCart').fadeOut();
                 }, 800);
             }
             console.log(data);

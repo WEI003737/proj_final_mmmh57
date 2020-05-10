@@ -96,17 +96,6 @@ if(!empty($_SESSION["customized"])) {
 <!--  公版:header  -->
 <?php include __DIR__ . '/parts/header.php'; ?>
 
-    <!-- 提示 (css 在 h_f_script.php 裡) -->
-    <div class="alert a_removeFromCart">
-        <i class="fas fa-trash-alt fa-lg"></i>
-        <h6><span>已</span>移除商品</h6>
-    </div>
-
-    <div class="alert a_nothingInCart">
-        <i class="fas fa-exclamation-circle fa-lg"></i>
-        <h6><span>購</span>物車裡沒有東西</h6>
-    </div>
-
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     <div class="t_page_cart">
@@ -436,12 +425,11 @@ if(!empty($_SESSION["customized"])) {
             div.remove();
             countCartObj(data);
             calPrices();
-            $('.alert.a_removeFromCart').fadeIn();
+            $('.a_alert.a_removeFromCart').fadeIn();
             setTimeout(function(){
-                $('.alert.a_removeFromCart').fadeOut();
+                $('.a_alert.a_removeFromCart').fadeOut();
             }, 800);
         }, 'json')
-        location.reload();
     }
 
     function removeCustomizedItem(event){
@@ -455,12 +443,11 @@ if(!empty($_SESSION["customized"])) {
             div.remove();
             countCartObj(data);
             calPrices();
-            $('.alert.a_removeFromCart').fadeIn();
+            $('.a_alert.a_removeFromCart').fadeIn();
             setTimeout(function(){
-                $('.alert.a_removeFromCart').fadeOut();
+                $('.a_alert.a_removeFromCart').fadeOut();
             }, 800);
         }, 'json')
-        location.reload();
     }
 
     function changeQty(cart_sid){
@@ -532,9 +519,9 @@ if(!empty($_SESSION["customized"])) {
                 if(data.cart || data.customized){
                     location.href = "cart_step2.php";
                 }else{
-                    $('.alert.a_nothingInCart').fadeIn();
+                    $('.a_alert.a_nothingInCart').fadeIn();
                     setTimeout(function(){
-                        $('.alert.a_nothingInCart').fadeOut();
+                        $('.a_alert.a_nothingInCart').fadeOut();
                     }, 800);
                     console.log(data);
                 }

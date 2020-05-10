@@ -89,7 +89,7 @@
             display: none;
         }
     /* ----------- alert ----------- */
-        .alert{
+        .a_alert{
             width: 280px;
             height: 100px;
             text-align: center;
@@ -106,13 +106,13 @@
             top: 30%;
             z-index: 997;
         }
-        .alert span{
+        .a_alert span{
             font-size: 24px;
         }
-        .alert i{
+        .a_alert i{
             margin-bottom: 5px;
         }
-        .alert .svg-inline--fa.fa-w-18{
+        .a_alert .svg-inline--fa.fa-w-18{
             width: 100%;
         }
 

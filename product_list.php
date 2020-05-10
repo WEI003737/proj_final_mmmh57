@@ -541,15 +541,6 @@ if(! isset($_SESSION)){
       <?php include __DIR__. '/parts/header.php';?>
     <!-- =================================== #ootd =================================== -->
 
-    <!-- 提示 (css 在 h_f_script.php 裡) -->
-    <div class="alert a_addToLike">
-        <i class="fab fa-gratipay fa-lg"></i>
-        <h6><span>已</span>加入收藏</h6>
-    </div>
-    <div class="alert a_removeFromLike">
-        <i class="fas fa-hand-holding-heart fa-lg"></i>
-        <h6><span>已</span>從收藏移除</h6>
-    </div>
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     <div class="wea_ootd">
@@ -1112,9 +1103,9 @@ if(! isset($_SESSION)){
 
               $.get('_add_to_like_api.php', {a_likeProSid}, function (data) {
                   if (data.success) {
-                        $('.alert.a_addToLike').fadeIn();
+                        $('.a_alert.a_addToLike').fadeIn();
                         setTimeout(function(){
-                            $('.alert.a_addToLike').fadeOut();
+                            $('.a_alert.a_addToLike').fadeOut();
                         }, 800);
                   }
               }, 'json')
@@ -1130,9 +1121,9 @@ if(! isset($_SESSION)){
 
               $.get('_remove_from_like_api.php', {a_likeProSid}, function (data) {
                   if (data.success) {
-                      $('.alert.a_removeFromLike').fadeIn();
+                      $('.a_alert.a_removeFromLike').fadeIn();
                       setTimeout(function(){
-                          $('.alert.a_removeFromLike').fadeOut();
+                          $('.a_alert.a_removeFromLike').fadeOut();
                       }, 800);
                   }
 
@@ -1164,7 +1155,7 @@ if(! isset($_SESSION)){
           // }
 
 
-          showWishList();
+          // showWishList();
       </script>
   </body>
 </html>
