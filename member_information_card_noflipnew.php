@@ -188,8 +188,18 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
 <?php include __DIR__ . '/parts/header.php'; ?>
 
 <!-- 提示 (css 在 h_f_script.php 裡) -->
+<div class="alert a_editData">
+    <i class="fas fa-pencil-alt fa-lg"></i>
+    <h6><span>資</span>料更新成功</h6>
+</div>
+
+<div class="alert a_editDataErr">
+    <i class="fas fa-pencil-alt fa-lg"></i>
+    <h6><span>記</span>得更改資訊欄喔</h6>
+</div>
+
 <div class="alert uploadPic">
-    <i class="fab fa-gratipay fa-lg"></i>
+    <i class="fas fa-image fa-lg"></i>
     <h6><span>照</span>片更新成功</h6>
 </div>
 
@@ -328,19 +338,27 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
 <script>
 //<!-- ====表單傳送確認==== -->
         function checkForm3(){
-          
+            event.preventDefault();
             if($("form")[0].checkValidity()) {
               
                 //console.log($(document.form3).serialize())
                 
                 $.post('member_information_update_api.php', $(document.form3).serialize(), function (data){
                     if(data.success){
-                        $('#info-bar3').show();
-                        $('#info-bar4').hide();
+                        $('.alert.a_editData').fadeIn();
+                        setTimeout(function(){
+                            $('.alert.a_editData').fadeOut();
+                        }, 800);
+                        // $('#info-bar3').show();
+                        // $('#info-bar4').hide();
                         //console.log(data)
                     } else {
-                        $('#info-bar4').show();
-                        $('#info-bar3').hide();
+                        $('.alert.a_editDataErr').fadeIn();
+                        setTimeout(function(){
+                            $('.alert.a_editDataErr').fadeOut();
+                        }, 800);
+                        // $('#info-bar4').show();
+                        // $('#info-bar3').hide();
                     }
                     
                 }, 'json')
@@ -370,6 +388,8 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
 
 //<!-- ====照片 傳至uploads==== -->
  $('#fileUploadSubmit').on('click', function() {
+            event.preventDefault();
+
             var file_data = $('#picFile').prop('files')[0];   //取得上傳檔案屬性
             var form_data = new FormData();  //建構new FormData()
             form_data.append('myfiles', file_data);  //吧物件加到file後面
@@ -386,7 +406,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px}
                             location.reload();
                             $("#jimg").attr("src", "./upload/"+data.newname)
                             $("#jimg-big").attr("src", "./upload/"+data.newname)
-                            alert("更新成功");
+                            // alert("更新成功");
                             // $('.alert.uploadPic').fadeIn();
                             // setTimeout(function(){
                             //     $('.alert.uploadPic').fadeOut();

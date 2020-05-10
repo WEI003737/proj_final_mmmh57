@@ -182,7 +182,29 @@ require __DIR__. '/__connect_db.php';
 
 <body>
 
-<?php include __DIR__ . '/parts/header.php'; ?>  
+<?php include __DIR__ . '/parts/header.php'; ?>
+
+<!-- 提示 (css 在 h_f_script.php 裡) -->
+<div class="alert a_login">
+    <i class="fas fa-smile fa-lg"></i>
+    <h6><span>登</span>入成功</h6>
+</div>
+
+<div class="alert a_loginErr">
+    <i class="fas fa-exclamation-triangle fa-lg"></i>
+    <h6><span>帳</span>號或密碼錯誤</h6>
+</div>
+
+<div class="alert a_registrationErr">
+    <i class="fas fa-exclamation fa-lg""></i>
+    <h6><span>請</span>檢查輸入資料有無錯誤</h6>
+</div>
+
+<div class="alert a_registration">
+    <i class="fas fa-ticket-alt fa-lg"></i>
+    <h6><span>註</span>冊成功<br>恭喜您得到一張新會員優惠卷</h6>
+</div>
+
 <!-- 推出 header 空間-->
 <div class="a_push_place"></div>
 <div class="container">
@@ -265,7 +287,7 @@ require __DIR__. '/__connect_db.php';
                         <p> 我同意RED CORE的<a href="">使用條款</a></p>
                         <p id="checkbox_help" class="form-text"></p> 
                         <!-- <input  type="checkbox" checked="checked" required name="terms" > -->
-                        <input id="check_must"  type="checkbox" checked="checked" >
+                        <input id="check_must"  type="checkbox">
                         <span class="checkmark"></span>
                     </label>
 
@@ -318,10 +340,15 @@ require __DIR__. '/__connect_db.php';
 
 
     function checkForm(){
+        event.preventDefault();
         $.post('members_login_api.php', $(document.form1).serialize(), function(data){
         
             if(data.success){
-                $('#info-bar').show().text('登入成功');
+                $('.alert.a_login').fadeIn();
+                setTimeout(function(){
+                    $('.alert.a_login').fadeOut();
+                }, 800);
+                // $('#info-bar').show().text('登入成功');
                 // console.log(data)
                 setTimeout(function(){
                     //首頁檔名
@@ -330,7 +357,10 @@ require __DIR__. '/__connect_db.php';
 
             } else {
                 // console.log(data)
-                $('#info-bar').show().text('帳號或密碼錯誤');
+                $('.alert.a_loginErr').fadeIn();
+                setTimeout(function(){
+                    $('.alert.a_loginErr').fadeOut();
+                }, 800);
             }
         }, 'json')
         .fail(function(err){
@@ -347,7 +377,8 @@ require __DIR__. '/__connect_db.php';
 <script>
      //  註冊
      function checkForm2(){
-        let isPass = true; //有沒有通過檢查
+         event.preventDefault();
+         let isPass = true; //有沒有通過檢查
         $("#register_email").css('border-color', '#ccc');
         $("#register_name").css('border-color', '#ccc');
         $("#register_mobile").css('border-color', '#ccc');
@@ -358,7 +389,7 @@ require __DIR__. '/__connect_db.php';
         //     isPass = false;
         // }
 
-        if($('input#check_must').prop('checked')){
+        if(!$('input#check_must').prop('checked')){
             $('p#checkbox_help').text('請閱讀使用條款並確認勾選');
             isPass = false;
             //alert('請閱讀使用條款並確認勾選');
@@ -367,12 +398,25 @@ require __DIR__. '/__connect_db.php';
         if(isPass){
             $.post('register_api.php', $(document.form2).serialize(), function (data){
                 if(data.success){
-                    $('#info-bar2').show();
+                    //註冊成功
+                    //得到優惠卷
+                    $('.alert.a_registration').fadeIn();
+                    setTimeout(function(){
+                        $('.alert.a_registration').fadeOut();
+                    }, 1600);
+                    setTimeout(function(){
+                        location.href ='member_information_card_noflipnew.php';
+                    }, 2400);
+
+                    // $('#info-bar2').show();
                     // setTimeout(function(){ //要導到商品列表或首頁
                     //     $('#info-bar2').hide();
                     // }, 1000);
                 } else {
-                    $('#info-bar3').show().text(data.error);
+                    $('.alert.a_registrationErr').fadeIn();
+                    setTimeout(function(){
+                        $('.alert.a_registrationErr').fadeOut();
+                    }, 800);
                 }
             }, 'json');
         //會造成非同步狀態    
