@@ -104,7 +104,7 @@
                 <li class="position-relative">
                     <?php if(isset($_SESSION['loginUser'])): ?>
                     <?php if(empty($_SESSION['selffie'])): ?>
-                    <a href="member_information.php">
+                    <a href="member_information_card_noflipnew.php">
                         <img class="a_log_in" src="./icon/log_in.png">
                     </a>
                     <?php else: ?>
