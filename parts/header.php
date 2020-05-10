@@ -46,7 +46,7 @@
 </div>
 
 <div class="a_alert a_registrationErr">
-    <i class="fas fa-exclamation fa-lg""></i>
+    <i class="fas fa-exclamation fa-lg"></i>
     <h6><span>請</span>檢查輸入資料有無錯誤</h6>
 </div>
 
