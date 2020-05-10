@@ -96,12 +96,20 @@ foreach($rows2 as $r2){
     .j_desk_noshow{display:none}
     .j_ordernum_title{color: #CA054D }
     .j_productpic{width:135px; height:120px }
+    .j_line{
+        border-top:1.5px #CCC solid;
+        height:10px;
+        padding:10px;
+    }
 
     @media screen and (max-width: 700px){
         .j_ordernum_title{font-size:16px}
         .j_productpic{width:90px; height:100px }
         .j_desk_noshow{display:block}
+        .j_mobile_noshow{display:none;}
     }
+
+  
 
 
 </style>
@@ -124,12 +132,12 @@ foreach($rows2 as $r2){
 
 
     <div class="member_top_title">
-        <div class="d-flex align-items-center justify-content-center j_padt_100 ">
+        <div class="d-flex align-items-center justify-content-center j_padt_50">
             <p class="j_eng_title">My Order</p>
             <p class="j_chinese_title ">我的訂單</p>
         </div>
         <P class="j_dashline"></P>
-        <p class="d-flex justify-content-center j_eng_title2 j_padb_100">Those are what I adore </p>
+        <p class="d-flex justify-content-center j_eng_title2 j_padb_50">Those are what I adore </p>
     </div>
 
     <div class="d-flex justify-content-center j_padb_200">
@@ -180,13 +188,13 @@ foreach($rows2 as $r2){
                 </tbody>
             </table>
 
-
+            <div class="j_padb_50"></div>
             <!-- 訂單細節 桌機 -->
             <?php if($rows2!=[]){ ?>
                 <div class="j_mobile_noshow">
 
                     <p class="j_ordernum_title">訂單編號:<?= $_GET['order_num'] ?></p>
-                    <table class="table" id="">
+                    <table class="table " id="">
 
                         <thead>
                         <tr>
@@ -204,7 +212,7 @@ foreach($rows2 as $r2){
                             <tbody>
                             <tr>
                                 <td>
-                                    <img src="./product_images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
+                                    <img src="./images-2020/images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
                                 </td>
                                 <td><?= $r2['name'] ?></td>
                                 <td><?=  $r2['color'] ?></td>
@@ -217,7 +225,9 @@ foreach($rows2 as $r2){
                         <?php endforeach;?>
 
                     </table>
+                    <div class="j_line">
                     <p class="d-flex justify-content-end" style="font-weight:bold;">合計 NT:<?=  $r2['amount'] ?></p>
+                    </div>
                 </div>
             <?php } ?>
 
@@ -240,7 +250,7 @@ foreach($rows2 as $r2){
                         <tbody>
                         <tr>
                             <td>
-                                <img src="./product_images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
+                                <img src="./images-2020/images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
                             </td>
 
                             <td>
@@ -263,7 +273,9 @@ foreach($rows2 as $r2){
                     <?php endforeach;?>
 
                 </table>
-                <p class="d-flex justify-content-end" style="font-weight:bold;">合計 NT:<?=  $r2['amount'] ?></p>
+                <div class="j_line  ">
+                <p class="d-flex justify-content-end " style="font-weight:bold;">合計 NT:<?=  $r2['amount'] ?></p>
+                </div>
             </div>
             <?php } ?>
 

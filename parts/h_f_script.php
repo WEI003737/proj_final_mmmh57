@@ -9,7 +9,7 @@
 <script>
 
 //行為提示
-//     $(".alert").hide();
+    $(".alert").hide();
 
 <!-- 提示 (css 在 h_f_script.php 裡) -->
 // <div class="alert">

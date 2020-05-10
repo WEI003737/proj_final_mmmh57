@@ -62,6 +62,7 @@ if(isset($_POST['register_email']) and isset($_POST['register_name']) and isset(
        // ===== 註冊成功 送出優惠卷=====
 
         $output['success'] = true;
+        $output['error'] = '';
     }else {
         $output['error'] = '資料無法新增';
     };

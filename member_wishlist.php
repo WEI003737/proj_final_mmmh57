@@ -1,5 +1,6 @@
 <?php
 require __DIR__. '/__connect_db.php';
+
 ?>
 
     <!DOCTYPE html>
@@ -90,34 +91,60 @@ require __DIR__. '/__connect_db.php';
             <!-- 主文 -->
             <div class="j_wishlist_area col-lg-10 d-flex justify-content-cneter flex-wrap">
 
-<!---->
-<!--                <div class="wea_recommend_area_hidden position-relative">-->
-<!--                    <ul class="wea_recommend_area d-flex justify-content-between">-->
-<!--                        --><?php //$i=0; foreach($weaRecommend as $R) : ?>
-<!--                            <li class="wea_recommend_item position-relative desktop">-->
-<!--                                --><?php //$recommendMainImg = json_decode($weaRecommendColor[$i][0]["pro_pic"]);?>
-<!--                                <a href="./product.php?sid=--><?//= $R["sid"] ?><!--">-->
-<!--                                    <img src="product_images/--><?//=$recommendMainImg[0]?><!--.png" alt="">-->
-<!--                                </a>-->
-<!--                                $colorSecondaryImg = json_decode($prodColors[0]['pro_pic']); -->
-<!--                                --><?php //if(isset($_SESSION["loginUser"])): ?>
-<!--                                    <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="--><?//=$R['sid']?><!--"></i>-->
-<!--                                    <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-sid="--><?//=$R['sid']?><!--"></i>-->
-<!--                                --><?php //endif; ?>
-<!--                                <p>--><?//=$R["name"]?><!--</p>-->
-<!--                                <div class="d-flex justify-content-between">-->
-<!--                                    <p class="wea_recommend_item_price">NT$ --><?//=$R["price"]?><!--</p>-->
-<!--                                    --><?php //foreach($weaRecommendColor[$i] as $RC) :
-//                                        $hoverImg = json_decode($RC["pro_pic"]);?>
-<!--                                        <div data-hoverimg='product_images/--><?//= $hoverImg[0]?><!--.png' class="wea_recommend_item_color --><?//= $RC['color']?><!--"></div>-->
-<!--                                    --><?php //endforeach;?>
-<!--                                </div>-->
-<!--                            </li>-->
-<!--                            --><?php //$i++; endforeach;?>
-<!--                        -->
-<!--                    </ul>-->
-<!--                </div>-->
 
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Just perfect 運動內衣</p>
+                    <div class="d-flex">
+                        <p class="flex_grow_2">NT$2,280</p>
+                        <div>黑</div>
+                        <div>白</div>
+                        <div>紅</div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Disco 運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Erin 細肩帶運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Veronica V領美背運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Just perfect 運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Just perfect 運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Just perfect 運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
+
+
+                <div>
+                    <div class="j_whish_box"></div>
+                    <p>Just perfect 運動內衣</p>
+                    <p>NT$2,280</p>
+                </div>
 
 
                 <button class="j_buy_btn" type="submit" formmethod="post" formaction="">繼續購物</button>
