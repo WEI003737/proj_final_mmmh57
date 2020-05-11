@@ -1427,12 +1427,12 @@ foreach($weaRecommend as $R){
                   }, 800);
               }
           }, 'json')
-              .done(function(){
-                  console.log("success")
-              })
-              .fail(function(er){
-                  console.log(er);
-              })
+              // .done(function(){
+              //     console.log("success")
+              // })
+              // .fail(function(er){
+              //     console.log(er);
+              // })
       });
 
       //移除最愛-----------------------------
