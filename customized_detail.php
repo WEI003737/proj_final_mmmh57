@@ -335,7 +335,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             unitRad = 2 * Math.PI / ballNum
             $("#colorPanel").css("opacity", "0");
             for (let i = 0; i < ballNum; i++) {
-                console.log(i)
+                // console.log(i)
                 $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
                 $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
             }
@@ -367,7 +367,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     top: yPos - nac_pigment_move
                 })
                 for (let i = 0; i < ballNum; i++) {
-                    console.log(i)
+                    // console.log(i)
                     $('li.color_panel_pigment').eq(i).css("left", nac_pigment_spacing + nac_pigment_spacing * Math.cos(i * unitRad) + 'px')
                     $('li.color_panel_pigment').eq(i).css("top", nac_pigment_spacing + nac_pigment_spacing * Math.sin(i * unitRad) + 'px')
                 }
@@ -377,7 +377,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     top: yPos - 95
                 })
                 for (let i = 0; i < ballNum; i++) {
-                    console.log(i)
+                    // console.log(i)
                     $('li.color_panel_pigment').eq(i).css("left", 75 + 75 * Math.cos(i * unitRad) + 'px')
                     $('li.color_panel_pigment').eq(i).css("top", 75 + 75 * Math.sin(i * unitRad) + 'px')
                 }
