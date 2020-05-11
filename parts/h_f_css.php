@@ -29,6 +29,9 @@
             src: local('Lucida Sans Demibold Roman'), url('/font/LSANSDI.TTF') format('woff');
         }
 /* --------------字體大小-------------- */
+        h1,h2,h3,h4,h5,h6,p{
+            -webkit-user-select: none;
+        }
         h1{
             font-size: 90px;
         }
@@ -427,57 +430,69 @@
             display: none;
         }
         @media all and (max-width: 768px) {
-            .a_wrapper{
+            .a_wrapper {
                 max-width: 708px;
             }
-            .footer{
+
+            .footer {
                 height: 700px;
                 padding-top: 20px;
                 background: #CA054D;
                 color: #fff;
                 font-size: 15px;
             }
-            .footer div:first-child{
+
+            .footer div:first-child {
                 display: block;
             }
-            .footer .a_title{
+
+            .footer .a_title {
                 /* 蓋過 footer 裡的 font-size */
                 font-size: 20px;
                 padding: 15px 0;
             }
-            .footer .a_block_1{
+
+            .footer .a_block_1 {
                 display: flex;
             }
 
             .footer .a_block_1_1 li,
-            .footer .a_block_1_2 li{
+            .footer .a_block_1_2 li {
                 padding-bottom: 10px;
             }
-            .footer .a_block_1_2 img{
+
+            .footer .a_block_1_2 img {
                 margin-right: 5px;
             }
-            .footer .a_block_2{
+
+            .footer .a_block_2 {
                 display: block;
             }
-            .footer .a_block_2 div:first-child img{
+
+            .footer .a_block_2 div:first-child img {
                 margin-right: 20px;
                 height: 20px;
             }
-            .footer .a_block_2 img{
+
+            .footer .a_block_2 img {
                 margin-right: 0;
             }
-            .footer .a_block_1_3{
+
+            .footer .a_block_1_3 {
                 display: none;
             }
-            .footer hr{
+
+            .footer hr {
                 width: 100%;
-                margin: 25px 15px 20px ;
+                margin: 25px 15px 20px;
             }
-            .footer .a_rwd_map{
+
+            .footer .a_rwd_map {
                 width: 100%;
                 display: block;
                 margin: 10px 0;
             }
+        }
         @media all and (max-width: 360px) {
             .a_wrapper{
                 width: 300px;

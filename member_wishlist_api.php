@@ -1,12 +1,11 @@
 <?php
 require __DIR__ . '/__connect_db.php';
 
-$page_name = 'member_wishlist';
 $wishListProSid = [];
 
-if(isset($_SESSION["loginUser"])){
-    $userSid = "1";
-    $wishListSql = "SELECT * FROM `like_box` WHERE `mem_sid` = 1";
+if(isset($_SESSION["sid"])){
+    $userSid = $_SESSION["sid"];
+    $wishListSql = "SELECT * FROM `like_box` WHERE `mem_sid` = $userSid";
     $wishRows = $pdo -> query($wishListSql) -> fetchAll();
 
     $i=0;
@@ -14,9 +13,9 @@ if(isset($_SESSION["loginUser"])){
         $wishListProSid[$i] = $w["pro_sid"];
         $i++;
     };
-
-    $wishProSql = sprintf("SELECT * FROM `products` WHERE `sid` IN(%s)", implode(',', $wishListProSid));
-    $wishProRows = $pdo -> query($wishProSql) -> fetchAll();
+//
+//    $wishProSql = sprintf("SELECT * FROM `products` WHERE `sid` IN(%s)", implode(',', $wishListProSid));
+//    $wishProRows = $pdo -> query($wishProSql) -> fetchAll();
 //
 //    $j=0;
 //    foreach($wishProRows as $p){
