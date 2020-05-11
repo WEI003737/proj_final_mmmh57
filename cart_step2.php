@@ -390,7 +390,6 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                 <select class="form-control a_coupon" name="coupon">
                                     <option selected>請選擇優惠券</option>
                                     <option value="新會員折扣">新會員折扣</option>
-                                    <option value="母親節優惠">母親節優惠</option>
                                 </select>
                         </div>
                         <div class="form-group">

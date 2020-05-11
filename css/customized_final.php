@@ -858,7 +858,9 @@ h6.customized_item_money {
     padding: 10px;
     border-radius: 10px;
     z-index: 11;
-    display: none;
+    /*display: none;*/
+    opacity: 0;
+    transition: .5s;
 }
 
 /* svg path:hover {

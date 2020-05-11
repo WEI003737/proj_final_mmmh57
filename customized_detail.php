@@ -49,7 +49,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
     <link rel="stylesheet" href="./fontawesome-free-5.13.0-web/css/all.min.css">
-<!--    <link rel="stylesheet" href="./css/customized_final.css">-->
+    <!--    <link rel="stylesheet" href="./css/customized_final.css">-->
     <?php include __DIR__ . '/css/customized_final.php' ?>
 
 
@@ -257,7 +257,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         let picture_outbox_size = $(".customized_detail_picture_outbox").width()
         let nac_pigment_spacing = picture_outbox_size / 7
         let nac_pigment_move = picture_outbox_size / 5.3
-        let nac_pigment_size = picture_outbox_size /11
+        let nac_pigment_size = picture_outbox_size / 11
         console.log(picture_outbox_size)
 
         if (nac_windw_width > 768) {
@@ -270,8 +270,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 b.style.background = colors[i]
                 b.style.width = nac_pigment_size + "px"
                 b.style.height = nac_pigment_size + "px"
-                b.style.left = nac_pigment_spacing + nac_pigment_spacing * Math.cos(i * unitRad) + 'px'
-                b.style.top = nac_pigment_spacing + nac_pigment_spacing * Math.sin(i * unitRad) + 'px'
+                b.style.left = nac_pigment_spacing + 'px'
+                b.style.top = nac_pigment_spacing + 'px'
                 $(nac_colorPanel).append(b)
             }
         } else {
@@ -284,8 +284,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 b.style.background = colors[i]
                 b.style.width = 45 + "px"
                 b.style.height = 45 + "px"
-                b.style.left = 75 + 75 * Math.cos(i * unitRad) + 'px'
-                b.style.top = 75 + 75 * Math.sin(i * unitRad) + 'px'
+                b.style.left = 75 /*+ 75 * Math.cos(i * unitRad)*/ + 'px'
+                b.style.top = 75 /*+ 75 * Math.sin(i * unitRad)*/ + 'px'
                 $(nac_colorPanel).append(b)
             }
         }
@@ -318,7 +318,10 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
             $(this).addClass("active").siblings().removeClass("active") //點到哪個提示
-            $("#colorPanel").hide();
+            $("#colorPanel").css("opacity", "0");
+            setTimeout(function() {
+                $("#colorPanel").hide();
+            }, 500);
             // console.log(clothes_area)
             // console.log($("#Clothes_area1").css("fill"))
             // console.log($("#Clothes_area2").css("fill"))
@@ -327,7 +330,18 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
         // 即時色盤消失
         $("body").click(function() {
-            $("#colorPanel").hide();
+            let b, i, unitRad, ballNum
+            ballNum = colors.length
+            unitRad = 2 * Math.PI / ballNum
+            $("#colorPanel").css("opacity", "0");
+            for (let i = 0; i < ballNum; i++) {
+                console.log(i)
+                $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
+                $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
+            }
+            setTimeout(function() {
+                $("#colorPanel").hide();
+            }, 500);
         });
 
         // 即時色盤
@@ -339,17 +353,34 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             pickId = $(this).attr("id")
             pickClothes = $("#" + pickId)
             $("#colorPanel").show();
+            $("#colorPanel").css("opacity", "1");
+
+
+
+            let b, i, unitRad, ballNum
+            ballNum = colors.length
+            unitRad = 2 * Math.PI / ballNum
 
             if (nac_windw_width > 768) {
                 $("#colorPanel").css({
                     left: xPos - nac_pigment_move,
                     top: yPos - nac_pigment_move
                 })
+                for (let i = 0; i < ballNum; i++) {
+                    console.log(i)
+                    $('li.color_panel_pigment').eq(i).css("left", nac_pigment_spacing + nac_pigment_spacing * Math.cos(i * unitRad) + 'px')
+                    $('li.color_panel_pigment').eq(i).css("top", nac_pigment_spacing + nac_pigment_spacing * Math.sin(i * unitRad) + 'px')
+                }
             } else {
                 $("#colorPanel").css({
                     left: xPos - 95,
                     top: yPos - 95
                 })
+                for (let i = 0; i < ballNum; i++) {
+                    console.log(i)
+                    $('li.color_panel_pigment').eq(i).css("left", 75 + 75 * Math.cos(i * unitRad) + 'px')
+                    $('li.color_panel_pigment').eq(i).css("top", 75 + 75 * Math.sin(i * unitRad) + 'px')
+                }
             }
 
         });
@@ -361,7 +392,10 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             let color = $(this).css("background-color");
             let colorIndex = $(this).index();
             pickClothes.css("fill", color)
-            $("#colorPanel").hide();
+            $("#colorPanel").css("opacity", "0");
+            setTimeout(function() {
+                $("#colorPanel").hide();
+            }, 500);
 
             if (pickId == $("ul.nac_chose_color_area").eq(0).attr("data-clothes_area")) {
                 $("ul.nac_chose_color_area:eq(0) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
@@ -371,7 +405,18 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             } else if (pickId == $("ul.nac_chose_color_area").eq(2).attr("data-clothes_area")) {
                 $("ul.nac_chose_color_area:eq(2) li").eq(colorIndex).addClass("active").siblings().removeClass("active")
             }
-
+            let b, i, unitRad, ballNum
+            ballNum = colors.length
+            unitRad = 2 * Math.PI / ballNum
+            $("#colorPanel").css("opacity", "0");
+            for (let i = 0; i < ballNum; i++) {
+                console.log(i)
+                $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
+                $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
+            }
+            setTimeout(function() {
+                $("#colorPanel").hide();
+            }, 500);
             //console.log(clothes_area)
             console.log($("#Clothes_area1").css("fill"))
             console.log($("#Clothes_area2").css("fill"))
@@ -390,6 +435,25 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
 
         /* 數量加減 */
+
+        if (document.getElementById("pieces_count").innerHTML > 1) {
+            $(".nac_plus").css("background-color", "rgb(202, 5, 77)")
+            $(".nac_plus").removeAttr('disabled')
+        } else {
+            $(".nac_plus").css("background-color", "#d8d8d8")
+            $(".nac_plus").attr('disabled', 'true')
+        }
+
+        $(".nac_chose_pieces_btn").click(function() {
+            if (document.getElementById("pieces_count").innerHTML > 1) {
+                $(".nac_plus").css("background-color", "rgb(202, 5, 77)")
+                $(".nac_plus").removeAttr('disabled')
+            } else {
+                $(".nac_plus").css("background-color", "#d8d8d8")
+                $(".nac_plus").attr('disabled', 'true')
+            }
+        })
+
         function insc() {
             var count = document.getElementById("pieces_count").innerHTML;
             document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
@@ -409,9 +473,8 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     </script>
 
     <script>
-
         //加入購物車
-        function addToCart(){
+        function addToCart() {
             event.preventDefault();
             //取得商品sid 數量 尺寸
             let cus_sid = $(".customized_detail_desi").attr("data-sid");
@@ -440,19 +503,21 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             console.log(cus_data)
 
 
-            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
-               if(data) {
-                   countCartObj(data)
-                   // alert("已加入購物車")
-                   $('.a_alert.a_addToCart').fadeIn();
-                    setTimeout(function(){
+            $.get("add_to_cart_api.php", {
+                cus_data: cus_data
+            }, function(data) {
+                if (data) {
+                    countCartObj(data)
+                    // alert("已加入購物車")
+                    $('.a_alert.a_addToCart').fadeIn();
+                    setTimeout(function() {
                         $('.a_alert.a_addToCart').fadeOut();
                     }, 800);
-               }
-            },"json");
+                }
+            }, "json");
         }
 
-        function goToCart(){
+        function goToCart() {
             //取得商品sid 數量 尺寸
             let cus_sid = $(".customized_detail_desi").attr("data-sid");
             let cus_qty = $(".nac_chose_pieces_count").text();
@@ -481,16 +546,16 @@ if ($sid < 1 || $sid > $rows_itemcount) {
 
             // 傳送資料給後端
             // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
-            $.get("add_to_cart_api.php", {cus_data:cus_data}, function(data){
+            $.get("add_to_cart_api.php", {
+                cus_data: cus_data
+            }, function(data) {
                 console.log(data);
-                if(data.success){
+                if (data.success) {
                     countCartObj(data)
                     location.href = "cart_step1.php";
                 }
-            },"json");
+            }, "json");
         }
-
-
     </script>
 </body>
 
