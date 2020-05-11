@@ -807,7 +807,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                 // return false;
                 $.post('cart_step2_api.php', $(document.form1).serialize(), function(data){
 
-                    if(data.addCartSuccess && data.addCusSuccess){
+                    if(data.addCartSuccess || data.addCusSuccess){
                         $('.a_alert.a_sandOrder').fadeIn();
                         setTimeout(function(){
                             $('.a_alert.a_sandOrder').fadeOut();
@@ -818,9 +818,9 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                         }, 1000);
 
                     } else {
-                        $('.a_alert.a_sandOrder').fadeIn();
+                        $('.a_alert.a_sandOrderErr').fadeIn();
                         setTimeout(function(){
-                            $('.a_alert.a_sandOrder').fadeOut();
+                            $('.a_alert.a_sandOrderErr').fadeOut();
                         }, 800);
                     }
                 }, 'JSON')
@@ -865,7 +865,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
             var whichCoupon = $(this).val();
             // console.log(whichCoupon)
             if(whichCoupon == "新會員折扣"){
-                $(".a_couponDiscount").text("60")
+                $(".a_couponDiscount").text("100")
                 a_couponDiscount = $(".a_couponDiscount").text();
             }else if(whichCoupon == "母親節優惠"){
                 $(".a_couponDiscount").text("100")

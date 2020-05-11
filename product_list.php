@@ -1143,28 +1143,23 @@ if(! isset($_SESSION)){
           })
 
           //有登入就顯示已加入收藏的商品----------------------------- (還沒寫完)
-          function showWishList() {
-              $.get("member_wishlist_api.php", function (data) {
-
-                  wishListProSid = data.wishListProSid;
-                  console.log(wishListProSid)
-
-                  // for(i=0 ; i<wishListProSid.length ; i++ ) {
-                  //     if ($(".a_add_to_like_active").attr("data-sid") == wishListProSid[i]) {
-                  //         $(event.target).removeClass("display_none");
-                  //     }
-                  // }
-
-                  i=0;
-                  for (let val of wishListProSid) {
-                     $('.a_add_to_like_active [data-sid="' + val + '"]').removeClass("display_none");
-                     i++;
-                  }
-                  }, "json")
-          }
+          // function showWishList() {
+          //     $.get("member_wishlist_api.php", function (data) {
+          //
+          //         wishListProSid = data.wishListProSid;
+          //         console.log(wishListProSid)
+          //
+          //         i=0;
+          //         for (let val of wishListProSid) {
+          //
+          //            $('.a_add_to_like_active [data-sid="' + val + '"]').removeClass("display_none");
+          //            i++;
+          //         }
+          //     }, "json")
+          // }
 
 
-          showWishList();
+          // showWishList();
       </script>
   </body>
 </html>

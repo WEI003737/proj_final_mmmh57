@@ -81,7 +81,7 @@ $weaRecommendColor = [];
 foreach($weaRecommend as $R){
     $weaRecommendColor[] = $pdo -> query("SELECT * FROM `color` WHERE pro_sid=". $R["sid"]) ->fetchAll();
 }
-// echo json_encode( $weaRecommendColor[0], JSON_UNESCAPED_UNICODE);
+// echo json_encode( $weaRecommendColor, JSON_UNESCAPED_UNICODE);
 
 ?>
 
@@ -1365,7 +1365,7 @@ foreach($weaRecommend as $R){
           cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
           //抓取數量
           cart_qty = $("#countnum").text();
-          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+          // console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
 
           // 傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
           // 讓所有頁面一進來就能讀到購物車內的商品數
@@ -1386,7 +1386,7 @@ foreach($weaRecommend as $R){
           cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
           //抓取數量
           cart_qty = $("#countnum").text();
-          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+          // console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
 
           // 傳送資料給後端
           // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)

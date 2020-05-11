@@ -3,9 +3,9 @@ require __DIR__. '/__connect_db.php';
 
 
 $coupon_used=[];
-$sql_coupon_used = "SELECT * FROM `coupon` WHERE `mem_sid`=".  $_SESSION['sid'];
+$sql_coupon_used = "SELECT * FROM `coupon` WHERE `mem_sid`= ". $_SESSION['sid']." AND `name`='會員註冊禮卷'";
 $stmt_coupon_used = $pdo -> query($sql_coupon_used);
-$coupon_used = $stmt_coupon_used -> fetch();  
+$coupon_used = $stmt_coupon_used -> fetch();
 ?>
 
 <!DOCTYPE html>
