@@ -485,7 +485,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                     <div class="form-check t_text_right">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                         <label class="form-check-label" for="defaultCheck1">
-                            我同意服務條款與退換貨政策
+                            我同意<a href="member_rules.php">服務條款與退換貨政策</a>
                         </label>
                     </div>
                     <div class="form-check t_text_right">

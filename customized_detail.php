@@ -410,7 +410,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             unitRad = 2 * Math.PI / ballNum
             $("#colorPanel").css("opacity", "0");
             for (let i = 0; i < ballNum; i++) {
-                console.log(i)
+                // console.log(i)
                 $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
                 $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
             }
@@ -418,9 +418,9 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 $("#colorPanel").hide();
             }, 500);
             //console.log(clothes_area)
-            console.log($("#Clothes_area1").css("fill"))
-            console.log($("#Clothes_area2").css("fill"))
-            console.log($("#Clothes_area3").css("fill"))
+            // console.log($("#Clothes_area1").css("fill"))
+            // console.log($("#Clothes_area2").css("fill"))
+            // console.log($("#Clothes_area3").css("fill"))
         })
 
 
@@ -429,7 +429,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $(this).addClass("active")
             $(this).parents().siblings().find(".nac_size_btn").removeClass("active")
             sizeChose = $(this).attr("date-sizeChose")
-            console.log(sizeChose)
+            // console.log(sizeChose)
         })
 
 
@@ -458,7 +458,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             var count = document.getElementById("pieces_count").innerHTML;
             document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
             nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
-            console.log(nac_chose_pieces)
+            // console.log(nac_chose_pieces)
         }
 
         function dec() {
@@ -468,7 +468,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
             };
 
-            console.log(nac_chose_pieces)
+            // console.log(nac_chose_pieces)
         }
     </script>
 
@@ -549,7 +549,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $.get("add_to_cart_api.php", {
                 cus_data: cus_data
             }, function(data) {
-                console.log(data);
+                // console.log(data);
                 if (data.success) {
                     countCartObj(data)
                     location.href = "cart_step1.php";

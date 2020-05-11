@@ -24,7 +24,6 @@ $size_sql = sprintf("SELECT * FROm `size` WHERE color_sid IN (%s)", implode(',',
 $prodSizes = $pdo -> query($size_sql)
             ->fetchAll();
 
-
 //
 ////設定size stock給按鈕用陣列
 //$a_colorWithSizeForCart = $prodColors;
@@ -1200,8 +1199,8 @@ foreach($weaRecommend as $R){
                 selectSizeSid= $(this).find("div").data('sizenum');
                 // parseInt(selectSizeSid);
                 // console.log(selectSizeSid);
-                stockNum = $(this).find("div").data('sizenum');
-                console.log(stockNum);
+                stockNum = $(this).find("div").data('stock');
+                // console.log(stockNum);
                 $(this).find("div").addClass("active");
                 $(this).siblings().find("div").removeClass("active");
                 selectCountNum = 1;

@@ -423,6 +423,9 @@ hr.t_separation_line_gr_long {
 .t_terms_check{
     margin: 10px 0;
 }
+.t_terms_check a{
+    color: #C9044D;
+}
 
 .t_cart2_backcart_btn,
 .t_cart2_sendorder_btn,

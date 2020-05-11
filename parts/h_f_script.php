@@ -69,13 +69,13 @@
 </script>
 <script>
 // logo 動態 ----------------------
-    const tl = gsap.timeline({
-        defaults: { duration: 0.4, ease: "power2.inOut" }
-    });
-    tl.from(".a_logo_top", { x: -75, opacity:0  });
-    tl.from(".a_logo_top", { rotation: 10 });
-    tl.from(".a_logo_bottom", { x: -75, opacity:0 });
-    tl.from(".header_nav_left>li, .header_nav_right>li", { x: -20, opacity:0 });
+//     const tl = gsap.timeline({
+//         defaults: { duration: 0.4, ease: "power2.inOut" }
+//     });
+//     tl.from(".a_logo_top", { x: -75, opacity:0  });
+//     tl.from(".a_logo_top", { rotation: 10 });
+//     tl.from(".a_logo_bottom", { x: -75, opacity:0 });
+//     tl.from(".header_nav_left>li, .header_nav_right>li", { x: -20, opacity:0 });
 
 // rwd手機板:menu(漢堡) 下拉選單 & 動態 ----------------------
     $(".header .a_menu").on("click", function(){
