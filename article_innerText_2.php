@@ -38,26 +38,26 @@ $page_name = 'article_innerText_2';
         <div class="cin_article_innertext_wrap">
             <div class="d-flex">
                 <a href="../大專＿健康小教室＿文章列表/article_category-healthyfood.html">
-                    <h6>健康飲食&nbsp&nbsp></h6>
+                    <h6 class="cin_h6">健康飲食&nbsp&nbsp></h6>
                 </a>
                 <a href="">
-                    <h6>女性健身者專用 健康飲食法</h6>
+                    <h6 class="cin_h6">女性健身者專用 健康飲食法</h6>
                 </a>
             </div>
             <div class="cin_article_titleDash">
                 <h5>健康食物</h5>
             </div>
             <div class="show_desktop cin_article_innertext_title d-flex space-between align-end">
-                <h2>女性健身者專用 健康飲食法</h2>
+                <h2 class="cin_h2">女性健身者專用 健康飲食法</h2>
                 <div class="d-flex">
-                    <h6>2020/04/28</h6>&nbsp &nbsp &nbsp &nbsp<h6>Sharon - Mellow</h6>
+                    <h6 class="cin_h6">2020/04/28</h6>&nbsp &nbsp &nbsp &nbsp<h6 class="cin_h6">Sharon - Mellow</h6>
                 </div>
             </div>
             <!----------------  手機  ---------------->
             <div class="show_mobile cin_article_innertext_title">
-                <h2>女性健身者專用 健康飲食法</h2>
+                <h2 class="cin_h2">女性健身者專用 健康飲食法</h2>
                 <div class="d-flex">
-                    <h6>2020/04/28</h6>&nbsp &nbsp &nbsp<h6>Sharon - Mellow</h6>
+                    <h6 class="cin_h6">2020/04/28</h6>&nbsp &nbsp &nbsp<h6 class="cin_h6">Sharon - Mellow</h6>
                 </div>
             </div>
             <!-------------------------------->
@@ -72,13 +72,13 @@ $page_name = 'article_innerText_2';
                 <img src="./img/article_innerText_2b.jpeg" alt="">
             </div>
 
-            <h4>何謂Meal Prep？</h4>
+            <h4 class="cin_h4">何謂Meal Prep？</h4>
             <p>Meal Prep可以在週末悠閒地把下週3-5天的份量都先準備好，放置冰箱保存，需要食用時只需要加熱一下，讓你每天下班後可以不用煩惱進廚房這件事情。
                 節省時間、方便、又健康，你可以自行調配每項營養素，搭配蛋白質、碳水化合物、維生素的攝取，提早計算好熱量，不只有助於減重的目標達成，也能免於外食油膩營養不均危害到身體的健康。</p>
             <div class="cin_zoomImage">
                 <img src="./img/article_innerText_2c.png" alt="">
             </div>
-            <h4>Meal Prep的5個保鮮要點</h4>
+            <h4 class="cin_h4">Meal Prep的5個保鮮要點</h4>
             <p>不過很多人都有一個迷思，就是隔夜菜不好，這樣一次做一週的份量食物還會新鮮嗎?以下幾點需要特別留意：</p>
             <p>● 做好的食物分裝在保鮮盒中時不要翻動。</p>
             <p>● 做好的食物即時冷藏或是冷凍，只要在食物不燙手的溫度就可以了，3天以下放冷藏，3天以上放冷凍。</p>
@@ -117,7 +117,7 @@ $page_name = 'article_innerText_2';
         <hr>
         <!----------------  相關閱讀  ---------------->
         <div class="cin_morearticle-wrap text-center">
-            <h2>關聯閱讀</h2>
+            <h2 class="cin_h2">關聯閱讀</h2>
             <div class="show_desktop cin_morearticle d-flex ">
                 <figure><a href="">
                     <div class="cin_morearticle_img">

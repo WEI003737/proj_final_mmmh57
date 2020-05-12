@@ -53,7 +53,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     <?php include __DIR__ . '/css/customized_final.php' ?>
 
 
-
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         /* * {
             outline: #FA8000 solid 1px;
@@ -134,7 +134,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     </li>
                 </ul>
                 <!-- 尺寸參考表 -->
-                <a class="nac_sizechart">
+                <a class="nac_sizechart wea_sizelist" href="#open">
                     <h6 class="nac nac_sizechart"><i class="fas fa-question-circle"></i> 尺寸表參考</h6>
                 </a>
             </div>
@@ -191,6 +191,13 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 <?php endforeach; ?>
             </ul>
         </div>
+        <div class="wea_imgbox_base fixed-bottom">
+            <a href="#close">
+                <div class="wea_imgbox_background position-relative">
+                    <img class="position-absolute" src="img/size.png" alt="">
+                </div>
+            </a>
+        </div>
     </section>
 
 
@@ -198,8 +205,10 @@ if ($sid < 1 || $sid > $rows_itemcount) {
     ?>
     <script defer src="./fontawesome-free-5.13.0-web/js/all.js"></script>
     <?php include __DIR__ . './parts/h_f_script.php' ?>
-
-
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
     <script>
         var sizeChose = "M";
         var nac_chose_pieces = "1";
@@ -335,7 +344,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             unitRad = 2 * Math.PI / ballNum
             $("#colorPanel").css("opacity", "0");
             for (let i = 0; i < ballNum; i++) {
-                // console.log(i)
+                console.log(i)
                 $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
                 $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
             }
@@ -367,7 +376,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     top: yPos - nac_pigment_move
                 })
                 for (let i = 0; i < ballNum; i++) {
-                    // console.log(i)
+                    console.log(i)
                     $('li.color_panel_pigment').eq(i).css("left", nac_pigment_spacing + nac_pigment_spacing * Math.cos(i * unitRad) + 'px')
                     $('li.color_panel_pigment').eq(i).css("top", nac_pigment_spacing + nac_pigment_spacing * Math.sin(i * unitRad) + 'px')
                 }
@@ -377,7 +386,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     top: yPos - 95
                 })
                 for (let i = 0; i < ballNum; i++) {
-                    // console.log(i)
+                    console.log(i)
                     $('li.color_panel_pigment').eq(i).css("left", 75 + 75 * Math.cos(i * unitRad) + 'px')
                     $('li.color_panel_pigment').eq(i).css("top", 75 + 75 * Math.sin(i * unitRad) + 'px')
                 }
@@ -410,7 +419,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             unitRad = 2 * Math.PI / ballNum
             $("#colorPanel").css("opacity", "0");
             for (let i = 0; i < ballNum; i++) {
-                // console.log(i)
+                console.log(i)
                 $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
                 $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
             }
@@ -418,9 +427,9 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 $("#colorPanel").hide();
             }, 500);
             //console.log(clothes_area)
-            // console.log($("#Clothes_area1").css("fill"))
-            // console.log($("#Clothes_area2").css("fill"))
-            // console.log($("#Clothes_area3").css("fill"))
+            console.log($("#Clothes_area1").css("fill"))
+            console.log($("#Clothes_area2").css("fill"))
+            console.log($("#Clothes_area3").css("fill"))
         })
 
 
@@ -429,7 +438,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $(this).addClass("active")
             $(this).parents().siblings().find(".nac_size_btn").removeClass("active")
             sizeChose = $(this).attr("date-sizeChose")
-            // console.log(sizeChose)
+            console.log(sizeChose)
         })
 
 
@@ -458,7 +467,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             var count = document.getElementById("pieces_count").innerHTML;
             document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
             nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
-            // console.log(nac_chose_pieces)
+            console.log(nac_chose_pieces)
         }
 
         function dec() {
@@ -468,7 +477,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
             };
 
-            // console.log(nac_chose_pieces)
+            console.log(nac_chose_pieces)
         }
     </script>
 
@@ -549,13 +558,20 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $.get("add_to_cart_api.php", {
                 cus_data: cus_data
             }, function(data) {
-                // console.log(data);
+                console.log(data);
                 if (data.success) {
                     countCartObj(data)
                     location.href = "cart_step1.php";
                 }
             }, "json");
         }
+
+        $(".wea_sizelist").click(function(){
+        $(".wea_imgbox_base").css("display","inline-block");
+      })
+    $(".wea_imgbox_base a").click(function(){
+        $(".wea_imgbox_base").css("display","none");
+    })
     </script>
 </body>
 

@@ -20,12 +20,17 @@
 .align-end{
     align-items: flex-end;
 }
-h4{
+.cin_h4{
     color: #ca054d;
     margin: 15px 0;
+    font-size:26px;
 }
-h2{
+.cin_h2{
     color: #ca054d;
+    font-size:35px;
+}
+.cin_h6{
+    font-size:15px;
 }
 p{
     margin-bottom: 15px;
@@ -58,10 +63,20 @@ a:hover{
 .cin_article_innertext_wrap a{
     margin: 0 5px 0 0;
 }
+@media screen and (max-width: 360px){
+    .cin_article_innertext_wrap a{
+    margin: 0;
+}
+}
 .cin_article_titleDash{
     padding-left: 5px;
     border-left: #ca054d 3px solid;
     margin: 20px 0 10px;
+}
+@media screen and (max-width: 360px){
+    .cin_article_titleDash{
+    margin: 0px 0 10px;
+    }
 }
 .cin_article_innertext_title{
     margin-bottom: 20px;
@@ -107,7 +122,7 @@ a:hover{
 /*============================= 相關閱讀 =================================*/
 #cin_article_innertext hr{
     margin: 50px auto 40px;
-    border: 1.5px solid #ca054d;
+    border: 2px solid #ca054d;
     max-width: 1100px;
 }
 @media screen and (max-width: 360px){
@@ -120,6 +135,11 @@ a:hover{
     height: 350px;
     margin: 0 auto;
     padding: 0;
+}
+@media screen and (max-width: 360px){
+    .cin_morearticle-wrap{
+    height: 150vh;
+    }
 }
 .cin_morearticle{
     max-width: 940px;

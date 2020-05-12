@@ -24,6 +24,7 @@ $size_sql = sprintf("SELECT * FROm `size` WHERE color_sid IN (%s)", implode(',',
 $prodSizes = $pdo -> query($size_sql)
             ->fetchAll();
 
+
 //
 ////設定size stock給按鈕用陣列
 //$a_colorWithSizeForCart = $prodColors;
@@ -81,7 +82,7 @@ $weaRecommendColor = [];
 foreach($weaRecommend as $R){
     $weaRecommendColor[] = $pdo -> query("SELECT * FROM `color` WHERE pro_sid=". $R["sid"]) ->fetchAll();
 }
-// echo json_encode( $weaRecommendColor, JSON_UNESCAPED_UNICODE);
+// echo json_encode( $weaRecommendColor[0], JSON_UNESCAPED_UNICODE);
 
 ?>
 
@@ -190,7 +191,54 @@ foreach($weaRecommend as $R){
     .white{
         background: #F6F4F4;
     }
-    
+     /* ================================= 放大圖 =================================== */
+     .wea_imgbox_base{
+        z-index: 3;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        height: calc(100% - 80px);
+        display: none;
+        -webkit-animation:imgbox-zoomIn 1s;
+    }
+    @keyframes imgbox-zoomIn{
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 1;
+        }
+    }
+    .wea_imgbox_base a{
+        width: 100%;
+        height: 100%;
+    }
+    .wea_imgbox_background{
+        width: 100%;
+        height: 100%;
+        background-color: rgba(96, 82, 80,.8);
+    }
+    .wea_imgbox_background img{
+        /* width: 70vw; */
+        height: 70vh;
+        object-fit: contain;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        margin-top: 75px;
+    }
+    @media screen and (max-width: 360px){
+        .wea_imgbox_base{
+        top: 60px;
+        height: calc(100% - 60px);
+        }
+        .wea_imgbox_background img{
+        width: 90vw;
+        height: auto;
+        }
+    }
     /* ================================= 商品主區塊 =================================== */
     .wea_product_main{
         /* background: wheat; */
@@ -398,6 +446,7 @@ foreach($weaRecommend as $R){
         margin-top: 20px;
     }
     }
+   
     /* ================================= 商品介紹區 =================================== */
     .wea_product_secondary{
         width: 100%;
@@ -858,7 +907,14 @@ foreach($weaRecommend as $R){
   <body>
   <?php include __DIR__.'/parts/header.php' ?>
     <!-- =============================== 商品主區塊 ===================================  -->
-
+<!-- 放大圖 -->
+    <div class="wea_imgbox_base fixed-bottom">
+      <a href="#close">
+        <div class="wea_imgbox_background position-relative">
+          <img class="position-absolute" src="img/size.png" alt="">
+        </div>
+      </a>
+    </div>
 
       <!-- 推出 header 空間-->
       <div class="a_push_place"></div>
@@ -916,13 +972,15 @@ foreach($weaRecommend as $R){
                     <hr class="wea_product_main_wordarea_line">
                 </div>
                 <div class="wea_product_main_wordarea_sizeform">
-                    <div class="d-flex justify-content-between wea_product_main_collapse_tital">
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-question-circle"></i>
-                            <h6>尺寸表</h6>
+                    <a class="wea_sizelist" href="#open">
+                        <div class="d-flex justify-content-between wea_product_main_collapse_tital">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-question-circle"></i>
+                                <h6>尺寸表</h6>
+                            </div>
+                            <i class="fas fa-chevron-down"></i>
                         </div>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
+                    </a>
                     <hr class="wea_product_main_wordarea_line">
                 </div>
             </div>
@@ -942,7 +1000,7 @@ foreach($weaRecommend as $R){
                     <li><a><div data-size="S" data-stock="" data-sizenum="" class="clothesSize">S</div></a></li>
                     <li><a><div data-size="M" data-stock="" data-sizenum="" class="clothesSize">M</div></a></li>
                     <li><a><div data-size="L" data-stock="" data-sizenum="" class="clothesSize">L</div></a></li>
-                    <li class="wea_product_main_size_form"><a><i class="fas fa-question-circle"><span>尺寸表</span></i></a></li>
+                    <li class="wea_product_main_size_form"><a class="wea_sizelist" href="#open"><i class="fas fa-question-circle"><span>尺寸表</span></i></a></li>
                 </ul>
                 <ul class="wea_product_main_count d-flex align-items-center">
                     <li><h6>數量</h6></li>
@@ -1157,7 +1215,7 @@ foreach($weaRecommend as $R){
             }
         }
     }
-    
+
     // 顏色控制抓取
     $(".wea_product_main_color li").has("div").click(function(){
         if($(this).find("div").hasClass("active") == false){
@@ -1199,8 +1257,8 @@ foreach($weaRecommend as $R){
                 selectSizeSid= $(this).find("div").data('sizenum');
                 // parseInt(selectSizeSid);
                 // console.log(selectSizeSid);
-                stockNum = $(this).find("div").data('stock');
-                // console.log(stockNum);
+                stockNum = $(this).find("div").data('sizenum');
+                console.log(stockNum);
                 $(this).find("div").addClass("active");
                 $(this).siblings().find("div").removeClass("active");
                 selectCountNum = 1;
@@ -1239,6 +1297,14 @@ foreach($weaRecommend as $R){
             document.getElementById("countnum").innerHTML = parseInt(selectCountNum);
             countNumState();
         }
+    })
+
+    // 放大圖
+    $(".wea_sizelist").click(function(){
+        $(".wea_imgbox_base").css("display","inline-block");
+      })
+    $(".wea_imgbox_base a").click(function(){
+        $(".wea_imgbox_base").css("display","none");
     })
 
     //圖片slider
@@ -1365,7 +1431,7 @@ foreach($weaRecommend as $R){
           cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
           //抓取數量
           cart_qty = $("#countnum").text();
-          // console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
 
           // 傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
           // 讓所有頁面一進來就能讀到購物車內的商品數
@@ -1386,7 +1452,7 @@ foreach($weaRecommend as $R){
           cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
           //抓取數量
           cart_qty = $("#countnum").text();
-          // console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
 
           // 傳送資料給後端
           // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
@@ -1427,12 +1493,12 @@ foreach($weaRecommend as $R){
                   }, 800);
               }
           }, 'json')
-              // .done(function(){
-              //     console.log("success")
-              // })
-              // .fail(function(er){
-              //     console.log(er);
-              // })
+              .done(function(){
+                  console.log("success")
+              })
+              .fail(function(er){
+                  console.log(er);
+              })
       });
 
       //移除最愛-----------------------------
@@ -1464,17 +1530,6 @@ foreach($weaRecommend as $R){
           //     console.log(er);
           // })
       })
-
-      //最愛登入時要顯示-----------------------------
-
-      // $.get("product_list_api.php", function(data){
-      //     window.product_list_api_data = data
-      // }, "json");
-      //
-      // var likes = window.product_list_api_data.likes || [];
-      // if(likes.indexOf(obj.sid) >= 0){
-      //     isNotLike = '';
-      // }
 
   </script>
   </body>
