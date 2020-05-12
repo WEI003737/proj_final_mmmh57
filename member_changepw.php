@@ -113,6 +113,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
         <p class="j_chinese_title ">密碼修改</p>
     </div>
     <P class="j_dashline"></P>
+    <div class="j_padb_100"></div>
 </div>  
 
 
@@ -129,7 +130,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
      
         
 
-        <div class=" j_padt_50  col-lg-10  form_changepw_position" >
+        <div class="   col-lg-10  form_changepw_position" >
             <div class="j_formwrap">
             <form class="d-flex flex-column"  name="form_changepw" method="post"  onsubmit="return checkform_changepw()" >
             

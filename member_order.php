@@ -147,7 +147,7 @@ foreach($rows2 as $r2){
             <p class="j_chinese_title ">我的訂單</p>
         </div>
         <P class="j_dashline"></P>
-        <p class="d-flex justify-content-center j_eng_title2 j_padb_50">Those are what I adore </p>
+        <p class="d-flex justify-content-center j_eng_title2 j_padb_100">Those are what I adore </p>
     </div>
 
     <div class="d-flex justify-content-center j_padb_200">

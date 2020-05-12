@@ -61,6 +61,10 @@ border-width: 3px;
 
 /* 手機上標 */
 
+.member_left_list_totop{
+    padding-top: 50px;
+}
+
 .member_left_list_totop a{
     color:black;
     text-decoration:none;
@@ -68,7 +72,7 @@ border-width: 3px;
 
 .member_left_list_totop a:hover{
     color:#CA054D;
-    text-decoration:none;  
+    text-decoration:none;
 }
 
 #member_left_list_totop{

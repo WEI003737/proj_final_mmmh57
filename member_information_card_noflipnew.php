@@ -52,6 +52,11 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
   max-width: 350px;
   margin: 0 auto;
   padding:20px;
+  transform: translateX(-90px);
+}
+
+@media screen and (max-width:700px){
+    .j_card{transform: translateX(0px);}
 }
 
 .j_red_background{
@@ -204,23 +209,33 @@ width:200px;height:100px}
         <p class="j_chinese_title ">我的資料修改</p>
     </div>
     <P class="j_dashline"></P>
-    <p class="d-flex justify-content-center j_padb_50">Add more details</p>
+    <p class="d-flex justify-content-center j_padb_100">Add more details</p>
 </div>  
 
 
-<div class=" j_padb_200 ">
+<div class=" j_padb_200  row">
         
         <!-- 桌機 左側標 -->
-        <div class="member_left_list left_list">
-                <div class="leftlist_underline"><a style="color:#CA054D;">會員資料修改</a></div>
-                <div class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></div>
-                <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>
-                <div class="leftlist_underline"><a href="member_order.php" >訂單查詢</div>
-                <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</div>
+<!--        <div class="member_left_list left_list">-->
+<!--                <div class="leftlist_underline"><a style="color:#CA054D;">會員資料修改</a></div>-->
+<!--                <div class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></div>-->
+<!--                <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>-->
+<!--                <div class="leftlist_underline"><a href="member_order.php" >訂單查詢</div>-->
+<!--                <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</div>-->
+<!--        </div>-->
+
+        <div class="member_left_list col-lg-2">
+            <ul >
+                <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+                <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
+                <li class="leftlist_underline"><a style="color:#CA054D;">我的收藏</a></li>
+                <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
+                <li class="leftlist_underline"><a href="member_coupon.php">我的優惠卷</a></li>
+            </ul>
         </div>
      
 
-        <div class=" j_card">
+        <div class="j_card  col-lg-10">
              <div class="j_red_background">
                   
                     <!-- ========照片上傳========= -->
