@@ -102,7 +102,7 @@ $o_stmt = $pdo->prepare($o_sql);
 $o_stmt->execute([
     $_SESSION["sid"],
     $a_orderNum,
-    "會員註冊禮卷",
+    $_POST["coupon"],
     $_POST["amount"],
     $_POST["shipping"],
     $_POST["receiver_name"],

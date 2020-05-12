@@ -15,17 +15,18 @@ if(isset($_SESSION["sid"])) {
         $wishListProSid[$i] = $w["pro_sid"];
         $i++;
     };
+    if(count($wishListProSid)) {
+        //拿到收藏商品資訊
+        $wishListProSql = sprintf("SELECT * FROM `products` WHERE `sid` IN(%s)", implode(',', $wishListProSid));
+        $wishListProRows = $pdo->query($wishListProSql)->fetchAll();
 
-    //拿到收藏商品資訊
-    $wishListProSql = sprintf("SELECT * FROM `products` WHERE `sid` IN(%s)",implode(',',$wishListProSid));
-    $wishListProRows = $pdo -> query($wishListProSql) -> fetchAll();
-
-    //拿到收藏顏色資訊
-    $i=0;
-    foreach($wishListProRows as $w) {
-        $wishListColorSql = "SELECT * FROM `color` WHERE pro_sid=". $w["sid"];
-        $wishListColorRows[$i] = $pdo -> query($wishListColorSql) -> fetchAll();
-        $i++;
+        //拿到收藏顏色資訊
+        $i = 0;
+        foreach ($wishListProRows as $w) {
+            $wishListColorSql = "SELECT * FROM `color` WHERE pro_sid=" . $w["sid"];
+            $wishListColorRows[$i] = $pdo->query($wishListColorSql)->fetchAll();
+            $i++;
+        }
     }
 }
 
@@ -326,11 +327,12 @@ if(isset($_SESSION["sid"])) {
         <!-- 手機 (左側標換到上方) -->
         <div id="member_left_list_totop" >
             <ul class="member_left_list_totop d-flex justify-content-between">
-                    <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
-                    <li class="leftlist_underline"><a href="member_wishlist.php" style="color:#CA054D;">我的收藏</a></li>
-                    <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
-                    <li class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></li>
-                </ul>
+                <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+                <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
+                <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
+                <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
+                <li class="leftlist_underline"><a href="member_coupon.php" style="color:#CA054D;" >我的優惠卷</a></li>
+            </ul>
         </div>
 
 
@@ -341,7 +343,7 @@ if(isset($_SESSION["sid"])) {
                 <p class="j_chinese_title ">我的收藏</p>
             </div>
             <P class="j_dashline"></P>
-            <p class="d-flex  justify-content-center  j_padb_100">Trust me,you will love it!</p>
+            <p class="d-flex  justify-content-center  j_padb_50">Trust me,you will love it!</p>
         </div>
 
 
@@ -353,7 +355,8 @@ if(isset($_SESSION["sid"])) {
             <div class="member_left_list col-lg-2">
                 <ul >
                     <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
-                    <li class="leftlist_underline"><a style="color:#CA054D;" >我的收藏</a></li>
+                    <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
+                    <li class="leftlist_underline"><a style="color:#CA054D;">我的收藏</a></li>
                     <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
                     <li class="leftlist_underline"><a href="member_coupon.php">我的優惠卷</a></li>
                 </ul>
@@ -362,6 +365,7 @@ if(isset($_SESSION["sid"])) {
             <!-- 主文 -->
             <div class="j_wishlist_area col-lg-10 d-flex justify-content-cneter flex-wrap">
 
+                <?php if($wishRows): ?>
                 <div class="wea_recommend_area_hidden position-relative">
                     <ul class="wea_recommend_area d-flex justify-content-between">
                         <?php $i=0; foreach($wishListProRows as $R) : ?>
@@ -389,6 +393,7 @@ if(isset($_SESSION["sid"])) {
                             <?php $i++; endforeach;?>
                     </ul>
                 </div>
+                <?php endif; ?>
                 <button class="j_buy_btn" type="submit" formmethod="post" formaction="">繼續購物</button>
 
             </div>

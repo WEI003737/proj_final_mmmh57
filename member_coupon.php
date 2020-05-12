@@ -142,7 +142,7 @@ a, a:hover{
             <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
             <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
             <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
-            <li class="leftlist_underline"><a href="member_coupon.php" style="color:#CA054D;" >我的優惠卷</a></li>
+            <li class="leftlist_underline"><a style="color:#CA054D;" >我的優惠卷</a></li>
         </ul>
 </div>
 
@@ -172,13 +172,13 @@ a, a:hover{
   
     <div class="d-flex justify-content-center j_padb_200"> 
             <div class="member_left_list col-lg-2 ">
-            <ul >
-                <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
-                <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
-                <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
-                <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
-                <li class="leftlist_underline"><a style="color:#CA054D;">我的優惠卷</a></li>
-            </ul>
+                <ul >
+                    <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+                    <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
+                    <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
+                    <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
+                    <li class="leftlist_underline"><a style="color:#CA054D;">我的優惠卷</a></li>
+                </ul>
             </div>
 
       

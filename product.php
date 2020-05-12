@@ -1106,7 +1106,7 @@ foreach($weaRecommend as $R){
             <div class="wea_recommend_area_hidden position-relative">
                 <ul class="wea_recommend_area d-flex justify-content-between">
                     <?php $i=0; foreach($weaRecommend as $R) : ?>
-                        <li class="wea_recommend_item position-relative desktop">
+                        <li class="wea_recommend_item position-relative desktop" data-sid="<?= $R["sid"] ?>">
                         <?php $recommendMainImg = json_decode($weaRecommendColor[$i][0]["pro_pic"]);?>
                             <a href="./product.php?sid=<?= $R["sid"] ?>">
                                 <img src="product_images/<?=$recommendMainImg[0]?>.png" alt="">
@@ -1531,6 +1531,32 @@ foreach($weaRecommend as $R){
           // })
       })
 
+      //收藏愛心要顯示
+      $.get('product_list_api.php',function(data){
+         window.product_list_api_data = data;
+         console.log(data.likes)
+          let likes=data.likes;
+          let productSid="<?=$weaProductNum?>";
+         let ifLike=likes.includes(productSid);
+         $(".wea_product_main_wordarea_name .a_add_to_like_unactive,.wea_product_main_wordarea_name .a_add_to_like_active").hide();
+         if(ifLike){
+             $(".wea_product_main_wordarea_name .a_add_to_like_active").show();
+         }else{
+             $(".wea_product_main_wordarea_name .a_add_to_like_unactive").show();
+         }
+         $(".wea_recommend_area li").each(function(){
+            let sid=$(this).data("sid").toString();
+             // console.log(sid)
+             let ifLike=likes.includes(sid);
+            // console.log(ifLike)
+             if(ifLike){
+                 $(this).find(".a_add_to_like_active").removeClass("display_none")
+             }else{
+                 $(this).find(".a_add_to_like_active").addClass("display_none")
+             }
+         })
+
+      })
   </script>
   </body>
 </html>

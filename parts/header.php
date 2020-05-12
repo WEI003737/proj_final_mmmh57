@@ -70,6 +70,11 @@
     <h6><span>訂</span>單送出失敗</h6>
 </div>
 
+<div class="a_alert a_changePassword a_display_none">
+    <i class="fas fa-envelope fa-lg"></i>
+    <h6><span>請</span>至註冊信箱<br>取得臨時密碼登入</h6>
+</div>
+
 <!-- 提示 (css 在 h_f_script.php 裡) -->
 
 

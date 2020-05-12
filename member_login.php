@@ -357,13 +357,13 @@ $("#j_forgetpw").click(function() {
     // alert("true : "+$("#login_email").val());  
 
     $.post('member_passmail_api.php', {'email': $("#login_email").val()}, function(data){
-       alert(data);
+        // console.log(data);
     }, 'html');
 
      //請至註冊信箱 取得臨時密碼登入
-    $('.a_alert.a_registration').fadeIn();
+    $('.a_alert.a_changePassword').fadeIn();
                     setTimeout(function(){
-                        $('.a_alert.a_registration').fadeOut();
+                        $('.a_alert.a_changePassword').fadeOut();
                     }, 1600);
                    
 });
