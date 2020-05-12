@@ -33,16 +33,16 @@
     <div class="a_wrapper">
         <div class="a_block_2 justify-content-between">
             <div class="d-flex">
-                <li><img src="./icon/social_media.png" alt=""></li>
-                <li><img src="./icon/fb.png" alt=""></li>
-                <li><img src="./icon/fb.png" alt=""></li>
-                <li><img src="./icon/fb.png" alt=""></li>
+                <li><img class="footericon" src="./icon/line.svg" alt=""></li>
+                <li><img class="footericon" src="./icon/instagram.svg" alt=""></li>
+                <li><img class="footericon" src="./icon/facebook.svg" alt=""></li>
+                <li><img class="footericon" src="./icon/twitter.svg" alt=""></li>
             </div>
 <!--    rwd手機板:地圖        -->
             <div class="a_rwd_map">
                 <img class="a_object_fit" src="./icon/map.png" alt="">
             </div>
-            <div>&copy 2020 REFCORE, Inc. All Rights Reserved</div>
+            <div>&copy 2020 REDCORE, Inc. All Rights Reserved</div>
         </div>
     </div>
 </div>

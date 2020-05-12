@@ -5,6 +5,7 @@ require __DIR__. '/__connect_db.php';
 $totalItems = 0;
 $totalProductItems = 0;
 $totalCustomizedItems = 0;
+$orderCustomizedSid = [];
 
 //將存進session的最新訂單編號拿出
 if(!empty($_SESSION["lastOrderSid"])){
@@ -47,6 +48,20 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderCustomizedSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '1'";
     $orderCustomizedRows = $pdo -> query($orderCustomizedSql) -> fetchAll();
 
+    $i=0;
+    foreach($orderCustomizedRows as $oc){
+        $orderCustomizedSid[$i] = $oc["pro_sid"];
+        $i++;
+    };
+    $j=0;
+    foreach($orderCustomizedSid as $ocSid){
+        $orderCustomizedPicSql = "SELECT `pro_pic` FROM `customize` WHERE `sid`= ".$ocSid;
+        $orderCustomizedPicRows = $pdo -> query($orderCustomizedPicSql) -> fetchAll();
+        $orderCustomizedRows[$j]["pro_pic"] = $orderCustomizedPicRows;
+        $j++;
+    }
+
+
     //數量
     for($k = 0; $k < count($orderCustomizedRows); $k++){
         $totalCustomizedItems += $orderCustomizedRows[$k]["gty"];
@@ -58,7 +73,7 @@ if(!empty($_SESSION["lastOrderSid"])){
 $numItems = count($orderProductsRows) + count($orderCustomizedRows);
 $totalItems = $totalProductItems + $totalCustomizedItems;
 
-//echo json_encode($orderCustomizedRows)
+echo json_encode($orderCustomizedRows)
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
@@ -90,18 +105,17 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
             </div>
             <hr class="t_separation_line t_mobile_none">
             <div class="t_cart3_orderfinish t_mobile_none">
-                <div class="d-flex t_justify_align_center check_img">
-                    <img src="./icon/check123.gif">
-                    <!-- <div><i class="far fa-check-circle fa-fw fa-5x"></i></div> -->
+                <div class="d-flex t_justify_align_center ">
+                    <img src="./icon/check.gif">
+                    <div><i class="far fa-check-circle fa-fw fa-5x"></i></div>
                     <h5>感謝您！您的訂單已成立！<br><br>
-                    訂單編號：<span class="t_color_ca054d"><?= $orderRow["order_num"] ?></span></h5>
+                    訂單編號：DRTYH3456778FGHJ0</h5>
                 </div>
             </div>
             <div class="t_cart3_orderfinish_mobile t_web_none">
-                <div class="check_img"><img src="./icon/check123.gif"></div>
-                <!-- <div><i class="far fa-check-circle fa-fw fa-5x"></i></div> -->
+                <div><i class="far fa-check-circle fa-fw fa-5x"></i></div>
                 <h5>感謝您！您的訂單已成立！<br>
-                訂單編號：<span class="t_color_ca054d"><?= $orderRow["order_num"] ?></span></h5>
+                訂單編號：DRTYH3456778FGHJ0</h5>
             </div>
             <div class="t_main_cart"><hr class="t_separation_line_gr_long"></div>
             <section>
@@ -110,15 +124,14 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                         <div class="t_text_center">訂單資訊</div>
                         <div class="t_orderdetail_info">
                             <p>訂單日期 : <?= $orderRow["created_date"] ?></p>
-                            <p>訂單狀態 :  <span class="t_color_ca054d"><?= $orderRow["order_status"] ?></span></p>
+                            <p>訂單狀態 :  <?= $orderRow["order_status"] ?></p>
                         </div>
                     </div>
                     <div class="t_grid-container_orderdetail">
-                        <div class="t_text_center">付款資訊</div>
+                        <div class="t_text_center">付款狀態</div>
                         <div class="t_orderdetail_info">
-                            <p>付款方式 : <?= $orderRow["payment"]?></p>
-                            <p>優惠券折扣 : <?= $orderRow["coupon"]?></p>
-                            <p>付款狀態 : <span class="t_color_ca054d">確認款項中</span></p>
+                            <p>付款方式 : 信用卡</p>
+                            <p>付款狀態 : 已付款</p>
                         </div>
                     </div>
                     <div class="t_grid-container_orderdetail">
@@ -132,7 +145,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                         <div class="t_justify_align_end">
                             <hr class="t_separation_line">
                             <div class="t_cart3_subtotal">
-                                <h5>總金額：<span id="totalAmount" class="t_color_ca054d">NT <?= number_format($orderRow["amount"]) ?></span></h5>
+                                <h5>總金額：<span id="totalAmount">NT <?= number_format($orderRow["amount"]) ?></span></h5>
                                 <div class="d-flex">
                                     <i class="fas fa-angle-down fa-fw fa-2x"></i>
                                     <h5>購物車(<?= $numItems ?>項，共<?= $totalItems ?>件)</h5>
@@ -190,7 +203,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                                 <div class="quantity" data-qty="<?= $op['gty'] ?>"></div>
                                             </div>
                                             <div>
-                                                <h6 class="sub-total t_color_ca054d"></h6>
+                                                <h6 class="sub-total"></h6>
                                             </div>
                                         </div>
                                     <?php
@@ -210,7 +223,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                     <div class="t_grid-container_cart3_productinfo p-item" data-proSid="<?= $oc['pro_sid'] ?>">
                                         <div></div>
                                         <div class="cart_img">
-                                            <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                            <img src="./images/<?= $oc['pro_pic'][0]["pro_pic"] ?>_auto.png" alt="">
                                         </div>
                                         <div class="t_text_left">
                                             <h6>
@@ -231,7 +244,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                             <div class="quantity" data-qty="<?= $oc['gty'] ?>"></div>
                                         </div>
                                         <div>
-                                            <h6 class="sub-total t_color_ca054d"></h6>
+                                            <h6 class="sub-total"></h6>
                                         </div>
                                     </div>
                                     <?php
@@ -250,15 +263,14 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                         <div class="t_text_center">訂單資訊</div>
                         <div class="t_orderdetail_info">
                             <p>訂單日期 : <?= $orderRow["created_date"] ?></p>
-                            <p>訂單狀態 : <span class="t_color_ca054d"><?= $orderRow["order_status"] ?></span></p>
+                            <p>訂單狀態 : <?= $orderRow["order_status"] ?></p>
                         </div>
                     </div>
                     <div class="t_grid-container_orderdetail_mobile">
-                        <div class="t_text_center">付款資訊</div>
+                        <div class="t_text_center">付款狀態</div>
                         <div class="t_orderdetail_info">
-                            <p>付款方式 : <?= $orderRow["payment"]?></p>
-                            <p>優惠券折扣 : <?= $orderRow["coupon"]?></p>
-                            <p>付款狀態 : <span class="t_color_ca054d">確認款項中</span></p>
+                            <p>付款方式 : 信用卡</p>
+                            <p>付款狀態 : 已付款</p>
                         </div>
                     </div>
                     <div class="t_grid-container_orderdetail_mobile">
@@ -273,7 +285,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                     <div>
                         <hr class="t_separation_line">
                         <div class="t_cart3_subtotal">
-                            <h5>總金額：<span id="mobileTotalAmount" class="t_color_ca054d">$ <?= number_format($orderRow["amount"]) ?></span></h5>
+                            <h5>總金額：<span id="mobileTotalAmount">$ <?= number_format($orderRow["amount"]) ?></span></h5>
                             <div class="d-flex t_justify_align_center">
                                 <i class="fas fa-angle-down fa-fw fa-2x"></i>
                                 <h5>購物車(<?= $numItems ?>項，共<?= $totalItems ?>件)</h5>
@@ -309,7 +321,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                         </div>
                                         <div class="d-flex justify-content-end">
                                             <div class="align-self-end">
-                                                <h6 class="sub-total t_color_ca054d"></h6>
+                                                <h6 class="sub-total"></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -328,7 +340,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
 
                                     <div class="t_grid-container_cart3_productinfo_mobile t_web_none p-item" data-proSid="<?= $oc['pro_sid'] ?>">
                                         <div class="cart_img">
-                                            <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                            <img src="./images/<?= $oc['pro_pic'][0]["pro_pic"] ?> alt="">
                                         </div>
                                         <div class="t_text_left">
                                             <a href=""><?=$oc['name'] ?></a>
@@ -348,7 +360,7 @@ $totalItems = $totalProductItems + $totalCustomizedItems;
                                         </div>
                                         <div class="d-flex justify-content-end">
                                             <div class="align-self-end">
-                                                <h6 class="sub-total t_color_ca054d"></h6>
+                                                <h6 class="sub-total"></h6>
                                             </div>
                                         </div>
                                     </div>

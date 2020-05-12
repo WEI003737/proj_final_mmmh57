@@ -1465,6 +1465,17 @@ foreach($weaRecommend as $R){
           // })
       })
 
+      //最愛登入時要顯示-----------------------------
+
+      // $.get("product_list_api.php", function(data){
+      //     window.product_list_api_data = data
+      // }, "json");
+      //
+      // var likes = window.product_list_api_data.likes || [];
+      // if(likes.indexOf(obj.sid) >= 0){
+      //     isNotLike = '';
+      // }
+
   </script>
   </body>
 </html>

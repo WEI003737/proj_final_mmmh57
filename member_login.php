@@ -1,5 +1,8 @@
 <?php
 require __DIR__. '/__connect_db.php';
+
+
+//$_SERVER['HTTP_REFERER']
 ?>
 
 <!DOCTYPE html>
@@ -245,7 +248,7 @@ require __DIR__. '/__connect_db.php';
    //const email_lo = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
    // const mobile_lo = /^09\d{2}-?\d{3}-?\d{3}$/;
 
-
+    var referer = "<?= !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'member_information_card_noflipnew.php' ?>";
     function checkForm(){
         $.post('members_login_api.php', $(document.form1).serialize(), function(data){
         
@@ -256,7 +259,7 @@ require __DIR__. '/__connect_db.php';
                 }, 800);
                 setTimeout(function(){
                     //首頁檔名
-                    location.href ='member_information_card_noflipnew.php';
+                    location.href = referer;
                 }, 1000);
 
             } else {
@@ -273,6 +276,7 @@ require __DIR__. '/__connect_db.php';
 </script>
 
 <script>
+
      //  註冊
      function checkForm2(){
         let isPass = true; //有沒有通過檢查
@@ -305,7 +309,7 @@ require __DIR__. '/__connect_db.php';
                         $('.a_alert.a_registration').fadeOut();
                     }, 1600);
                     setTimeout(function(){
-                        location.href ='member_information_card_noflipnew.php';
+                        location.href = referer;
                     }, 2400);
                 } else {
                     $('.a_alert.a_registrationErr').fadeIn();

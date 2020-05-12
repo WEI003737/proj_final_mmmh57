@@ -45,6 +45,17 @@ foreach($rows as $r){
     $rowsColor[] = $pdo -> query("SELECT * FROM `color` WHERE pro_sid=". $r["sid"]) ->fetchAll();
 }
 
+$likeData = [];
+if(!empty($_SESSION['sid'])) {
+    $likeSql = "SELECT `pro_sid` FROM `like_box` WHERE `mem_sid`=?";
+    $likeStmt = $pdo->prepare($likeSql);
+    $likeStmt->execute([$_SESSION['sid']]);
+    $likeRows = $likeStmt->fetchAll();
+    foreach ($likeRows as $r) {
+        $likeData[] = $r['pro_sid'];
+    }
+}
+
 // echo json_encode($rowColor, JSON_UNESCAPED_UNICODE);
 $output = [
     'page' => $page,
@@ -52,7 +63,8 @@ $output = [
     'totalRows' =>$totalRows,
     'totalPages' =>$totalPages,
     'rows' =>$rows,
-    'rowsColor' =>$rowsColor,
+    'rowsColor' => $rowsColor,
+    'likes' => $likeData,
 ];
 header('Content-Type:application/json');
 echo json_encode($output, JSON_UNESCAPED_UNICODE);

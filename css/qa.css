@@ -112,13 +112,12 @@ button:focus {
 
 .qa_main_box.qa_main_box_chose {
     display: block;
+    opacity: 1;
 }
 
 .qa_main_box li {
-    /* background: #f8f8f8; */
-    /* padding: 0px 30px; */
-    /* border: 1px solid #e2e2e2; */
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    overflow: hidden;
 }
 
 .nac.qa_title {
@@ -130,19 +129,35 @@ button:focus {
 }
 
 .qa_main_box h3.nac {
-    font-weight: 500;
-    color: rgb(202, 5, 77);
-    margin-bottom: 30px;
+    font-size: 16px;
+    display: inline-block;
+    font-weight: 300;
+    color: #adadad;
+    margin-bottom: 20px;
+    align-items: center;
+}
+.qa_main_box h3.nac::before{
+    content: '●';
+    padding: 5px;
 }
 
 .qa_main_box h4.nac {
     font-weight: 500;
-    padding: 15px;
-    border: 1px solid rgba(202, 5, 77, 1);
+    padding: 20px 15px;
+    border-top: 1px dashed rgba(202, 5, 77, 0.075);
     background-color: rgba(202, 5, 77, 0);
     color: rgba(202, 5, 77, 1);
-    border-radius: 15px;
+    /* border-radius: 15px; */
     transition: .5s;
+    margin: 0px;
+}
+
+.qa_main_box ul {
+    border-bottom: 1px dashed rgba(202, 5, 77, 0.075);
+}
+
+.qa_main_box ul:hover {
+    cursor: pointer;
 }
 
 .qa_open_btn h4.nac::before {
@@ -163,54 +178,64 @@ li.qa_open_btn.nac_qa_info_open h4.nac {
     background-color: rgba(202, 5, 77, 1);
 }
 
-.nac_qa_info {
-    height: 0;
-    overflow: hidden;
-    transition: .5s;
-}
-
-li.qa_open_btn.nac_qa_info_open .nac_qa_info {
-    height: 250px;
-}
-
-.nac_qa_info p.nac {
+li.qa_open_btn p.nac {
+    display: none;
     margin: 0px;
-    margin-bottom: 35px;
-    padding: 20px 30px;
+    padding: 20px 30px 60px 30px;
 }
 
 .qa_leftmenu {
     flex: 1 1 0;
 }
 
+.qa_leftmenu li {
+    padding: 0px 0px 20px 0px;
+    transition: .5s;
+}
+.qa_leftmenu li::before {
+    content: "-";
+    margin: 0px 10px;
+}
+
+.qa_leftmenu li:hover, .qa_leftmenu li.active {
+    color: rgba(202, 5, 77, 1);
+    cursor: pointer;
+    transform: translateX(5px);
+}
+
 .qa_main {
     flex: 4 1 0;
     display: flex;
     flex-direction: column;
+    margin-bottom: 150px;
 }
 
 @media all and (max-width: 768px) {
     .qa_main_outbox {
         flex-direction: column;
     }
-    .nac_qa_info {
-        height:auto;
-        max-height: 0;
-        overflow: hidden;
-        transition: .5s;
-    }
-    li.qa_open_btn.nac_qa_info_open .nac_qa_info {
-        height:auto;
-        max-height: 600px;
-    }
-    .qa_leftmenu ul{
+    .qa_leftmenu ul {
         flex-wrap: wrap;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-bottom: 30px;
     }
-    .qa_leftmenu ul li{
+    .qa_leftmenu ul li {
+        border-radius: 999px;
+        padding: 10px 20px;
         margin: 10px;
+        border:1px solid rgba(202, 5, 77, 0.219) ;
+
     }
+    .qa_leftmenu li:hover, .qa_leftmenu li.active {
+        transform: translate(0px,0px);
+        background:rgba(202, 5, 77, 1) ;
+        color: #FFF;
+    }
+    .qa_leftmenu li::before {
+        content: "";
+        margin: 0px 0px;
+    }
+    
 }

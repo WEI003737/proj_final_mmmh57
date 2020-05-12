@@ -68,13 +68,14 @@ if(!empty($_SESSION["customized"])) {
         $j++;
     }
 
-    $a_cusSql = sprintf("SELECT `sid`,`name`,`price` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
+    $a_cusSql = sprintf("SELECT * FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
     $a_cusRows = $pdo->query($a_cusSql)->fetchAll();
 
     $k = 0;
     foreach ($a_cusRows as $cus) {
         $a_cusData[$k]['name'] = $cus["name"];
         $a_cusData[$k]['price'] = $cus["price"];
+        $a_cusData[$k]['pro_pic'] = $cus["pro_pic"];
         $k++;
     };
 
@@ -134,7 +135,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
             <section>
                 <div class="t_main_cart">
                     <div class="t_top-amount">
-                        <div class="sub-total t_color_ca054d">合計：<span id="totalAmount">NT <?= number_format($totalPrice) ?></span></div>
+                        <div>合計：<span id="totalAmount">NT <?= number_format($totalPrice) ?></span></div>
                         <div>購物車(<span class="a_countNum" id="productItem"><?= $numItems ?></span>項，共<span id="totalQty"><?= $totalItems ?></span> 件)</div>
                         <div><i class="fas fa-angle-down fa-fw fa-lg"></i></div>
                     </div>
@@ -190,7 +191,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                                 <div id="countnum<?= $j?>" data-maxnum="<?= $r['in_stock'] ?>" class="quantity" onchange="changeQty(event)"><?= $r['quantity'] ?></div>
                                             </div>
                                             <div>
-                                                <h6 class="sub-total t_color_ca054d"></h6>
+                                                <h6 class="sub-total"></h6>
                                             </div>
                                             </div>
                                 <?php 
@@ -205,7 +206,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                 <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $cus['cus_sid'] ?>">
                                     <div></div>
                                     <div class="cart_img">
-                                        <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                        <img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt="">
                                     </div>
                                     <div class="t_text_left">
                                         <h6>
@@ -224,9 +225,10 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                         <li><div id="countnum<?= $j?>" data-maxnum="50" class="quantity" ><?= $cus['cus_qty'] ?></div></li>
                                     </div>
                                     <div>
-                                        <h6 class="sub-total t_color_ca054d"></h6>
+                                        <h6 class="sub-total"></h6>
                                     </div>
                                 </div>
+                            </div>
                             <?php endforeach; ?>
                             <?php endif; ?>
                             </div>
@@ -265,7 +267,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                         </div>
                                         <div class="d-flex justify-content-end">
                                             <div class="align-self-end">
-                                                <h6 class="sub-total t_color_ca054d"></h6>
+                                                <h6 class="sub-total"></h6>
                                             </div>
                                         </div>
                                     </div>
@@ -279,7 +281,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                     <?php foreach($a_cusData as $cus): ?>
                                         <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $cus['cus_sid'] ?>">
                                             <div class="cart_img">
-                                                <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                                <img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt="">
                                             </div>
                                             <div class="t_text_left">
                                                 <a href=""><?=$cus['name'] ?></a>
@@ -297,7 +299,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                             </div>
                                             <div class="d-flex justify-content-end">
                                                 <div class="align-self-end">
-                                                    <h6 class="sub-total t_color_ca054d"></h6>
+                                                    <h6 class="sub-total"></h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -320,8 +322,8 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                         <div class="form-group">
                             <label for="how_to_deliver" required>運送方式</label>
                                 <select class="form-control a_shipping" id="chooseDeliver" name="shipping">
-                                    <option value="宅配寄送100元">宅配寄送</option>
-                                    <option value="超商取貨60元">超商取貨</option>
+                                    <option value="宅配寄送">宅配寄送</option>
+                                    <option value="超商取貨">超商取貨</option>
                                 </select>
                         </div>
                         <div  id="deliverTarget">
@@ -342,7 +344,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                             </div>
                             <div class="form-group">
                                 <label for="receiver_mobile" id="mobileTarget">收件人電話</label>
-                                <input type="text" class="form-control" id="receiver_mobile" name="receiver_mobile" pattern="09\d{2}-?\d{3}-?\d{3}" maxlength="10" required>
+                                <input type="text" class="form-control" id="receiver_mobile" name="receiver_mobile" pattern="09\d{2}-?\d{3}-?\d{3}" required>
                                 <small id="receivermobileHelp" class="form-text"></small>
                             </div>
                             <div class="form-group">
@@ -387,9 +389,8 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                         <div class="form-group">
                             <label for="coupon">我的優惠券</label>
                                 <select class="form-control a_coupon" name="coupon">
-                                    <option value="無使用"selected>請選擇優惠券</option>
-                                    <option value="新會員折扣100元">新會員折扣</option>
-                                    <!-- <option value="母親節優惠">母親節優惠</option> -->
+                                    <option selected>請選擇優惠券</option>
+                                    <option value="新會員折扣">新會員折扣</option>
                                 </select>
                         </div>
                         <div class="form-group">
@@ -401,7 +402,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                 </select>
                         </div>
                         <div id="paymentTarget">
-                            <div class="form-group">
+                            <div class="form-row form-group">
                                 <label for="credit_number" id="accountTarget">信用卡卡號</label>
                                     <div class="col-md-12">
                                         <div class="form-row">
@@ -442,7 +443,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                 </div>
                                 <div class="form-group col-md-4">
                                     <div class="col-md-12 ">
-                                        <label for="credit_three" id="threeTarget">驗證碼</label>
+                                        <label for="credit_three" id="threeTarget">末三碼</label>
                                         <div class="d-flex justify-content-between">
                                             <input type="text" class="form-control t_text_center" id="credit_three" maxlength="3">
                                             <i class="fas fa-credit-card fa-fw fa-2x"></i>
@@ -476,7 +477,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                         </div>
                         <div class="t_grid-container_subtotal">
                             <div>總金額</div>
-                            <div class="t_text_right t_color_ca054d">NT <span class="a_totalAmount">0</span></div>
+                            <div class="t_text_right">NT <span class="a_totalAmount">0</span></div>
                             <input type="hidden" name="amount" id="total_amount" value="0">
                         </div>
                     </div>
@@ -485,7 +486,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                     <div class="form-check t_text_right">
                         <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
                         <label class="form-check-label" for="defaultCheck1">
-                            我同意<a href="member_rules.php" target="_blank">服務條款與退換貨政策</a>
+                            我同意<a href="member_rules.php">服務條款與退換貨政策</a>
                         </label>
                     </div>
                     <div class="form-check t_text_right">
@@ -507,7 +508,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
             
             
             <div class="d-flex justify-content-center">
-                <a href="cart_step1.php">
+                <a href="cart_step1_change.php">
                     <div class="t_cart2_backcart_btn">
                         <input type="submit" value="←返回購物車" class="btn btn-p">
                     </div>
@@ -673,7 +674,13 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
             // $("#paymentTarget").text($content);
         })
 
-      
+        // let $coupon_price = $("#coupon_price").val();
+
+        // if($totalPrice < 1000){
+        //     $coupon_price = 80;
+        // } else {
+        //     $coupon_price = 0;
+        // };
         
         $(".card-input").keyup(function(){
             let maxLength=$(this).attr("maxlength")
@@ -758,18 +765,11 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                 isPass = false;
             }
 
-            if($chooseInvoice.val() == "個人 - 二聯電子發票(手機載具)"){
-                if($invoice.val().length < 8){
-                $invoice.css('border-color', 'red');
-                $invoiceHelp.text('請輸入手機條碼');
-                isPass = false;
-                }
-            }
+            if($chooseInvoice.val() == "個人 - 二聯電子發票(手機載具)" || $chooseInvoice.val() == "公司 - 三聯式發票"){
 
-            if($chooseInvoice.val() == "公司 - 三聯式發票"){
                 if($invoice.val().length < 8){
                 $invoice.css('border-color', 'red');
-                $invoiceHelp.text('請輸入統一編號');
+                $invoiceHelp.text('請輸入載具');
                 isPass = false;
                 }
             }
@@ -807,6 +807,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                 // console.log($(document.form1).serialize());
                 // return false;
                 $.post('cart_step2_api.php', $(document.form1).serialize(), function(data){
+
                     if(data.addCartSuccess || data.addCusSuccess){
                         $('.a_alert.a_sandOrder').fadeIn();
                         setTimeout(function(){
@@ -816,10 +817,11 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                             //首頁檔名
                             location.href ='cart_step3.php';
                         }, 1000);
+
                     } else {
-                        $('.a_alert.a_sandOrder').fadeIn();
+                        $('.a_alert.a_sandOrderErr').fadeIn();
                         setTimeout(function(){
-                            $('.a_alert.a_sandOrder').fadeOut();
+                            $('.a_alert.a_sandOrderErr').fadeOut();
                         }, 800);
                     }
                 }, 'JSON')
@@ -848,10 +850,10 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
         $(".a_shipping").change(function(){
             var wayOfShipping = $(this).val();
             // console.log(wayOfShipping)
-            if(wayOfShipping == "宅配寄送100元"){
+            if(wayOfShipping == "宅配寄送"){
                 $(".a_shippingPrice").text("100")
                 a_shippingPrice = $(".a_shippingPrice").text();
-            }else if(wayOfShipping == "超商取貨60元"){
+            }else if(wayOfShipping == "超商取貨"){
                 $(".a_shippingPrice").text("60")
                 a_shippingPrice = $(".a_shippingPrice").text();
             }
@@ -863,16 +865,14 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
         $(".a_coupon").change(function(){
             var whichCoupon = $(this).val();
             // console.log(whichCoupon)
-            if(whichCoupon == "新會員折扣100元"){
+            if(whichCoupon == "新會員折扣"){
                 $(".a_couponDiscount").text("100")
                 a_couponDiscount = $(".a_couponDiscount").text();
-            
+            }else if(whichCoupon == "母親節優惠"){
+                $(".a_couponDiscount").text("100")
+                a_couponDiscount = $(".a_couponDiscount").text();
             }
-            // else if(whichCoupon == "請選擇優惠券"){
-            //     $(".a_couponDiscount").text("0")
-            //     a_couponDiscount = $(".a_couponDiscount").text();
-            // }
-            console.log(a_couponDiscount)
+            // console.log(a_couponDiscount)
             countAmount();
         })
 

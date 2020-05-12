@@ -524,6 +524,7 @@ if(! isset($_SESSION)){
     }
     .wea_product_list_page li.active a{
         color: #C9044D;
+        border-bottom: 1.5px solid #C9044D;
     }
     @media screen and (max-width: 625px){
         .wea_product_list_page{
@@ -802,6 +803,23 @@ if(! isset($_SESSION)){
     </script>
     <!-- 生成資料 -->
     <script>
+
+        // 算點頁面後移動的高度
+        var touchpagetop;
+
+        function scrollfunction() {
+            if ($(window).width() > 768) {
+                touchpagetop = $(".wea_ootd").offset().top + $(".wea_ootd").height() - 50;
+            } else if ($(window).width() > 360) {
+                touchpagetop = $(".wea_ootd").offset().top + $(".wea_ootd").height() - 80;
+            } else {
+                touchpagetop = $(".wea_ootd").offset().top + $(".wea_ootd").height() - 100;
+            }
+            // console.log(touchpagetop);
+        }
+        scrollfunction();
+        $(window).resize(scrollfunction);
+
     /*
         運作的流程 steps
         1. 取得資料 (包成 function
@@ -822,12 +840,19 @@ if(! isset($_SESSION)){
         `;
     }
     const ProductListTpl = (obj) => {
+        var isNotLike = 'display_none';
+        var likes = window.product_list_api_data.likes || [];
+        if(likes.indexOf(obj.sid) >= 0){
+            isNotLike = '';
+        }
+        console.log(likes, obj.sid)
+        console.log('isNotLike:', isNotLike)
         let uptext=`
             <li class="wea_product_list_item position-relative" data-sid="${obj.sid}">
                 <a href="./product.php?sid=${obj.sid}"><img src="product_images/${obj.showImg}.png" alt=""></a>
                 <?php if(isset($_SESSION['loginUser'])): ?>
                 <i class="a_add_to_like_unactive far fa-heart position-absolute" data-sid="${obj.sid}"></i>
-                <i class="a_add_to_like_active fas fa-heart position-absolute display_none" data-sid="${obj.sid}"></i>
+                <i class="a_add_to_like_active fas fa-heart position-absolute ${isNotLike}" data-sid="${obj.sid}"></i>
                  <?php endif; ?>
                 <p>${obj.name}</p>
                 <div class="d-flex justify-content-between">
@@ -851,7 +876,7 @@ if(! isset($_SESSION)){
             // let imm = JSON.parse(data.rowsColor[0][0].pro_pic) ;
             // console.log(JSON.parse(data.rowsColor[0][0].pro_pic)[0]);
             // console.log(data);
-
+            window.product_list_api_data = data;
             //抓頁碼
             let ListPageStr='';
             totalpage = data.totalPages;
@@ -879,6 +904,7 @@ if(! isset($_SESSION)){
                 })
             }
             ProductList.html(ProductListStr);
+            pagefunction();
         },'json')
         // .done(function(){
         //     alert("success");
@@ -933,14 +959,21 @@ if(! isset($_SESSION)){
             }
         }
         // // let page = parseInt(hashStr);
-        prepagenum = page - 1;
-        if(prepagenum < 1){
-            prepagenum =  1;
+        if (!page) {
+            nowpagenum = 1;
+            prepagenum = 1;
+            nextpagenum = 2;
+        } else {
+            nowpagenum = page;
+            prepagenum = page - 1;
+            if (prepagenum < 1) {
+                prepagenum = 1;
+            }
+            nextpagenum = page + 1;
+            if (nextpagenum > totalpage) {
+                nextpagenum = totalpage;
+            }
         }
-        nextpagenum = page + 1;
-        if(nextpagenum > totalpage){
-            nextpagenum = totalpage;
-        }    
         
         if(page){
             getDataByPage(page,categories,ordertype,orderway);
@@ -962,7 +995,50 @@ if(! isset($_SESSION)){
             ordertype: $("#wea_sort_btn").attr("data-ordertype"),
             orderway: $("#wea_sort_btn").attr("data-orderway")
             });
+
+            $("html,body").animate({
+                scrollTop: touchpagetop
+            }, 800, "swing");
     }
+
+        function pagefunction() {
+            // console.log('pagefunction',text, $(window).width())
+            if ($(window).width() < 768) {
+                if (totalpage > 5) {
+                    let pre = nowpagenum - 2;
+                    let next = nowpagenum + 2;
+                    // $(Document).find(".wea_product_list_page li").addClass("display_none");
+                    $(".wea_product_list_page li").addClass("display_none");
+                    $(".wea_product_list_page li").eq(0).removeClass("display_none");
+                    $(".wea_product_list_page li").eq(totalpage + 1).removeClass("display_none");
+                    let shownum;
+                    if (next <= totalpage && pre >= 1) {
+                        shownum = pre;
+                        for (let i = 0; i < 5; i++) {
+                            $(".wea_product_list_page li").eq(shownum).removeClass("display_none");
+                            shownum++;
+                        }
+                    } else if (pre < 1) {
+                        shownum = 1;
+                        for (let i = 0; i < 5; i++) {
+                            $(".wea_product_list_page li").eq(shownum).removeClass("display_none");
+                            shownum++;
+                        }
+                    } else if (next > totalpage) {
+                        shownum = totalpage;
+                        for (let i = 0; i < 5; i++) {
+                            $(".wea_product_list_page li").eq(shownum).removeClass("display_none");
+                            shownum--;
+                        }
+                    }
+                }
+            } else {
+                $(".wea_product_list_page li").removeClass("display_none");
+            }
+        }
+
+        $(window).resize(pagefunction);
+
     </script>
     <!-- 商品預覽換圖 -->
     <script>
@@ -1092,6 +1168,7 @@ if(! isset($_SESSION)){
 
       <script>
 
+
           //加入最愛-----------------------------
           //登入才顯示愛心
 
@@ -1142,24 +1219,7 @@ if(! isset($_SESSION)){
               // })
           })
 
-          //有登入就顯示已加入收藏的商品----------------------------- (還沒寫完)
-          // function showWishList() {
-          //     $.get("member_wishlist_api.php", function (data) {
-          //
-          //         wishListProSid = data.wishListProSid;
-          //         console.log(wishListProSid)
-          //
-          //         i=0;
-          //         for (let val of wishListProSid) {
-          //
-          //            $('.a_add_to_like_active [data-sid="' + val + '"]').removeClass("display_none");
-          //            i++;
-          //         }
-          //     }, "json")
-          // }
 
-
-          // showWishList();
       </script>
   </body>
 </html>

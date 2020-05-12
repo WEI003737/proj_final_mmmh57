@@ -1,7 +1,6 @@
 <?php
 require __DIR__. '/__connect_db.php';
 
-print_r($_SESSION);
 
 $i=0;
 if(!empty($_SESSION["cart"])) {
@@ -71,18 +70,19 @@ if(!empty($_SESSION["customized"])) {
         $j++;
     }
 
-    $cusSql = sprintf("SELECT `sid`,`name`,`price` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
+    $cusSql = sprintf("SELECT * FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
     $cusRows = $pdo->query($cusSql)->fetchAll();
 
     $k = 0;
     foreach ($cusRows as $cus) {
         $a_cusData[$k]['name'] = $cus["name"];
         $a_cusData[$k]['price'] = $cus["price"];
+        $a_cusData[$k]['pro_pic'] = $cus["pro_pic"];
         $k++;
     };
 }
 
-//echo json_encode($a_cusData, JSON_UNESCAPED_UNICODE);
+echo json_encode($a_cusData, JSON_UNESCAPED_UNICODE);
 
 
 
@@ -154,7 +154,7 @@ if(!empty($_SESSION["customized"])) {
                                 <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $r['sid'] ?>">
                                     <div></div>
                                     <div class="cart_img">
-                                        <a href="./product.php?sid=<?= $r['sid'] ?>"><img href="./product.php?sid=<?= $r['sid'] ?>" src="./product_images/<?= $colorArr[0]?>.png" alt=""></a>
+                                        <img src="./product_images/<?= $colorArr[0]?>.png" alt="">
                                     </div>
                                     <div class="t_text_left">
                                         <h6>
@@ -175,7 +175,7 @@ if(!empty($_SESSION["customized"])) {
                                         <li><a><div class="plus <?= $r['quantity'] == $r['in_stock'] ? "unckick" : "" ?>">+</div></a></li>
                                     </div>
                                     <div>
-                                        <h6 class="sub-total t_color_ca054d"></h6>
+                                        <h6 class="sub-total"></h6>
                                     </div>
                                     <div>
                                         <a href="#" onclick="removeProductItem(event)"><i class="fas fa-trash-alt"></i></a>
@@ -193,7 +193,7 @@ if(!empty($_SESSION["customized"])) {
                     <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $cus['cus_sid'] ?>">
                         <div></div>
                         <div class="cart_img">
-                            <a href="./customized_detail.php?sid=<?= $cus['cus_sid'] ?>"><img href="./product.php?sid=<?= $cus['sid'] ?>" src="./images/customized_sportsbras_01_pro_pic.png" alt=""></a>
+                            <img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt="">
                         </div>
                         <div class="t_text_left">
                             <h6>
@@ -203,7 +203,13 @@ if(!empty($_SESSION["customized"])) {
                             </h6>
                         </div>
                         <div class="t_text_center">
-                            <div style="color: black" ><i class="fas fa-circle fa-lg"></i></div>
+                            <?php
+                            $i=0;
+                            foreach($cus["cus_color"] as $c):  ?>
+                            <div style="color: <?= $c; ?>" ><i class="fas fa-circle fa-lg"></i></div>
+                            <?php
+                            $i++;
+                            endforeach; ?>
                         </div>
                         <div>
                             <h6><?= $cus['cus_size'] ?></h6>
@@ -214,7 +220,7 @@ if(!empty($_SESSION["customized"])) {
                             <li><a><div class="plus <?= $cus['cus_qty'] == 50 ? "unckick" : "" ?>">+</div></a></li>
                         </div>
                         <div>
-                            <h6 class="sub-total t_color_ca054d"></h6>
+                            <h6 class="sub-total"></h6>
                         </div>
                         <div>
                             <a href="#" onclick="removeCustomizedItem(event)"><i class="fas fa-trash-alt"></i></a>
@@ -241,7 +247,7 @@ if(!empty($_SESSION["customized"])) {
 
                             <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $r['sid'] ?>">
                                 <div class="cart_img">
-                                    <a href="./product.php?sid=<?= $r['sid'] ?>"><img src="./product_images/<?= $colorArr[0]?>.png" alt=""></a>
+                                    <img src="./product_images/<?= $colorArr[0]?>.png" alt="">
                                 </div>
                                 <div class="t_text_left">
                                         <a href=""><?=$r['product'][0]['name'] ?></a> 
@@ -264,7 +270,7 @@ if(!empty($_SESSION["customized"])) {
                                     <a href="#" onclick="removeProductItem(event)"><i class="fas fa-times fa-2x"></i></a>
                                     </div>
                                     <div class="align-self-end">
-                                        <h6 class="sub-total t_color_ca054d"></h6>
+                                        <h6 class="sub-total"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -278,7 +284,7 @@ if(!empty($_SESSION["customized"])) {
                         <?php foreach($a_cusData as $cus): ?>
                             <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $cus['cus_sid'] ?>">
                                 <div class="cart_img">
-                                    <a href="./customized_detail.php?sid=<?= $cus['cus_sid'] ?>"><img src="./images/customized_sportsbras_01_pro_pic.png" alt=""></a>
+                                    <img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt="">
                                 </div>
                                 <div class="t_text_left">
                                     <a href=""><?=$cus['name'] ?></a>
@@ -301,7 +307,7 @@ if(!empty($_SESSION["customized"])) {
                                         <a href="#" onclick="removeCustomizedItem(event)"><i class="fas fa-times fa-2x"></i></a>
                                     </div>
                                     <div class="align-self-end">
-                                        <h6 class="sub-total t_color_ca054d"></h6>
+                                        <h6 class="sub-total"></h6>
                                     </div>
                                 </div>
                             </div>
@@ -319,11 +325,11 @@ if(!empty($_SESSION["customized"])) {
                             <h5>訂單金額</h5>
                             <div class="t_grid-container_subtotal">
                                 <div>商品總金額</div>
-                                <div class="t_text_right sub-total t_color_ca054d" id="totalAmount"></div>
+                                <div class="t_text_right" id="totalAmount"></div>
                             </div>
                             <?php if(!empty($_SESSION["loginUser"])): ?>
                             <a><div class="t_cart1_checkout_btn">
-                                <input type="button" value="立即結帳→" class="btn" onclick="a_goCartPageSecond()">
+                                <input value="立即結帳→" class="btn" onclick="a_goCartPageSecond()">
                             </div></a>
                             <?php else: ?>
                                 <a href="member_login.php"><div class="t_cart1_checkout_btn">
@@ -419,7 +425,7 @@ if(!empty($_SESSION["customized"])) {
         event.preventDefault(); // 避免 <a> 的連結
         const div = $(event.target).closest('div.p-item')
         const cart_sid = div.attr('data-sid');
-        console.log(cart_sid)
+        // console.log(cart_sid)
         $.get('remove_from_cart_api.php', {cart_sid}, function(data){
             console.log(data)
 
@@ -436,9 +442,9 @@ if(!empty($_SESSION["customized"])) {
     function removeCustomizedItem(event){
         event.preventDefault(); // 避免 <a> 的連結
         const div = $(event.target).closest('div.p-item')
-        const cart_sid = div.attr('data-sid');
-        console.log(cart_sid)
-        $.get('remove_from_customized_api.php', {cart_sid}, function(data){
+        const cart_cus_sid = div.attr('data-sid');
+        // console.log(cart_cus_sid)
+        $.get('remove_from_cart_api.php', {cart_cus_sid}, function(data){
             console.log(data)
 
             div.remove();

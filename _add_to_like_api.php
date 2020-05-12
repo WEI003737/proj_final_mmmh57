@@ -6,7 +6,7 @@ $output = [
     'getData' => $_GET
 ];
 
-$a_likeProSid = isset($_GET['a_likeProSid']) ? intval($_GET['a_likeProSid']) : '';
+$a_likeProSid = isset($_GET['a_likeProSid']) ? intval($_GET['a_likeProSid']) : 0;
 
 
 $checkLikeSql = "SELECT `pro_sid` FROM `like_box` WHERE `pro_sid`= ".$a_likeProSid ;
@@ -14,11 +14,11 @@ $checkLikeStmt = $pdo-> query($checkLikeSql);
 $checkLikeStmt -> fetchAll();
 
 if(!$checkLikeStmt -> rowCount() == 1) {
-    $addToLikeSql = "INSERT INTO `like_box`(`mem_sid`, `pro_sid`) 
-    VALUES (?, ?)";
+    $addToLikeSql = "INSERT INTO `like_box`(`mem_sid`, `pro_sid`, `created_at`) 
+    VALUES (?, ?, NOW())";
     $addToLikestmt = $pdo->prepare($addToLikeSql);
     $addToLikestmt->execute([
-        "1",
+        $_SESSION['sid'],
         $a_likeProSid,
     ]);
 

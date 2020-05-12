@@ -266,7 +266,7 @@
                 position: absolute;
                 background: rgb(255, 255, 255);
                 font-size: 15px;
-                top: 40px;
+                top: 70px;
                 right: -30px;
                 width: 132px;
                 max-height: 0;
@@ -393,8 +393,8 @@
 
     /* ----------- footer ----------- */
         .footer{
-            height: 415px;
-            padding: 60px 30px 0;
+            min-height: 415px;
+            padding: 60px 30px;
             background: #CA054D;
             color: #fff;
             font-size: 20px;
@@ -431,6 +431,16 @@
         }
         .footer .a_block_2 img{
             margin-right: 50px;
+        }
+        .footer .a_block_2 img.footericon {
+            width: 30px;
+            margin-right: 50px;
+            z-index: 99999999;
+            transition: .5s
+        }
+        .footer .a_block_2 img.footericon:hover {
+            transform: translateY(-10px);
+            cursor: pointer;
         }
         .footer .a_rwd_map{
             display: none;
