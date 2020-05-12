@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+.container {
+    max-width: 1400px;
+    padding: 20px;
+}
+
+h2.nac {
+    font-size: 4.5rem;
+    padding: 0px;
+    font-weight: 300;
+}
+
+h3.nac {
+    font-size: 24px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+h4.nac {
+    font-size: 18px;
+    font-weight: 300;
+    margin-bottom: 5px;
+}
+
+h6.nac {
+    font-size: .8rem;
+    font-weight: 300;
+    color: #adadad;
+    padding: 0px;
+}
+
+p.nac {
+    font-size: 15px;
+    line-height: 2rem;
+}
+
+.nac_menu_reserve {
+    height: 150px;
+}
+
+button:focus {
+    outline: 1px solid rgb(230, 1, 85);
+    transition: .5s;
+}
+
+/* 瞄點定位偏移 */
+
+.nac_target_fix {
+    position: relative;
+    top: -160px;
+    display: block;
+    height: 0;
+    overflow: hidden;
+}
+
+.nac_width100 {
+    width: 100%;
+}
+
+/* 導航列預留 */
+
+.nac_menu_reserve {
+    height: 80px;
+    margin-bottom: 15px;
+}
+
+@media all and (max-width: 768px) {
+    .nac_menu_reserve {
+        height: 120px;
+    }
+    .nac_onlymobile {
+        display: block;
+    }
+    .nac_onlypc {
+        display: none;
+    }
+}
+
+@media all and (max-width: 360px) {
+    .nac_menu_reserve {
+        height: 60px;
+    }
+}
+
+@media all and (min-width: 768px) {
+    .nac_onlymobile {
+        display: none;
+    }
+    .nac_onlypc {
+        display: block;
+    }
+}
+
+/* -------------------------------------------------------- */
+
+.qa_title_out {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 60px;
+}
+
+.qa_main_outbox {
+    display: flex;
+    min-height: 50vh;
+}
+
+.qa_main_box {
+    display: none;
+}
+
+.qa_main_box.qa_main_box_chose {
+    display: block;
+}
+
+.qa_main_box li {
+    /* background: #f8f8f8; */
+    /* padding: 0px 30px; */
+    /* border: 1px solid #e2e2e2; */
+    margin-bottom: 10px;
+}
+
+.nac.qa_title {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    border-bottom: 1px dashed #adadad;
+    padding: 10px 0px;
+}
+
+.qa_main_box h3.nac {
+    font-weight: 500;
+    color: rgb(202, 5, 77);
+    margin-bottom: 30px;
+}
+
+.qa_main_box h4.nac {
+    font-weight: 500;
+    padding: 15px;
+    border: 1px solid rgba(202, 5, 77, 1);
+    background-color: rgba(202, 5, 77, 0);
+    color: rgba(202, 5, 77, 1);
+    border-radius: 15px;
+    transition: .5s;
+}
+
+.qa_open_btn h4.nac::before {
+    display: inline-block;
+    text-align: center;
+    content: '+';
+    width: 21px;
+    padding: 0px 5px;
+}
+
+.qa_open_btn.nac_qa_info_open h4.nac::before {
+    content: '-';
+}
+
+li.qa_open_btn.nac_qa_info_open h4.nac {
+    color: rgb(255, 255, 255);
+    border: 1px solid rgba(202, 5, 77, 1);
+    background-color: rgba(202, 5, 77, 1);
+}
+
+.nac_qa_info {
+    height: 0;
+    overflow: hidden;
+    transition: .5s;
+}
+
+li.qa_open_btn.nac_qa_info_open .nac_qa_info {
+    height: 250px;
+}
+
+.nac_qa_info p.nac {
+    margin: 0px;
+    margin-bottom: 35px;
+    padding: 20px 30px;
+}
+
+.qa_leftmenu {
+    flex: 1 1 0;
+}
+
+.qa_main {
+    flex: 4 1 0;
+    display: flex;
+    flex-direction: column;
+}
+
+@media all and (max-width: 768px) {
+    .qa_main_outbox {
+        flex-direction: column;
+    }
+    .nac_qa_info {
+        height:auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: .5s;
+    }
+    li.qa_open_btn.nac_qa_info_open .nac_qa_info {
+        height:auto;
+        max-height: 600px;
+    }
+    .qa_leftmenu ul{
+        flex-wrap: wrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+    .qa_leftmenu ul li{
+        margin: 10px;
+    }
+}
