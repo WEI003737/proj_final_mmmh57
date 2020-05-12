@@ -3,8 +3,8 @@
         <div class="a_block_1">
             <div class="a_block_1_1">
                 <div class="a_title"><a>取得協助</a></div>
-                <li><a>常見問題</a></li>
-                <li><a>購物相關問題</a></li>
+                <li><a href="qa.php">常見問題</a></li>
+                <li><a href="qa.php">購物相關問題</a></li>
             </div>
             <div class="a_block_1_2">
                 <div class="a_title"><a>聯絡我們</a></div>

@@ -166,6 +166,9 @@
         .header_nav_left>li{
             margin: 0 2vw;
         }
+        .header_nav_left>li:hover{
+            transform: translateY(-3px);
+        }
         .header_nav_left>li a:hover{
             color: #CA054D;
         }
@@ -395,6 +398,9 @@
             background: #CA054D;
             color: #fff;
             font-size: 20px;
+        }
+        .footer a{
+            color: #fff;
         }
         .footer .a_block_1{
             display: flex;
