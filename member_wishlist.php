@@ -81,8 +81,6 @@ if(isset($_SESSION["sid"])) {
             text-align:center;
             border-style: hidden;
             margin: 30px;
-            position: absolute;
-            bottom: -12%;
         }
 
      
@@ -145,22 +143,24 @@ if(isset($_SESSION["sid"])) {
             margin-bottom: 72px;
         }
         .wea_recommend_area_hidden{
-            width: 98%;
-            height: 500px;
+            width: 100%;
+            /* height: 500px; */
             padding: 0 20px;
             margin:0 auto 144px;
             overflow: hidden;
         }
         .wea_recommend_area{
-            position: absolute;
-            width: 150%;
+            display: flex;
+            flex-wrap: wrap;
+            /* position: absolute; */
+            width: 100%;
             top : 0;
-            left: -25%;
+            left: 0;
             transition: .5s;
         }
         @media screen and (max-width:1440px){
             .wea_recommend_area_hidden{
-                height: 40vw;
+                /* height: 40vw; */
                 margin:0 auto 60px;
             }
         }
@@ -179,7 +179,6 @@ if(isset($_SESSION["sid"])) {
             }
             .wea_recommend_area_hidden{
                 width: 100%;
-                height: 100%;
                 padding: 0;
                 overflow: visible;
             }
@@ -242,8 +241,9 @@ if(isset($_SESSION["sid"])) {
         } */
         @media screen and (max-width:768px){
             .wea_recommend_area{
+                width: 100%;
                 flex-wrap: wrap;
-                padding: 0 5%;
+                /* padding: 0 5%; */
                 margin-bottom: 40px;
             }
             .wea_recommend_area li{
@@ -367,7 +367,7 @@ if(isset($_SESSION["sid"])) {
 
                 <?php if($wishRows): ?>
                 <div class="wea_recommend_area_hidden position-relative">
-                    <ul class="wea_recommend_area d-flex justify-content-between">
+                    <ul class="wea_recommend_area d-flex">
                         <?php $i=0; foreach($wishListProRows as $R) : ?>
                             <li class="wea_recommend_item position-relative desktop">
                                 <?php $wishListImg = json_decode($wishListColorRows[$i][0]["pro_pic"]);?>

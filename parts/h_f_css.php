@@ -20,13 +20,13 @@
             font-family: 'Lucida Sans Italic';
             font-style: normal;
             font-weight: normal;
-            src: local('Lucida Sans Italic'), url('/font/LSANSD.TTF') format('woff');
+            src: local('Lucida Sans Italic'), url('./font/LSANSD.TTF') format('woff');
         }
         @font-face {
             font-family: 'Lucida Sans Demibold Roman';
             font-style: normal;
             font-weight: normal;
-            src: local('Lucida Sans Demibold Roman'), url('/font/LSANSDI.TTF') format('woff');
+            src: local('Lucida Sans Demibold Roman'), url('./font/LSANSDI.TTF') format('woff');
         }
 /* --------------字體大小-------------- */
         h1,h2,h3,h4,h5,h6,p{

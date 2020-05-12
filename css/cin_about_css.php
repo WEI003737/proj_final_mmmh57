@@ -33,11 +33,11 @@
                font-size: 32px;
             }
             }
-            @font-face{
-                font-family: 'Lucida Sans Demibold Roman';
-                src:url(../font/Lucida\ Sans);
-                /* font-style:Demibold; */
-            }
+/*@font-face{*/
+/*    font-family: 'Lucida Sans';*/
+/*    src:url(./font/Lucida\ Sans);*/
+/*    font-style: italic;*/
+/*}*/
             .cin_h2{
                 color: #272838;
                 font-size: 40px;  

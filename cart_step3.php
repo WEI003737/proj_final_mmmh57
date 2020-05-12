@@ -47,6 +47,10 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderCustomizedSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '1'";
     $orderCustomizedRows = $pdo -> query($orderCustomizedSql) -> fetchAll();
 
+    foreach($orderCustomizedRows as $oc){
+        $orderCustomizedSid
+    }
+
     //數量
     for($k = 0; $k < count($orderCustomizedRows); $k++){
         $totalCustomizedItems += $orderCustomizedRows[$k]["gty"];
@@ -58,7 +62,7 @@ if(!empty($_SESSION["lastOrderSid"])){
 $numItems = count($orderProductsRows) + count($orderCustomizedRows);
 $totalItems = $totalProductItems + $totalCustomizedItems;
 
-//echo json_encode($orderCustomizedRows)
+echo json_encode($orderCustomizedRows)
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>

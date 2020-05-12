@@ -75,6 +75,7 @@ if(!empty($_SESSION["customized"])) {
     foreach ($a_cusRows as $cus) {
         $a_cusData[$k]['name'] = $cus["name"];
         $a_cusData[$k]['price'] = $cus["price"];
+        $a_cusData[$k]['pro_pic'] = $cus["pro_pic"];
         $k++;
     };
 
@@ -215,7 +216,13 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                         </h6>
                                     </div>
                                     <div class="t_text_center">
-                                        <div style="color: black" ><i class="fas fa-circle fa-lg"></i></div>
+                                        <?php
+                                        $i=0;
+                                        foreach($cus["cus_color"] as $c):  ?>
+                                            <div style="color: <?= $c; ?>" ><i class="fas fa-circle fa-lg"></i></div>
+                                            <?php
+                                            $i++;
+                                        endforeach; ?>
                                     </div>
                                     <div>
                                         <h6><?= $cus['cus_size'] ?></h6>
@@ -279,16 +286,22 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                     <?php foreach($a_cusData as $cus): ?>
                                         <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $cus['cus_sid'] ?>">
                                             <div class="cart_img">
-                                                <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                                <img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt="">
                                             </div>
                                             <div class="t_text_left">
                                                 <a href=""><?=$cus['name'] ?></a>
                                                 <br>
                                                 <label class="price" data-price="<?= $cus['price'] ?>"></label>
                                                 <div class="d-flex justify-content-start align-items-baseline">
-                                                    <div style="color: <?= $r['color'][0]['color'] ?>" >
+                                                    <?php
+                                                    $i=0;
+                                                    foreach($cus["cus_color"] as $c):  ?>
+                                                    <div style="color: <?= $c; ?>" >
                                                         <i class="fas fa-circle t_color_size_between"></i>
                                                     </div>
+                                                    <?php
+                                                    $i++;
+                                                    endforeach; ?>
                                                     <p><?= $cus['cus_size']; ?></p>
                                                 </div>
                                                 <div>

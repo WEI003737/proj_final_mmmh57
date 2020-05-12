@@ -71,13 +71,14 @@ if(!empty($_SESSION["customized"])) {
         $j++;
     }
 
-    $cusSql = sprintf("SELECT `sid`,`name`,`price` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
+    $cusSql = sprintf("SELECT * FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
     $cusRows = $pdo->query($cusSql)->fetchAll();
 
     $k = 0;
     foreach ($cusRows as $cus) {
         $a_cusData[$k]['name'] = $cus["name"];
         $a_cusData[$k]['price'] = $cus["price"];
+        $a_cusData[$k]['pro_pic'] = $cus["pro_pic"];
         $k++;
     };
 }
@@ -154,7 +155,7 @@ if(!empty($_SESSION["customized"])) {
                                 <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $r['sid'] ?>">
                                     <div></div>
                                     <div class="cart_img">
-                                        <a href="./product.php?sid=<?= $r['sid'] ?>"><img href="./product.php?sid=<?= $r['sid'] ?>" src="./product_images/<?= $colorArr[0]?>.png" alt=""></a>
+                                        <a href="./product.php?sid=<?= $r['sid'] ?>"><img src="./product_images/<?= $colorArr[0]?>.png" alt=""></a>
                                     </div>
                                     <div class="t_text_left">
                                         <h6>
@@ -193,7 +194,7 @@ if(!empty($_SESSION["customized"])) {
                     <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $cus['cus_sid'] ?>">
                         <div></div>
                         <div class="cart_img">
-                            <a href="./customized_detail.php?sid=<?= $cus['cus_sid'] ?>"><img href="./product.php?sid=<?= $cus['sid'] ?>" src="./images/customized_sportsbras_01_pro_pic.png" alt=""></a>
+                            <a href="./customized_detail.php?sid=<?= $cus['cus_sid'] ?>"><img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt=""></a>
                         </div>
                         <div class="t_text_left">
                             <h6>
@@ -203,7 +204,13 @@ if(!empty($_SESSION["customized"])) {
                             </h6>
                         </div>
                         <div class="t_text_center">
-                            <div style="color: black" ><i class="fas fa-circle fa-lg"></i></div>
+                            <?php
+                            $i=0;
+                            foreach($cus["cus_color"] as $c):  ?>
+                                <div style="color: <?= $c; ?>" ><i class="fas fa-circle fa-lg"></i></div>
+                                <?php
+                                $i++;
+                            endforeach; ?>
                         </div>
                         <div>
                             <h6><?= $cus['cus_size'] ?></h6>
@@ -278,16 +285,22 @@ if(!empty($_SESSION["customized"])) {
                         <?php foreach($a_cusData as $cus): ?>
                             <div class="t_grid-container_cart1_productinfo_mobile t_web_none p-item" data-sid="<?= $cus['cus_sid'] ?>">
                                 <div class="cart_img">
-                                    <a href="./customized_detail.php?sid=<?= $cus['cus_sid'] ?>"><img src="./images/customized_sportsbras_01_pro_pic.png" alt=""></a>
+                                    <a href="./customized_detail.php?sid=<?= $cus['cus_sid'] ?>"><img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt=""></a>
                                 </div>
                                 <div class="t_text_left">
                                     <a href=""><?=$cus['name'] ?></a>
                                     <br>
                                     <label class="price" data-price="<?= $cus['price'] ?>"></label>
                                     <div class="d-flex justify-content-start align-items-baseline">
-                                        <div style="color: <?= $r['color'][0]['color'] ?>" >
+                                        <?php
+                                        $i=0;
+                                        foreach($cus["cus_color"] as $c):  ?>
+                                        <div style="color: <?= $c; ?>" >
                                             <i class="fas fa-circle t_color_size_between"></i>
                                         </div>
+                                        <?php
+                                        $i++;
+                                        endforeach; ?>
                                         <p><?= $cus['cus_size']; ?></p>
                                     </div>
                                     <div class="t_wea_product_main_count d-flex align-items-center">
@@ -419,9 +432,9 @@ if(!empty($_SESSION["customized"])) {
         event.preventDefault(); // 避免 <a> 的連結
         const div = $(event.target).closest('div.p-item')
         const cart_sid = div.attr('data-sid');
-        console.log(cart_sid)
+        // console.log(cart_sid)
         $.get('remove_from_cart_api.php', {cart_sid}, function(data){
-            console.log(data)
+            // console.log(data)
 
             div.remove();
             countCartObj(data);
@@ -436,10 +449,10 @@ if(!empty($_SESSION["customized"])) {
     function removeCustomizedItem(event){
         event.preventDefault(); // 避免 <a> 的連結
         const div = $(event.target).closest('div.p-item')
-        const cart_sid = div.attr('data-sid');
-        console.log(cart_sid)
-        $.get('remove_from_customized_api.php', {cart_sid}, function(data){
-            console.log(data)
+        const cart_cus_sid = div.attr('data-sid');
+        // console.log(cart_cus_sid)
+        $.get('remove_from_cart_api.php', {cart_cus_sid}, function(data){
+            // console.log(data)
 
             div.remove();
             countCartObj(data);
