@@ -5,6 +5,8 @@ require __DIR__. '/__connect_db.php';
 $totalItems = 0;
 $totalProductItems = 0;
 $totalCustomizedItems = 0;
+$orderProductsSid = [];
+$orderCustomizedSid =[];
 
 //將存進session的最新訂單編號拿出
 if(!empty($_SESSION["lastOrderSid"])){
@@ -17,7 +19,6 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderRow = $pdo -> query($orderSql) -> fetchAll()[0];
 
     //訂單明細:普通商品
-    $orderProductsSid = [];
     $orderProductsSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '0'";
     $orderProductsRows = $pdo -> query($orderProductsSql) -> fetchAll();
 
@@ -47,8 +48,22 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderCustomizedSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '1'";
     $orderCustomizedRows = $pdo -> query($orderCustomizedSql) -> fetchAll();
 
+    $i=0;
     foreach($orderCustomizedRows as $oc){
-        $orderCustomizedSid
+        $orderCustomizedSid[$i] = $oc["pro_sid"];
+        $i++;
+    }
+
+    foreach($orderCustomizedSid as $ocSid){
+        $orderCustomizedPicSql = sprintf("SELECT `pro_pic` FROM `customize` WHERE `sid` IN(%s)", implode(',',$orderCustomizedSid));
+        $orderCustomizedPicRows = $pdo -> query($orderCustomizedPicSql) ->fetchAll();
+    }
+
+    $j=0;
+    foreach($orderCustomizedRows as $oc){
+        $orderCustomizedRows[$j]["pro_pic"] =  $orderCustomizedPicRows[0];
+        $j++;
+
     }
 
     //數量
@@ -72,7 +87,7 @@ echo json_encode($orderCustomizedRows)
 <?php include __DIR__ . '/parts/h_f_css.php'; ?>
 <?php include __DIR__ . '/parts/main-css.php'; ?>
     <!--  公版:header  -->
-<?php include __DIR__ . '/parts/header.php'; ?>
+<?php //include __DIR__ . '/parts/header.php'; ?>
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     
@@ -214,7 +229,7 @@ echo json_encode($orderCustomizedRows)
                                     <div class="t_grid-container_cart3_productinfo p-item" data-proSid="<?= $oc['pro_sid'] ?>">
                                         <div></div>
                                         <div class="cart_img">
-                                            <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                            <img src="./images/<?= $oc['pro_pic']['pro_pic'] ?>_auto.png" alt="">
                                         </div>
                                         <div class="t_text_left">
                                             <h6>
