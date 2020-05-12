@@ -158,7 +158,7 @@ foreach($rows2 as $r2){
                 <div class="leftlist_underline "><a href="member_information_card_noflipnew.php">會員資料修改</a></div>
                 <div class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></div>
                 <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>
-                <div class="leftlist_underline"><a href="member_order.php" style="color:#CA054D;" >訂單查詢</a></div>
+                <div class="leftlist_underline"><a style="color:#CA054D;" >訂單查詢</a></div>
                 <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></div>
         </div>
 

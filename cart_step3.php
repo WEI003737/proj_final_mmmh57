@@ -18,66 +18,70 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderSql = "SELECT * FROM `orders` WHERE `sid`= $lastOrderSid";
     $orderRow = $pdo -> query($orderSql) -> fetchAll()[0];
 
+
     //訂單明細:普通商品
     $orderProductsSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '0'";
     $orderProductsRows = $pdo -> query($orderProductsSql) -> fetchAll();
 
-    foreach($orderProductsRows as $op){
+    if($orderProductsRows) {
+        foreach ($orderProductsRows as $op) {
 
-        //拿到color_sid 撈照片用
-        $orderProductsSid[$i] = $op["color_sid"];
+            //拿到color_sid 撈照片用
+            $orderProductsSid[$i] = $op["color_sid"];
 
-        $orderProductsPicSql = sprintf("SELECT `pro_pic` FROM `color` WHERE `sid` IN (%s)", implode(',',$orderProductsSid));
-        $orderProductsPicRows = $pdo -> query($orderProductsPicSql) -> fetchAll();
+            $orderProductsPicSql = sprintf("SELECT `pro_pic` FROM `color` WHERE `sid` IN (%s)", implode(',', $orderProductsSid));
+            $orderProductsPicRows = $pdo->query($orderProductsPicSql)->fetchAll();
 
-        //撈出照片
-        $j=0;
-        foreach($orderProductsPicRows as $p) {
-            $orderProductsRows[$j]["picture"] = $p;
-            $j++;
+            //撈出照片
+            $j = 0;
+            foreach ($orderProductsPicRows as $p) {
+                $orderProductsRows[$j]["picture"] = $p;
+                $j++;
+            };
+
+            //數量
+            $totalProductItems += $orderProductsRows[$i]['gty'];
+
+            $i++;
         };
-
-        //數量
-        $totalProductItems += $orderProductsRows[$i]['gty'];
-
-        $i++;
-    };
+    }
 
 
     //訂單明細:客製化
     $orderCustomizedSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '1'";
     $orderCustomizedRows = $pdo -> query($orderCustomizedSql) -> fetchAll();
 
-    $i=0;
-    foreach($orderCustomizedRows as $oc){
-        $orderCustomizedSid[$i] = $oc["pro_sid"];
-        $i++;
+    if($orderCustomizedRows) {
+        $i = 0;
+        foreach ($orderCustomizedRows as $oc) {
+            $orderCustomizedSid[$i] = $oc["pro_sid"];
+            $i++;
+        }
+
+        foreach ($orderCustomizedSid as $ocSid) {
+            $orderCustomizedPicSql = sprintf("SELECT `pro_pic` FROM `customize` WHERE `sid` IN(%s)", implode(',', $orderCustomizedSid));
+            $orderCustomizedPicRows = $pdo->query($orderCustomizedPicSql)->fetchAll();
+        }
+
+        $j = 0;
+        foreach ($orderCustomizedRows as $oc) {
+            $orderCustomizedRows[$j]["pro_pic"] = $orderCustomizedPicRows[0];
+            $j++;
+
+        }
+
+        //數量
+        for ($k = 0; $k < count($orderCustomizedRows); $k++) {
+            $totalCustomizedItems += $orderCustomizedRows[$k]["gty"];
+        }
     }
-
-    foreach($orderCustomizedSid as $ocSid){
-        $orderCustomizedPicSql = sprintf("SELECT `pro_pic` FROM `customize` WHERE `sid` IN(%s)", implode(',',$orderCustomizedSid));
-        $orderCustomizedPicRows = $pdo -> query($orderCustomizedPicSql) ->fetchAll();
-    }
-
-    $j=0;
-    foreach($orderCustomizedRows as $oc){
-        $orderCustomizedRows[$j]["pro_pic"] =  $orderCustomizedPicRows[0];
-        $j++;
-
-    }
-
-    //數量
-    for($k = 0; $k < count($orderCustomizedRows); $k++){
-        $totalCustomizedItems += $orderCustomizedRows[$k]["gty"];
-    }
-
 
 };
 
 $numItems = count($orderProductsRows) + count($orderCustomizedRows);
 $totalItems = $totalProductItems + $totalCustomizedItems;
 
-echo json_encode($orderCustomizedRows)
+//echo json_encode($orderCustomizedRows)
 
 ?>
 <?php include __DIR__ . '/parts/html-head.php'; ?>
@@ -87,7 +91,7 @@ echo json_encode($orderCustomizedRows)
 <?php include __DIR__ . '/parts/h_f_css.php'; ?>
 <?php include __DIR__ . '/parts/main-css.php'; ?>
     <!--  公版:header  -->
-<?php //include __DIR__ . '/parts/header.php'; ?>
+<?php include __DIR__ . '/parts/header.php'; ?>
     <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     
