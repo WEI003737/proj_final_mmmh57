@@ -116,6 +116,8 @@ foreach($rows2 as $r2){
         .j_productpic{width:90px; height:100px }
         .j_desk_noshow{display:block}
         .j_mobile_noshow{display:none;}
+        .table{table-layout: fixed}
+        a{word-break: break-all}
     }
 
   

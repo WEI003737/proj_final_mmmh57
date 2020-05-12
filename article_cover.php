@@ -11,6 +11,7 @@ require __DIR__. '/__connect_db.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
     <!--  公版:link  -->
@@ -57,25 +58,25 @@ require __DIR__. '/__connect_db.php';
             <div class="cin_articleCover_titlewrap">
             <h1 id="" class="text-center position-absolute coverTitle">EAT CLEAN<br>GET FIT<br>BE HAPPY</h1>
             <a href="article_category.php">
-                <h6>閱讀文章</h6>
+                <h6 class="cin_h6">閱讀文章</h6>
             </a>
             </div>
            
-            <a href="article_category-spiritual.php"><div class="cin_zoomImage_a">
+            <a href="article_category-spiritual.php"><div class="cin_zoomImage_a" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="2000">
                 <img src="./img/article_cover4.jpg" alt="">
                 <div class="cin_items_cover">
                 <h1># 心靈成長</h1>
                 </div>
             </div></a>
 
-            <a href="article_category-healthyfood.php"><div class="cin_zoomImage_b">
+            <a href="article_category-healthyfood.php"><div class="cin_zoomImage_b" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
                 <img src="./img/article_cover2.jpg" alt="">
                 <div class="cin_items_cover">
                 <h1># 健康食譜</h1>
                 </div>
             </div></a>
 
-            <a href="article_category-exercise.php"><div class="cin_zoomImage_c">
+            <a href="article_category-exercise.php"><div class="cin_zoomImage_c" data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1500">
                 <img src="./img/article_cover3.jpg" alt="">
                 <div class="cin_items_cover">
                 <h1># 運動知識</h1>
@@ -111,6 +112,10 @@ require __DIR__. '/__connect_db.php';
 <!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
 <!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
 <!--        crossorigin="anonymous"></script>-->
+ <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+    AOS.init();
+</script>
 
     <script>
     

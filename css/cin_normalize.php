@@ -20,6 +20,9 @@
 .d-flex{
     display: flex;
 }
+.align-center{
+    align
+}
 h1{
     color: #ca054d;
     font-size: 90px;
@@ -76,9 +79,10 @@ h2{
     height: 100%;
     width: 100%;
     z-index: 1;
+    transform: scale(1.25);
     mix-blend-mode:lighten;
     object-fit: cover;
-    animation: mask 4s ease 2s forwards;
+    animation: mask 3s cubic-bezier(.79,.01,.88,.52) 0s forwards;
 }
 .cin_film video{
     position: absolute;
@@ -133,18 +137,14 @@ line#mobileSlash {
     }
 }
 @keyframes mask{
-    0%{
+    0%{ 
+        fill:#ca054d;
         opacity: 1;
-        transform: scale(1);
-    }
-    50%{
-        opacity: 0;
-        transform: scale(1.5);
-
+        transform: scale(1.25);
     }
     100%{
-        opacity: 0;
-        transform: scale(1.5);
+        opacity: 1;
+        transform: scale(4);
     }
 }
 @keyframes title{

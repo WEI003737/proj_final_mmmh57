@@ -67,11 +67,12 @@ require __DIR__. '/__connect_db.php';
 
     <!----------------------   商品類別  -------------------------->
     <section class="cin_items text-center">
-        <h1>All Women's</h1>
-        <h2>商品類別</h2>
+        <h1 data-aos="zoom-out-down">All Women's</h1>
+        <h2 data-aos="zoom-out-down">商品類別</h2>
         <div class="cin_items_wrapper">
             <ul class="cin_items_list d-flex">
-                <li><a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20IN(1,2)%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
+                <li data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
+                <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20IN(1,2)%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                             <img src="./img/abdtf-jo5ip.jpg" alt="">
                             <div class="cin_items_cover">
@@ -82,7 +83,7 @@ require __DIR__. '/__connect_db.php';
                     </a>
                 </li>
 
-                <li>
+                <li data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
                     <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20BETWEEN%208%20AND%2013%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                         <img src="./img/leggings_025_bk_1 copy.png" alt="">
@@ -93,7 +94,7 @@ require __DIR__. '/__connect_db.php';
                     </a>
                 </li>
 
-                <li>
+                <li data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
                     <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20BETWEEN%203%20AND%207%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                         <img src="./img/sweatshirts_000_bl_1.jpg" alt="">
@@ -104,7 +105,7 @@ require __DIR__. '/__connect_db.php';
                     </a>
                 </li>
 
-                <li>
+                <li data-aos="flip-left" data-aos-easing="ease-out-cubic" data-aos-duration="1000">
                     <a href="product_list.php#{%22page%22:1,%22categories%22:%22%60cate_sid%60%20=%2014%22,%22ordertype%22:%22%22,%22orderway%22:%22%22}">
                         <div class="cin_test">
                         <img src="./img/yoga_009_pk_0.jpg" alt="">
@@ -413,7 +414,8 @@ require __DIR__. '/__connect_db.php';
     <!----------------------   關於我們  -------------------------->
     <section class="cin_index_about">
         <div class="cin_index_about_wrapper">
-            <div class="cin_yellowbox" data-aos="fade-left">
+    <!----------------------   電腦版  -------------------------->
+            <div class="cin_yellowbox show_desktop" data-aos="fade-left">
                 <div class="cin_yellow_text">
                     <img class="cin_logo" src="./img/index_about_Logo.png"alt="">
                     <p>「動」是一種生活的態度；是一種精神享受!「動」可以使人更自信、樂觀、生活更精彩！
@@ -430,6 +432,26 @@ require __DIR__. '/__connect_db.php';
                     </div>
                 </div>
             </div>
+    <!----------------------   手機版  -------------------------->
+            <div class="cin_yellowbox show_mobile">
+                <div class="cin_yellow_text">
+                    <img class="cin_logo" src="./img/index_about_Logo.png"alt="">
+                    <p>「動」是一種生活的態度；是一種精神享受!「動」可以使人更自信、樂觀、生活更精彩！
+                        希望能讓更多人在這個繁華的時代，享受到「動」的快樂！<br>
+                        本品牌的服飾、周邊融入各式時尚元素，期望能吸引到更多人發現「運動」是件很Fashion的事情。
+                        並以舒適、日常好穿搭為主要訴求。讓運動能夠融入日常生活當中，讓運動成為習慣成為「日常」！<br>RedCore，讓每個女孩由內而外，爆發出自信迷人的光彩!
+                    </p>
+                    <hr class="cin_index_hr">
+                    <h1 class="cin_about_title">Eco Collectino</h1>
+                    <p>我們對回收進行處理，塑料PET瓶會進行分類，清洗，消毒，然後分解成顆粒。接著將來自透明塑料瓶的顆粒熔化，並製成非常細的線，同時將不同顏色的塑料瓶顆粒進行分類，運於其他再循環使用。來自透明塑料瓶的線，最終會被編織成環保織物，不僅對環境減輕負擔，還包括運用最先進排汗技術和抗氣味控制，成效卓越。
+                    </p>
+                    <div class="cin_index_icon">
+                        <img src="./img/index_icons.png" alt="">
+                    </div>
+                </div>
+            </div>
+
+
             <div class="cin_index_about_pic" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine"><img src="./img/Index_about.jpg" alt=""></div>
         
         </div>

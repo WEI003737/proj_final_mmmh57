@@ -265,8 +265,25 @@ a:hover{
 }
 .cin_article_card:hover{
     box-shadow: 5px 5px 5px rgba(117, 117, 117, 0.5);
-    transition: .4s;
+    transition: .3s;
+    animation:cin_article_card_animate;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
 }
+@keyframes cin_article_card_animate {
+        0% {
+            transform: translateY(-0px);
+        }
+
+        50% {
+            transform: translateY(-3px);
+        }
+
+        100% {
+            transform: translateY(-0px);
+        }
+    }
 /*============================= 人氣文章 =================================*/
 .cin_articleCategory_main_R{
     width:380px;

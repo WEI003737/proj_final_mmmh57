@@ -82,7 +82,7 @@ require __DIR__ . '/__connect_db.php';
 
         <div class="cin_sustain_wrapperC d-flex justify_between">
             <div class="cin_sustain_mind">
-                <p>為了要讓時尚產品減少對地球的傷害，我們選擇的製造及供應夥伴，都需通過全球紡織業嚴格的環保認證。也就是說，我們的製程與產品都需通過生態環保、健康無害及安全的檢驗。我們使用經過高規格認可的染料，對環境高度友善，減少空氣和水系統中的不良因子，使工廠用更少的資源及能源來清潔廢水。用更安全的化學品，及認證過的工廠環境（通過物理接觸和空氣質量測量），負起對社區周圍水域環境的保護責任。</p>
+                <p data-aos="fade-right" data-aos-offset="400" data-aos-easing="ease-in-sine">為了要讓時尚產品減少對地球的傷害，我們選擇的製造及供應夥伴，都需通過全球紡織業嚴格的環保認證。也就是說，我們的製程與產品都需通過生態環保、健康無害及安全的檢驗。我們使用經過高規格認可的染料，對環境高度友善，減少空氣和水系統中的不良因子，使工廠用更少的資源及能源來清潔廢水。用更安全的化學品，及認證過的工廠環境（通過物理接觸和空氣質量測量），負起對社區周圍水域環境的保護責任。</p>
             </div>
             <img class="show_desktop" data-aos="fade-left" src="./img/about_sustain2.png" alt=""> 
         </div>            
@@ -93,8 +93,8 @@ require __DIR__ . '/__connect_db.php';
         <div class="container">
             <div class="cin_teamTitles text-center">
                 <div class="cin_hLine"></div>
-                <h1 class="cin_h1">OUR LOVELY TEAM</h1>
-                <h2 class="cin_h2">我們的團隊</h2>
+                <h1 class="cin_h1" data-aos="zoom-out-down">OUR LOVELY TEAM</h1>
+                <h2 class="cin_h2" data-aos="zoom-out-down">我們的團隊</h2>
             </div>
             <div class="cin_team_box" data-aos="fade-up" data-aos-anchor-placement="center-bottom">
                 <div class="cin_teamPara show_desktop">
