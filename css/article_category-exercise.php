@@ -1,8 +1,23 @@
 <style>
     /*============================= 共用 =================================*/
 .cin_articleCategory_body{
-    max-width: 1920px;
+    max-width: 100%;
     height: 190vh;
+}
+@media screen and (max-width: 1112px){
+    .cin_articleCategory_body{
+    height: 370vh;
+}
+}
+@media screen and (max-width: 750px){
+    .cin_articleCategory_body{
+    height: 440vh;
+}
+}
+@media screen and (max-width: 360px){
+    .cin_articleCategory_body{
+    height: 490vh;
+}
 }
 .container{
     max-width: 1440px;
@@ -21,11 +36,12 @@ h5{
 .text-align{
     text-align: center;
 }
-h5,h1{
+h5, .cin_h1{
     margin-bottom: 0;
 }
-h1{
+.cin_h1{
     color:#ca054d;
+    font-size:40px;
 }
 a{
     color: #4D4D4D;
@@ -43,6 +59,9 @@ a:hover{
     .show_desktop{
     display:none!important;
    }  
+   .show_desktop_1{
+    display:none!important;
+   }
    .show_mobile{
     display:block!important;
 }
@@ -58,7 +77,7 @@ a:hover{
 
 /*============================= 分類標籤 =================================*/
 .cin_articleCategory_head{
-    max-width: 1920px;
+    max-width: 100%;
     background: #fff;
     align-items: center;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
@@ -262,7 +281,7 @@ a:hover{
     }  
 @media screen and (max-width: 750px){
     .cin_articleCategory_main_R{
-    margin-top: 210vh;
+    margin-top: 175vh;
     height: 700px;
     }
     }
@@ -337,6 +356,7 @@ hr{
     transform: translateX(800px);
     outline: none;
     z-index: 1000;
+    right:100px;
 }
 #topBtn i{
     background: #fff;

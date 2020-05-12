@@ -30,7 +30,7 @@ border-width: 3px;
 
 /* 分頁通用 */
 .member_left_list,.member_left_list_totop{
-    margin:30px;
+    /* margin:30px; */
     text-align:center;
 }
 
@@ -98,6 +98,7 @@ border-width: 3px;
     .j_padb_200{padding-bottom: 50px;}
     .j_padt_100{padding-top:25px}
     .j_padt_50{padding-top:25px;}
+    .j_padt_25{padding-top:10px;}
 }
 
 #register-area{

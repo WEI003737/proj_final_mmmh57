@@ -11,6 +11,7 @@ require __DIR__. '/__connect_db.php';
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <!--  公版:link  -->
     <?php include __DIR__. '/parts/h_f_link.php';?>
@@ -34,17 +35,18 @@ require __DIR__. '/__connect_db.php';
         <div class="cin_film">
             <img src="./img/Index_mask.svg" alt="">
             <video loop="true" autoplay="autoplay" muted="true">
-                <source type="video/mp4" src="./img/Index_video_colorfix.mp4">
+                <source type="video/mp4" src="./img/Index_video_2.mp4">
                 </source>
             </video>
             <h1 id="" class="position-absolute coverTitle">Sport Pro<br>Fashion More</h1>`
             <svg class="position-absolute cover-title">
                 <defs>
                     <mask id="titleMask">
-                        <rect x="0" y="0" width="100%" height="100%" fill="white" />
-                        <rect x="520" y="360" width="400" height="220" fill="black" />   
+                    <rect x="0" y="0" width="100%" height="100%" fill="white" />
+                    <rect x="520" y="330" width="450" height="250" fill="black" /> 
                     </mask>
                 </defs> 
+        
                 
                 <defs>    
                     <mask id="titleMask_mobile">
@@ -411,7 +413,7 @@ require __DIR__. '/__connect_db.php';
     <!----------------------   關於我們  -------------------------->
     <section class="cin_index_about">
         <div class="cin_index_about_wrapper">
-            <div class="cin_yellowbox">
+            <div class="cin_yellowbox" data-aos="fade-left">
                 <div class="cin_yellow_text">
                     <img class="cin_logo" src="./img/index_about_Logo.png"alt="">
                     <p>「動」是一種生活的態度；是一種精神享受!「動」可以使人更自信、樂觀、生活更精彩！
@@ -428,10 +430,8 @@ require __DIR__. '/__connect_db.php';
                     </div>
                 </div>
             </div>
-            <div class="cin_index_about_pic">
-                <img src="./img/Index_about.jpg" alt="">
-            </div>
-
+            <div class="cin_index_about_pic" data-aos="fade-right" data-aos-offset="300" data-aos-easing="ease-in-sine"><img src="./img/Index_about.jpg" alt=""></div>
+        
         </div>
 
     </section>
@@ -442,6 +442,10 @@ require __DIR__. '/__connect_db.php';
 <!--    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"-->
 <!--        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"-->
 <!--        crossorigin="anonymous"></script>-->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
     <script>
     
         // let newLine = document.createElementNS('http://www.w3.org/2000/svg','line');

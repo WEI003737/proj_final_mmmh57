@@ -23,6 +23,8 @@ $rowss = $stmt->fetchAll();
 <?php include __DIR__ . '/parts/h_f_css.php'; ?>
 <?php include __DIR__ . '/css/member_css.php'; ?>
 <?php include __DIR__ . '/parts/h_f_link.php'; ?>
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
    
 <style>
 body{
@@ -138,10 +140,11 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 }
 
 .upright{
-  /* writing-mode: vertical-lr;
-  text-orientation: upright; */
-  top:5%;
+  writing-mode: vertical-lr;
+  text-orientation: upright;
+  top:2%;
   position:absolute; 
+  font-size:12px;
 }
 
 .j_email_reveal{
@@ -150,17 +153,9 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
     right:3%;
     bottom:3%;
     color:white;
+    font-size:14px;
     }
 
-/* .j_more_btn{
-    font-family:sans-serif;
-    font-size:20px;
-    color:#CA054D;
-    border: 2px solid #CA054D;
-    width:100px;
-    border-radius:20px;
-    margin:5px;
-    } */
 
 .alert-info{
     color: black;
@@ -174,6 +169,9 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
     left:20%;
     position: absolute;
 }
+
+.box{background:pink;
+width:200px;height:100px}
 
 
 
@@ -191,19 +189,14 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 <div id="member_left_list_totop" >
        <ul class="member_left_list_totop d-flex justify-content-between">
             <li class="leftlist_underline"><a style="color:#CA054D;">會員資料修改</a></li>
+            <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
             <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
             <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
             <li class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></li>
+          
         </ul>
 </div>
 
-<!-- <div class=" member_left_list d-flex justify-content-center">
-            <div class="leftlist_underline"><a style="color:#CA054D;">會員資料修改</a></div>
-            <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>
-            <div class="leftlist_underline"><a href="member_order.php" >訂單查詢</div>
-            <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</div>
-</div> -->
- 
 
 <div class="member_top_title j_padt_50"> 
     <div class="d-flex align-items-center justify-content-center ">
@@ -215,14 +208,12 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 </div>  
 
 
-
-
-
 <div class=" j_padb_200 ">
         
         <!-- 桌機 左側標 -->
         <div class="member_left_list left_list">
                 <div class="leftlist_underline"><a style="color:#CA054D;">會員資料修改</a></div>
+                <div class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></div>
                 <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>
                 <div class="leftlist_underline"><a href="member_order.php" >訂單查詢</div>
                 <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</div>
@@ -231,7 +222,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 
         <div class=" j_card">
              <div class="j_red_background">
-                    <!-- <div class="j_wea_ootd_dec_up"></div>  -->
+                  
                     <!-- ========照片上傳========= -->
                     <input type="file" id="picFile" onchange="previewFile()" name="myfiles" accept="image/*" style="display: none"><br>
                         <div class="j_circle ">
@@ -258,7 +249,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 
             <form  name="form3" method="post"  onsubmit="return checkForm3()" >
                 <?php foreach($rowss as $r): ?>
-                <!-- <div class="j_wea_ootd_dec_up"></div>  -->
+               
                         <br>
                         <div class="row">
                             <p class="col-4" >姓名</p> 
@@ -286,11 +277,11 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 
                         <div class="row j_relative" >
                              <p class="col-4">收件人地址</p>
-                            <textarea style="width:80%" class="col-8 inputcss_information" type="text" id="receiver_address" name="receiver_address" placeholder="" value="<?= $r['address'] ?>"required></textarea>
+                            <textarea style="width:80%" class="col-8 inputcss_information" type="text" id="receiver_address" name="receiver_address" placeholder="" value="<?= $r['address'] ?>"required><?= $r['address'] ?></textarea>
                             <img class="j_pencil" src="images/pencil-alt-solid.svg" alt="">
                         </div>
                   
-                     <!-- <div class="j_wea_ootd_dec_down"></div>  -->
+                   
                        
                         <div class="d-flex justify-content-end"><button class="j_storage_btn" type="submit" >儲存變更</button></div>
                         <div id="info-bar3"   role="alert" style="display:none" >資料更新成功!!!</div>
@@ -304,9 +295,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
        
 </div>
 
-   <!-- <div class="j_wea_ootd_dec_up"></div> 
-   <div class="j_wea_ootd_dec_down"></div>  -->
-    <!-- <div id="more" class="j_more_btn d-flex justify-content-center ">more+</div> -->
+
 </div>      
 </div>
 </body>
@@ -314,6 +303,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
 
 <?php include __DIR__ . '/parts/footer.php'; ?> 
 <?php include __DIR__ . '/parts/h_f_script.php'; ?>
+
 
 <script>
 //<!-- ====表單傳送確認==== -->
@@ -392,6 +382,7 @@ cursor:pointer; text-align:left;margin:0px auto 10px;}
             });
         });
 
+$(".j_red_background a[href='member_coupon.php']").removeAttr("href")
 </script>
 
 

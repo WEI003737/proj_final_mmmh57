@@ -51,7 +51,7 @@ h2{
 }
 /*============================= 主視覺 =================================*/
 .coverTitle{
-    top:50%;
+    top:45%;
     transform: translateY(-50%);
     position: absolute;
     left: 300px;
@@ -65,7 +65,6 @@ h2{
 }
 .cin_film{
     min-height: 100vh ;
-    max-width: 1920px;
     position: relative;
     overflow: hidden; 
 }
@@ -246,12 +245,12 @@ line#mobileSlash {
 }
 .cin_items_rec{
     background: #ca054d;
-    height: 50%;
+    height: 60%;
     width: 100%;
     position: absolute;
     /* top: 13rem; */
     z-index: -1;
-    bottom:0;
+    bottom:-50px;
 }
 @media screen and (max-width: 360px){
     .cin_items_rec{
@@ -352,10 +351,21 @@ max-height: 900px;
 .cin_index_about{
     margin: 180px auto 0px;
 }
+@media screen and (max-width: 360px){
+    .cin_index_about{
+    margin: 130px auto 0px;
+    }
+}
 .cin_index_about_wrapper{
     position: relative;
     width: 100%;
     height: 1000px;
+    margin-bottom:150px;
+}
+@media screen and (max-width: 360px){
+    .cin_index_about_wrapper{
+    margin-bottom:0px;
+    }
 }
 .cin_yellowbox{
     position: absolute;
@@ -389,10 +399,10 @@ max-height: 900px;
 }
 .cin_yellow_text{
     position: absolute;
-    padding: 50px 0 0 0;
-    width: 55%;
+    padding: 100px 0 0 0;
+    width: 60%;
     height: 900px;
-    right: 100px;
+    right: 10%;
 }
 @media screen and (max-width: 850px){
     .cin_yellow_text{
@@ -442,7 +452,7 @@ max-height: 900px;
     position: absolute;
     left: 0;
     bottom: 0;
-    max-width: 53%;
+    max-width: 50%;
     max-height: 700px;
 }
 @media screen and (max-width: 850px){

@@ -20,7 +20,7 @@
             .justify_between{
                 justify-content: space-between;
             }
-            h1{
+            .cin_h1{
                 color: #ca054d;
                 font-size: 60px;
                 font-family:Lucida Sans Demibold Roman;
@@ -29,7 +29,7 @@
                 margin:0px;
             }
             @media screen and (max-width: 360px){
-            h1{
+            .cin_h1{
                font-size: 32px;
             }
             }
@@ -38,17 +38,17 @@
                 src:url(../font/Lucida\ Sans);
                 /* font-style:Demibold; */
             }
-            h2{
+            .cin_h2{
                 color: #272838;
                 font-size: 40px;  
-                margin: 0;
+                margin-bottom: 13px;
             }
-            h3{
+            .cin_h3{
                 color: #ca054d;
                 font-size: 25px;  
             }
             @media screen and (max-width: 360px){
-                h3{
+                .cin_h3{
                 font-size: 18px;  
                 }
             }
@@ -139,6 +139,7 @@
         }
         @media screen and (max-width: 360px){
             .cin_about_rightsideText{
+                text-shadow: 0 0 1px red, 0 0 4px purple;
                 -webkit-text-stroke:1px #ca054d;
                 font-size: 2rem;
                 top:30%;
@@ -205,9 +206,9 @@
         }
 /*============================= 理念 =================================*/
 .cin_sustain{
-    height: 125vh;
+    height: 115vh;
     position: relative;
-    max-width: 1920px;
+    max-width: 100%;
 }
 @media screen and (max-width: 1300px){
     .cin_sustain{
@@ -286,11 +287,12 @@
 @media screen and (max-width: 800px){
     .cin_sustainTitle h1{
         font-size:50px;
+        line-height: 50px;
     }
 }
 @media screen and (max-width: 360px){
     .cin_sustainTitle{
-        top:35%;
+        top:33%;
     }
 }
 .cin_sustain_wrapperB{
@@ -417,26 +419,31 @@ margin-top: 100px;
     padding: 80px;
     margin-bottom:200px;
 }
-@media screen and (max-width: 740px){
+@media screen and (max-width: 912px){
     .cin_team_box{
         height:580px;
     }
 }
-@media screen and (max-width: 580px){
+@media screen and (max-width: 660px){
     .cin_team_box{
         height:680px;
+    }
+}
+@media screen and (max-width: 536px){
+    .cin_team_box{
+        height:780px;
     }
 }
 @media screen and (max-width: 360px){
     .cin_team_box{
         padding: 30px;
-        height:110vh;
+        height:125vh;
         margin-bottom:60px;
     }
 }
 .cin_teamPara{
     max-width: 1100px;
-    margin-bottom:100px;
+    margin-bottom:30px;
 }
 @media screen and (max-width: 936px){
     .cin_teamPara{

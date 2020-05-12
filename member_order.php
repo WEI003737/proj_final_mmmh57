@@ -133,6 +133,7 @@ foreach($rows2 as $r2){
     <div id="member_left_list_totop" >
         <ul class="member_left_list_totop d-flex justify-content-between">
             <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+            <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
             <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
             <li class="leftlist_underline"><a href="member_order.php" style="color:#CA054D;" >訂單查詢</a></li>
             <li class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></li>
@@ -153,6 +154,7 @@ foreach($rows2 as $r2){
 
         <div class="member_left_list col-lg-2">
                 <div class="leftlist_underline "><a href="member_information_card_noflipnew.php">會員資料修改</a></div>
+                <div class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></div>
                 <div class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></div>
                 <div class="leftlist_underline"><a href="member_order.php" style="color:#CA054D;" >訂單查詢</a></div>
                 <div class="leftlist_underline"><a href="member_coupon.php" >我的優惠卷</a></div>
@@ -170,7 +172,7 @@ foreach($rows2 as $r2){
                     <th class="j_mobile_noshow" scope="col">應付金額</th>
                     <th class="j_mobile_noshow" scope="col">付款方式</th>
                     <th scope="col">處理進度</th>
-                    <th class="" scope="col">取消訂單</th>
+                    <!-- <th class="" scope="col">取消訂單</th> -->
                 </tr>
                 </thead>
 
@@ -190,8 +192,8 @@ foreach($rows2 as $r2){
                         <td class="j_mobile_noshow" ><?= $r['amount'] ?></td>
                         <td class="j_mobile_noshow"><?= $r['payment'] ?></td>
                         <td id="j_status"><?= $r['order_status']?></td>
-                        <td class="j_mobile_noshow" ><button data-status="<?= $r['order_status']?>" class="j_cancel_btn">取消訂單</button></td>
-                        <td><button class="j_cancel_btn_mobile ">取消</button></td>
+                        <!-- <td class="j_mobile_noshow" ><button data-status="<?= $r['order_status']?>" class="j_cancel_btn">取消訂單</button></td>
+                        <td><button class="j_cancel_btn_mobile ">取消</button></td> -->
                     </tr>
                 <?php endforeach;?>
                 </tbody>
@@ -300,9 +302,25 @@ foreach($rows2 as $r2){
 <?php include __DIR__ . '/parts/h_f_script.php'; ?>
 <script>
 
-
+//取消訂單 再點其他訂單時又會變回紅色
 
     $(".j_cancel_btn").click(function() {
+
+        console.log($(this).data('status'))
+        // return;
+        if ( $(this).data('status')=="處理中") {
+            $(this).css("background-color","gray");
+            $(this).text("訂單已取消")
+
+
+        } else {
+
+        }
+
+    });
+
+
+    $(".j_cancel_btn_mobile").click(function() {
 
         console.log($(this).data('status'))
         // return;
@@ -310,15 +328,11 @@ foreach($rows2 as $r2){
             $(this).css("background-color","gray");
             $(this).text("訂單已取消")
 
+} else {
 
-        } else {
+}
 
-
-
-        }
-
-    });
-
+});
 
 </script>
 

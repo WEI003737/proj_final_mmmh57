@@ -3,9 +3,9 @@ require __DIR__. '/__connect_db.php';
 
 
 $coupon_used=[];
-$sql_coupon_used = "SELECT * FROM `coupon` WHERE `mem_sid`= ". $_SESSION['sid']." AND `name`='會員註冊禮卷'";
+$sql_coupon_used = "SELECT * FROM `coupon` WHERE `mem_sid`=".  $_SESSION['sid'];
 $stmt_coupon_used = $pdo -> query($sql_coupon_used);
-$coupon_used = $stmt_coupon_used -> fetch();
+$coupon_used = $stmt_coupon_used -> fetch();  
 ?>
 
 <!DOCTYPE html>
@@ -139,6 +139,7 @@ a, a:hover{
 <div id="member_left_list_totop" >
        <ul class="member_left_list_totop d-flex justify-content-between">
             <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+            <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
             <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
             <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
             <li class="leftlist_underline"><a href="member_coupon.php" style="color:#CA054D;" >我的優惠卷</a></li>
@@ -173,6 +174,7 @@ a, a:hover{
             <div class="member_left_list col-lg-2 ">
             <ul >
                 <li class="leftlist_underline"><a href="member_information_card_noflipnew.php">會員資料修改</a></li>
+                <li class="leftlist_underline"><i class="fas fa-key"></i><a href="member_changepw.php" >密碼修改</a></li>
                 <li class="leftlist_underline"><a href="member_wishlist.php" >我的收藏</a></li>
                 <li class="leftlist_underline"><a href="member_order.php" >訂單查詢</a></li>
                 <li class="leftlist_underline"><a style="color:#CA054D;">我的優惠卷</a></li>

@@ -1,8 +1,5 @@
 <?php
 require __DIR__. '/__connect_db.php';
-
-
-//$_SERVER['HTTP_REFERER']
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +65,7 @@ require __DIR__. '/__connect_db.php';
         color:white;
         text-align:center;
         border-style: hidden;
+        border-radius: .25rem
     }
 
     .check_btn{
@@ -97,17 +95,21 @@ require __DIR__. '/__connect_db.php';
     }
 
     .small_p{font-size:12px;}
+    #j_check_p{display:none}
+    .j_nextline{display:none}
 
     @media screen and (max-width: 700px){
     .j_dashline{margin-bottom:10px}
     .login_inputcss{padding:5px 60px 5px 5px;margin:10px auto;}
     .login_btn,.login_btn_2{width: 200px;height: 40px;}
     .login-register_1, .login-register_2 {font-size:16px}
-    /* .check_btn{left:5%;position:absolute;} */
-    .login_btn{width:180px;margin:20px auto }
+    .login_btn{width:180px;margin:20px auto; }
     .login-register-tab{padding:5px}
     .small_p{word-wrap:break-all;font-size:10px;width:300px}
-    #register-area{display:none;left:5%};
+    #register-area{display:none;left:5%}
+    #j_check_p,.j_nextline{display:block}
+    #j_check_p_desk{display:none}
+    #j_forgetpw{font-size:12px}
     }
 
  
@@ -120,6 +122,8 @@ require __DIR__. '/__connect_db.php';
 
 <?php include __DIR__ . '/parts/header.php'; ?>
 
+<?echo json_encode($sql_findUser);?>
+
 
 <!-- 推出 header 空間-->
 <div class="a_push_place"></div>
@@ -130,7 +134,7 @@ require __DIR__. '/__connect_db.php';
         <div class="login-register_2">註冊成會員</div>
     </div>
 
-
+ 
     <P class="j_dashline"></P>
 
 
@@ -138,23 +142,30 @@ require __DIR__. '/__connect_db.php';
 
         <form name="form1" method="post" onsubmit="return checkForm()">
             <div>
-                <input class="login_inputcss"  type="text" id="" name="email" placeholder="Email " value=""  required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
+                <input class="login_inputcss"  type="text" id="login_email" name="email" placeholder="Email " value=""  required  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" />
             </div>
 
             <div>
-                <input class="login_inputcss" type="password" id="login_pw" name="password" placeholder="密碼" value=""  required  />
-                <!-- <a href="">忘記密碼？</a> -->
+                <input class="login_inputcss" type="password" id="login_pw" name="password" placeholder="密碼" value=""   />
+                 <div class="j_nextline"></div>
+                <a id="j_forgetpw" href="">忘記密碼？</a>
             </div>
+          
 
             <div id="info-bar" class="alert alert-info" role="alert" style="display:none">
             </div>
 
-
-            <div class="login-remember">
-                <button class="login_btn" type="submit" formaction="">確認登入</button>
+          
+            <div class="j_padt_25 ">
+                <button class="login_btn " type="submit" formaction="">確認登入</button>
             </div>
 
         </form>
+
+        <!-- <form name="form3"  method="post"  action="">
+         請輸入註冊電話
+        <input type="text" id="checkphone" name="">
+        </form> -->
 
     </div>
 
@@ -183,7 +194,7 @@ require __DIR__. '/__connect_db.php';
             </div>
 
           
-            <div class="small_p">必須包含5個或更多字符，至少包含一個數字，以及一個大寫和小寫字母 </div>
+            <div class="small_p">*必須包含5個或更多字符，至少包含一個數字，以及一個大寫和小寫字母 </div>
            
 
 
@@ -206,7 +217,8 @@ require __DIR__. '/__connect_db.php';
                     </label>
 
                     <label class="j_checkbox_container">
-                        <p>註冊後接收來自RED CORE的相關產品.服務.優惠資訊</p>
+                        <p id="j_check_p_desk">註冊後接收來自RED CORE的相關產品.服務.優惠資訊</p>
+                        <p id="j_check_p">註冊後接收來自RED CORE的<br>相關產品.服務.優惠資訊</p>
                         <input  type="checkbox" checked="checked">
                         <span class="checkmark"></span>
                     </label>
@@ -221,7 +233,7 @@ require __DIR__. '/__connect_db.php';
 
     </div>
 
-
+    
 </div>
 
 </body>
@@ -248,7 +260,7 @@ require __DIR__. '/__connect_db.php';
    //const email_lo = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
    // const mobile_lo = /^09\d{2}-?\d{3}-?\d{3}$/;
 
-    var referer = "<?= !empty($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : 'member_information_card_noflipnew.php' ?>";
+
     function checkForm(){
         $.post('members_login_api.php', $(document.form1).serialize(), function(data){
         
@@ -259,7 +271,7 @@ require __DIR__. '/__connect_db.php';
                 }, 800);
                 setTimeout(function(){
                     //首頁檔名
-                    location.href = referer;
+                    location.href ='member_information_card_noflipnew.php';
                 }, 1000);
 
             } else {
@@ -276,7 +288,6 @@ require __DIR__. '/__connect_db.php';
 </script>
 
 <script>
-
      //  註冊
      function checkForm2(){
         let isPass = true; //有沒有通過檢查
@@ -309,7 +320,7 @@ require __DIR__. '/__connect_db.php';
                         $('.a_alert.a_registration').fadeOut();
                     }, 1600);
                     setTimeout(function(){
-                        location.href = referer;
+                        location.href ='member_information_card_noflipnew.php';
                     }, 2400);
                 } else {
                     $('.a_alert.a_registrationErr').fadeIn();
@@ -337,6 +348,32 @@ require __DIR__. '/__connect_db.php';
 
 
 </script>
+
+<script>
+
+$("#j_forgetpw").click(function() {
+
+    $("#login_email").val();
+    // alert("true : "+$("#login_email").val());  
+
+    $.post('member_passmail_api.php', {'email': $("#login_email").val()}, function(data){
+       alert(data);
+    }, 'html');
+
+     //請至註冊信箱 取得臨時密碼登入
+    $('.a_alert.a_registration').fadeIn();
+                    setTimeout(function(){
+                        $('.a_alert.a_registration').fadeOut();
+                    }, 1600);
+                   
+});
+
+
+</script>
+
+
+
+
 
 
 

@@ -10,8 +10,7 @@ $page_name = "article_category";
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>article_category</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-<!--        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
+<!--       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">-->
 <!--    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"-->
 <!--        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -36,7 +35,7 @@ $page_name = "article_category";
         <!----------------------   分類標籤  -------------------------->
         <div class="cin_articleCategory_head">
             <div class="container">  
-                <div class="cin_p_w d-flex show_desktop">
+                <div class="cin_p_w d-flex show_desktop_1">
                     <a href="article_category-healthyfood.php" data-title="# 健康食物"># 健康食物</a>
                     <a href="article_category-spiritual.php" data-title="# 心靈成長"># 心靈成長</a>
                     <a href="article_category-exercise.php" data-title="# 運動知識"># 運動知識</a>
@@ -170,9 +169,9 @@ $page_name = "article_category";
                     <div class="cin_articleCategory_main_R show_desktop">
                         <a href="article_innerText_1.php">
                             <div class="cin_articleCategory_main_R_wrap">
-                                <h1>人氣文章</h1>
+                                <h1 class="cin_h1">人氣文章</h1>
                                 <div class="cin_articleCategory_main_R_text d-flex">
-                                    <h1>1&nbsp&nbsp</h1>
+                                    <h1 class="cin_h1">1&nbsp&nbsp</h1>
                                     <h5>10種運動最燃脂 專家建議這樣做</h5>
                                 </div>
                         </a>
@@ -180,7 +179,7 @@ $page_name = "article_category";
 
                         <a href="article_innerText_2.php">
                             <div class="cin_articleCategory_main_R_text d-flex">
-                                <h1>2&nbsp&nbsp</h1>
+                                <h1 class="cin_h1">2&nbsp&nbsp</h1>
                                 <h5>女性健身者專用 快速Meal Prep健康飲食法</h5>
                             </div>
                         </a>
@@ -188,7 +187,7 @@ $page_name = "article_category";
 
                         <a href="article_innerText_3.php">
                             <div class="cin_articleCategory_main_R_text d-flex">
-                                <h1>3&nbsp&nbsp</h1>
+                                <h1 class="cin_h1">3&nbsp&nbsp</h1>
                                 <h5>瑜伽老師 Stacy：「過度耗能的時代，你更該保有覺察身體的好奇心」</h5>
                             </div>
                         </a>
@@ -196,7 +195,7 @@ $page_name = "article_category";
 
                         <a href="">
                             <div class="cin_articleCategory_main_R_text d-flex">
-                                <h1>4&nbsp&nbsp</h1>
+                                <h1 class="cin_h1">4&nbsp&nbsp</h1>
                                 <h5>想練肌力，先培養活動力</h5>
                             </div>
                         </a>
@@ -204,7 +203,7 @@ $page_name = "article_category";
 
                         <a href="">
                             <div class="cin_articleCategory_main_R_text d-flex">
-                                <h1>5&nbsp&nbsp</h1>
+                                <h1 class="cin_h1">5&nbsp&nbsp</h1>
                                 <h5>旅行 與自己好好相處的全新起點</h5>
                             </div>
                         </a>
@@ -225,7 +224,7 @@ $page_name = "article_category";
                 <div class="cin_articleCategory_main_R_wrap">
                     <div class="cin_hotarticle"><p>人氣文章<p></div>
                     <div class="cin_articleCategory_main_R_text d-flex">
-                        <h1>1&nbsp&nbsp</h1>
+                        <h1 class="cin_h1">1&nbsp&nbsp</h1>
                         <h5>10種運動最燃脂 專家建議這樣做</h5>
                     </div>
             </a>
@@ -233,7 +232,7 @@ $page_name = "article_category";
 
             <a href="article_innerText_2.php">
                 <div class="cin_articleCategory_main_R_text d-flex">
-                    <h1>2&nbsp&nbsp</h1>
+                    <h1 class="cin_h1">2&nbsp&nbsp</h1>
                     <h5>女性健身者專用 快速Meal Prep健康飲食法</h5>
                 </div>
             </a>
@@ -241,7 +240,7 @@ $page_name = "article_category";
 
             <a href="article_innerText_3.php">
                 <div class="cin_articleCategory_main_R_text d-flex">
-                    <h1>3&nbsp&nbsp</h1>
+                    <h1 class="cin_h1">3&nbsp&nbsp</h1>
                     <h5>瑜伽老師 Stacy：「過度耗能的時代，你更該保有覺察身體的好奇心」</h5>
                 </div>
             </a>
@@ -249,7 +248,7 @@ $page_name = "article_category";
 
             <a href="">
                 <div class="cin_articleCategory_main_R_text d-flex">
-                    <h1>4&nbsp&nbsp</h1>
+                    <h1 class="cin_h1">4&nbsp&nbsp</h1>
                     <h5>想練肌力，先培養活動力</h5>
                 </div>
             </a>
@@ -257,7 +256,7 @@ $page_name = "article_category";
 
             <a href="">
                 <div class="cin_articleCategory_main_R_text d-flex">
-                    <h1>5&nbsp&nbsp</h1>
+                    <h1 class="cin_h1">5&nbsp&nbsp</h1>
                     <h5>旅行 與自己好好相處的全新起點</h5>
                 </div>
             </a>
@@ -280,7 +279,8 @@ $page_name = "article_category";
             if (scrollTop > 250) {
                 $('#topBtn').fadeIn();
                 $('#topBtn').css("transform", "translateX(0)")
-            } else {
+            }
+             else {
                 $('#topBtn').hide();
             }
         });
