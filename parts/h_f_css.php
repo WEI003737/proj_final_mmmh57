@@ -230,13 +230,11 @@
         #jimg{
             border-radius:50%;
         }
-        .a_cart_box{
-            transform: translateY(-3px);
-        }
         .selffie{
             width:30px;
             height:30px;
             border-radius:50%;
+            transform: translateY(3px);
             /*background:pink;*/
         }
         .header .header_nav_right .a_cart_count{
@@ -343,9 +341,6 @@
             }
             .header_nav_left li{
                 display: none;
-            }
-            .header_nav_right{
-                /*padding-right: 0;*/
             }
             .a_form_search{
                 display: none;

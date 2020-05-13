@@ -13,32 +13,92 @@ $rows_o = $stmt->fetchAll();
 //echo json_encode($rows_o);
 
 //訂單細節 order_details
-$rows2 = [];
-if(isset($_GET['order_num'])){
+//$rows2 = [];
+//if(isset($_GET['order_num'])){
 
-    $sql_o_d = "SELECT * FROM orders JOIN order_details ON orders.sid = order_details.order_sid where orders.mem_sid= ". $_SESSION['sid'] ;
-    if( isset($_GET['order_num']) ){
-        $sql_o_d .= " AND order_num = '".$_GET['order_num']."'";
-    }
-    $stmt2 = $pdo->query($sql_o_d);
-    $rows2 = $stmt2->fetchAll();
+//    $sql_o_d = "SELECT * FROM orders JOIN order_details ON orders.sid = order_details.order_sid where orders.mem_sid= ". $_SESSION['sid'] ;
+//    if( isset($_GET['order_num']) ){
+//        $sql_o_d .= " AND order_num = '".$_GET['order_num']."'";
+//    }
+//    $stmt2 = $pdo->query($sql_o_d);
+//    $rows2 = $stmt2->fetchAll();
+
+
+//echo json_encode($rows2);
+
+////加入照片 order_details_picture
+//$i=0;
+//foreach($rows2 as $r2){
+//    $sql_o_d_p = "SELECT `sid`,`pro_pic` FROM `color` WHERE `sid`= ". $r2['color_sid'];
+//    $o_d_p_stmt = $pdo -> query($sql_o_d_p);
+//    $o_d_p_row = $o_d_p_stmt -> fetch();
+//    $rows2[$i]['pro_pic'] = $o_d_p_row;
+//
+//    $i++;
+//};
+//}
+//echo json_encode($rows2);
+
+$totalItems = 0;
+$totalProductItems = 0;
+$totalCustomizedItems = 0;
+$orderProductsSid = [];
+$orderCustomizedSid = [];
+
+
+if(isset($_GET['order_num'])) {
+
+        $a_orderNum = isset($_GET['order_num']) ? intval($_GET['order_num']) : 0;
+
+        $i = 0;
+
+        //訂單資訊
+        $orderSql = "SELECT * FROM `orders` WHERE `order_num`= $a_orderNum";
+        $orderRow = $pdo->query($orderSql)->fetchAll()[0];
+
+        $a_orderSid = $orderRow["sid"];
+
+
+        //訂單明細:普通商品
+//        $orderProductsSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '0'";
+//        $orderProductsRows = $pdo->query($orderProductsSql)->fetchAll();
+
+
+
+        //訂單明細:客製化
+//        $orderCustomizedSql = "SELECT * FROM `order_details` WHERE `order_sid` = $lastOrderSid AND `is_cus` = '1'";
+//        $orderCustomizedRows = $pdo->query($orderCustomizedSql)->fetchAll();
+//
+//        if ($orderCustomizedRows) {
+//            $i = 0;
+//            foreach ($orderCustomizedRows as $oc) {
+//                $orderCustomizedSid[$i] = $oc["pro_sid"];
+//                $i++;
+//            }
+//
+//            foreach ($orderCustomizedSid as $ocSid) {
+//                $orderCustomizedPicSql = sprintf("SELECT `pro_pic` FROM `customize` WHERE `sid` IN(%s)", implode(',', $orderCustomizedSid));
+//                $orderCustomizedPicRows = $pdo->query($orderCustomizedPicSql)->fetchAll();
+//            }
+//
+//            $j = 0;
+//            foreach ($orderCustomizedRows as $oc) {
+//                $orderCustomizedRows[$j]["pro_pic"] = $orderCustomizedPicRows[0];
+//                $j++;
+//
+//            }
+//
+//            //數量
+//            for ($k = 0; $k < count($orderCustomizedRows); $k++) {
+//                $totalCustomizedItems += $orderCustomizedRows[$k]["gty"];
+//            }
+//        }
+
 }
+//    $numItems = count($orderProductsRows) + count($orderCustomizedRows);
+//    $totalItems = $totalProductItems + $totalCustomizedItems;
 
-//echo json_encode($rows2);
-
-//加入照片 order_details_picture
-$i=0;
-foreach($rows2 as $r2){
-    $sql_o_d_p = "SELECT `sid`,`pro_pic` FROM `color` WHERE `sid`= ". $r2['color_sid'];
-    $o_d_p_stmt = $pdo -> query($sql_o_d_p);
-    $o_d_p_row = $o_d_p_stmt -> fetch();
-    $rows2[$i]['pro_pic'] = $o_d_p_row;
-
-    $i++;
-};
-
-//echo json_encode($rows2);
-
+echo json_encode($a_orderSid);
 ?>
 
 <!DOCTYPE html>
@@ -63,6 +123,11 @@ foreach($rows2 as $r2){
     a, a:hover{
         text-decoration: none;
     }
+
+    tr.a_order_details td{
+        vertical-align:middle;
+    }
+
     @media screen and (max-width: 700px){
         table {font-size:12px}
     }
@@ -104,7 +169,7 @@ foreach($rows2 as $r2){
 
     .j_desk_noshow{display:none}
     .j_ordernum_title{color: #CA054D }
-    .j_productpic{width:135px; height:120px }
+    .j_productpic{width:120px; height:155px }
     .j_line{
         border-top:1.5px #CCC solid;
         height:10px;
@@ -220,22 +285,47 @@ foreach($rows2 as $r2){
                             <th scope="col">小計</th>
                         </tr>
                         </thead>
+
+                        <!-- ========================= 普通商品 ============================ -->
+
                         <?php foreach($rows2 as $r2):
                             $picArr = json_decode($r2["pro_pic"]["pro_pic"], JSON_UNESCAPED_UNICODE); ?>
                             <tbody>
-                            <tr>
+                            <tr class="a_order_details">
                                 <td>
                                     <img src="./product_images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
                                 </td>
                                 <td><?= $r2['name'] ?></td>
-                                <td><?=  $r2['color'] ?></td>
+                                <td>
+                                    <div style="color: <?=  $r2['color'] ?>" >
+                                        <i class="fas fa-circle t_color_size_between"></i>
+                                    </div>
+                                </td>
                                 <td><?=  $r2['size'] ?></td>
-                                <td><?=  $r2['price'] ?></td>
+                                <td>$ <?=  $r2['price'] ?></td>
                                 <td><?=  $r2['gty'] ?></td>
-                                <td><?= $r2['gty']* $r2['price'] ?></td>
+                                <td>$ <?= $r2['gty']* $r2['price'] ?></td>
                             </tr>
                             </tbody>
                         <?php endforeach;?>
+                    <!-- ========================= 客製化 ============================ -->
+                        <tbody>
+                        <tr class="a_order_details">
+                            <td>
+                                <img src="./product_images/<?= $picArr[0]?>.png" alt="商品圖" class="j_productpic"  >
+                            </td>
+                            <td><?= $r2['name'] ?></td>
+                            <td>
+                                <div style="color: <?=  $r2['color'] ?>" >
+                                    <i class="fas fa-circle t_color_size_between"></i>
+                                </div>
+                            </td>
+                            <td><?=  $r2['size'] ?></td>
+                            <td>$ <?=  $r2['price'] ?></td>
+                            <td><?=  $r2['gty'] ?></td>
+                            <td>$ <?= $r2['gty']* $r2['price'] ?></td>
+                        </tr>
+                        </tbody>
 
                     </table>
                     <div class="j_line">
@@ -257,6 +347,9 @@ foreach($rows2 as $r2){
                         <th scope="col"></th>
                     </tr>
                     </thead>
+
+
+                    <!-- ========================= 普通商品 手機版 ============================ -->
 
                     <?php foreach($rows2 as $r2):
                         $picArr = json_decode($r2["pro_pic"]["pro_pic"], JSON_UNESCAPED_UNICODE); ?>
@@ -284,6 +377,9 @@ foreach($rows2 as $r2){
                         </tr>
                         </tbody>
                     <?php endforeach;?>
+
+                    <!-- ========================= 客製化 手機版 ============================ -->
+
 
                 </table>
                 <div class="j_line  ">
