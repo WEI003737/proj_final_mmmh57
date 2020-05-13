@@ -416,7 +416,8 @@ INSERT INTO `customize` (`sid`, `cate_sid`, `name`, `price`, `intro`, `material`
 CREATE TABLE `like_box` (
   `sid` int(11) NOT NULL,
   `mem_sid` int(11) NOT NULL,
-  `pro_sid` int(11) NOT NULL
+  `pro_sid` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
