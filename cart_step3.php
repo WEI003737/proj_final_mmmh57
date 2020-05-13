@@ -42,7 +42,9 @@ if(!empty($_SESSION["lastOrderSid"])){
         };
 
         //數量
-        $totalProductItems += $orderProductsRows[$i]['gty'];
+        for($i=0; $i<count($orderProductsRows); $i++) {
+            $totalProductItems += $orderProductsRows[$i]['gty'];
+        }
 
 
     }

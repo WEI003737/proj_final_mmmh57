@@ -94,7 +94,7 @@ if(!empty($_SESSION["customized"])) {
 $totalPrice = $totalPriceOfProducts + $totalPriceOfCustomized;
 $totalItems = $totalProductItems + $totalCustomizedItems;
 
-echo json_encode($a_cusRows, JSON_UNESCAPED_UNICODE);
+//echo json_encode($a_cusRows, JSON_UNESCAPED_UNICODE);
 
 
 //同會員資料功能----------------------------------------------------------------------------------------------------------

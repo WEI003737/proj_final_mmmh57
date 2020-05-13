@@ -268,6 +268,9 @@
             .header .a_sub_nav{
                 display: none;
             }
+            .header_nav_right li:nth-child(3){
+                margin: 0 7px 0 0;
+            }
             .header .active .a_rwd_sub_nav{
                 max-height: 300px;
             }
@@ -346,9 +349,10 @@
                 display: none;
             }
             .header_nav_right li{
-                margin-right: 0;
+                margin: 0;
             }
-            .header_nav_right .a_cart_icon{
+            .header_nav_right .a_cart_icon,
+            .header_nav_right .a_log_in{
                 width: 20px;
                 margin: 0 10px;
             }

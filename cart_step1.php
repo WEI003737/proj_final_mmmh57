@@ -1,7 +1,7 @@
 <?php
 require __DIR__. '/__connect_db.php';
 
-print_r($_SESSION);
+//print_r($_SESSION);
 
 $i=0;
 if(!empty($_SESSION["cart"])) {
