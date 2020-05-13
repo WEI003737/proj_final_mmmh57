@@ -325,6 +325,9 @@
             .header .a_logo .a_logo_top img{
                 height: 25px;
             }
+            .header .a_rwd_sub_nav{
+                top: 53px;
+            }
             .header .a_logo .a_logo_bottom img{
                 height: 15px;
             }

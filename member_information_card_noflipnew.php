@@ -247,7 +247,7 @@ width:200px;height:100px}
                                 <div class="j_camera_center">
                                     <div><a class="fas fa-camera" onclick="document.querySelector('input[type=file]').click()" style="cursor: pointer; color:white;" ></a></div>
                                     <!-- <input type="submit" id="fileUploadSubmit">  -->
-                                    <div id="fileUploadSubmit" style="background:white;font-size:10px;border:#FFE07C 2px double;border-radius:5px">更新</div>
+<!--                                    <div id="fileUploadSubmit" style="background:white;font-size:10px;border:#FFE07C 2px double;border-radius:5px">更新</div>-->
                                 </div>
                             </div> 
                         
@@ -362,40 +362,67 @@ width:200px;height:100px}
 
   if (file) {
     reader.readAsDataURL(file);
+      var file_data = $('#picFile').prop('files')[0];   //取得上傳檔案屬性
+      var form_data = new FormData();  //建構new FormData()
+      form_data.append('myfiles', file_data);  //吧物件加到file後面
+
+      $.ajax({
+          url: 'member_uploads.php',
+          cache: false,
+          contentType: false,
+          processData: false,
+          data: form_data,     //data只能指定單一物件
+          type: 'post',
+          success: function(data){
+              //  console.log(data);
+
+              $("#jimg").attr("src", "./upload/"+data.newname)
+              $("#jimg-big").attr("src", "./upload/"+data.newname)
+              //alert("更新成功");
+              $('.a_alert.a_uploadPic').fadeIn();
+              setTimeout(function(){
+                  $('.a_alert.a_uploadPic').fadeOut();
+              }, 800);
+
+              setTimeout(function(){
+                  location.reload();
+              }, 1600);
+          }
+      });
   }
 }
 
 
 //<!-- ====照片 傳至uploads==== -->
- $('#fileUploadSubmit').on('click', function() {
-            var file_data = $('#picFile').prop('files')[0];   //取得上傳檔案屬性
-            var form_data = new FormData();  //建構new FormData()
-            form_data.append('myfiles', file_data);  //吧物件加到file後面
-                                    
-            $.ajax({
-                        url: 'member_uploads.php',
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        data: form_data,     //data只能指定單一物件                 
-                        type: 'post',
-                    success: function(data){
-                            //  console.log(data);
-
-                            $("#jimg").attr("src", "./upload/"+data.newname)
-                            $("#jimg-big").attr("src", "./upload/"+data.newname)
-                            //alert("更新成功");
-                            $('.a_alert.a_uploadPic').fadeIn();
-                            setTimeout(function(){
-                                $('.a_alert.a_uploadPic').fadeOut();
-                            }, 800);
-
-                            setTimeout(function(){
-                                location.reload();
-                            }, 1600);
-                        }
-            });
-        });
+//  $('#fileUploadSubmit').on('click', function() {
+//             var file_data = $('#picFile').prop('files')[0];   //取得上傳檔案屬性
+//             var form_data = new FormData();  //建構new FormData()
+//             form_data.append('myfiles', file_data);  //吧物件加到file後面
+//
+//             $.ajax({
+//                         url: 'member_uploads.php',
+//                         cache: false,
+//                         contentType: false,
+//                         processData: false,
+//                         data: form_data,     //data只能指定單一物件
+//                         type: 'post',
+//                     success: function(data){
+//                             //  console.log(data);
+//
+//                             $("#jimg").attr("src", "./upload/"+data.newname)
+//                             $("#jimg-big").attr("src", "./upload/"+data.newname)
+//                             //alert("更新成功");
+//                             $('.a_alert.a_uploadPic').fadeIn();
+//                             setTimeout(function(){
+//                                 $('.a_alert.a_uploadPic').fadeOut();
+//                             }, 800);
+//
+//                             setTimeout(function(){
+//                                 location.reload();
+//                             }, 1600);
+//                         }
+//             });
+//         });
 
 $(".j_red_background a[href='member_coupon.php']").removeAttr("href")
 </script>

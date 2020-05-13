@@ -148,7 +148,7 @@ require __DIR__. '/__connect_db.php';
             <div>
                 <input class="login_inputcss" type="password" id="login_pw" name="password" placeholder="密碼" value=""   />
                  <div class="j_nextline"></div>
-                <a id="j_forgetpw" href="">忘記密碼？</a>
+                <a id="j_forgetpw" >忘記密碼？</a>
             </div>
           
 
@@ -209,7 +209,7 @@ require __DIR__. '/__connect_db.php';
           
             <div class="check_btn j_padt_50 ">
                     <label class="j_checkbox_container">
-                        <p> 我同意RED CORE的<a href="">使用條款</a></p>
+                        <p> 我同意RED CORE的<a href="member_rules.php" target="_blank">使用條款</a></p>
                         <p id="checkbox_help" class="form-text"></p> 
                         <!-- <input  type="checkbox" checked="checked" required name="terms" > -->
                         <input id="check_must"  type="checkbox" checked="checked" >
@@ -357,14 +357,16 @@ $("#j_forgetpw").click(function() {
     // alert("true : "+$("#login_email").val());  
 
     $.post('member_passmail_api.php', {'email': $("#login_email").val()}, function(data){
-        // console.log(data);
+        console.log(data);
+
+        //請至註冊信箱 取得臨時密碼登入
+
     }, 'html');
 
-     //請至註冊信箱 取得臨時密碼登入
     $('.a_alert.a_changePassword').fadeIn();
-                    setTimeout(function(){
-                        $('.a_alert.a_changePassword').fadeOut();
-                    }, 1600);
+    setTimeout(function(){
+        $('.a_alert.a_changePassword').fadeOut();
+    }, 1600);
                    
 });
 
