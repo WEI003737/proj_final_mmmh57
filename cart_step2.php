@@ -68,7 +68,7 @@ if(!empty($_SESSION["customized"])) {
         $j++;
     }
 
-    $a_cusSql = sprintf("SELECT `sid`,`name`,`price` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
+    $a_cusSql = sprintf("SELECT `sid`,`name`,`price`,`pro_pic` FROM `customize` WHERE `sid` IN (%s)", implode(',', $a_cusSid));
     $a_cusRows = $pdo->query($a_cusSql)->fetchAll();
 
     $k = 0;
@@ -94,7 +94,7 @@ if(!empty($_SESSION["customized"])) {
 $totalPrice = $totalPriceOfProducts + $totalPriceOfCustomized;
 $totalItems = $totalProductItems + $totalCustomizedItems;
 
-//echo json_encode($totalPrice, JSON_UNESCAPED_UNICODE);
+echo json_encode($a_cusRows, JSON_UNESCAPED_UNICODE);
 
 
 //同會員資料功能----------------------------------------------------------------------------------------------------------
@@ -206,7 +206,7 @@ $asMemDataRow = $pdo -> query($asMemDataSql) -> fetchAll();
                                 <div class="t_grid-container_cart1_productinfo p-item" data-sid="<?= $cus['cus_sid'] ?>">
                                     <div></div>
                                     <div class="cart_img">
-                                        <img src="./images/customized_sportsbras_01_pro_pic.png" alt="">
+                                        <img src="./images/<?= $cus['pro_pic'] ?>_auto.png" alt="">
                                     </div>
                                     <div class="t_text_left">
                                         <h6>

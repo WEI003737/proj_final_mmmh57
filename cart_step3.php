@@ -24,26 +24,27 @@ if(!empty($_SESSION["lastOrderSid"])){
     $orderProductsRows = $pdo -> query($orderProductsSql) -> fetchAll();
 
     if($orderProductsRows) {
+
+        //拿到color_sid 撈照片用
         foreach ($orderProductsRows as $op) {
-
-            //拿到color_sid 撈照片用
             $orderProductsSid[$i] = $op["color_sid"];
-
-            $orderProductsPicSql = sprintf("SELECT `pro_pic` FROM `color` WHERE `sid` IN (%s)", implode(',', $orderProductsSid));
-            $orderProductsPicRows = $pdo->query($orderProductsPicSql)->fetchAll();
-
-            //撈出照片
-            $j = 0;
-            foreach ($orderProductsPicRows as $p) {
-                $orderProductsRows[$j]["picture"] = $p;
-                $j++;
-            };
-
-            //數量
-            $totalProductItems += $orderProductsRows[$i]['gty'];
-
             $i++;
         };
+
+        $orderProductsPicSql = sprintf("SELECT `pro_pic` FROM `color` WHERE `sid` IN (%s)", implode(',', $orderProductsSid));
+        $orderProductsPicRows = $pdo->query($orderProductsPicSql)->fetchAll();
+
+        //撈出照片
+        $j = 0;
+        foreach ($orderProductsPicRows as $p) {
+            $orderProductsRows[$j]["picture"] = $p;
+            $j++;
+        };
+
+        //數量
+        $totalProductItems += $orderProductsRows[$i]['gty'];
+
+
     }
 
 
@@ -58,16 +59,13 @@ if(!empty($_SESSION["lastOrderSid"])){
             $i++;
         }
 
-        foreach ($orderCustomizedSid as $ocSid) {
-            $orderCustomizedPicSql = sprintf("SELECT `pro_pic` FROM `customize` WHERE `sid` IN(%s)", implode(',', $orderCustomizedSid));
-            $orderCustomizedPicRows = $pdo->query($orderCustomizedPicSql)->fetchAll();
-        }
+        $orderCustomizedPicSql = sprintf("SELECT `pro_pic` FROM `customize` WHERE `sid` IN(%s)", implode(',', $orderCustomizedSid));
+        $orderCustomizedPicRows = $pdo->query($orderCustomizedPicSql)->fetchAll();
 
         $j = 0;
         foreach ($orderCustomizedRows as $oc) {
             $orderCustomizedRows[$j]["pro_pic"] = $orderCustomizedPicRows[0];
             $j++;
-
         }
 
         //數量
