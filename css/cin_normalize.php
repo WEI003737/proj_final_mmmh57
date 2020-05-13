@@ -161,6 +161,7 @@ line#mobileSlash {
 /*============================= 商品類 =================================*/
 .cin_items{
     padding: 150px 0;
+    overflow: hidden;
 }
 @media screen and (max-width: 650px){
     .cin_items{

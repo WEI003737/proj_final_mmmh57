@@ -21,6 +21,9 @@ require __DIR__. '/__connect_db.php';
     .header a{
         color:#333;
     }
+    a{
+        cursor: pointer;
+    }
     a, a:hover{
         text-decoration: none;
     }
@@ -77,7 +80,7 @@ require __DIR__. '/__connect_db.php';
 
     #checkbox_help{
     font-size:20px;
-    color:#CA054D;
+    /*color:#CA054D;*/
     }
 
     .login_inputcss{padding:10px 300px 10px 5px; border:2px #CA054D solid;
@@ -97,6 +100,12 @@ require __DIR__. '/__connect_db.php';
     .small_p{font-size:12px;}
     #j_check_p{display:none}
     .j_nextline{display:none}
+
+    #j_forgetpw{
+        color: #CA054D;
+    }
+
+
 
     @media screen and (max-width: 700px){
     .j_dashline{margin-bottom:10px}
@@ -148,7 +157,7 @@ require __DIR__. '/__connect_db.php';
             <div>
                 <input class="login_inputcss" type="password" id="login_pw" name="password" placeholder="密碼" value=""   />
                  <div class="j_nextline"></div>
-                <a id="j_forgetpw" >忘記密碼？</a>
+                <a id="j_forgetpw" ><i class="fas fa-question-circle"></i>忘記密碼</a>
             </div>
           
 
