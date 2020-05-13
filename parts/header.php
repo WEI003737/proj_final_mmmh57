@@ -131,7 +131,7 @@
                 </li>
 
                 <li class="position-relative a_cart_box" onclick="haveSession(event)">
-                    <a><img src="./icon/cart.png"></a>
+                    <a><img class="a_cart_icon" src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
                 <li class="a_menu">

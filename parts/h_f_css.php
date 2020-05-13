@@ -345,12 +345,15 @@
                 display: none;
             }
             .header_nav_right{
-                padding-right: 0;
+                /*padding-right: 0;*/
             }
             .a_form_search{
                 display: none;
             }
-            .header_nav_right img{
+            .header_nav_right li{
+                margin-right: 0;
+            }
+            .header_nav_right .a_cart_icon{
                 width: 20px;
                 margin: 0 10px;
             }
@@ -361,6 +364,7 @@
             }
             .header .a_rwd_sub_nav{
                  top: 53px;
+                right: 0;
              }
             .header .header_nav_right .a_cart_count{
                 font-size: 8px;
