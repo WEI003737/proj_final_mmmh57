@@ -33,7 +33,7 @@ require __DIR__. '/__connect_db.php';
     <div class="a_push_place"></div>
     <div class="position-relative" id="sportCover">
         <div class="cin_film">
-<!--            <img src="./img/Index_mask.svg" alt="">-->
+            <img src="./img/Index_mask.svg" alt="">
             <video loop="true" autoplay="autoplay" muted="true">
                 <source type="video/mp4" src="./img/Index_video_2.mp4">
                 </source>

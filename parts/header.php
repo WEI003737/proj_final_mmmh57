@@ -83,7 +83,7 @@
         <nav class="a_nav">
             <div class="header_nav_left">
                 <div class="a_logo">
-                    <a href="_index.php">
+                    <a href="index.php">
                         <div class="a_logo_top">
                             <img src="./icon/logo_top.png" alt="">
                         </div>
@@ -98,14 +98,14 @@
                 <li><a href="article_cover.php">健康小教室</a></li>
             </div>
             <div class="header_nav_right">
-                <li>
-                    <div class="a_input_search">
-                        <input type="text" class="a_form_search a_transition" placeholder="找商品">
-                        <div>
-                            <span class="a_input_search_img"><img src="./icon/search.png"></span>
-                        </div>
-                    </div>
-                </li>
+<!--                <li>-->
+<!--                    <div class="a_input_search">-->
+<!--                        <input type="text" class="a_form_search a_transition" placeholder="找商品">-->
+<!--                        <div>-->
+<!--                            <span class="a_input_search_img"><img src="./icon/search.png"></span>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </li>-->
                 <li class="position-relative">
                     <?php if(isset($_SESSION['loginUser'])): ?>
                     <?php if(empty($_SESSION['selffie'])): ?>
@@ -114,7 +114,10 @@
                     </a>
                     <?php else: ?>
                     <a href="member_information_card_noflipnew.php">
-                        <img style="width:30px;height:30px;border-radius:50%;background:pink"  id="jimg" src="./uploads/<?= $_SESSION['selffie'] ?>"   alt="">
+                        <div class="selffie position-relative">
+                            <img class="a_object_fit position-absolute" id="jimg" src="./uploads/<?= $_SESSION['selffie'] ?>" alt="">
+                        </div>
+
                     </a>
                     <?php endif ?>
                     <ul class="a_sub_nav a_transition">
@@ -127,7 +130,7 @@
                     <?php endif; ?>
                 </li>
 
-                <li class="position-relative" onclick="haveSession(event)">
+                <li class="position-relative a_cart_box" onclick="haveSession(event)">
                     <a><img src="./icon/cart.png"></a>
                     <span class="badge badge-pill badge-warning a_cart_count"></span>
                 </li>
