@@ -165,6 +165,7 @@
         }
         .header_nav_left>li{
             margin: 0 2vw;
+            transition: .5s;
         }
         .header_nav_left>li:hover{
             transform: translateY(-3px);

@@ -267,7 +267,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
         let nac_pigment_spacing = picture_outbox_size / 7
         let nac_pigment_move = picture_outbox_size / 5.3
         let nac_pigment_size = picture_outbox_size / 11
-        console.log(picture_outbox_size)
+        // console.log(picture_outbox_size)
 
         if (nac_windw_width > 768) {
             let b, i, unitRad, ballNum
@@ -344,7 +344,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             unitRad = 2 * Math.PI / ballNum
             $("#colorPanel").css("opacity", "0");
             for (let i = 0; i < ballNum; i++) {
-                console.log(i)
+                // console.log(i)
                 $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
                 $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
             }
@@ -376,7 +376,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     top: yPos - nac_pigment_move
                 })
                 for (let i = 0; i < ballNum; i++) {
-                    console.log(i)
+                    // console.log(i)
                     $('li.color_panel_pigment').eq(i).css("left", nac_pigment_spacing + nac_pigment_spacing * Math.cos(i * unitRad) + 'px')
                     $('li.color_panel_pigment').eq(i).css("top", nac_pigment_spacing + nac_pigment_spacing * Math.sin(i * unitRad) + 'px')
                 }
@@ -386,7 +386,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                     top: yPos - 95
                 })
                 for (let i = 0; i < ballNum; i++) {
-                    console.log(i)
+                    // console.log(i)
                     $('li.color_panel_pigment').eq(i).css("left", 75 + 75 * Math.cos(i * unitRad) + 'px')
                     $('li.color_panel_pigment').eq(i).css("top", 75 + 75 * Math.sin(i * unitRad) + 'px')
                 }
@@ -419,7 +419,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             unitRad = 2 * Math.PI / ballNum
             $("#colorPanel").css("opacity", "0");
             for (let i = 0; i < ballNum; i++) {
-                console.log(i)
+                // console.log(i)
                 $('li.color_panel_pigment').css("left", nac_pigment_spacing + 'px')
                 $('li.color_panel_pigment').css("top", nac_pigment_spacing + 'px')
             }
@@ -438,7 +438,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $(this).addClass("active")
             $(this).parents().siblings().find(".nac_size_btn").removeClass("active")
             sizeChose = $(this).attr("date-sizeChose")
-            console.log(sizeChose)
+            // console.log(sizeChose)
         })
 
 
@@ -467,7 +467,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             var count = document.getElementById("pieces_count").innerHTML;
             document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
             nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) + 1;
-            console.log(nac_chose_pieces)
+            // console.log(nac_chose_pieces)
         }
 
         function dec() {
@@ -477,7 +477,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
                 nac_chose_pieces = document.getElementById("pieces_count").innerHTML = parseInt(count) - 1;
             };
 
-            console.log(nac_chose_pieces)
+            // console.log(nac_chose_pieces)
         }
     </script>
 
@@ -509,7 +509,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             // console.log(`cus_sid: ${cus_sid}, cus_qty: ${cus_qty}, cus_size: ${cus_size}`)
             // console.log(`cus_colorFirst: ${cus_colorFirst}, cus_colorSecond: ${cus_colorSecond}, cus_colorThird: ${cus_colorThird}`)
             // console.log(`cus_color: ${cus_color}`)
-            console.log(cus_data)
+            // console.log(cus_data)
 
 
             $.get("add_to_cart_api.php", {
@@ -558,7 +558,7 @@ if ($sid < 1 || $sid > $rows_itemcount) {
             $.get("add_to_cart_api.php", {
                 cus_data: cus_data
             }, function(data) {
-                console.log(data);
+                // console.log(data);
                 if (data.success) {
                     countCartObj(data)
                     location.href = "cart_step1.php";

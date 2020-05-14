@@ -84,9 +84,9 @@ if(! isset($_SESSION)){
     }
     a, a:link{
         color:#272838;
-        display: block;
+        /*display: block;*/
         text-decoration: none;
-        font-size: 18px;
+        /*font-size: 18px;*/
     }
     a:hover,a:active{
         color: #C9044D;

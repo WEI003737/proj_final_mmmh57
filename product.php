@@ -1257,8 +1257,8 @@ foreach($weaRecommend as $R){
                 selectSizeSid= $(this).find("div").data('sizenum');
                 // parseInt(selectSizeSid);
                 // console.log(selectSizeSid);
-                stockNum = $(this).find("div").data('sizenum');
-                console.log(stockNum);
+                stockNum = $(this).find("div").data('stock');
+                // console.log(stockNum);
                 $(this).find("div").addClass("active");
                 $(this).siblings().find("div").removeClass("active");
                 selectCountNum = 1;
@@ -1393,7 +1393,7 @@ foreach($weaRecommend as $R){
             if(recommend_position == 0){
                 recommend_position = -50;
                 $(".wea_recommend_area").css("left",`${recommend_position}%`);
-                console.log(recommend_position);
+                // console.log(recommend_position);
             }else{
                 recommend_position = recommend_position + 25;
                 $(".wea_recommend_area").css("left",`${recommend_position}%`);
@@ -1404,7 +1404,7 @@ foreach($weaRecommend as $R){
             if(recommend_position == -50){
                 recommend_position = 0;
                 $(".wea_recommend_area").css("left",`${recommend_position}%`);
-                console.log(recommend_position);
+                // console.log(recommend_position);
             }else{
                 recommend_position = recommend_position - 25;
                 $(".wea_recommend_area").css("left",`${recommend_position}%`);
@@ -1431,7 +1431,7 @@ foreach($weaRecommend as $R){
           cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
           //抓取數量
           cart_qty = $("#countnum").text();
-          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+          // console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
 
           // 傳送資料給後端 ->  數量加總丟進購物車數量裡 (寫在parts 的 script裡)
           // 讓所有頁面一進來就能讀到購物車內的商品數
@@ -1452,12 +1452,12 @@ foreach($weaRecommend as $R){
           cart_sid = $(event.target).closest(".wea_product_main_selectarea").find(".wea_product_main_size").find(".active").attr("data-sizenum");
           //抓取數量
           cart_qty = $("#countnum").text();
-          console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
+          // console.log(`cart_sid: ${cart_sid}, cart_qty: ${cart_qty}`)
 
           // 傳送資料給後端
           // countCartObj(data) 讓所有頁面一進來就能讀到購物車內的商品數 (寫在parts 的 script裡)
           $.get("add_to_cart_api.php", {cart_sid,cart_qty}, function(data){
-              console.log(data);
+              // console.log(data);
               if(data.success){
                   countCartObj(data)
                   location.href = "cart_step1.php";
@@ -1497,10 +1497,10 @@ foreach($weaRecommend as $R){
               }
           }, 'json')
               .done(function(){
-                  console.log("success")
+                  // console.log("success")
               })
               .fail(function(er){
-                  console.log(er);
+                  // console.log(er);
               })
       });
 
@@ -1538,34 +1538,34 @@ foreach($weaRecommend as $R){
       })
 
       //收藏愛心要顯示
-      $.get('product_list_api.php',function(data){
-         window.product_list_api_data = data;
-         console.log(data.likes)
-          let likes=data.likes;
-          let productSid="<?=$weaProductNum?>";
-         let ifLike=likes.includes(productSid);
-         // $(".wea_product_main_wordarea_name .a_add_to_like_active").hide();
-         if(ifLike){
-             $(".wea_product_main_wordarea_name .a_add_to_like_active").show();
-         }
-         // else{
-         //     $(".wea_product_main_wordarea_name .a_add_to_like_unactive").show();
-         // }
-         $(".wea_recommend_area li").each(function(){
-            let sid=$(this).data("sid").toString();
-             // console.log(sid)
-             let ifLike=likes.includes(sid);
-            // console.log(ifLike)
-             if(ifLike){
-                 $(this).find(".a_add_to_like_active").removeClass("display_none")
-                 // $(this).find(".a_add_to_like_unactive").addClass("display_none")
-             }else{
-                 $(this).find(".a_add_to_like_active").addClass("display_none")
-                 // $(this).find(".a_add_to_like_unactive").addClass("display_none")
-             }
-         })
-
-      })
+      //$.get('product_list_api.php',function(data){
+      //   window.product_list_api_data = data;
+      //   console.log(data.likes)
+      //    let likes=data.likes;
+      //    let productSid="<?//=$weaProductNum?>//";
+      //   let ifLike=likes.includes(productSid);
+      //   $(".wea_product_main_wordarea_name .a_add_to_like_unactive, .wea_product_main_wordarea_name .a_add_to_like_active").hide();
+      //   if(ifLike){
+      //       $(".wea_product_main_wordarea_name .a_add_to_like_active").show();
+      //   }else{
+      //        $(".wea_product_main_wordarea_name .a_add_to_like_unactive").show();
+      //       $(".wea_product_main_wordarea_name .a_add_to_like_active").hide();
+      //   }
+      //   $(".wea_recommend_area li").each(function(){
+      //      let sid=$(this).data("sid").toString();
+      //       // console.log(sid)
+      //       let ifLike=likes.includes(sid);
+      //      // console.log(ifLike)
+      //       if(ifLike){
+      //           $(this).find(".a_add_to_like_active").removeClass("display_none")
+      //           // $(this).find(".a_add_to_like_unactive").addClass("display_none")
+      //       }else{
+      //           $(this).find(".a_add_to_like_active").addClass("display_none")
+      //           // $(this).find(".a_add_to_like_unactive").addClass("display_none")
+      //       }
+      //   })
+      //
+      //})
   </script>
   </body>
 </html>
