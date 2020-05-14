@@ -438,7 +438,11 @@ if(isset($_SESSION["sid"])) {
                     setTimeout(function(){
                         $('.a_alert.a_removeFromLike').fadeOut();
                     }, 800);
-                    location.reload();
+
+                    setTimeout(function(){
+                        location.reload();
+                    }, 1600);
+
                 }
 
             }, 'json')

@@ -1486,6 +1486,9 @@ foreach($weaRecommend as $R){
                   setTimeout(function(){
                       $('.a_alert.a_addToLike').fadeOut();
                   }, 800);
+                  // setTimeout(function(){
+                  //     location.reload();
+                  // }, 800);
               }else {
                   $('.a_alert.a_addToLike').fadeIn();
                   setTimeout(function(){
@@ -1519,6 +1522,9 @@ foreach($weaRecommend as $R){
                   setTimeout(function(){
                       $('.a_alert.a_removeFromLike').fadeOut();
                   }, 800);
+                  // setTimeout(function(){
+                  //     location.reload();
+                  // }, 800);
               }
 
           }, 'json')
@@ -1538,12 +1544,13 @@ foreach($weaRecommend as $R){
           let likes=data.likes;
           let productSid="<?=$weaProductNum?>";
          let ifLike=likes.includes(productSid);
-         $(".wea_product_main_wordarea_name .a_add_to_like_unactive,.wea_product_main_wordarea_name .a_add_to_like_active").hide();
+         // $(".wea_product_main_wordarea_name .a_add_to_like_active").hide();
          if(ifLike){
              $(".wea_product_main_wordarea_name .a_add_to_like_active").show();
-         }else{
-             $(".wea_product_main_wordarea_name .a_add_to_like_unactive").show();
          }
+         // else{
+         //     $(".wea_product_main_wordarea_name .a_add_to_like_unactive").show();
+         // }
          $(".wea_recommend_area li").each(function(){
             let sid=$(this).data("sid").toString();
              // console.log(sid)
@@ -1551,8 +1558,10 @@ foreach($weaRecommend as $R){
             // console.log(ifLike)
              if(ifLike){
                  $(this).find(".a_add_to_like_active").removeClass("display_none")
+                 // $(this).find(".a_add_to_like_unactive").addClass("display_none")
              }else{
                  $(this).find(".a_add_to_like_active").addClass("display_none")
+                 // $(this).find(".a_add_to_like_unactive").addClass("display_none")
              }
          })
 

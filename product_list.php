@@ -27,6 +27,39 @@ if(! isset($_SESSION)){
     .show-mobile{
             display: none;
     }
+      /* ----------- alert ----------- */
+    /*.a_alert{*/
+    /*    width: 280px;*/
+    /*    height: 100px;*/
+    /*    text-align: center;*/
+    /*    background: #ffffff;*/
+    /*    color: #C9044D;*/
+    /*    border: 1px solid #C9044D;*/
+    /*    border-radius: 5px;*/
+    /*    position: fixed;*/
+    /*    right: 0;*/
+    /*    left: 0;*/
+    /*    margin: 0 auto;*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: center;*/
+    /*    top: 30%;*/
+    /*    z-index: 997;*/
+    /*}*/
+    /*.a_alert span{*/
+    /*    font-size: 24px;*/
+    /*}*/
+    /*.a_alert i{*/
+    /*    margin-bottom: 5px;*/
+    /*}*/
+    /*.a_alert .svg-inline--fa.fa-w-18{*/
+    /*    width: 100%;*/
+    /*}*/
+    /*.a_display_none{*/
+    /*    display: none;*/
+    /*}*/
+    /* ----------- alert ----------- */
+
     @media screen and (max-width: 992px){
         .show-desktop{
             display: none;
@@ -542,7 +575,18 @@ if(! isset($_SESSION)){
       <?php include __DIR__. '/parts/header.php';?>
     <!-- =================================== #ootd =================================== -->
 
-    <!-- 推出 header 空間-->
+      <!-- 提示 (css 在 h_f_script.php 裡) -->
+<!--      <div class="a_alert a_addToLike a_display_none">-->
+<!--              <i class="fab fa-gratipay fa-lg"></i>-->
+<!--              <h6><span>已</span>加入收藏</h6>-->
+<!--          </div>-->
+<!---->
+<!--          <div class="a_alert a_removeFromLike a_display_none">-->
+<!--              <i class="fas fa-hand-holding-heart fa-lg"></i>-->
+<!--              <h6><span>已</span>從收藏移除</h6>-->
+<!--          </div>-->
+
+              <!-- 推出 header 空間-->
     <div class="a_push_place"></div>
     <div class="wea_ootd">
         <div class="wea_ootd_img position-relative">

@@ -30,6 +30,38 @@ $rowss = $stmt->fetchAll();
 body{
     font-family: 'Noto Sans TC', sans-serif;
 }
+/* ----------- alert ----------- */
+/*.a_alert{*/
+/*    width: 280px;*/
+/*    height: 100px;*/
+/*    text-align: center;*/
+/*    background: #ffffff;*/
+/*    color: #C9044D;*/
+/*    border: 1px solid #C9044D;*/
+/*    border-radius: 5px;*/
+/*    position: fixed;*/
+/*    right: 0;*/
+/*    left: 0;*/
+/*    margin: 0 auto;*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    justify-content: center;*/
+/*    top: 30%;*/
+/*    z-index: 997;*/
+/*}*/
+/*.a_alert span{*/
+/*    font-size: 24px;*/
+/*}*/
+/*.a_alert i{*/
+/*    margin-bottom: 5px;*/
+/*}*/
+/*.a_alert .svg-inline--fa.fa-w-18{*/
+/*    width: 100%;*/
+/*}*/
+/*.a_display_none{*/
+/*    display: none;*/
+/*}*/
+/* ----------- alert ----------- */
 .header a{
     color:#333;
 }
@@ -185,6 +217,22 @@ width:200px;height:100px}
 
 
 <?php include __DIR__ . '/parts/header.php'; ?>
+
+<!-- 提示 (css 在 h_f_script.php 裡) -->
+<!--<div class="a_alert a_editData a_display_none">-->
+<!--    <i class="fas fa-pencil-alt fa-lg"></i>-->
+<!--    <h6><span>資</span>料更新成功</h6>-->
+<!--</div>-->
+<!---->
+<!--<div class="a_alert a_editDataErr a_display_none">-->
+<!--    <i class="fas fa-pencil-alt fa-lg"></i>-->
+<!--    <h6><span>記</span>得更改資訊欄喔</h6>-->
+<!--</div>-->
+<!---->
+<!--<div class="a_alert a_uploadPic a_display_none">-->
+<!--    <i class="fas fa-image fa-lg"></i>-->
+<!--    <h6><span>照</span>片更新成功</h6>-->
+<!--</div>-->
 
 <div class="container">
 <!-- 推出 header 空間-->

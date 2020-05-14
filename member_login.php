@@ -18,6 +18,38 @@ require __DIR__. '/__connect_db.php';
     body{
         font-family: 'Noto Sans TC', sans-serif;
     }
+    /* ----------- alert ----------- */
+    /*.a_alert{*/
+    /*    width: 280px;*/
+    /*    height: 100px;*/
+    /*    text-align: center;*/
+    /*    background: #ffffff;*/
+    /*    color: #C9044D;*/
+    /*    border: 1px solid #C9044D;*/
+    /*    border-radius: 5px;*/
+    /*    position: fixed;*/
+    /*    right: 0;*/
+    /*    left: 0;*/
+    /*    margin: 0 auto;*/
+    /*    display: flex;*/
+    /*    flex-direction: column;*/
+    /*    justify-content: center;*/
+    /*    top: 30%;*/
+    /*    z-index: 997;*/
+    /*}*/
+    /*.a_alert span{*/
+    /*    font-size: 24px;*/
+    /*}*/
+    /*.a_alert i{*/
+    /*    margin-bottom: 5px;*/
+    /*}*/
+    /*.a_alert .svg-inline--fa.fa-w-18{*/
+    /*    width: 100%;*/
+    /*}*/
+    /*.a_display_none{*/
+    /*    display: none;*/
+    /*}*/
+    /* ----------- alert ----------- */
     .header a{
         color:#333;
     }
@@ -132,6 +164,33 @@ require __DIR__. '/__connect_db.php';
 <?php include __DIR__ . '/parts/header.php'; ?>
 
 <?echo json_encode($sql_findUser);?>
+
+<!-- 提示 (css 在 h_f_script.php 裡) -->
+<!---->
+<!--<div class="a_alert a_login a_display_none">-->
+<!--    <i class="fas fa-smile fa-lg"></i>-->
+<!--    <h6><span>登</span>入成功</h6>-->
+<!--</div>-->
+<!---->
+<!--<div class="a_alert a_loginErr a_display_none">-->
+<!--    <i class="fas fa-exclamation-triangle fa-lg"></i>-->
+<!--    <h6><span>帳</span>號或密碼錯誤</h6>-->
+<!--</div>-->
+<!---->
+<!--<div class="a_alert a_registrationErr a_display_none">-->
+<!--    <i class="fas fa-exclamation fa-lg"></i>-->
+<!--    <h6><span>請</span>檢查輸入資料有無錯誤</h6>-->
+<!--</div>-->
+<!---->
+<!--<div class="a_alert a_registration a_display_none">-->
+<!--    <i class="fas fa-ticket-alt fa-lg"></i>-->
+<!--    <h6><span>註</span>冊成功<br>恭喜您得到一張新會員優惠卷</h6>-->
+<!--</div>-->
+<!---->
+<!--<div class="a_alert a_changePassword a_display_none">-->
+<!--    <i class="fas fa-envelope fa-lg"></i>-->
+<!--    <h6><span>請</span>至註冊信箱<br>取得臨時密碼登入</h6>-->
+<!--</div>-->
 
 
 <!-- 推出 header 空間-->

@@ -193,7 +193,7 @@
             position: absolute;
             background: rgb(255, 255, 255);
             top: 52px;
-            width: 132px;
+            width: 140px;
             max-height: 0;
             overflow: hidden;
             box-shadow: 1px 1px 5px #ccc;
