@@ -37,7 +37,7 @@ $page_name = 'article_innerText_1';
     <section id="cin_article_innertext">
         <div class="cin_article_innertext_wrap">
             <div class="d-flex">
-                <a href="../大專＿健康小教室＿文章列表/article_category-exercise.html">
+                <a href="article_category-exercise.php">
                     <h6 class="cin_h6">運動知識&nbsp&nbsp></h6>
                 </a>
                 <a href="">

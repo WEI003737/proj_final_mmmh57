@@ -37,7 +37,7 @@ $page_name = 'article_innerText_3';
     <section id="cin_article_innertext">
         <div class="cin_article_innertext_wrap">
             <div class="show_desktop d-flex">
-                <a href="../大專＿健康小教室＿文章列表/article_category-spiritual.html">
+                <a href="article_category-spiritual.php">
                     <h6 class="cin_h6">心靈成長&nbsp&nbsp></h6>
                 </a>
                 <a href="">
@@ -45,7 +45,7 @@ $page_name = 'article_innerText_3';
                 </a>
             </div>
             <div class="show_mobile">
-                <a href="../大專＿健康小教室＿文章列表/article_category-spiritual.html">
+                <a href="article_category-spiritual.php">
                     <h6 class="cin_h6">心靈成長&nbsp&nbsp></h6>
                 </a>
                 <a href="">

@@ -348,6 +348,9 @@
             .a_form_search{
                 display: none;
             }
+            .header_nav_right{
+                padding-right: 0;
+            }
             .header_nav_right li{
                 margin: 0;
             }
