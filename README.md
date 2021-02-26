@@ -1,4 +1,4 @@
-# proj_final
+# proj final
 ###把下面五項依 _index.php 示意插入你的php檔案中：  
  include __DIR__ . '/parts/h_f_link.php'   
  include __DIR__ . '/parts/h_f_css.php'   
